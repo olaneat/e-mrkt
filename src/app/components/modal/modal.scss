@@ -1,0 +1,16 @@
+
+.modal-container{
+    // max-width: 20rem;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+    position: absolute;
+    top: 50%;
+    left: 50% ;
+    transform: translate(-50%, -50%);
+    border: 0px;
+}
+
+.modal-container::backdrop {
+  background: hsl(0 0% 0% / 50%);
+}

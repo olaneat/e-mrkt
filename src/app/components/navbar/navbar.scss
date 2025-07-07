@@ -1,0 +1,296 @@
+.lg-screen{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #191919;
+    padding: 0px 40px;
+    height: 75px;
+    width: 100%;
+    .company-name{
+        display: flex;
+        gap:16px;
+        justify-content: center;
+        align-items: center;
+        .title{
+            font-size: 24px;
+            font-weight: 700;
+            color: #f1f1f1;
+        }
+        .drop-down-btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            position: relative;
+            cursor: pointer;
+
+            .dropdown{
+                position: absolute;
+                top: 50px;
+                left: -12px;
+                background: #fff;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                width: 160px;
+                z-index: 10;
+                .title{
+                    font-size: 13px;
+                    font-family: 'DM Sans';
+                    color: #333;
+                    border-bottom: 1px solid #f1f1f1;
+                    width: 100%;
+                    padding: 8px;
+
+                }
+                .categories{
+                    display: flex;
+                    flex-direction:column ;
+                    gap: 4px;
+                    overflow-y: auto;
+                    max-height: 200px;
+                    .items{
+                        padding: 10px 8px;
+                        font-size: 12.8px;
+                        color: #666;
+                        font-weight: 500;
+                        background: #fff;
+
+                    }
+
+                }
+            }
+            
+        }
+    }
+    .nav-content{
+        display: flex;
+        gap:40px;
+        justify-content: center;
+        align-items:  center;
+
+       .txt{
+            position: relative;
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .drop-down{
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 16px;
+            background: #fff;
+            border-radius: 20px;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            top: 35px;
+            left: -45px;
+            z-index: 10;
+            .items{
+                padding: 12px;
+                color: #000;
+                font-size: 13px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                align-self: stretch;
+                cursor: pointer;
+            }
+            .hr{
+                border-bottom: 1px solid #f1f1f1;
+
+            }
+        }
+        
+
+    }
+
+
+    .search-div{
+        display: flex;
+        position: relative;
+        padding: 0px 16px;
+    
+        input{
+            width: 100%;
+            padding: 16px;
+            border:1px solid #f1f1f1;
+            border-radius: 10px;
+
+         }:focus{
+            outline: none;
+         }
+         ::placeholder{
+            font-size: 13px;
+            line-height: 120%;
+            color: #666;
+
+         }
+
+        
+    }
+}
+
+
+@media (min-width:768px) {
+    .sm-screen{
+        display: none;
+    }
+    .search-div{
+        width: 450px;
+    }
+    .nav{
+        font-size: 15px;
+
+    }
+    
+}
+
+@media (max-width:768px) {
+    .lg-screen{
+        display: none;
+    }
+
+
+    .menu-div{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-self: stretch;
+        padding: 16px;
+        width: 100%;
+        .menu-bar{
+            cursor: pointer;
+            img{
+                height: 24px;
+                width: 24px;
+            }
+        }
+        
+    }
+
+
+    .sidebar{
+        width: 100vw;
+        height: 100%;
+        color: #f1f1f1;
+        .top{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            padding: 16px;
+            border-bottom: 1px solid #f1f1f1;
+            .lft{
+                display: flex;
+                gap: 16px;
+                justify-content: center;
+                align-items: center;
+                .close{
+                    color: #333;
+                    font-size: 16px;
+                    cursor: pointer;
+                }
+                .name{
+                    color: #191919;
+                    font-size: 16px;
+                }
+            }
+            
+        }
+
+        
+    }
+    .list{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        justify-content: flex-start;
+        align-self: center;
+
+        .item{
+            display: flex;
+            justify-items: flex-start;
+            padding: 16px 8px;
+            color: #212121;
+            font-size: 12.8px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+    }
+    .categories{
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        // box-shadow: ;
+        .title{
+            font-size: 16px;
+            color: #191919;
+            font-weight: 700;
+            
+        }
+        .cat-list{
+            display: flex;
+            flex-direction: column;
+            align-self: stretch;
+            padding: 8px;
+            gap: 8px;
+            max-height: 50vh;
+            overflow-x: auto;
+            .items{
+                padding: 8px 12px;
+                font-size: 13px;
+                color: #666;
+                font-weight: 500;
+
+            }
+        }
+    }
+
+    .sm-screen{
+        display: flex;
+        align-self: stretch;
+    }
+
+    
+}
+.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 10px;
+    background: #f1f1f1;
+    cursor: pointer;
+    position: relative;
+    img{
+        height: 24px;
+        width: 24px;
+    }
+
+    .badge{
+        background: #DB4444;
+        color: #000;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 10px;
+        border-radius: 50%;
+        padding: 3px;
+        position: absolute;
+        right: 10px;
+        top: 5px;
+    }
+}
+.item{
+    padding: 10px 8px;
+    font-size: 12.8px;
+    color: #fff;
+    font-weight: 500;
+
+}
+
+.link{
+    text-decoration: none;
+}

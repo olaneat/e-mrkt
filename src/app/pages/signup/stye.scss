@@ -1,0 +1,79 @@
+.signup-container{
+    display: flex;
+    align-self: stretch;
+    justify-content: center;
+    align-items: center;
+    // padding: 64px 0px;
+    // .img-container{
+    //     width: 30%;
+    //     height: 100%;
+    // }
+        // img{
+        //     width: 100%;
+        //     height: 100vh;
+            
+        // }
+    .signup-div{
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+        width: 100%;
+        .signup-title{
+            font-size: 25px;
+            color: #212121;
+        }
+        .signup-sub{
+            font-size: 14px;
+            color: #333;
+
+        }
+        .form{
+            display: flex;
+            align-self: stretch;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 8px;
+            padding: 0px 16px;LoginAPI
+
+            .field{
+              display: flex;
+              align-self: stretch;
+              
+             
+            }
+            .signup-btns{
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                justify-content: center;
+                align-self: stretch;
+                align-items: center;
+
+                .btn{
+                    width: 100%;
+                }
+            }
+            .already{
+                margin-top: 16px;
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-end;
+                align-self: stretch;
+                font-size: 12px;
+                color: #333;
+                .sign-in{
+                    margin-left: 2px;
+                    color: #4e9fe5;
+                    font-size: 12px;
+                    text-decoration: none;
+                }
+            }
+
+        }
+    }
+}

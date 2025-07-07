@@ -1,0 +1,53 @@
+.parent-btn{
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    gap: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    width: 100%;
+    :hover{
+        cursor: pointer;
+        
+    }
+}
+.primaryBtn{
+    background: #DB4444;
+    color: #fff;
+    &:hover{
+        background: #b93636;
+        transform: scale(1.05);
+        transition: border-color 0.3s ease;
+        box-shadow: 0 0 0 2px #DB4444;
+    }
+
+    &:active {
+        background-color: #b93636; /* Darker red */
+        transform: scale(0.95); /* Slight press effect */
+    }
+}
+
+
+.secondaryBtn{
+    background: #f1f1f1;
+    color: #212121;
+    
+    &:hover{
+        background-color: #f0f0f0; /* Slightly grayish on hover */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        transform: scale(1.05);
+    }
+}
+
+
+.disable{
+    opacity: .5;
+    pointer-events: none;
+    width: 100%;
+}
+.full{
+    width: 100%;
+}
