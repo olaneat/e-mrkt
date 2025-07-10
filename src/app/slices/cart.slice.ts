@@ -8,6 +8,8 @@ interface CartItem {
     totalPrice: number; // price * quantity
     img:string
     shippingCost: number
+    totalShippingCost: number
+
   }
 
   interface CartState {
@@ -24,6 +26,9 @@ interface CartItem {
 
 const calculateTotalCost = (cart:CartItem[]) =>{
     return cart.reduce((total, item)=> total + item.totalPrice, 0)
+}
+const calculateTotalShippingCost = (cart:CartItem[]) =>{
+    return cart.reduce((total, item)=> total + item.totalShippingCost, 0)
 }
 const  CartSlice = createSlice({
     name: 'cart',
@@ -42,11 +47,12 @@ const  CartSlice = createSlice({
             ...newItem,
             quantity: newItem.quantity || 1,
             totalPrice: (newItem.quantity || 1) * newItem.price,
+            totalShippingCost: (newItem.quantity || 1) * newItem.shippingCost
           });
         }
         console.log('Cart after update:', JSON.stringify(state.cart, null, 2))
         state.totalPrice = calculateTotalCost(state.cart);
-        // state.shippingCost = 
+        state.shippingCost = calculateTotalShippingCost(state.cart)
       },
         increaseQuantity(
             state,
@@ -58,7 +64,9 @@ const  CartSlice = createSlice({
             if (item) {
               item.quantity+=1;
               item.totalPrice = item.quantity * item.price;
+              item.totalShippingCost = item.quantity * item.shippingCost
               state.totalPrice = calculateTotalCost(state.cart);
+              state.shippingCost = calculateTotalShippingCost(state.cart)
             }
         },
         reduceQuantity(state, action: PayloadAction<{ id: string }>) {
@@ -69,6 +77,9 @@ const  CartSlice = createSlice({
               if (item.quantity > 1) {
                 item.quantity -= 1;
                 item.totalPrice = item.quantity * item.price;
+                item.totalShippingCost = item.quantity * item.shippingCost
+                state.shippingCost = calculateTotalShippingCost(state.cart)
+
               } else {
                 // Remove item if quantity would become 0
                 state.cart = state.cart.filter((cartItem) => cartItem.id !== id);
@@ -79,6 +90,7 @@ const  CartSlice = createSlice({
         removeItem(state, action: PayloadAction<{ id: string }>) {
             state.cart = state.cart.filter((item) => item.id !== action.payload.id);
             state.totalPrice = calculateTotalCost(state.cart);
+            
         },
         clearCart(state) {
             state.cart = [];

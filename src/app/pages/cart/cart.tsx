@@ -18,7 +18,7 @@ const Cart =() =>{
     const icons = Icons;
     const dispatch  = useDispatch();
     const [totlPrice, setTotalPrice]=useState(0); 
-    const [shippingCost, setshippingCost]=useState(1000); 
+    // const [shippingCost, setshippingCost]=useState(1000); 
     const [authUser, setUser] = useState()
     const navigate = useNavigate(); 
 // const [cart, setCart] = useState();
@@ -42,7 +42,7 @@ const Cart =() =>{
     }
 
     const calTotal = ()=>{
-      let total = cart.totalPrice + shippingCost
+      let total = cart.totalPrice + cart.shippingCost
       setTotalPrice(total)
     }
 

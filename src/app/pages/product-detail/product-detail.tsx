@@ -85,7 +85,8 @@ const ProductDetail = () =>{
         quantity: quantity,
         id: product?.id,
         img: product?.img,
-        totalPrice: quantity * product!.price
+        totalPrice: quantity * product!.price,
+        shippingCost:300
       }
       console.log(payload)
       dispatch(addToCart(payload) )

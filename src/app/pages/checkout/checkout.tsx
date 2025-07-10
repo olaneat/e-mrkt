@@ -199,7 +199,7 @@ const onClose = () => {
                 return(
                   <div className="cart-item-detail" key={item.id}>
                     <div className="upper-detail">
-                      <img src={`${env.BASE_URL}/${item.img}`} className="img-item" alt="" />
+                      <img src={`${env.IMG_URL}/${item.img}`} className="img-item" alt="" />
                       <div className="item-infor">
                         <span className="name">{item.name}</span>
                         <div className="price-qua-div">
@@ -217,7 +217,7 @@ const onClose = () => {
                     </div>
                     <div className="lower-detail">
                       <span className="shipping">
-                        Shipping: {item.shippingCost}
+                        Shipping: {item.totalShippingCost.toLocaleString('en-US', {currency:'NGN', style:'currency'})}
                       </span>
                       <span className="shipping">
                         Delivery: 
@@ -243,7 +243,7 @@ const onClose = () => {
             </div>
             <div className="summary-items">
               <div className="summary-title">Shipping fee</div>
-              <div className="summary-item">{cart.shippingCost}</div>
+              <div className="summary-item">{cart.shippingCost.toLocaleString('en-US', {currency:'NGN', style:'currency'})}</div>
             </div>
               <div className="summary-items">
               <div className="summary-title">Total Feee</div>
