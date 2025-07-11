@@ -60,3 +60,31 @@
     font-size: 10px;
     color: red;
 }
+
+.dropdown-field{
+    // max-width: 150px;
+    background: #fff;
+    .dropdown-list{
+        background: #fff;
+        position: absolute;
+        box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+        top: 30px;
+        left: 5px;
+        border: 1px solid #e5e5e5;
+        padding: 8px;
+        gap: 8px;
+        display: flex;
+        border-radius: 10px;
+        width: 100%;
+        z-index: 10000;
+        overflow: auto;
+        height: 150px;
+        flex-direction: column;
+        .dropdown-option{
+            padding: 2px;
+        }
+     }
+}
+.select-field-div{
+    width: 100%;
+}

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import './style.scss'
 import NavBar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/footer";
@@ -16,7 +16,7 @@ import { ProfileDTO } from "../../dto/auth.dto";
 import { UpdateAddress } from "../../slices/update-address.slice";
 import { PaystackButton, usePaystackPayment } from "react-paystack";
 import JSONstates from  '../../constant/states.json'
-
+import SelectField, {DropdownHandle} from "../../components/input-field/custom-select-field";
 
 // const handleSuccess = ()=>{
 //     // delCart()
@@ -46,9 +46,10 @@ const Checkout = () =>{
     const [addressModal, setAddressModal] = useState(false);
     const [editAddressModal, setEditAddressModal] = useState(false);
     const [newAddressModal, setNewAddressModal] = useState(false);
-    const [states, setStates] = useState<string[]>();
-
-    const data = JSONstates;
+    const [states, setStates] = useState<any>();
+    const [lgas, setlgas] = useState<any>();
+    const dropdownRef = useRef<DropdownHandle>(null);
+    const stateData = JSONstates;
     const [formData, setFormData] = useState<any >({
       address: editAddressModal ? address?.address! : '',
       phone_number: editAddressModal ? address?.phone_number! :"",
@@ -71,13 +72,17 @@ const Checkout = () =>{
         ...prev,
         [name]:data
       }))
+
+      if(name=='state'){
+        createLgas(data)
+      }
     }
 
     const icons = Icons;
   
     useEffect(()=>{
       displayAddress();
-      createStates(data)
+      createStates(stateData)
     }, [])
 
 
@@ -138,8 +143,21 @@ const Checkout = () =>{
     data.map((item:any)=>{
       states.push(item?.state?.name)
     })
-    console.log(states)
     setStates(states);
+  }
+
+  const createLgas = (data:any)=>{
+    let locals:string[] = [];
+    setlgas([])
+    console.log('state', data)
+    const state:any = stateData.find(item => item.state.name == data )
+    console.log(state, 'ssss')
+    state.state.locals.forEach((x:any)=>{
+      locals.push(x.name)
+    })
+    console.log(state)
+    setlgas(locals)
+    console.log(locals, 'lga')
   }
   const config = {
     email:user?.email,
@@ -148,11 +166,7 @@ const Checkout = () =>{
     publicKey: env.TEST_PK,
     onSuccess: handleSuccess
   }
-  
-const onClose = () => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log('closed')
-  }
+
 
   const updateAddress =()=>{   
     dispatch(UpdateAddress(formData) as any).then((res:any)=>{
@@ -168,7 +182,19 @@ const onClose = () => {
     
   }
 
+ 
 
+  // const handleSelectValue = (name: string, value: string) => {
+  //   console.log(value, 'hahahah')
+  //   setFormData((prev:any)=>({
+  //       ...prev,
+  //       [name]:data
+  //     }))
+
+
+  //     console.log(formData, 'form')
+  //   dropdownRef.current?.selectValue(value); // Trigger value selection
+  // };
   
   return (
     <div className="checkout-container">
@@ -182,7 +208,7 @@ const onClose = () => {
                 <span className="full-name">{address?.first_name} {address?.last_name}</span>
                 <span className="contact-detail">{address?.phone_number}</span>
                 <span className="contact-detail">{address?.address}</span>
-                <span className="contact-detail">{address?.state}</span>
+                <span className="contact-detail">{address?.lga}, {address?.state}</span>
               </span>
               <span className="change-detail" onClick={()=>openModal('address')}>Change</span>
             </div>
@@ -294,14 +320,18 @@ const onClose = () => {
               <img src={icons.closeIcon} className="close"  onClick={closeModal} alt="" />
             </div>
             <div className="address-body">
-              <div className="fields-div">
+              {/* <div className="fields-div">
                 <span className="field-name">Country/Region</span>
-                <InputField
-                  type="select"
-                  dropDownValues={states}
-
+                <SelectField
+                  ref={dropdownRef}
+                  options={states}
+                  label="Select your state"
+                  placeholder="Select"
+                  preSelectedValue={formData.state}
+                  onChange={getData}
+                  fieldName="state"
                 />
-              </div>
+              </div> */}
               <div className="fields-div">
                 <span className="field-name">Full names</span>
                 <div className="fields">
@@ -345,20 +375,26 @@ const onClose = () => {
                                   
                 </div>
                 <div className="fields">
-                  <InputField
-                    type="select"
-                    data={formData.state}
-                    name="state"
-                    onChange={getData}
-                    // handleClick={isShowDown}
-                    // ref={pro}
                   
-                  />
-                  <InputField
-                    type="text"
+                  <SelectField
+                    ref={dropdownRef}
+                    options={states}
+                    label="Select your state"
+                    placeholder="Select"
+                    preSelectedValue={formData.state}
                     onChange={getData}
-                    data={formData.lga}
-                    name="lga"
+                    fieldName="state"
+                  />
+
+
+                  <SelectField
+                    ref={dropdownRef}
+                    options={lgas}
+                    label="Select your LGA"
+                    placeholder="Select"
+                    preSelectedValue={formData.lga}
+                    onChange={getData}
+                    fieldName="lga"
                   />
                   
                 </div>
