@@ -65,14 +65,12 @@ const ProductDetail = () =>{
           setQuantity(quantity)
           setFlag(false);
         }
-        console.log(quantity)
       }else{
         quantity--
         if(quantity>1){
           setQuantity(quantity)
         }else{
           setQuantity(1)
-          console.log(quantity)
         }
 
       }
@@ -88,7 +86,6 @@ const ProductDetail = () =>{
         totalPrice: quantity * product!.price,
         shippingCost:300
       }
-      console.log(payload)
       dispatch(addToCart(payload) )
        
     }

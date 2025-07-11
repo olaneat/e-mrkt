@@ -50,7 +50,6 @@ const  CartSlice = createSlice({
             totalShippingCost: (newItem.quantity || 1) * newItem.shippingCost
           });
         }
-        console.log('Cart after update:', JSON.stringify(state.cart, null, 2))
         state.totalPrice = calculateTotalCost(state.cart);
         state.shippingCost = calculateTotalShippingCost(state.cart)
       },
@@ -95,6 +94,7 @@ const  CartSlice = createSlice({
         clearCart(state) {
             state.cart = [];
             state.totalPrice = 0;
+            state.shippingCost = 0
         },
     }   
 });
