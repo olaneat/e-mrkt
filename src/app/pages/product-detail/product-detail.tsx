@@ -10,7 +10,7 @@ import './syle.scss'
 import env from "../../../environment/env";
 import {  addToCart, } from "../../slices/cart.slice";
 import { RootState, AppDispatch } from "../../store";
-
+import ToastComponent from "../../components/toast/toast";
 const ProductDetail = () =>{
     const dispatch = useDispatch();
     // const [productDetail, setProductDetail] = useState<ProductDetailDTO>();
@@ -19,6 +19,10 @@ const ProductDetail = () =>{
     const [tabvalue, setTabValue] = useState<string>("");
     let [quantity, setQuantity] = useState<number>(1)
     let [flag, setFlag] = useState<boolean>(false)
+    const [showToast, setShowToast] = useState<boolean>(false);
+    const [toastTitle, setToastTitle] = useState<string>('');
+    const [toastMsg, setToastMsg] = useState<string>('')
+    const [toastType, setToastType] = useState<string>('')
 
     useEffect(() =>{
         displayProdDetail()
@@ -87,9 +91,19 @@ const ProductDetail = () =>{
         shippingCost:300
       }
       dispatch(addToCart(payload) )
+      openToast();
        
     }
 
+    const closeToast = ()=>{
+      setShowToast(false)
+    }
+    const openToast =() =>{
+      setShowToast(true);
+      setToastMsg('item added to cart successfully');
+      setToastTitle('Cart updated successfully');
+      setToastType('success')
+    }
     return (
       <div>
         <NavBar />  
@@ -337,7 +351,17 @@ const ProductDetail = () =>{
 
           </div>
         </div>
-        <Footer />    
+        <Footer />
+
+        <ToastComponent 
+          isOpen={showToast}
+          message={toastMsg}
+          title={toastTitle}
+          type={toastType}
+          handleClose={closeToast}
+          isClose={true}
+
+        />    
       </div>
     )
 }

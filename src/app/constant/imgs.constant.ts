@@ -12,6 +12,9 @@ import toggleIcon from '/icons/menu-white.avif'
 import cartIcon from '/icons/cart.svg'
 import trashIcon from '/icons/trash.svg'
 import closeIcon from '/icons/close.svg'
+import warning from '/icons/warning.svg'
+import success from '/icons/check-icon.svg'
+import error from '/icons/error-icon.svg'
 
 
 const Icons= {
@@ -28,7 +31,10 @@ const Icons= {
     toggleIcon,
     cartIcon,
     trashIcon,
-    closeIcon
+    closeIcon,
+    success,
+    error,
+    warning
 }
 
 export default Icons
