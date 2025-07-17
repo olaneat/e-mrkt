@@ -11,6 +11,7 @@ import { increaseQuantity, removeItem, reduceQuantity } from "../../slices/cart.
 import { UseDispatch } from "react-redux";
 import Footer from "../../components/footer/footer";
 import localStorageService from "../../services/local-storage.service";
+import ToastComponent from "app/components/toast/toast";
 
 const Cart =() =>{
     // const {cart, totalPrice} = useSelector((state:RootState) => state.cart);
@@ -21,12 +22,14 @@ const Cart =() =>{
     // const [shippingCost, setshippingCost]=useState(1000); 
     const [authUser, setUser] = useState()
     const navigate = useNavigate(); 
+    const [showToast, setOpen] = useState<boolean>(false)
 // const [cart, setCart] = useState();
 // 
 
   const delItem = (id:string)=> (event: React.MouseEvent<HTMLSpanElement>) =>{
     console.log(id)
-    dispatch(removeItem({id}))
+    dispatch(removeItem({id}) as any).then()
+    
   }
     useEffect(()=>{
       calTotal();
@@ -46,6 +49,7 @@ const Cart =() =>{
       setTotalPrice(total)
     }
 
+    // const openToast()
     const checkOut =()=>{
       let user:any =localStorageService.getItem('user')
      if(user?.refresh_token){
@@ -145,6 +149,13 @@ const Cart =() =>{
 
         </div>
         <Footer/>
+
+        {/* <ToastComponent 
+          message="Item added to yout Cart Successfully" 
+          title="Cart Updated" 
+          isOpen={showToast}
+          handleClose={}
+        /> */}
       </div>
     )
 }

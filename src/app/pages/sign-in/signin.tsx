@@ -8,12 +8,17 @@ import {Login } from '../../slices/login.slice'
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation, useSearchParams} from "react-router-dom";
 import { AppDispatch } from 'app/store';
+import ToastComponent from '../../components/toast/toast';
 
 const SignInComponent = () =>{
   const imgUrl = Icons;
   const dispatch = useDispatch<AppDispatch>();
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [disabledFlag, setDisableFlag] = useState(true); 
+  const [title, setTitle] = useState<string>('')
+  const [msg, setMsg] = useState<string>('')
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastType, setToastType] = useState<string>('')
   const [formData, setFormData] = useState({
     email: '',
     password:'',
@@ -57,15 +62,26 @@ const SignInComponent = () =>{
        
   }
   
+   const closeToast = ()=>{
+      setShowToast(false)
+    }
 
   const userLogin=()=>{
     dispatch(Login(formData) as any).then((res:any)=>{
       if(res.type=="auth/login/fulfilled"){
+        
        const previousUrl = (location.state as { from?: string })?.from || searchParams.get('redirect') || '/'
         // const redirectTo = searchParams.get('redirect') || (location.state as {from?:string})?.from || '/'
         // console.log(redirectTo, 'url')
         navigate(decodeURIComponent(previousUrl))
+      }else{
+        setTitle('Login failed')
+        let errMsg = res.payload
+        setToastType('err')
+        setMsg(res?.payload)
       }
+      setShowToast(true);
+      setTimeout(()=>setShowToast(false),5000)
     })
   }
   return (
@@ -110,7 +126,13 @@ const SignInComponent = () =>{
             </div>
           </div>
         </div>
-      
+      <ToastComponent 
+        title={title}
+        message={msg}
+        isOpen={showToast}
+        type={toastType}
+        handleClose={closeToast}
+      />
     </div>
   )
 }

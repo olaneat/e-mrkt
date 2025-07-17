@@ -41,10 +41,12 @@ const initialState: LoginState = {
 >('auth/login', async (form: LoginRequestDTO, { rejectWithValue }) => {
   try {
     const response = await AuthService.Login(form);
+    console.log(response.data, 'res')
     return response.data; // { user, token }
   } catch (err: any) {
+    console.log(err.response.data.non_field_errors[0], 'err')
     const errorMessage =
-      err.response?.data?.msg ||
+      err.response.data.non_field_errors[0] ||
       err.message ||
       'Failed to log in. Please try again.';
     return rejectWithValue(errorMessage);

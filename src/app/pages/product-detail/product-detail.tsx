@@ -90,9 +90,8 @@ const ProductDetail = () =>{
         totalPrice: quantity * product!.price,
         shippingCost:300
       }
-      dispatch(addToCart(payload) )
-      openToast();
-       
+      dispatch(addToCart(payload))
+        openToast();
     }
 
     const closeToast = ()=>{
@@ -103,6 +102,8 @@ const ProductDetail = () =>{
       setToastMsg('item added to cart successfully');
       setToastTitle('Cart updated successfully');
       setToastType('success')
+
+      setTimeout(()=>setShowToast(false), 5000)
     }
     return (
       <div>
@@ -359,7 +360,6 @@ const ProductDetail = () =>{
           title={toastTitle}
           type={toastType}
           handleClose={closeToast}
-          isClose={true}
 
         />    
       </div>
