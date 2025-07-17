@@ -85,12 +85,12 @@ const  CartSlice = createSlice({
               }
               state.totalPrice = calculateTotalCost(state.cart);
 
-              return state;
             }
         },
         removeItem(state, action: PayloadAction<{ id: string }>) {
             state.cart = state.cart.filter((item) => item.id !== action.payload.id);
             state.totalPrice = calculateTotalCost(state.cart);
+            state.shippingCost = calculateTotalShippingCost(state.cart)
             
         },
         clearCart(state) {

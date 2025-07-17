@@ -11,7 +11,7 @@ import { increaseQuantity, removeItem, reduceQuantity } from "../../slices/cart.
 import { UseDispatch } from "react-redux";
 import Footer from "../../components/footer/footer";
 import localStorageService from "../../services/local-storage.service";
-import ToastComponent from "app/components/toast/toast";
+import ToastComponent from "../../components/toast/toast";
 
 const Cart =() =>{
     // const {cart, totalPrice} = useSelector((state:RootState) => state.cart);
@@ -22,13 +22,17 @@ const Cart =() =>{
     // const [shippingCost, setshippingCost]=useState(1000); 
     const [authUser, setUser] = useState()
     const navigate = useNavigate(); 
-    const [showToast, setOpen] = useState<boolean>(false)
+    const [showToast, setShowToast] = useState<boolean>(false)
+    const [toastMsg, setToastMsg] = useState<string>('')
+    const [toastTitle, setToastTitle] = useState<string>('')
+    
 // const [cart, setCart] = useState();
 // 
 
   const delItem = (id:string)=> (event: React.MouseEvent<HTMLSpanElement>) =>{
     console.log(id)
-    dispatch(removeItem({id}) as any).then()
+    dispatch(removeItem({id}) as any)
+    openToast('del')
     
   }
     useEffect(()=>{
@@ -42,6 +46,9 @@ const Cart =() =>{
       else{
         dispatch(reduceQuantity({id}))
       }
+
+      openToast('update');
+      
     }
 
     const calTotal = ()=>{
@@ -59,7 +66,21 @@ const Cart =() =>{
      }
     }
     
-
+    const closeToast = ()=>{
+      setShowToast(false)
+    }
+    const openToast =(type:string)=>{
+      if(type == 'del'){
+        setToastMsg('Item deleted Successfully');
+        setToastTitle('Cart updated successfully');
+      
+      }else if(type == 'update'){
+        setToastMsg('Item quantity updated Successfully')
+        setToastTitle('Cart updated successfully')
+      }
+      setShowToast(true)
+      setTimeout(()=>setShowToast(false), 5000)
+    }
     return(
 
       <div className="cart-container">
@@ -150,12 +171,13 @@ const Cart =() =>{
         </div>
         <Footer/>
 
-        {/* <ToastComponent 
-          message="Item added to yout Cart Successfully" 
-          title="Cart Updated" 
+        <ToastComponent 
+          message={toastMsg} 
+          title={toastTitle} 
           isOpen={showToast}
-          handleClose={}
-        /> */}
+          handleClose={closeToast}
+          type="success"
+        />
       </div>
     )
 }

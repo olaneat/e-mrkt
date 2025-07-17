@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import './style.scss'
 import Icons from "../../constant/imgs.constant";
 export interface toast{
-    type:string,
+    type?:string,
     message:string,
     title:string
     timer?:any,
