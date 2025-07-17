@@ -2,7 +2,7 @@ import React, {useEffect, useState, forwardRef, useRef, useImperativeHandle} fro
 import Icons from "../../constant/imgs.constant";
 import './style.scss'
 const InputField = (props:any)=>{
-    const imgUrl = Icons;
+    const imgUrl = Icons.Icons;
     
     
     const [showPassword, setShowPassword] = useState(false);

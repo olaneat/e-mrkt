@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import  './stye.scss'
 import { SignUpDTO } from "app/dto/auth.dto";
-import Icons from "../../constant/imgs.constant";
+import Icons  from "../../constant/imgs.constant";
+import Images from "../../constant/imgs.constant"
 import Button from "./../../components/btns/btn";
 import InputField from "./../../components/input-field/input-field";
 import { Signup } from "../../slices/auth.slice";
@@ -68,8 +69,8 @@ const SignUpComponent=()=>{
       }))
      
     }
-    const imgUrl = Icons
-    
+    const iconUrl = Icons.Icons
+    const imgUrl = Images.Images
     
     const createUser = () =>{
       dispatch(Signup(formData) as any)
@@ -85,7 +86,7 @@ const SignUpComponent=()=>{
     return (
       <div className="signup-container">
         <span className="img-container">
-          <img src={Icons.signUpImg} alt="" />
+          <img src={imgUrl.signUpImg} alt="" />
         </span>
         <div className="signup-div">
           <span className="signup-title">Create an account</span>
@@ -108,7 +109,7 @@ const SignUpComponent=()=>{
                 name="username" 
                 onChange={getData} 
                 placeholder="Pick your user username" 
-                img={imgUrl.user}
+                img={iconUrl.user}
                 onBlur= {handleErr}
               />
             </span>

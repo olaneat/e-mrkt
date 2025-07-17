@@ -18,7 +18,7 @@ const ToastComponent = ({type, message, title, handleClose, isOpen}:toast)=>{
     
 
   useEffect(()=>{})
-  const icons = Icons;
+  const icons = Icons.Icons;
   return (
     <div>
       {isOpen ?

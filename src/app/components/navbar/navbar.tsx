@@ -5,13 +5,14 @@ import { useDispatch, UseDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { displayCategories } from "../../slices/categories.slice";
 import { RootState, AppDispatch } from "../../store";
-// import
 import Icons from "../../constant/imgs.constant";
+import { useNavigate } from "react-router-dom";
+
 const NavBar = () =>{
   const dispatch = useDispatch();
-  const icon = Icons;
-    const {cart} = useSelector((state:RootState)=>state.cart )
-  
+  const icon = Icons.Icons;
+  const {cart} = useSelector((state:RootState)=>state.cart )
+  const navigate = useNavigate();
   useEffect(()=>{
     getCategories()
   },[])
@@ -58,6 +59,9 @@ const NavBar = () =>{
     }
   }
 
+  const goHome= ()=>{
+    navigate('/')
+  }
   const titleCase =(element:string) =>{
     if(element == null || element === ""){
       return false;
@@ -76,7 +80,7 @@ const NavBar = () =>{
           <div className="lg-screen">
 
           <div className="company-name">
-            <span className="title">Neat Storez</span>
+            <span className="title" onClick={goHome}>Olaneat Storez</span>
             <span className="drop-down-btn" onClick={toggleDropdown}>
               <img src={icon.toggleIcon} alt="" />
 
@@ -131,7 +135,11 @@ const NavBar = () =>{
             
             <Link to="/cart">
               <div className="icon">
-                <span className="badge">{cart.length}</span>
+                {cart.length>0 
+                  ?
+                  <span className="badge">{cart.length}</span>
+                  : ""
+                }
                 <img src={icon.cartIcon} alt="" />
               </div>
                 
@@ -149,7 +157,11 @@ const NavBar = () =>{
                   </div>
                   <Link to="/cart">
                   <div className="icon">
-                    <span className="badge">{cart.length}</span>
+                    {cart.length>0 
+                      ?
+                      <span className="badge">{cart.length}</span>
+                      : ""
+                    }
                     <img src={icon.cartIcon} alt="" />
                   </div>
                 
@@ -188,7 +200,11 @@ const NavBar = () =>{
                 </span>
                 <Link to={'/cart'}>
                   <div className="icon">
-                    <span className="badge">{cart.length}</span>
+                    {cart.length>0 
+                      ?
+                      <span className="badge">{cart.length}</span>
+                      : ""
+                    }
                     <img src={icon.cartIcon} alt="" />
                   </div>
                 

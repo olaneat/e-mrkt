@@ -11,7 +11,9 @@ import { AppDispatch } from 'app/store';
 import ToastComponent from '../../components/toast/toast';
 
 const SignInComponent = () =>{
-  const imgUrl = Icons;
+  const iconUrl = Icons.Icons;
+  const imgUrl = Icons.Images;
+
   const dispatch = useDispatch<AppDispatch>();
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [disabledFlag, setDisableFlag] = useState(true); 
