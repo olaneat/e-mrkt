@@ -15,14 +15,13 @@ import closeIcon from '/icons/close.svg'
 import warning from '/icons/warning.svg'
 import success from '/icons/check-icon.svg'
 import error from '/icons/error-icon.svg'
-
+import emptyStateCart from '/imgs/shoping-cart.jpeg'
 
 const Icons= {
     SendIcon,
     locationIcon,
     whiteMail,
     whitePhone,
-    signUpImg,
     email,
     hidePswd,
     visiblePswd,
@@ -37,4 +36,11 @@ const Icons= {
     warning
 }
 
-export default Icons
+
+
+const Images ={
+    signUpImg,
+    emptyStateCart
+
+}
+export default {Icons, Images}

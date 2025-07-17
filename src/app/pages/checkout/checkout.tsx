@@ -78,7 +78,7 @@ const Checkout = () =>{
       }
     }
 
-    const icons = Icons;
+    const icons = Icons.Icons;
   
     useEffect(()=>{
       displayAddress();
