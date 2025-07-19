@@ -235,6 +235,18 @@
             }
         }
     }
+
+    .empty-state{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: stretch;
+    }
+    .pg-footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+}
 }
 
 
@@ -367,6 +379,7 @@
         align-self: stretch;
         border-top: 1px solid #e5e5e5;
         padding: 16px 0px;
+        
         .btns{
             gap: 16px;
             display: flex;
@@ -396,6 +409,8 @@
     }
 }
 
+
+
 @media (max-width:768px) {
     .upper-detail{
         flex-direction: column;
@@ -413,4 +428,10 @@
     .checkout-body{
         flex-direction: column;
     }
+}
+
+.disable-btn{
+    cursor: none !important;
+    pointer-events: none;
+    opacity: .5;
 }

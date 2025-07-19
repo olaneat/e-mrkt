@@ -80,7 +80,7 @@ const NavBar = () =>{
           <div className="lg-screen">
 
           <div className="company-name">
-            <span className="title" onClick={goHome}>Olaneat Storez</span>
+            <span className="title" onClick={goHome}>Ola Storez</span>
             <span className="drop-down-btn" onClick={toggleDropdown}>
               <img src={icon.toggleIcon} alt="" />
 
@@ -153,7 +153,7 @@ const NavBar = () =>{
                 <div className="top">
                   <div className="lft">
                     <span className="close">X</span>
-                    <span className="name">NeatFarmz</span>
+                    <span className="name">Ola Storez</span>
                   </div>
                   <Link to="/cart">
                   <div className="icon">

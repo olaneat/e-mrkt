@@ -14,27 +14,30 @@ import localStorageService from "../../services/local-storage.service";
 import ToastComponent from "../../components/toast/toast";
 import EmptyStateComponent from "../../components/empty-state/empty-state";
 import images from "../../constant/imgs.constant";
+import ModalComponent from "../../components/modal/modal";
+
 const Cart =() =>{
-    // const {cart, totalPrice} = useSelector((state:RootState) => state.cart);
     const cart = useSelector((state:RootState)=>state.cart )
     const icons = Icons.Icons;
     const dispatch  = useDispatch();
     const [totlPrice, setTotalPrice]=useState(0); 
-    // const [shippingCost, setshippingCost]=useState(1000); 
-    const [authUser, setUser] = useState()
     const navigate = useNavigate(); 
     const [showToast, setShowToast] = useState<boolean>(false)
     const [toastMsg, setToastMsg] = useState<string>('')
     const [toastTitle, setToastTitle] = useState<string>('')
     const imgUrl = images.Images
-// const [cart, setCart] = useState();
-// 
+    const [openModal, setOpenModal] = useState(false);
+    const [itemId, setId] = useState<string>('')
+  const openDelModal = (id:string)=> (event: React.MouseEvent<HTMLSpanElement>) =>{
+    setOpenModal(true);
+    setId(id)
+  }
 
-  const delItem = (id:string)=> (event: React.MouseEvent<HTMLSpanElement>) =>{
-    console.log(id)
+  const deleteItem =() =>{
+    let id:string = itemId
     dispatch(removeItem({id}) as any)
     openToast('del')
-    
+    closeModal()
   }
     useEffect(()=>{
       calTotal();
@@ -47,14 +50,15 @@ const Cart =() =>{
       else{
         dispatch(reduceQuantity({id}))
       }
-
-      openToast('update');
-      
     }
 
     const calTotal = ()=>{
       let total = cart.totalPrice + cart.shippingCost
       setTotalPrice(total)
+    }
+
+    const closeModal =()=>{
+      setOpenModal(false);
     }
 
     // const openToast()
@@ -114,7 +118,7 @@ const Cart =() =>{
                                   </span>
                                 </span>
                                 <div className="item-quantity">
-                                  <span className="change-quantity" onClick={changeQuantity('reduce', item.id)}>-</span>
+                                  <span className={`change-quantity ${item.quantity<=1 ? 'disable-btn ': ''}`} onClick={changeQuantity('reduce', item.id)} >-</span>
                                   <span className="chart-item-quantity">{item.quantity}</span>
                                   <span className="change-quantity" onClick={changeQuantity('increase', item.id)}>+</span>
                                 </div>
@@ -128,7 +132,7 @@ const Cart =() =>{
                               </div>
                             </div>
                           </div>
-                          <span className="del-icon" onClick={delItem(item.id)}>
+                          <span className="del-icon" onClick={openDelModal(item.id)}>
                             <img src={icons.trashIcon}  className="img"/>
 
                           </span>
@@ -174,9 +178,10 @@ const Cart =() =>{
             </div>
           : <div className="empty-div">
               <EmptyStateComponent
-              text="Items added to your cart will display here"
+              text="Looks like you haven't added any items yet. Start shopping to fill your cart!"
               title="Your Cart is Empty"
               imgUrl={imgUrl.emptyStateCart}
+              btnTxt="Shop Now"
             />
           </div>
         } 
@@ -189,6 +194,26 @@ const Cart =() =>{
           handleClose={closeToast}
           type="success"
         />
+
+        <ModalComponent
+          isOpen={openModal}
+          hasCloseBtn={true}
+          onClose={closeModal}
+
+        >
+          <div className="modal">
+            <div className="header">
+              <span className="title">Remove Product</span>
+              <img src={icons.closeIcon} className="close" onClick={closeModal} />
+            </div>
+            <span className="del-body">Remove item from cart?</span>
+            <div className="btns">
+              <Button name="Remove" type="primary" handleClick={deleteItem} />
+              <Button name="Cancel" handleClick={closeModal}/>
+            </div>
+          </div>
+
+        </ModalComponent>
       </div>
     )
 }
