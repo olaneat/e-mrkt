@@ -59,7 +59,6 @@ const  CartSlice = createSlice({
           ) {
             const { id } = action.payload;
             const item = state.cart.find((item) => item.id === id);
-      
             if (item) {
               item.quantity+=1;
               item.totalPrice = item.quantity * item.price;
@@ -78,7 +77,6 @@ const  CartSlice = createSlice({
                 item.totalPrice = item.quantity * item.price;
                 item.totalShippingCost = item.quantity * item.shippingCost
                 state.shippingCost = calculateTotalShippingCost(state.cart)
-
               } else {
                 // Remove item if quantity would become 0
                 state.cart = state.cart.filter((cartItem) => cartItem.id !== id);

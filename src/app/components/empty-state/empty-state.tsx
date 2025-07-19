@@ -7,9 +7,10 @@ export interface EmptyState{
     imgUrl?:string,
     title?:string
     text?:string
+    btnTxt?:string
 }
 
-const EmptyStateComponent =({imgUrl, title, text}: EmptyState)=>{
+const EmptyStateComponent =({imgUrl, title, text, btnTxt}: EmptyState)=>{
   const navigate = useNavigate();
   const goHome =()=>{
     navigate('/')
@@ -26,7 +27,7 @@ const EmptyStateComponent =({imgUrl, title, text}: EmptyState)=>{
     
       <Button 
         type="primary"
-        name="Expore Items"
+        name={btnTxt}
         handleClick={goHome}
       />
     </div>
