@@ -91,7 +91,7 @@ const Checkout = () =>{
   const displayAddress =()=>{
     let user  =  localStorageService.getItem('user')
     setUser(user);
-    dispatch(DisplayAddress(user.id) as any)
+    dispatch(DisplayAddress(user?.id) as any)
   }
 
   const changeQuantity = (action:string, id:string)=> (event: React.MouseEvent<HTMLSpanElement>) =>{
@@ -436,12 +436,14 @@ const Checkout = () =>{
           </div>
         :
         <div className="empty-state">
-          <EmptyStateComponent
+          
+          
+          {/* <EmptyStateComponent
             text="Thank you for your purchase. Your order is being processed."
             title="Payment Successful"
             imgUrl={imgUrl.emptyStateCart}
             btnTxt="Shop Now"
-          />
+          /> */}
         </div>  
       }
       <div className="pg-footer">

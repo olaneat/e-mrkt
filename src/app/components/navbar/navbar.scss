@@ -57,7 +57,8 @@
                         color: #666;
                         font-weight: 500;
                         background: #fff;
-
+                        font-family: 'Courier New', Courier, monospace;
+                        align-self: stretch;
                     }
 
                 }
@@ -70,7 +71,6 @@
         gap:40px;
         justify-content: center;
         align-items:  center;
-
        .txt{
             position: relative;
             color: #fff;
@@ -81,22 +81,30 @@
             position: absolute;
             display: flex;
             flex-direction: column;
-            gap: 8px;
             padding: 16px;
             background: #fff;
             border-radius: 20px;
             justify-content: center;
             align-items: center;
-            width: 100px;
+            width: 300px;
             top: 35px;
-            left: -45px;
-            z-index: 10;
+            right: -130px;
+            z-index: 100;
+            box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+
+            .signout{
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 14px;
+                color: #DB4444;
+                font-weight: 600;
+                cursor: pointer;
+            }
             .items{
                 padding: 12px;
                 color: #000;
                 font-size: 13px;
                 display: flex;
-                justify-content: center;
+                justify-content: flex-start;
                 align-items: center;
                 align-self: stretch;
                 cursor: pointer;
@@ -105,6 +113,42 @@
                 border-bottom: 1px solid #f1f1f1;
 
             }
+
+            .profile-div{
+                display: flex;
+                gap: 8px;
+                border-bottom: 1px solid #e5e5e5;
+                padding: 8px;
+                align-self: stretch;
+                justify-content: flex-start;
+                align-items: center;
+
+                .profile-info{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    gap: 8px;
+
+                    .profile{
+                        font-size: 12px;
+                        font-family: 'Courier New', Courier, monospace;
+                        font-weight: 60;
+                        color: #666;
+                    }
+                }
+            }
+
+            .span-list{
+                display: flex;
+                justify-content: center;
+                align-self: stretch;
+                flex-direction: 8px;
+                
+            }
+        }
+        .list{
+            gap: 8px;
+
         }
         
 
@@ -294,4 +338,5 @@
 
 .link{
     text-decoration: none;
+    width: 100%;
 }

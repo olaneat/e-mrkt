@@ -71,10 +71,7 @@ const SignInComponent = () =>{
   const userLogin=()=>{
     dispatch(Login(formData) as any).then((res:any)=>{
       if(res.type=="auth/login/fulfilled"){
-        
        const previousUrl = (location.state as { from?: string })?.from || searchParams.get('redirect') || '/'
-        // const redirectTo = searchParams.get('redirect') || (location.state as {from?:string})?.from || '/'
-        // console.log(redirectTo, 'url')
         navigate(decodeURIComponent(previousUrl))
       }else{
         setTitle('Login failed')

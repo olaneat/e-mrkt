@@ -7,17 +7,27 @@ import { displayCategories } from "../../slices/categories.slice";
 import { RootState, AppDispatch } from "../../store";
 import Icons from "../../constant/imgs.constant";
 import { useNavigate } from "react-router-dom";
-
+import localStorageService from "../../services/local-storage.service";
+import { logout } from "../../slices/login.slice";
 const NavBar = () =>{
   const dispatch = useDispatch();
   const icon = Icons.Icons;
   const {cart} = useSelector((state:RootState)=>state.cart )
   const navigate = useNavigate();
+  // const isAuthenticated = useSelector((state:RootState)=>state.login.isAuthenticated)
+  const {address} = useSelector((state:RootState)=>state.address)
+  const [authUser, setUser] = useState<any>();
   useEffect(()=>{
     getCategories()
+    let user = localStorageService.getItem('user')
+    setUser(user)
+    console.log(authUser, 'auth')
   },[])
 
-
+  const sigout =()=>{
+    dispatch(logout());
+    console.log('sign')
+  }
   const getCategories = () =>{
     dispatch(displayCategories()as any)
    
@@ -30,7 +40,6 @@ const NavBar = () =>{
   // const [Categories, setCategories] = useState<CategoryDTO[]>([]);
  
   useEffect(()=>{
-
   })
 
   const toggleSidebar = () =>{
@@ -113,25 +122,63 @@ const NavBar = () =>{
            <Link className="link" to="/">
             <span className="item"> Home</span>
           </Link>
-            <span  className="txt"  onClick={accountToogle}>
-              Account
+            {
+              authUser ? 
+                <span className="txt" onClick={accountToogle}>
+                  {authUser?.first_name}
+                  <span className="drop-down">
+                    <span className="profile-div">
+                      <span className="dp"></span>
+                      <span className="profile-info">
+                        <span className="profile">{authUser?.first_name}</span>
+                        <span className="signout" onClick={sigout}>Sigout</span>
+
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              : <span className="txt" onClick={accountToogle}>
+                Account 
+                <span className="drop-down list">
+                  <Link className="link" to="/sign-in">
+                    <span className="items" >Login</span>
+                  </Link>
+                  <Link className="link" to="/registration">
+                    <span className="items" >Signup</span>
+                  </Link>
+                </span> 
+              </span>
+
+            }
+            {/* <span  className="txt"  onClick={accountToogle}>
               
               { dropDown ? (
-              <div className="drop-down">
-
-                <Link className="link" to="/sign-in">
-                  <span className="items" >Login</span>
-                </Link>
-                <Link className="link" to="/registration">
-                  <span className="items" >Signup</span>
-                </Link>
+              <div className="drop-down-container">
+                {
+                  isAuthenticated ?
+                    <div className="drop-down">
+                      <Link className="link" to="/sign-in">
+                        <span className="items" >Login</span>
+                      </Link>
+                      <Link className="link" to="/registration">
+                        <span className="items" >Signup</span>
+                      </Link>
+                    </div>
+                  : <div className="drop-down">
+                      <Link className="link" to="/sign-in">
+                        <span className="items" >Login</span>
+                      </Link>
+                      <Link className="link" to="/registration">
+                        <span className="items" >Signup</span>
+                      </Link>
+                    </div> 
+                }
                 
-
               </div>
             ):(
               <div></div>
             )}
-            </span>
+            </span> */}
             
             <Link to="/cart">
               <div className="icon">

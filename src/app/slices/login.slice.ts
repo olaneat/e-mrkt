@@ -64,6 +64,7 @@ const LoginSlice = createSlice({
             state.isLoading = false;
             state.token = null
             localStorageService.clearItem();
+            console.log(state, 'state')
         },
         clearError: (state) => {
             state.error = null;
@@ -86,7 +87,6 @@ const LoginSlice = createSlice({
 
         })
         .addCase(Login.rejected, (state, action)=>{
-          console.log(action, 'action')
             state.isLoading = false;
             state.error = action.error
         })
