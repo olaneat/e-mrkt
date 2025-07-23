@@ -18,19 +18,21 @@ import { persistReducer} from 'redux-persist';
     key:'root',
     storage,
     debug: true,
-    version:1
+    version:1,
+    whitelist: ['cart', 'login']
+    
   }
   const reducers = combineReducers({
     product: productDetailReducer,
-    cart:CartReducer,
+    cart:persistReducer(persistConfig, CartReducer),
     products:ProductReducer,
     category: CategoryReducer,
-    login: LoginReducer,
+    user: persistReducer(persistConfig, LoginReducer),
     address:AddressReducer,
     updateAddress: UpdateAddressReducer
   })
 
-  const persistedReducer:any = persistReducer(persistConfig, reducers)
+  // const persistedReducer:any = persistReducer(persistConfig, reducers)
 // Infer the `RootState` type from the root reducer
 // export type RootState = ReturnType<typeof rootReducer>
 
@@ -56,6 +58,7 @@ export const store = configureStore({
   // reducer:persistedReducer,
   reducer:reducers,
   preloadedState:persistState,
+
   // devTools: true,
   // middleware: (getDefaultMiddleware) =>
   //   getDefaultMiddleware({
@@ -89,6 +92,7 @@ store.subscribe(
   throttle(() => {
     saveState({
       cart: store.getState().cart,
+      user:store.getState().user
     });
   }, 1000) // Save at most once per second
 );

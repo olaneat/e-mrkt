@@ -10,8 +10,10 @@ interface LoginResponseDTO {
   user: {
     id: string;
     email: string;
-    first_name?: string; // Optional, adjust based on your API
-    last_name?: string
+    firstName?: string; // Optional, adjust based on your API
+    lastName?: string;
+    username?: string;
+    profileImage?:string
   };
   refresh_token: string;
   access_token: string;
@@ -78,11 +80,13 @@ const LoginSlice = createSlice({
         })
         .addCase(Login.fulfilled, (state, action)=>{
             state.isAuthenticated = true;
+            console.log(action.payload, 'pay')
             state.error = null
+            state.isLoading = false;
             state.user = action.payload.user;
             state.token = action.payload.refresh_token;
             console.log(state, 'state')
-            localStorageService.saveItem('user',action.payload);
+            // localStorageService.saveItem('user',action.payload);
             
 
         })

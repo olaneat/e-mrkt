@@ -71,11 +71,24 @@
         gap:40px;
         justify-content: center;
         align-items:  center;
-       .txt{
-            position: relative;
-            color: #fff;
-            font-size: 13px;
+        .acct-div{
+            display: flex;
+            gap: 8px;
+            width: fit-content;
+            justify-content: flex-start;
+            align-items: center;
             cursor: pointer;
+            .txt{
+                position: relative;
+                color: #fff;
+                font-size: 13px;
+                text-wrap: nowrap;
+                
+            }
+            .profile-icon{
+                width: 18px;
+                height: 18px;
+            }
         }
         .drop-down{
             position: absolute;
@@ -87,8 +100,8 @@
             justify-content: center;
             align-items: center;
             width: 300px;
-            top: 35px;
-            right: -130px;
+            top: 60px;
+            right: 13px;
             z-index: 100;
             box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
 
@@ -123,11 +136,22 @@
                 justify-content: flex-start;
                 align-items: center;
 
+                .empty-dp{
+                    display: flex;
+                    justify-content: center;
+                    align-self: stretch;
+                    width: 40px;
+                    height: 40px;
+                    padding: 4px;
+                    border-radius: 50%;
+                    border: 1px solid #f1f1f1;
+                    background: #e5e5e5;
+                }
                 .profile-info{
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
-                    gap: 8px;
+                    gap: 16px;
 
                     .profile{
                         font-size: 12px;
@@ -137,13 +161,26 @@
                     }
                 }
             }
-
             .span-list{
                 display: flex;
                 justify-content: center;
+                align-items: flex-start;
                 align-self: stretch;
-                flex-direction: 8px;
-                
+                gap: 8px;
+                flex-direction: column;
+
+                .list{
+                    display: flex;
+                    gap: 8px;
+                    align-self: stretch;
+                    width: 100%;
+                    justify-content: flex-start;
+                    align-items: center;
+                    img{
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
             }
         }
         .list{

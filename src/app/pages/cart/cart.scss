@@ -31,7 +31,9 @@
     .cart-detail{
         display: flex;
         align-self: stretch;
-        gap: 16px;
+        // gap: 16px;
+        justify-content: space-between;
+        align-items: center;
        .lft-cart{
             display: flex;
             gap: 16px;
@@ -77,6 +79,7 @@
                     border-radius: 10px;
                     padding: 16px 10px ;
                     line-height: normal;
+                    gap: 16px;
                   .single-item{
                         display: flex;
                         gap: 12px;
@@ -89,7 +92,7 @@
                             justify-content: center;
                             align-items: flex-start;
                             align-self: stretch;
-                            width: 100%;
+                            width: 350px;
                         .item-name{
                             display: flex;
                             justify-content: center;

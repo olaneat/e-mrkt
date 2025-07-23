@@ -16,7 +16,11 @@ import warning from '/icons/warning.svg'
 import success from '/icons/check-icon.svg'
 import error from '/icons/error-icon.svg'
 import emptyStateCart from '/imgs/shoping-cart.jpeg'
-
+import whiteUser from '/icons/white-user.svg'
+import chevronDownWhite from '/icons/chevro-down-white.svg'
+import WishList from '/icons/list.svg'
+import Settings from '/icons/settings.svg'
+import payment from '/icons/payment.svg'
 const Icons= {
     SendIcon,
     locationIcon,
@@ -33,7 +37,12 @@ const Icons= {
     closeIcon,
     success,
     error,
-    warning
+    warning,
+    whiteUser,
+    chevronDownWhite,
+    WishList,
+    payment,
+    Settings
 }
 
 
