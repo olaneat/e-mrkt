@@ -88,9 +88,6 @@ const SignInComponent = () =>{
   }
   return (
     <div className='sign-container'>
-        <div className="lft">
-          <img src={imgUrl.signUpImg} alt="" />
-        </div>
         <div className="rite">
           <span className="sign-title">Login to access your Account</span>
           <span className='sign-sub'>Enter Your detail below</span>
@@ -128,6 +125,8 @@ const SignInComponent = () =>{
             </div>
           </div>
         </div>
+        <img src={imgUrl.signUpImg} alt="" className='login-img' />
+        
       <ToastComponent 
         title={title}
         message={msg}

@@ -63,11 +63,10 @@ const Cart =() =>{
 
     // const openToast()
     const checkOut =()=>{
-      // let user:any =localStorageService.getItem('user')
      if(user?.isAuthenticated){
       navigate('/checkout')
      }else{
-      // navigate('/sign-in')
+      navigate('/sign-in')
      }
     }
     

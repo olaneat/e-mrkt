@@ -89,7 +89,6 @@ const NavBar = () =>{
           <div className="lg-screen">
 
           <div className="company-name">
-            <span className="title" onClick={goHome}>Ola Storez</span>
             <span className="drop-down-btn" onClick={toggleDropdown}>
               <img src={icon.toggleIcon} alt="" />
 
@@ -109,6 +108,7 @@ const NavBar = () =>{
                 ): ''
               }
             </span>
+            <span className="title" onClick={goHome}>Ola Storez</span>
           </div>
           
           <div className="search-div">
@@ -207,7 +207,7 @@ const NavBar = () =>{
                 <div className="top">
                   <div className="lft">
                     <span className="close">X</span>
-                    <span className="name">Ola Storez</span>
+                    <span className="name sm-screen-name">Ola storez</span>
                   </div>
                   <Link to="/cart">
                   <div className="icon">
@@ -222,47 +222,91 @@ const NavBar = () =>{
                 </Link>
 
                 </div>
-
-                <div className="list">
-                  <Link className="link" to="/">
-                    <span className="item"> Home</span>
-                  </Link>
-                  <Link className="link" to="/sign-in">
-                    <span className="items" >Login</span>
-                  </Link>
-                  <Link className="link" to="/registration">
-                    <span className="items" >Signup</span>
-                  </Link>
-
-                </div>
-                <div className="categories">
-                  <span className="title">Popular Categories</span>
-                  <div className="cat-list">
-                    {
-                      categories?.map((catgory:CategoryDTO)=>
-                        (
-                        <span key={catgory?.id} className="items"> {catgory?.name?.toLocaleUpperCase()}</span>
-                      ))
+                <div className="nav-slider">
+                  <div className="list">
+                    <Link className="item" to="/">
+                      <span className=""> Home</span>
+                    </Link>
+                    { user.isAuthenticated 
+                      ?
+                      <div className="sm-profile-info">
+                        <span className="profile-div">
+                          {
+                            user.user?.profileImage
+                              ? <img src="" alt=""  className="profile-img"/>
+                              : <span className="empty-dp">
+                                <img src={icon.whiteUser} alt="" />
+                              </span>
+                          }
+                          <span className="profile-info">
+                            <span className="profile">Welcome, {user.user?.username}</span>
+                            <span className="signout" onClick={sigout}>Sigout</span>
+                          </span>
+                        </span>
+                        <span className="span-list">
+                          <span className="span-option">
+                            <img src={icon.WishList} alt="" />
+                            <span className="span-option-txt">My Orders</span>
+                          </span>
+                          <span className="span-option">
+                            <img src={icon.payment} alt="" />
+                            <span className="span-option-txt">Payment</span>
+                          </span>
+                          <span className="span-option">
+                            <img src={icon.like} alt="" />
+                            <span className="span-option-txt">Wish List</span>
+                          </span>
+                          <span className="span-option">
+                            <img src={icon.Settings} alt="" />
+                            <span className="span-option-txt">Settings</span>
+                          </span>
+                        </span>  
+                      </div>
+                      : 
+                      <div>
+                        <Link className="item" to="/sign-in">
+                          <span className="" >Login</span>
+                        </Link>
+                        <Link className="item" to="/registration">
+                          <span className="" >Signup</span>
+                        </Link>
+                      </div>
                     }
+
                   </div>
+                  <div className="navbar-categories">
+                    <span className="title">Popular Categories</span>
+                    <div className="cat-list">
+                      {
+                        categories?.map((catgory:CategoryDTO)=>
+                          (
+                          <span key={catgory?.id} className="items"> {catgory?.name?.toLocaleUpperCase()}</span>
+                        ))
+                      }
+                    </div>
+                  </div>
+
                 </div>
               </div>
               :
               <div className="menu-div">
                 <span className="menu-bar" onClick={toggleSidebar}>
-                  <img src="icons/menu-icon.svg" alt="" />
+                  <img src={icon.toggleIcon} alt="" />
                 </span>
-                <Link to={'/cart'}>
-                  <div className="icon">
-                    {cart.length>0 
-                      ?
-                      <span className="badge">{cart.length}</span>
-                      : ""
-                    }
-                    <img src={icon.cartIcon} alt="" />
-                  </div>
-                
-                </Link>
+                <div className="nav-header-div">
+                  <span className="nav-header-txt">Ola Storez</span>
+                  <Link to={'/cart'}>
+                    <div className="icon">
+                      {cart.length>0 
+                        ?
+                        <span className="badge">{cart.length}</span>
+                        : ""
+                      }
+                      <img src={icon.cartIcon} alt="" />
+                    </div>
+                  
+                  </Link>
+                </div>
               </div>
             }
             

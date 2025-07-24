@@ -85,9 +85,6 @@ const SignUpComponent=()=>{
     
     return (
       <div className="signup-container">
-        <span className="img-container">
-          <img src={imgUrl.signUpImg} alt="" />
-        </span>
         <div className="signup-div">
           <span className="signup-title">Create an account</span>
           <span className="signup-sub">Enter your detail</span>
@@ -147,6 +144,7 @@ const SignUpComponent=()=>{
             </div>
           </div>
         </div>
+          <img src={imgUrl.signUpImg} alt="" className="bg-img" />
       </div>
     )
 
