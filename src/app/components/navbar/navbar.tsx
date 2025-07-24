@@ -145,7 +145,7 @@ const NavBar = () =>{
                         </span>
                         <span className="span-list">
                           <span className="list">
-                            {/* <img  alt="" /> */}
+                            <img src={icon.WishList} alt="" />
                             <span className="content">My Orders</span>
                           </span>
                           <span className="list">
@@ -153,7 +153,7 @@ const NavBar = () =>{
                             <span className="content">Payment</span>
                           </span>
                           <span className="list">
-                            <img src={icon.WishList} alt="" />
+                            <img src={icon.like} alt="" />
                             <span className="content">Wish List</span>
                           </span>
                           <span className="list">

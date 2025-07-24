@@ -103,7 +103,7 @@
             top: 60px;
             right: 13px;
             z-index: 100;
-            box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
             .signout{
                 font-family: 'Courier New', Courier, monospace;
@@ -168,6 +168,7 @@
                 align-self: stretch;
                 gap: 8px;
                 flex-direction: column;
+                padding: 8px;
 
                 .list{
                     display: flex;
@@ -180,12 +181,29 @@
                         width: 20px;
                         height: 20px;
                     }
-                }
+                    .content{
+                        font-size: 13px;
+                        color: #212121;
+                        height: 20px;
+                        font-family: 'Courier New', Courier, monospace;
+                    }
+                }:hover{
+                        background: #f1f1f1;
+                        padding: 8px 4px;
+                        width: 100%;
+                        justify-content: flex-start;
+                        text-align: right;
+                        .content{
+                            color: #DB4444;
+                        }
+                    }
             }
         }
         .list{
             gap: 8px;
-
+            top: 20px;
+            left: -30px;
+            width: 150px;
         }
         
 

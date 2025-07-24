@@ -21,6 +21,7 @@ import chevronDownWhite from '/icons/chevro-down-white.svg'
 import WishList from '/icons/list.svg'
 import Settings from '/icons/settings.svg'
 import payment from '/icons/payment.svg'
+import like from '/icons/like.svg'
 const Icons= {
     SendIcon,
     locationIcon,
@@ -42,7 +43,8 @@ const Icons= {
     chevronDownWhite,
     WishList,
     payment,
-    Settings
+    Settings,
+    like
 }
 
 

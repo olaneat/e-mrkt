@@ -10,7 +10,6 @@ import Icons from "../../constant/imgs.constant";
 import { increaseQuantity, removeItem, reduceQuantity } from "../../slices/cart.slice";
 import { UseDispatch } from "react-redux";
 import Footer from "../../components/footer/footer";
-import localStorageService from "../../services/local-storage.service";
 import ToastComponent from "../../components/toast/toast";
 import EmptyStateComponent from "../../components/empty-state/empty-state";
 import images from "../../constant/imgs.constant";
@@ -28,6 +27,7 @@ const Cart =() =>{
     const imgUrl = images.Images
     const [openModal, setOpenModal] = useState(false);
     const [itemId, setId] = useState<string>('')
+    const user = useSelector((state: RootState)=> state.user)
   const openDelModal = (id:string)=> (event: React.MouseEvent<HTMLSpanElement>) =>{
     setOpenModal(true);
     setId(id)
@@ -63,11 +63,11 @@ const Cart =() =>{
 
     // const openToast()
     const checkOut =()=>{
-      let user:any =localStorageService.getItem('user')
-     if(user?.refresh_token){
+      // let user:any =localStorageService.getItem('user')
+     if(user?.isAuthenticated){
       navigate('/checkout')
      }else{
-      navigate('/sign-in')
+      // navigate('/sign-in')
      }
     }
     

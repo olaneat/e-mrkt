@@ -25,6 +25,7 @@ interface LoginState {
     isAuthenticated: boolean;
     isLoading: boolean;
     error: any | null;
+    timeStamp:number | null
   }
 
 // Initial state
@@ -34,6 +35,7 @@ const initialState: LoginState = {
     isAuthenticated: false,
     isLoading: false,
     error: null,
+    timeStamp: null
   };
 
   export const Login = createAsyncThunk<
@@ -66,7 +68,9 @@ const LoginSlice = createSlice({
             state.isLoading = false;
             state.token = null
             localStorageService.clearItem();
-            console.log(state, 'state')
+            window.location.href = '/'
+            state.timeStamp = null;
+
         },
         clearError: (state) => {
             state.error = null;
@@ -86,6 +90,7 @@ const LoginSlice = createSlice({
             state.user = action.payload.user;
             state.token = action.payload.refresh_token;
             console.log(state, 'state')
+            state.timeStamp = Date.now()
             // localStorageService.saveItem('user',action.payload);
             
 

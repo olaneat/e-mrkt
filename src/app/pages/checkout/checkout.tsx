@@ -43,7 +43,7 @@ const Checkout = () =>{
     const dispatch = useDispatch();
     const {address, isLoading,  error } = useSelector((state:RootState)=> state.address)
     const cart= useSelector((state:RootState)=>state.cart)
-    const [user, setUser] = useState<any>();
+    const user = useSelector((state:RootState)=>state.user);
     const [addressModal, setAddressModal] = useState(false);
     const [editAddressModal, setEditAddressModal] = useState(false);
     const [newAddressModal, setNewAddressModal] = useState(false);
@@ -83,15 +83,15 @@ const Checkout = () =>{
     const icons = Icons.Icons;
   
     useEffect(()=>{
+      console.log('hellpoo')
       displayAddress();
       createStates(stateData)
     }, [])
 
 
   const displayAddress =()=>{
-    let user  =  localStorageService.getItem('user')
-    setUser(user);
-    dispatch(DisplayAddress(user?.id) as any)
+    let id = user.user!.id
+    dispatch(DisplayAddress(id) as any)
   }
 
   const changeQuantity = (action:string, id:string)=> (event: React.MouseEvent<HTMLSpanElement>) =>{
@@ -162,7 +162,7 @@ const Checkout = () =>{
     console.log(locals, 'lga')
   }
   const config = {
-    email:user?.email,
+    email:user?.user! .email,
     reference: (new Date()).getSeconds().toString(),
     amount: (cart.shippingCost + cart.totalPrice) * 100,
     publicKey: env.TEST_PK,

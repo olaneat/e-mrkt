@@ -1,8 +1,7 @@
 export const loadState = (): {cart?:any, user?:any}| undefined =>{
     try{
         const serializedState = localStorage.getItem('reduxState');
-        console.log(serializedState, 'state data')
-        if(serializedState===null){
+         if(serializedState===null){
             return undefined;
         }
         return JSON.parse(serializedState);
