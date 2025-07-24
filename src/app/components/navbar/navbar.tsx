@@ -7,17 +7,27 @@ import { displayCategories } from "../../slices/categories.slice";
 import { RootState, AppDispatch } from "../../store";
 import Icons from "../../constant/imgs.constant";
 import { useNavigate } from "react-router-dom";
-
+// import localStorageService from "../../services/local-storage.service";
+import { logout } from "../../slices/login.slice";
 const NavBar = () =>{
   const dispatch = useDispatch();
   const icon = Icons.Icons;
   const {cart} = useSelector((state:RootState)=>state.cart )
   const navigate = useNavigate();
+  // const isAuthenticated = useSelector((state:RootState)=>state.login.isAuthenticated)
+  const {address} = useSelector((state:RootState)=>state.address)
+  const user = useSelector((state:RootState)=>state.user)
+  const [authUser, setUser] = useState<any>();
   useEffect(()=>{
     getCategories()
+    // let user = localStorageService.getItem('user')
+    // setUser(user)
   },[])
 
-
+  const sigout =()=>{
+    dispatch(logout());
+    setdropDown(!dropDown);
+  }
   const getCategories = () =>{
     dispatch(displayCategories()as any)
    
@@ -30,7 +40,6 @@ const NavBar = () =>{
   // const [Categories, setCategories] = useState<CategoryDTO[]>([]);
  
   useEffect(()=>{
-
   })
 
   const toggleSidebar = () =>{
@@ -113,26 +122,71 @@ const NavBar = () =>{
            <Link className="link" to="/">
             <span className="item"> Home</span>
           </Link>
-            <span  className="txt"  onClick={accountToogle}>
-              Account
-              
-              { dropDown ? (
-              <div className="drop-down">
-
-                <Link className="link" to="/sign-in">
-                  <span className="items" >Login</span>
-                </Link>
-                <Link className="link" to="/registration">
-                  <span className="items" >Signup</span>
-                </Link>
-                
-
+            {
+              user.isAuthenticated ? 
+                <div className="acct-div" onClick={accountToogle}>
+                  <img src={icon.whiteUser} className="profile-icon" alt="" />
+                  <span className="txt" > Hi, {user?.user?.username}</span>
+                  {
+                    dropDown ?
+                      <span className="drop-down">
+                        <span className="profile-div">
+                          {
+                            user.user?.profileImage
+                              ? <img src="" alt=""  className="profile-img"/>
+                              : <span className="empty-dp">
+                                <img src={icon.whiteUser} alt="" />
+                              </span>
+                          }
+                          <span className="profile-info">
+                            <span className="profile">Welcome, {user.user?.username}</span>
+                            <span className="signout" onClick={sigout}>Sigout</span>
+                          </span>
+                        </span>
+                        <span className="span-list">
+                          <span className="list">
+                            <img src={icon.WishList} alt="" />
+                            <span className="content">My Orders</span>
+                          </span>
+                          <span className="list">
+                            <img src={icon.payment} alt="" />
+                            <span className="content">Payment</span>
+                          </span>
+                          <span className="list">
+                            <img src={icon.like} alt="" />
+                            <span className="content">Wish List</span>
+                          </span>
+                          <span className="list">
+                            <img src={icon.Settings} alt="" />
+                            <span className="content">Settings</span>
+                          </span>
+                        </span>  
+                      </span>
+                    : ""
+                  }
+                  <img src={icon.chevronDownWhite} className="profile-icon" alt="" />
+                </div>
+              : 
+              <div className="acct-div" onClick={accountToogle}>
+                <span className="txt" >
+                  Account 
+                  {
+                    dropDown ?
+                    <span className="drop-down list">
+                      <Link className="link" to="/sign-in">
+                        <span className="items" >Login</span>
+                      </Link>
+                      <Link className="link" to="/registration">
+                        <span className="items" >Signup</span>
+                      </Link>
+                    </span> 
+                    : ""
+                  }
+                </span>
+                <img src={icon.chevronDownWhite} className="profile-icon" alt="" />
               </div>
-            ):(
-              <div></div>
-            )}
-            </span>
-            
+
+            }
             <Link to="/cart">
               <div className="icon">
                 {cart.length>0 

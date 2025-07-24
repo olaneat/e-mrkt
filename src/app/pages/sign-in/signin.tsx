@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useLocation, useSearchParams} from "react-router-dom";
 import { AppDispatch } from 'app/store';
 import ToastComponent from '../../components/toast/toast';
+import localStorageService from '../../services/local-storage.service';
 
 const SignInComponent = () =>{
   const iconUrl = Icons.Icons;
@@ -71,11 +72,10 @@ const SignInComponent = () =>{
   const userLogin=()=>{
     dispatch(Login(formData) as any).then((res:any)=>{
       if(res.type=="auth/login/fulfilled"){
-        
        const previousUrl = (location.state as { from?: string })?.from || searchParams.get('redirect') || '/'
-        // const redirectTo = searchParams.get('redirect') || (location.state as {from?:string})?.from || '/'
-        // console.log(redirectTo, 'url')
         navigate(decodeURIComponent(previousUrl))
+        console.log(res, 're')
+        localStorageService.saveItem('user', res)
       }else{
         setTitle('Login failed')
         let errMsg = res.payload

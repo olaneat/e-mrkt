@@ -10,8 +10,10 @@ interface LoginResponseDTO {
   user: {
     id: string;
     email: string;
-    first_name?: string; // Optional, adjust based on your API
-    last_name?: string
+    firstName?: string; // Optional, adjust based on your API
+    lastName?: string;
+    username?: string;
+    profileImage?:string
   };
   refresh_token: string;
   access_token: string;
@@ -23,6 +25,7 @@ interface LoginState {
     isAuthenticated: boolean;
     isLoading: boolean;
     error: any | null;
+    timeStamp:number | null
   }
 
 // Initial state
@@ -32,6 +35,7 @@ const initialState: LoginState = {
     isAuthenticated: false,
     isLoading: false,
     error: null,
+    timeStamp: null
   };
 
   export const Login = createAsyncThunk<
@@ -64,6 +68,9 @@ const LoginSlice = createSlice({
             state.isLoading = false;
             state.token = null
             localStorageService.clearItem();
+            window.location.href = '/'
+            state.timeStamp = null;
+
         },
         clearError: (state) => {
             state.error = null;
@@ -77,16 +84,18 @@ const LoginSlice = createSlice({
         })
         .addCase(Login.fulfilled, (state, action)=>{
             state.isAuthenticated = true;
+            console.log(action.payload, 'pay')
             state.error = null
+            state.isLoading = false;
             state.user = action.payload.user;
             state.token = action.payload.refresh_token;
             console.log(state, 'state')
-            localStorageService.saveItem('user',action.payload);
+            state.timeStamp = Date.now()
+            // localStorageService.saveItem('user',action.payload);
             
 
         })
         .addCase(Login.rejected, (state, action)=>{
-          console.log(action, 'action')
             state.isLoading = false;
             state.error = action.error
         })

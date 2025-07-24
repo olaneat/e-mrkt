@@ -57,7 +57,8 @@
                         color: #666;
                         font-weight: 500;
                         background: #fff;
-
+                        font-family: 'Courier New', Courier, monospace;
+                        align-self: stretch;
                     }
 
                 }
@@ -70,33 +71,53 @@
         gap:40px;
         justify-content: center;
         align-items:  center;
-
-       .txt{
-            position: relative;
-            color: #fff;
-            font-size: 13px;
+        .acct-div{
+            display: flex;
+            gap: 8px;
+            width: fit-content;
+            justify-content: flex-start;
+            align-items: center;
             cursor: pointer;
+            .txt{
+                position: relative;
+                color: #fff;
+                font-size: 13px;
+                text-wrap: nowrap;
+                
+            }
+            .profile-icon{
+                width: 18px;
+                height: 18px;
+            }
         }
         .drop-down{
             position: absolute;
             display: flex;
             flex-direction: column;
-            gap: 8px;
             padding: 16px;
             background: #fff;
             border-radius: 20px;
             justify-content: center;
             align-items: center;
-            width: 100px;
-            top: 35px;
-            left: -45px;
-            z-index: 10;
+            width: 300px;
+            top: 60px;
+            right: 13px;
+            z-index: 100;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+            .signout{
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 14px;
+                color: #DB4444;
+                font-weight: 600;
+                cursor: pointer;
+            }
             .items{
                 padding: 12px;
                 color: #000;
                 font-size: 13px;
                 display: flex;
-                justify-content: center;
+                justify-content: flex-start;
                 align-items: center;
                 align-self: stretch;
                 cursor: pointer;
@@ -105,6 +126,84 @@
                 border-bottom: 1px solid #f1f1f1;
 
             }
+
+            .profile-div{
+                display: flex;
+                gap: 8px;
+                border-bottom: 1px solid #e5e5e5;
+                padding: 8px;
+                align-self: stretch;
+                justify-content: flex-start;
+                align-items: center;
+
+                .empty-dp{
+                    display: flex;
+                    justify-content: center;
+                    align-self: stretch;
+                    width: 40px;
+                    height: 40px;
+                    padding: 4px;
+                    border-radius: 50%;
+                    border: 1px solid #f1f1f1;
+                    background: #e5e5e5;
+                }
+                .profile-info{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    gap: 16px;
+
+                    .profile{
+                        font-size: 12px;
+                        font-family: 'Courier New', Courier, monospace;
+                        font-weight: 60;
+                        color: #666;
+                    }
+                }
+            }
+            .span-list{
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                align-self: stretch;
+                gap: 8px;
+                flex-direction: column;
+                padding: 8px;
+
+                .list{
+                    display: flex;
+                    gap: 8px;
+                    align-self: stretch;
+                    width: 100%;
+                    justify-content: flex-start;
+                    align-items: center;
+                    img{
+                        width: 20px;
+                        height: 20px;
+                    }
+                    .content{
+                        font-size: 13px;
+                        color: #212121;
+                        height: 20px;
+                        font-family: 'Courier New', Courier, monospace;
+                    }
+                }:hover{
+                        background: #f1f1f1;
+                        padding: 8px 4px;
+                        width: 100%;
+                        justify-content: flex-start;
+                        text-align: right;
+                        .content{
+                            color: #DB4444;
+                        }
+                    }
+            }
+        }
+        .list{
+            gap: 8px;
+            top: 20px;
+            left: -30px;
+            width: 150px;
         }
         
 
@@ -294,4 +393,5 @@
 
 .link{
     text-decoration: none;
+    width: 100%;
 }

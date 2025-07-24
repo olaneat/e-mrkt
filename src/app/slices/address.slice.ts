@@ -23,6 +23,7 @@ export const DisplayAddress = createAsyncThunk<
             try{
                 const response = await AddressService.GetAddress(id);
                 let detail = mapProfileDTO(response.data.data);
+                console.log(detail, 'de')
                 return detail
             }catch(error:any){
                 return rejectWithValue(

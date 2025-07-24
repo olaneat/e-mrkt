@@ -17,6 +17,7 @@ const ProductList = () =>{
     const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
     const [catProducts, setCatProducts] = useState<ProductDTO[]>([])
     useEffect(()=>{
+      console.log(loading, 'load')
       getProducts();
       getCategories()
     },[dispatch])
