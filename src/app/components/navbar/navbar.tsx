@@ -205,7 +205,7 @@ const NavBar = () =>{
             { showSidebar ? 
               <div className="sidebar" onClick={toggleSidebar}>
                 <div className="top">
-                  <div className="lft">
+                  {/* <div className="lft">
                     <span className="close">X</span>
                     <span className="name sm-screen-name">Ola storez</span>
                   </div>
@@ -219,13 +219,25 @@ const NavBar = () =>{
                     <img src={icon.cartIcon} alt="" />
                   </div>
                 
-                </Link>
+                </Link> */}
 
                 </div>
                 <div className="nav-slider">
+                  <span className="company-name">
+                    <span className="name-name">
+                      Ola storez
+                    </span>
+                    <img src={icon.closeIcon} alt="" onClick={toggleSidebar} className="close" />
+                  </span>
                   <div className="list">
-                    <Link className="item" to="/">
-                      <span className=""> Home</span>
+                    <Link className="item" to="/cart">
+                      {/* <span className=""> Cart</span> */}
+                      <span className="icon">
+                        <img src={icon.cartIcon} alt="" />
+                        <span className="badge">{cart.length}</span>
+
+                      </span>
+
                     </Link>
                     { user.isAuthenticated 
                       ?
