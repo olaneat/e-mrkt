@@ -224,9 +224,12 @@ const NavBar = () =>{
                 </div>
                 <div className="nav-slider">
                   <span className="company-name">
-                    <span className="name-name">
-                      Ola storez
-                    </span>
+                    <Link to='/' className="name-name">
+                      <span className="name-name">
+                        Ola storez
+                      </span>
+                    
+                    </Link>
                     <img src={icon.closeIcon} alt="" onClick={toggleSidebar} className="close" />
                   </span>
                   <div className="list">
