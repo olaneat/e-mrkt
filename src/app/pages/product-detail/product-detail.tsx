@@ -132,10 +132,13 @@ const ProductDetail = () =>{
               </div>
               <div className="price-div">
                 <span className="name">price: </span>
-                <span className="price">{product?.price.toLocaleString('en-US', {
-                  style:'currency',
-                  currency:'NGN'
-                })}</span>
+                <span className="price">
+                  {
+                    product?.price.toLocaleString('en-US', {
+                    style:'currency',
+                    currency:'NGN'
+                  })}
+                </span>
               </div>
              
               <div className="add-cart">

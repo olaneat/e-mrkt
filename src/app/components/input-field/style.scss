@@ -28,7 +28,7 @@
           padding: 10px 12px 10px 36px;
           width: 100px;
           color: #333;
-          font-family: "DM sans";
+          font-family: 'Courier New', Courier, monospace;
           font-size: 12px;
           width: 100%;
           display: flex;
@@ -62,8 +62,9 @@
 }
 
 .dropdown-field{
-    // max-width: 150px;
+    justify-content: space-between !important;
     background: #fff;
+    cursor: pointer;
     .dropdown-list{
         background: #fff;
         position: absolute;
@@ -80,10 +81,15 @@
         overflow: auto;
         height: 150px;
         flex-direction: column;
+        cursor: pointer;
         .dropdown-option{
             padding: 2px;
         }
-     }
+    }
+    .select-icon{
+        width: 16px;
+        height: 16px;
+    }
 }
 .select-field-div{
     width: 100%;

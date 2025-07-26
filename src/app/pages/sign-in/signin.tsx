@@ -88,44 +88,44 @@ const SignInComponent = () =>{
   }
   return (
     <div className='sign-container'>
-        <div className="rite">
-          <span className="sign-title">Login to access your Account</span>
-          <span className='sign-sub'>Enter Your detail below</span>
+      <img src={imgUrl.loginImg} alt="" className='login-img' />
+      <div className="rite">
+        <span className="sign-title">Login to access your Account</span>
+        <span className='sign-sub'>Enter Your detail below</span>
 
-          <div className="form">
-            <div className="field">
-              <InputField 
-                type="email"
-                name="email" 
-                onBlur={handleErr} 
-                onChange={getData} 
-                err={errMsg.email}
-                placeholder="Enter your email address"
+        <div className="form">
+          <div className="field">
+            <InputField 
+              type="email"
+              name="email" 
+              onBlur={handleErr} 
+              onChange={getData} 
+              err={errMsg.email}
+              placeholder="Enter your email address"
 
-              />
-            </div>
-            <div className='field'>
-              <InputField 
-                type="password"
-                name="password" 
-                onBlur={handleErr} 
-                onChange={getData} 
-                err={errMsg.password}
-                placeholder="Enter your Password"
+            />
+          </div>
+          <div className='field'>
+            <InputField 
+              type="password"
+              name="password" 
+              onBlur={handleErr} 
+              onChange={getData} 
+              err={errMsg.password}
+              placeholder="Enter your Password"
 
-              />
-            </div>
-            <div className="signup-btns">
-              <Button name="Login" disabled={disabledFlag} className="btn" handleClick={userLogin} type="primary" />
-            </div>
-            <div className="already">Don't have an account? 
-                <Link className="sign-in" to={'/registration'}>
-                <span >Register</span>
-                </Link>
-            </div>
+            />
+          </div>
+          <div className="signup-btns">
+            <Button name="Login" disabled={disabledFlag} className="btn" handleClick={userLogin} type="primary" />
+          </div>
+          <div className="already">Don't have an account? 
+              <Link className="sign-in" to={'/registration'}>
+              <span >Register</span>
+              </Link>
           </div>
         </div>
-        <img src={imgUrl.signUpImg} alt="" className='login-img' />
+      </div>
         
       <ToastComponent 
         title={title}
