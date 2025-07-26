@@ -1,8 +1,9 @@
+//icons lists
+
 import SendIcon from '/icons/send-outline.svg'
 import locationIcon from '/icons/location-outline.svg'
 import whiteMail from '/icons/mail-outline.svg'
 import whitePhone from '/icons/call-outline.svg'
-import signUpImg from '/imgs/signup-img.svg'
 import visiblePswd from '/icons/show-pswd.svg'
 import hidePswd from '/icons/hide-pswd.svg'
 import email from '/icons/mail.svg'
@@ -15,13 +16,21 @@ import closeIcon from '/icons/close.svg'
 import warning from '/icons/warning.svg'
 import success from '/icons/check-icon.svg'
 import error from '/icons/error-icon.svg'
-import emptyStateCart from '/imgs/shoping-cart.jpeg'
 import whiteUser from '/icons/white-user.svg'
 import chevronDownWhite from '/icons/chevro-down-white.svg'
 import WishList from '/icons/list.svg'
 import Settings from '/icons/settings.svg'
 import payment from '/icons/payment.svg'
 import like from '/icons/like.svg'
+import chevronDown from '/icons/chevron-down.svg'
+
+
+// img list start here 
+import loginImg from '/imgs/shopping.png'
+// import signUpImg from '/imgs/signup-img.svg'
+import emptyStateCart from '/imgs/shoping-cart.jpeg'
+
+
 const Icons= {
     SendIcon,
     locationIcon,
@@ -44,14 +53,16 @@ const Icons= {
     WishList,
     payment,
     Settings,
-    like
+    like,
+    chevronDown
 }
 
 
 
 const Images ={
-    signUpImg,
-    emptyStateCart
+    // signUpImg,
+    emptyStateCart,
+    loginImg
 
 }
 export default {Icons, Images}

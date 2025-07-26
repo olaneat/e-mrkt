@@ -7,7 +7,6 @@ const InputField = (props:any)=>{
     
     const [showPassword, setShowPassword] = useState(false);
     const [passwordToggle, setPsdToggle] = useState<Boolean>(false)
-    const [password, setpswd] = useState()
      // const [confpassword, setPsdToggle] = useState<Boolean>(false)
     
     // const [errMsg, setErrMsg] = useState({

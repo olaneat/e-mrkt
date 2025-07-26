@@ -92,6 +92,10 @@ const Checkout = () =>{
   const displayAddress =()=>{
     let id = user.user!.id
     dispatch(DisplayAddress(id) as any)
+    if(address?.state){
+        console.log('hehehe')
+        createLgas(address.state);
+      }
   }
 
   const changeQuantity = (action:string, id:string)=> (event: React.MouseEvent<HTMLSpanElement>) =>{
@@ -148,18 +152,15 @@ const Checkout = () =>{
     setStates(states);
   }
 
-  const createLgas = (data:any)=>{
+  const   createLgas = (data:any)=>{
     let locals:string[] = [];
     setlgas([])
-    console.log('state', data)
     const state:any = stateData.find(item => item.state.name == data )
-    console.log(state, 'ssss')
     state.state.locals.forEach((x:any)=>{
       locals.push(x.name)
     })
-    console.log(state)
     setlgas(locals)
-    console.log(locals, 'lga')
+    console.log(locals, 'lgas')
   }
   const config = {
     email:user?.user! .email,
@@ -416,34 +417,15 @@ const Checkout = () =>{
                 </div>
               </div>
             </ModalComponent>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           </div>
         :
         <div className="empty-state">
-          
-          
-          {/* <EmptyStateComponent
+          <EmptyStateComponent
             text="Thank you for your purchase. Your order is being processed."
             title="Payment Successful"
             imgUrl={imgUrl.emptyStateCart}
             btnTxt="Shop Now"
-          /> */}
+          />
         </div>  
       }
       <div className="pg-footer">
