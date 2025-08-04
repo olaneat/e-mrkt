@@ -25,6 +25,7 @@ const ProductDetail = () =>{
     const [toastType, setToastType] = useState<string>('')
 
     useEffect(() =>{
+      setTabValue('overview')
         displayProdDetail()
     },[])
 
