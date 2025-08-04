@@ -34,7 +34,7 @@ const HomePage = () => {
           <NavBar />  
           <div className="body"> 
             <div className="top-div">
-              <div className="categories">
+              {/* <div className="categories">
                 <span className="category"> 
                   {
                     categories?.slice(0, 8)?.map((category:CategoryDTO)=>(
@@ -42,7 +42,7 @@ const HomePage = () => {
                     ))
                   }
                 </span>
-              </div>
+              </div> */}
               <div className="slider">
               <Slider />
               </div>

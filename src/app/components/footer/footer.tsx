@@ -4,7 +4,7 @@ import Icons from "../../constant/imgs.constant";
 const Footer = ()=>{
 
   const [email, setEmail]= useState<string>("");
-
+  const icons = Icons.Icons
   function sendMail(){
     console.log(email)
   }
@@ -21,22 +21,22 @@ const Footer = ()=>{
                 onChange={(e)=>setEmail(e.target.value)}
                 value={email}
               />
-              <img src={Icons.SendIcon} alt="" className="email-icon" onClick={sendMail} />
+              <img src={icons.SendIcon} alt="" className="email-icon" onClick={sendMail} />
             </span>
 
           </div>
             <div className="info-div">
               <span className="footer-title">Support</span>
               <span className="footer-txt">
-                <img src={Icons.locationIcon} className="footer-icon" alt="" /> 
+                <img src={icons.locationIcon} className="footer-icon" alt="" /> 
                 No 13 Behind Aso Rock FCT, Abuja
               </span>
               <span className="footer-txt">
-              <img src={Icons.whiteMail} className="footer-icon" alt="" /> 
+              <img src={icons.whiteMail} className="footer-icon" alt="" /> 
                 info@abc.com
               </span>
               <span className="footer-txt">
-              <img src={Icons.whitePhone} className="footer-icon" alt="" /> 
+              <img src={icons.whitePhone} className="footer-icon" alt="" /> 
                 +234-7012-345-678
               </span>
 

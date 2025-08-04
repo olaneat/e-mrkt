@@ -2,54 +2,35 @@ import React, {useEffect, useRef, useState} from "react"
 import "./counter.scss"
 
 const CountdownTimer = () => {
-  const [startDate, setStartDate] = useState("00:00:00")
-  const Ref = useRef();
- 
-  function getDeadTime(){
-    let deadline = new Date();
-    deadline.setSeconds(deadline.getSeconds() + 10);
-    return deadline
-  }
-  function startTimer(e:any){
-    let {total, hour, mins, seconds} =getTimeRemaining(e);
-    // console.log(total, 'total')
-    // console.log(mins, 'min')
-    // console.log(hour, 'hr')
-    // console.log(seconds, 'sec')
+  const initialTime = 7 * 24 * 60 * 60
+  const [timeLeft, setTimeLeft] = useState(initialTime);
 
-    if(total>0 ){
-      setStartDate(
+  useEffect(() => {
+    if (timeLeft <= 0) return;
 
-        (hour > 9 ? hour : "0" + hour) + ": " +
-        (mins > 9 ? mins : "0" + mins) + ":" +
-        (seconds > 9 ? seconds : "0" + seconds)
-      )
-    }
-  }
-  const getTimeRemaining = (e:any) => {
-    let parseDate = new Date().toISOString()
-    const total = Date.parse(e) - Date.parse(parseDate)
-    const hour = Math.floor((total / 60 / 60) *24);
-    const seconds = Math.floor((total / 1000)% 60);
-    const mins = Math.floor((total/1000 / 60) % 60);
-    return {total, hour, mins, seconds}
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 1) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer); // Cleanup on unmount
+  }, [timeLeft]);
+
+  const formatTime = (seconds:any) => {
+    const days = Math.floor(seconds / (24 * 60 * 60));
+    const hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
+    const minutes = Math.floor((seconds % (60 * 60)) / 60);
+    const secs = seconds % 60;
+    return `${days}d ${hours.toString().padStart(2, '0')}h ${minutes
+      .toString()
+      .padStart(2, '0')}m ${secs.toString().padStart(2, '0')}s`;
   };
-  function clearTimer(e:any){
-    setStartDate("24:00:00")
-    if(Ref.current) clearInterval(Ref.current);
-    const id:any = setInterval(()=>{
-      startTimer(e)
-    }, 1000)
-    Ref.current = id;
-  }
 
-  useEffect(()=>{
-    getDeadTime();
-    clearTimer(getDeadTime());
-  
-  }, [])
-
- 
 
 
   return(
@@ -61,13 +42,10 @@ const CountdownTimer = () => {
         </div>
         <div className="header-div">
           <span className="header-title">Flash sales</span>
-          
           <div className="countdown-display">
-          {startDate}
-      </div>
-
+            {formatTime(timeLeft)}
+          </div>
         </div>
-        <div className="flash-content"></div>
 
       </div>      
           

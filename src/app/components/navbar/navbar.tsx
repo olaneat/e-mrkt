@@ -94,13 +94,13 @@ const NavBar = () =>{
 
               {
                 dropDownMenu ? (
-                  <div className="dropdown">
+                  <div className="dropdown" onMouseLeave={()=>toggleDropdown}>
                     <span className="title">All Categories</span>
                       <span className="categories">
 
                       { categories?.map((catgory:CategoryDTO)=>
                         (
-                        <span key={catgory?.id} className="items"> {catgory?.name?.toLocaleUpperCase()}</span>
+                        <span key={catgory?.id} className="items"> {catgory?.name?.toLowerCase()}</span>
                       )
                     )}
                       </span>
@@ -204,24 +204,6 @@ const NavBar = () =>{
           <div className="sm-screen">
             { showSidebar ? 
               <div className="sidebar" onClick={toggleSidebar}>
-                <div className="top">
-                  {/* <div className="lft">
-                    <span className="close">X</span>
-                    <span className="name sm-screen-name">Ola storez</span>
-                  </div>
-                  <Link to="/cart">
-                  <div className="icon">
-                    {cart.length>0 
-                      ?
-                      <span className="badge">{cart.length}</span>
-                      : ""
-                    }
-                    <img src={icon.cartIcon} alt="" />
-                  </div>
-                
-                </Link> */}
-
-                </div>
                 <div className="nav-slider">
                   <span className="company-name">
                     <Link to='/' className="name-name">

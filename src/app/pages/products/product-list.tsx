@@ -90,47 +90,20 @@ const ProductList = () =>{
               <div className="title">Shop by category</div>
             </div>
             <div className="categories">
-              <div className="rgt">
-                <div className="upper">
-                  <div className="lft">
-                    <div className="title">Viva</div>
-                    <div className="txt">Your electronics choice</div>
-                    <div className="shop-btn">Shop now</div>
+              {
+                categories?.slice(0, 7).map((category:CategoryDTO)=>{
+                return(
+                  <div className="category" key={category.id}>
+                      <img src={`${env.IMG_URL}${category.img}`} alt=""  className="category-img" />
+                    <span>
+                    </span>
+                    <span className="category-name">{category.name}</span>
                   </div>
-                  {/* <div className="rgt" >
-                    <img key={categories[14]?.id} src={`${env.imgUrl}/${categories[14]?.img}`} /> 
-                  </div> */}
-                  
-                </div>
-                <div className="content">
-                  {catProducts?.slice(0,3).map((items:ProductDTO)=>{
-                    return(
-                      <div className="items" key={items.id}>
-                        <img src={`${env.IMG_URL}/${items.img}`} alt="" />
-                        <span className="name">{items.name}</span>
-                        <span className="price">N{items.price}</span>
-                      </div>
-                    )
-                  })}
-                </div>
-
-              </div>
-              <div className="lft">
-                <div className="lft-categories">
-                  {categories?.slice(1,7).map((category:CategoryDTO)=>{
-                    return(
-                      <div className="category" key={category.id}>
-                        <span className="name">{category.name}</span>
-                        
-                        <img src={`${env.IMG_URL}${category.img}`} alt="" />
-
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-
+                )
+              })
+              }
             </div>
+            
           </div>
 
           <div className="product-list">
