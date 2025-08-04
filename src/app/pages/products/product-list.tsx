@@ -94,7 +94,7 @@ const ProductList = () =>{
                 categories?.slice(0, 7).map((category:CategoryDTO)=>{
                 return(
                   <div className="category" key={category.id}>
-                      <img src={`${env.IMG_URL}${category.img}`} alt=""  className="category-img" />
+                    <img src={`${env.IMG_URL}${category.img}`} alt=""  className="category-img" />
                     <span>
                     </span>
                     <span className="category-name">{category.name}</span>

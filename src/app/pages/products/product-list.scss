@@ -108,7 +108,7 @@
       
      .categories{
       display: flex;
-      gap: 8px;
+      gap: 16px;
       align-self: stretch;
       justify-content: center;
       align-items: center;
@@ -124,10 +124,11 @@
         flex-direction: column;
         gap: 4px;
         padding: 8px;
+        cursor: pointer;
         .category-img{
           border-radius: 50%;
-          width: 140px;
-          height: 140px;
+          width: 200px;
+          height: 200px;
           justify-content: center;
           display: flex;
           align-items: center;
@@ -302,11 +303,14 @@
 
 @media (max-width:760px) {
   .categories{
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 16px;
+   flex-direction: column;
+   .category{
+    width: 100%;
+    border-bottom: 1px solid #f1f1f1 ;
+   }
+   .category:last-child{
+    border: none;
+   }
   }
   .flash-products{
     flex-direction: column;
