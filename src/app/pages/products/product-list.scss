@@ -108,13 +108,12 @@
       
      .categories{
       display: flex;
-      gap: 16px;
+      gap: 8px;
       align-self: stretch;
       justify-content: center;
       align-items: center;
       border-radius: 10px ;
-      border: 1px solid #e5e5e5;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      
       padding: 8px;
       .category{
         display: flex;
@@ -124,11 +123,13 @@
         flex-direction: column;
         gap: 4px;
         padding: 8px;
+        border: 1px solid #e5e5e5;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         cursor: pointer;
         .category-img{
           border-radius: 50%;
-          width: 200px;
-          height: 200px;
+          width: 150px;
+          height: 150px;
           justify-content: center;
           display: flex;
           align-items: center;
@@ -151,8 +152,19 @@
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 1fr;
         grid-column-gap: 16px;
-        width: 100%;
 
+        .category{
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          text-decoration: none;
+          justify-content: center;
+          cursor: pointer;
+          .category-name{
+            text-decoration: none;
+            color: #666;
+          }
+        }
         .rgt{
           background: #CBE4E8;
           display: flex;
@@ -304,9 +316,10 @@
 @media (max-width:760px) {
   .categories{
    flex-direction: column;
-   .category{
+   width: 100%;
+   .cat{
     width: 100%;
-    border-bottom: 1px solid #f1f1f1 ;
+    border-bottom: 1px solid #e5e5e5 ;
    }
    .category:last-child{
     border: none;
@@ -331,6 +344,7 @@
       justify-content: center ;
       display: flex;
       gap: 16px;
+      text-decoration: none;
     
       img{
         width: 150px;
@@ -340,6 +354,7 @@
         text-transform:capitalize;
         font-size: 20px;
         color: #0006;
+        text-decoration: none;
         font-family: "Courier New', Courier, monospace";
       }
     }
@@ -366,6 +381,10 @@
 }
 
 @media (min-width:760px) {
+  .categories{
+    width: fit-content;
+
+  }
   .lft-categories{
     display: grid;
     grid-template-columns: repeat(2, 1fr);

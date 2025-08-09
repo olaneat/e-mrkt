@@ -91,13 +91,13 @@ const ProductList = () =>{
             </div>
             <div className="categories">
               {
-                categories?.slice(0, 7).map((category:CategoryDTO)=>{
+                categories?.slice(0, 6).map((category:CategoryDTO)=>{
                 return(
-                  <div className="category" key={category.id}>
-                    <img src={`${env.IMG_URL}${category.img}`} alt=""  className="category-img" />
-                    <span>
-                    </span>
-                    <span className="category-name">{category.name}</span>
+                  <div className="cat" key={category.id}>
+                    <Link to={`/product-by-category/${category.id}`} className="category">
+                      <img src={`${env.IMG_URL}${category.img}`} alt=""  className="category-img" />
+                      <span className="category-name">{category.name}</span>
+                    </Link>
                   </div>
                 )
               })
@@ -117,11 +117,12 @@ const ProductList = () =>{
                 {products?.slice(7,19)?.map((prod:ProductDTO)=>{
                   return(
                     <Link to={`/product/${prod.id}/detail`} className="product" key={prod.id}>
+                      <span className="name">{prod.name}</span>
+                      
                       <div className="img">
                         <img src={`${env.IMG_URL}/${prod.img}`} alt="" />
 
                       </div>
-                      <span className="name">{prod.name}</span>
                       <span className="price">{prod.price}</span>
 
                     </Link>

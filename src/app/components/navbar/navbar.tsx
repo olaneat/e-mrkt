@@ -20,6 +20,7 @@ const NavBar = () =>{
   const [authUser, setUser] = useState<any>();
   useEffect(()=>{
     getCategories()
+    console.log(categories, 'cate')
     // let user = localStorageService.getItem('user')
     // setUser(user)
   },[])
@@ -100,7 +101,10 @@ const NavBar = () =>{
 
                       { categories?.map((catgory:CategoryDTO)=>
                         (
-                        <span key={catgory?.id} className="items"> {catgory?.name?.toLowerCase()}</span>
+                        <Link key={catgory?.id} to={`/product-by-category/${catgory.id}`} className="link" >
+                          <span  className="items"> {catgory?.name}</span>
+                        </Link>
+
                       )
                     )}
                       </span>
@@ -277,7 +281,9 @@ const NavBar = () =>{
                       {
                         categories?.map((catgory:CategoryDTO)=>
                           (
-                          <span key={catgory?.id} className="items"> {catgory?.name?.toLocaleUpperCase()}</span>
+                            <Link to={`/product-by-category/${catgory.id}`}>
+                              <span key={catgory?.id} className="items"> {catgory?.name?.toLocaleUpperCase()}</span>
+                            </Link>
                         ))
                       }
                     </div>

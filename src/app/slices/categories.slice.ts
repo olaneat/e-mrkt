@@ -2,8 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 // import { setMessage } from "./msg";
 import CategoryService from "../services/categories.service";
 import { CategoryDTO, ERROR_MESSAGES, mapCategoryListDTO} from '../dto/categories.dto';
-
-
 interface CategoryState {
     categories: CategoryDTO[] | null;
     error: string | null;
@@ -14,7 +12,6 @@ const initialState: CategoryState = {
     isLoading: false,
     error: null
 }
-
 
 export const newCategorySlice = createAsyncThunk(
     'category/new-category',
@@ -36,6 +33,8 @@ export const newCategorySlice = createAsyncThunk(
     }
     
 )
+
+
 export const displayCategories= createAsyncThunk<
   CategoryDTO[],
   void,

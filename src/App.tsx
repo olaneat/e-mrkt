@@ -12,6 +12,7 @@ import { useDispatch, useSelector, UseSelector } from "react-redux"
 import AuthService from "./app/services/auth.services"
 import { logout } from "./app/slices/login.slice"
 import { UseDispatch } from "react-redux"
+import ProductByCategory from "./app/pages/category-product/index"
 
 const App = () => {
 
@@ -34,7 +35,7 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/sign-in" element={<SignInComponent/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
-
+        <Route path="/product-by-category/:id" element={<ProductByCategory />} />
       </Routes>
     </BrowserRouter>
   )
