@@ -1,7 +1,6 @@
-import axios from "axios";
 import env from "../../environment/env";
 import { SignUpDTO, LoginDTO, ProfileDTO } from "../dto/auth.dto";
-
+import api from "../../app/interceptor/auth.interceptor";
 interface TokenPayload {
   exp: number;
   [key: string]: any;
@@ -9,12 +8,12 @@ interface TokenPayload {
 
 const SignUp = (data:SignUpDTO)=>{
     const url = `${env.BASE_URL}/account/registration`;
-    return axios.post(url, data).then();
+    return api.post(url, data).then();
 }
 
 const Login = (data:LoginDTO) =>{
     const url = `${env.BASE_URL}/account/login`;
-    return axios.post(url, data).then();
+    return api.post(url, data).then();
 }
 
 const isTokenExpired =(token:string | null, loginTime:number | null):boolean =>{

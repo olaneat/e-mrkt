@@ -28,7 +28,7 @@ const ProductList = () =>{
     }
     const getProducts = () =>{
       // dispatch(DisplayProducts('args') as any);  
-      
+      console.log('heh', products)
       dispatch(DisplayProducts())
     }
 
@@ -37,15 +37,7 @@ const ProductList = () =>{
       
     }
 
-    const displayCatProduct =(items:any[])=>{
-      let arr: ProductDTO[] = [];
-      items.forEach((item:ProductDTO)=>{
-        if(item.category == 'electronics'){
-          arr.push(item)
-        }
-        setCatProducts(arr);
-      })
-    }
+   
 
     return(
 

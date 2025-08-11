@@ -1,10 +1,11 @@
 import env from "../../environment/env";
 import { ProductDTO } from "../dto/products.dto";
 import api from "../../app/interceptor/auth.interceptor";
-
+import axios from "axios";
 
  const getProductList = ()=>{
-    const url = `${env.BASE_URL}/products/list`;
+   const url = `${env.BASE_URL}/products/list`;
+   console.log(url)
     return api.get(url);
  }
 
@@ -16,22 +17,23 @@ import api from "../../app/interceptor/auth.interceptor";
 
  const addNewProduct = (data:ProductDTO) =>{
    const url = `${env.BASE_URL}/products/add-product`
-   return api.post(url, data)
+   return api.post(url, data);
  }
 
  const updateProduct = (data:ProductDTO, id:string) =>{
    const url = `${env.BASE_URL}/products/update-product/${id}`
-   return api.put(url, data)
+   return api.put(url, data);
  }
  
  const deleteProduct = (id:string) =>{
    const url = `${env.BASE_URL}/products/delete-product${id}`;
-   return api.delete(url).then();
+   return api.delete(url)
  }
 
  const displayProductByCategory =(id:string)=>{
-  const url = `${env.BASE_URL}/products/product-category-list/${id}`;
-  return api.get(url).then(); 
+  const url =''
+  // const url = `${env.BASE_URL}/products/product-category-list/${id}`;
+  return api.get(url)
  }
  
 
@@ -41,6 +43,6 @@ import api from "../../app/interceptor/auth.interceptor";
     addNewProduct,
     updateProduct,
     deleteProduct,
-    displayProductByCategory
+    // displayProductByCategory
  }
  export default ProductService;

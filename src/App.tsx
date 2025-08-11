@@ -19,10 +19,8 @@ const App = () => {
   const user = useSelector((state:RootState)=>state.user);
   const dispatch = useDispatch();
   useEffect(()=>{
-    console.log(user)
     let response = (AuthService.isTokenExpired(user.token, user.timeStamp))
     if(user.isAuthenticated && response){
-      console.log(response,  'expired')
       dispatch(logout());
     }
   },[user.token])

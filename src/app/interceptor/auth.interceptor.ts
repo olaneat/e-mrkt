@@ -10,11 +10,10 @@ const api: AxiosInstance = axios.create({
 
 api.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    if(!config.headers){
-        config.headers = {} as any
-    }
+    config.headers = config.headers || {};
+    console.log('request', config)
     const user = localStorageService.getItem('user');
-    let token = user.payload.access_token
+    let token = user?.payload?.access_token || null
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }

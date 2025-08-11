@@ -3,13 +3,13 @@ import ProductService from "../services/product.service";
 import { ProductDTO, ERROR_MESSAGES, mapProductListDTO } from "../dto/products.dto";
 
 interface ProductState{
-    products: ProductDTO[] | null,
+    categoryProducts: ProductDTO[] | null,
     err: string | null,
     loading : boolean,
 }
 
 const initialState:ProductState = {
-    products: null,
+    categoryProducts: null,
     loading: false,
     err:null
 };
@@ -49,25 +49,25 @@ const ProductByCategorySlice = createSlice({
     clearProduct(state){
         state.loading = false,
         state.err = null,
-        state.products = null;
+        state.categoryProducts = null;
     }
   },
   extraReducers:(builder)=>{
     builder
     .addCase(DisplayProductsByCategory.fulfilled,(state, action)=>{
-      state.products = action.payload,
+      state.categoryProducts = action.payload,
       state.err = null,
       state.loading = false
     })
     .addCase(DisplayProductsByCategory.pending, (state)=>{
         state.err = null,
         state.loading = true,
-        state.products = null
+        state.categoryProducts = null
     })
     .addCase(DisplayProductsByCategory.rejected, (state, action)=>{
         state.err = action.payload || ERROR_MESSAGES.FETCH_FAILED,
         state.loading = false,
-        state.products = null
+        state.categoryProducts = null
     })
   }    
 })

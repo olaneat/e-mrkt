@@ -31,7 +31,7 @@ import ProductByCategoryReducer from './slices/category-product.slice'
     user: persistReducer(persistConfig, LoginReducer),
     address:AddressReducer,
     updateAddress: UpdateAddressReducer,
-    productByCatgeory: ProductByCategoryReducer
+    // productByCatgeory: ProductByCategoryReducer
   })
 
   // const persistedReducer:any = persistReducer(persistConfig, reducers)

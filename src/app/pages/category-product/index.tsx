@@ -6,7 +6,7 @@ import { DisplayProductsByCategory } from "../../slices/category-product.slice";
 
 
 const ProductByCategory = ()=>{
-  const ProductByCategory = useSelector((state:RootState)=>state.productByCatgeory)
+  // const ProductByCategory = useSelector((state:RootState)=>state.productByCatgeory)
   const params = useParams();
   const dispatch = useDispatch();
 
