@@ -11,7 +11,8 @@ import AddressReducer from './slices/address.slice'
 import UpdateAddressReducer from './slices/update-address.slice'
 import { saveState, loadState } from "./constant/persist-data"
 import { persistReducer} from 'redux-persist'; 
-import ProductByCategoryReducer from './slices/category-product.slice'
+import OrderReducer from "./slices/order-slice"
+import ProductByCategoryReducer from './slices/category-product.slice'    
 // import ProfileReducer from './slices/profile.slice'
 
   const persistState = loadState();
@@ -31,7 +32,7 @@ import ProductByCategoryReducer from './slices/category-product.slice'
     user: persistReducer(persistConfig, LoginReducer),
     address:AddressReducer,
     updateAddress: UpdateAddressReducer,
-    // productByCatgeory: ProductByCategoryReducer
+    orders: OrderReducer
   })
 
   // const persistedReducer:any = persistReducer(persistConfig, reducers)

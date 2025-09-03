@@ -19,6 +19,9 @@ import JSONstates from  '../../constant/states.json'
 import SelectField, {DropdownHandle} from "../../components/input-field/custom-select-field";
 import EmptyStateComponent from "../../components/empty-state/empty-state";
 import Imgs from "../../constant/imgs.constant";
+import ToastComponent from "../../components/toast/toast";
+import {Order} from "../../slices/order-slice";
+
 // const handleSuccess = ()=>{
 //     // delCart()
 //   }
@@ -52,6 +55,10 @@ const Checkout = () =>{
     const dropdownRef = useRef<DropdownHandle>(null);
     const stateData = JSONstates;
     const imgUrl = Imgs.Images
+    const [title, setTitle] = useState<string>('')
+    const [msg, setMsg] = useState<string>('')
+    const [showToast, setShowToast] = useState<boolean>(false);
+    const [toastType, setToastType] = useState<string>('')
     const [formData, setFormData] = useState<any >({
       address: editAddressModal ? address?.address! : '',
       phone_number: editAddressModal ? address?.phone_number! :"",
@@ -132,7 +139,7 @@ const Checkout = () =>{
   const closeModal = ()=>{
     if(editAddressModal){
       setEditAddressModal(false)
-      setAddressModal(true);
+      // setAddressModal(true);
     }else if( addressModal){
         setAddressModal(false);
     
@@ -170,6 +177,9 @@ const Checkout = () =>{
     onSuccess: handleSuccess
   }
 
+   const closeToast = ()=>{
+      setShowToast(false)
+    }
 
   const updateAddress =()=>{   
     dispatch(UpdateAddress(formData) as any).then((res:any)=>{
@@ -184,7 +194,42 @@ const Checkout = () =>{
     text: 'Pay',
     
   }
+  const intiatePayment =()=>{
+    console.log(address, 'add')
+    if(!address?.address || !address.phone_number){
+      console.log('heheh')
+      setShowToast(true);
+      setToastType('warning');
+      setTitle('Address Required');
+      setMsg('Please add a shipping address to proceed with checkout');
+    }
+    else{
+      const payload = {
+        user: user?.user!.id!,
+        items:cart.cart
+      }
+      console.log(payload, 'payload')
+      dispatch(Order(payload)as any).then((res:any)=>{
+        console.log('Order created successfully', res.payload);
+        if(res.payload.success){
+          console.log('Order created successfully', res.payloadmessage);
+           setShowToast(true);
+          setToastType('success');
+          setTitle('Payment Initiated');
+          setMsg(res.payload.message);
+          setTimeout(()=>setShowToast(false),5000)
+        }else{
+          console.log('Failed to create order', res.payload);
+          setShowToast(true);
+          setToastType('error');
+          setTitle('Payment Failed');
+          setMsg(res.payload.non_field_errors[0] || 'An error occurred while initiating payment. Please try again.');
+          setTimeout(()=>setShowToast(false),5000)
 
+        }
+      })
+    }
+  }
  
 
   // const handleSelectValue = (name: string, value: string) => {
@@ -209,16 +254,21 @@ const Checkout = () =>{
             <div className="checkout-lft">
               <div className="shipping-detail">
                 <span className="item-title">Shipping address</span>
-                <div className="shipping-user-detail">
-                  <span className="detailll">
-                    <span className="full-name">{address?.first_name} {address?.last_name}</span>
-                    <span className="contact-detail">{address?.phone_number}</span>
-                    <span className="contact-detail">{address?.address}</span>
-                    <span className="contact-detail">{address?.lga}, {address?.state}</span>
-                  </span>
-                  <span className="change-detail" onClick={()=>openModal('address')}>Change</span>
-                </div>
-              
+                { address?.address || address?.phone_number ? 
+                  <div className="shipping-user-detail">
+                    <span className="detailll">
+                      <span className="full-name">{address?.first_name} {address?.last_name}</span>
+                      <span className="contact-detail">{address?.phone_number}</span>
+                      <span className="contact-detail">{address?.address}</span>
+                      <span className="contact-detail">{address?.lga}, {address?.state}</span>
+                    </span>
+                    <span className="change-detail" onClick={()=>openModal('address')}>Change</span>
+                  </div>
+                  :
+
+                  <Button name="Add Address" handleClick={()=>openModal('edit_address')}/>
+                }
+
 
               </div>
               <div className="payment-div">
@@ -283,8 +333,8 @@ const Checkout = () =>{
                 </div>
                 <div className="btn">
                   {/* <paystackHook/> */}
-                  <PaystackButton {...payStackComponent}/>
-                  {/* <Button name='Pay' type="primary"/> */}
+                  {/* <PaystackButton {...payStackComponent}/> */}
+                  <Button name='Pay' type="primary" handleClick={intiatePayment}/>
                 </div>
               </div>
 
@@ -430,8 +480,14 @@ const Checkout = () =>{
       }
       <div className="pg-footer">
         <Footer/>
-      </div>
-
+      </div>  
+      <ToastComponent 
+        title={title}
+        message={msg}
+        isOpen={showToast}
+        type={toastType}
+        handleClose={closeToast}
+      />
 
     </div>
   )

@@ -281,7 +281,7 @@ const NavBar = () =>{
                       {
                         categories?.map((catgory:CategoryDTO)=>
                           (
-                            <Link to={`/product-by-category/${catgory.id}`}>
+                            <Link to={`/product-by-category/${catgory.id}`} className="plain-txt">
                               <span key={catgory?.id} className="items"> {catgory?.name?.toLocaleUpperCase()}</span>
                             </Link>
                         ))

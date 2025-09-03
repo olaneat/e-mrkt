@@ -4,23 +4,22 @@ import { SignUpDTO, LoginDTO } from "../dto/auth.dto";
 
 
 export const Signup = createAsyncThunk(
-    'auth/sign-up',
-    async(form:SignUpDTO, thunkAPI)=>{
-        try{
-            const response = await AuthService.SignUp(form)
-            // thunkAPI.dispatch()
-            return response.data;
-        }
-        catch(err:any){
-           const msg = (err.data.msg && 
-                err.response.data.msg &&
-                err.response
-            ) 
-            ||  err.message || err.toSting()
-                
-        }
+  'auth/signUp',
+  async (form: SignUpDTO, thunkAPI) => {
+    try {
+      const response = await AuthService.SignUp(form);
+      if (!response) {
+        return thunkAPI.rejectWithValue('Sign up failed due to empty response');
+      }
+      return response; // Return the data
+    } catch (err: any) {
+      console.log('Thunk caught error:', err.response.data.message);
+      const msg = err.response.data.message || 'Unknown error';
+      console.log('Error message:', msg);
+      return thunkAPI.rejectWithValue(msg);
     }
-)
+  }
+);
 
 
 let initialState = {
@@ -47,9 +46,10 @@ const SignupSlice = createSlice({
             state.loading = false;
             state.error = false;
         })
-        builder.addCase(Signup.pending, (state:any)=>{
+        builder.addCase(Signup.rejected, (state:any, action:any)=>{
             state.loading = false;
             state.error = true;
+            state.message = action.payload;
         })
     },
 })

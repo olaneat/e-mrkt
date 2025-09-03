@@ -22,7 +22,7 @@
                 width: 100%;
                 border-radius: 8px;
                 .item-title{
-                    font-family: 'Courier New', Courier, monospace;
+                    font-family: 'Times New Roman', Times, serif;
                     font-weight: 900;
                     font-size: 24px;
                     color: #000;
@@ -42,14 +42,14 @@
                         gap: 8px;
 
                         .full-name{
-                            font-family: 'Courier New', Courier, monospace;
+                            font-family: 'Times New Roman', Times, serif;
                             font-weight: 600;
                             font-size: 12px;
                             color: #333;
                         }
 
                         .contact-detail{
-                            font-family: 'Courier New', Courier, monospace;
+                            font-family: 'Times New Roman', Times, serif;
                             font-weight: 500;
                             font-size: 12px;
                             color: #666;
@@ -59,7 +59,7 @@
                         font-size: 14px;
                         color: #DB4444;
                         font-weight: 600px;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-family: 'Times New Roman', Times, serif;
                         cursor: pointer;
                     }
                 }
@@ -101,10 +101,12 @@
                                 width: 100%;
                                 align-items: flex-start;
                                 .name{
-                                    font-family: 'Courier New', Courier, monospace;
+                                    font-family:'Times New Roman', Times, serif;
                                     font-size: 12px;
                                     color: #212121;
                                     width: 100%;
+                                    font-weight: 500;
+
                                     
                                 }
                                 .price-qua-div{
@@ -113,9 +115,10 @@
                                     align-self: center;
                                     align-self: stretch;
                                     .price{
-                                        font-family: 'Courier New', Courier, monospace;
+                                        font-family: 'Times New Roman', Times, serif;
                                         font-size: 15px;
                                         color: #000;
+
                                     }
                                     .quantity{
                                         display: flex;
@@ -124,7 +127,7 @@
                                         align-items: center;
 
                                         .quantity{
-                                            font-family: 'Courier New', Courier, monospace;
+                                            font-family: 'Times New Roman', Times, serif;
                                             color: #333;
                                             font-size: 12px;
 
@@ -136,7 +139,7 @@
                                             display: flex;
                                             justify-content: center;
                                             align-items: center;
-                                            font-family: 'Courier New', Courier, monospace;
+                                            font-family: 'Times New Roman', Times, serif;
                                             font-size: 14px;
                                             color: #000;
                                             border-radius: 7px;
@@ -151,7 +154,7 @@
                             align-self: stretch;
                             gap: 8px;
                             .shipping{
-                                font-family: 'Courier New', Courier, monospace;
+                                font-family: 'Times New Roman', Times, serif;
                                 color: #000;
                                 font-size: 12px;
                             }
@@ -175,7 +178,7 @@
 
             .summary-header{
                 font-size: 24px;
-                font-family: 'Courier New', Courier, monospace;
+                font-family: 'Times New Roman', Times, serif;
                 color: #333;
                 display: flex;
                 justify-content: flex-start;
@@ -199,31 +202,41 @@
                     .summary-title{
                         font-size: 13px;
                         color: #666;
-                        font-family: 'Courier New', Courier, monospace;
-
+                        font-family: 'Times New Roman', Times, serif;
+                        font-weight: 600;
                     }
                     .summary-item{
                         font-size: 13px;
                         color: #000;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-weight: 600;
+                        font-family: 'Times New Roman', Times, serif;
                     }
 
                 }
                 .shipping-items{
                     padding: 8px 0px;
+                    font-weight: 600;
                     border-top: 1px solid #e5e5e5;
                     width: 100%;
 
                     .shipping-title{
                         font-size: 14px;
                         color: #222;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-family: 'Times New Roman', Times, serif;
+                        font-weight: 600;
+                        
                     }
                     .est-title{
                         font-size: 14px;
                         color: #222;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-family: 'Times New Roman', Times, serif;
+                        font-weight: 600;
+                        
                     }
+                }
+
+                .btn{
+                    width: 100%;
                 }
             }
             .cart-btn{
@@ -262,7 +275,7 @@
         align-self: stretch;
         justify-content: space-between;
         .header-txt{
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Times New Roman', Times, serif;
             color: #212121;
             font-size: 18px;
             font-weight: 600;
@@ -290,14 +303,14 @@
             justify-content: space-between;
             align-items: center;
             .full-name{
-                font-family: 'Courier New', Courier, monospace;
+                font-family: 'Times New Roman', Times, serif;
                 font-weight: 600;
                 font-size: 12px;
                 color: #333;
             }
             .edit{
                 color: #DB4444;
-                font-family: 'Courier New', Courier, monospace;
+                font-family: 'Times New Roman', Times, serif;
                 font-size: 12px;
                 font-weight: 400;
                 cursor: pointer;
@@ -305,7 +318,7 @@
         }
 
         .contact-detail{
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Times New Roman', Times, serif;
             font-weight: 500;
             font-size: 12px;
             color: #666;
@@ -330,7 +343,7 @@
         padding: 8px;
         width: 100%;
         .title{
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Times New Roman', Times, serif;
             font-size: 16px;
             color: #212121;
         }
@@ -357,7 +370,7 @@
             align-items: flex-start;
 
             .field-name{
-                font-family: 'Courier New', Courier, monospace;
+                font-family: 'Times New Roman', Times, serif;
                 color: #333;
                 font-weight: 600;
                 font-size: 16px;
@@ -382,6 +395,7 @@
         .btns{
             gap: 16px;
             display: flex;
+
         }
     }
 }

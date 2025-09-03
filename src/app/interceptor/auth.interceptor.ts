@@ -11,7 +11,6 @@ const api: AxiosInstance = axios.create({
 api.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     config.headers = config.headers || {};
-    console.log('request', config)
     const user = localStorageService.getItem('user');
     let token = user?.payload?.access_token || null
     if (token) {
@@ -25,10 +24,10 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response:AxiosResponse)=>response,
     (error)=>{
-        if(error.response.status == 401){
-            window.location.href = 'sign-in'
-        }
-        return Promise.reject();
+      if(error.response.status == 401){
+          window.location.href = 'sign-in'
+      }
+      return Promise.reject(error);
     }
 )
 

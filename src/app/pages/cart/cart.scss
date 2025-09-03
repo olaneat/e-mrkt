@@ -44,7 +44,9 @@
         display: flex;
         align-self: stretch;
         // gap: 16px;
-        justify-content: space-between;
+        justify-content: center;
+        align-self: stretch;
+        gap: 32px;
         align-items: center;
        .lft-cart{
             display: flex;
@@ -52,7 +54,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-
+            width: 100%;
             .cart-header{
                 display: flex;
                 justify-content: space-between;
@@ -65,7 +67,7 @@
                     font-size: 14px;
                     color: #333;
                     text-align: center;
-                    font-family: 'Courier New', Courier, monospace;
+                    font-family: 'Times New Roman', Times, serif;
                     display: flex;
                     align-items: center;
                 }
@@ -110,12 +112,14 @@
                             justify-content: center;
                             align-items: center;
                             gap: 16px;
-                            font-family: 'Courier New', Courier, monospace;
-                                font-size: 12px;
+                            font-family: 'Times New Roman', Times, serif;
+                            font-size: 12px;
+                            font-weight: 600;
                             
                             .item{
-                                font-family: 'Courier New', Courier, monospace;
+                                font-family: 'Times New Roman', Times, serif;
                                 font-size: 12px;
+                                font-weight: 600;
                             }
                             
                         }
@@ -151,9 +155,10 @@
                                     padding: 8px 15px;
                                     font-size: 12px;
                                     display: flex;
+                                    font-weight: 600;
                                     justify-content: center;
                                     align-items: center;
-                                    font-family: 'Courier New', Courier, monospace;
+                                    font-family: 'Times New Roman', Times, serif;
 
 
 
@@ -162,7 +167,7 @@
                         }
                     }
                     .count{
-                        font-family: 'Courier New', Courier, monospace;
+                        font-family: 'Times New Roman', Times, serif;
                         padding: 8px;
                         display: flex;
                         justify-content: center;
@@ -204,13 +209,14 @@
 
             .summary-header{
                 font-size: 24px;
-                font-family: 'Courier New', Courier, monospace;
+                font-family: 'Times New Roman', Times, serif;
                 color: #333;
                 display: flex;
                 justify-content: flex-start;
                 align-self: stretch;
                 padding: 16px 10px ;   
                 border-bottom: 1px solid #e5e5e5;
+                font-weight: 600;
             }
             .summary-body{
                 display: flex;
@@ -227,13 +233,16 @@
                     .summary-title{
                         font-size: 13px;
                         color: #666;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-family: 'Times New Roman', Times, serif;
+                        font-weight: 600;
 
                     }
                     .summary-item{
                         font-size: 13px;
                         color: #000;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-weight: 600;
+
+                        font-family: 'Times New Roman', Times, serif;
                     }
 
                 }
@@ -245,12 +254,15 @@
                     .shipping-title{
                         font-size: 14px;
                         color: #222;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-family: 'Times New Roman', Times, serif;
+                        font-weight: 600;
+
                     }
                     .est-title{
                         font-size: 14px;
                         color: #222;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-weight: 600;
+                        font-family: 'Times New Roman', Times, serif;
                     }
                 }
             }
@@ -258,7 +270,7 @@
                 display: flex;
                 align-self: stretch;
                 justify-content: center;
-                padding: 4px;
+                padding: 8px;
             }
         }
     }
@@ -279,12 +291,14 @@
     .unit-price{
         color: #666;
         font-size: 12px;
-        font-family: 'Courier New', Courier, monospace;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: 600;
     }
     .price{
         color: #333;
         font-size: 12px;
-        font-family: 'Courier New', Courier, monospace;
+        font-weight: 600;
+        font-family: 'Times New Roman', Times, serif;
     }
 }
 @media (max-width:768px) {
@@ -337,7 +351,7 @@
         align-items: center;
         align-self: stretch;
         .title{
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Times New Roman', Times, serif;
             font-size: 16px;
             color: #212121;
             font-weight: 600;
@@ -353,9 +367,10 @@
         display: flex;
         justify-content: flex-start;
         align-self: stretch;
-        font-family: 'Courier New', Courier, monospace;
+        font-family: 'Times New Roman', Times, serif;
         color: #666;
         font-size: 14px;
+        font-weight: 600;
         
     }
     .btns{

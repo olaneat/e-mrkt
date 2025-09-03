@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CartDTO } from 'app/dto/card.dto';
+// interface CartDTO {
+//     id: string; // Use string for flexibility (e.g., UUIDs)
+//     name: string; // Item name for display
+//     price: number; // Unit price of the item
+//     quantity: number; // Number of items in cart
+//     totalPrice: number; // price * quantity
+//     img:string
+//     shippingCost: number
+//     totalShippingCost: number
 
-interface CartItem {
-    id: string; // Use string for flexibility (e.g., UUIDs)
-    name: string; // Item name for display
-    price: number; // Unit price of the item
-    quantity: number; // Number of items in cart
-    totalPrice: number; // price * quantity
-    img:string
-    shippingCost: number
-    totalShippingCost: number
-
-  }
+//   }
 
   interface CartState {
-    cart: CartItem[];
+    cart: CartDTO[];
     totalPrice: number; // Total price of all items
     shippingCost:number
   }
@@ -24,17 +24,17 @@ interface CartItem {
     shippingCost:0
   };
 
-const calculateTotalCost = (cart:CartItem[]) =>{
+const calculateTotalCost = (cart:CartDTO[]) =>{
     return cart.reduce((total, item)=> total + item.totalPrice, 0)
 }
-const calculateTotalShippingCost = (cart:CartItem[]) =>{
+const calculateTotalShippingCost = (cart:CartDTO[]) =>{
     return cart.reduce((total, item)=> total + item.totalShippingCost, 0)
 }
 const  CartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers:{
-      addToCart(state, action: PayloadAction<CartItem>) {
+      addToCart(state, action: PayloadAction<CartDTO>) {
         const newItem = action.payload;
         const existingItem = state.cart.find((item) => item.id === newItem.id);
   
@@ -79,7 +79,7 @@ const  CartSlice = createSlice({
                 state.shippingCost = calculateTotalShippingCost(state.cart)
               } else {
                 // Remove item if quantity would become 0
-                state.cart = state.cart.filter((cartItem) => cartItem.id !== id);
+                state.cart = state.cart.filter((CartDTO) => CartDTO.id !== id);
               }
               state.totalPrice = calculateTotalCost(state.cart);
 

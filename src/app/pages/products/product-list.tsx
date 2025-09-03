@@ -73,31 +73,6 @@ const ProductList = () =>{
             })}
           </div>
           <div className="see-all">View all products</div>
-          <div className="category-div">
-            <div className="category-title">
-              <div className="style">
-                <span className="icon"></span>
-                <div className="txt">Category</div>
-              </div>
-              <div className="title">Shop by category</div>
-            </div>
-            <div className="categories">
-              {
-                categories?.slice(0, 6).map((category:CategoryDTO)=>{
-                return(
-                  <div className="cat" key={category.id}>
-                    <Link to={`/product-by-category/${category.id}`} className="category">
-                      <img src={`${env.IMG_URL}${category.img}`} alt=""  className="category-img" />
-                      <span className="category-name">{category.name}</span>
-                    </Link>
-                  </div>
-                )
-              })
-              }
-            </div>
-            
-          </div>
-
           <div className="product-list">
           <div className="product-title">
               <div className="style">
@@ -123,6 +98,32 @@ const ProductList = () =>{
               </div>
             </div>
           </div>
+          <div className="category-div">
+            <div className="category-title">
+              <div className="style">
+                <span className="icon"></span>
+                <div className="txt">Category</div>
+              </div>
+              <div className="title">Shop by category</div>
+            </div>
+            <div className="categories">
+              {
+                categories?.slice(0, 6).map((category:CategoryDTO)=>{
+                return(
+                  <div className="cat" key={category.id}>
+                    <Link to={`/product-by-category/${category.id}`} className="category">
+                      <img src={`${env.IMG_URL}${category.img}`} alt=""  className="category-img" />
+                      <span className="category-name">{category.name}</span>
+                    </Link>
+                  </div>
+                )
+              })
+              }
+            </div>
+            
+          </div>
+
+          
         </div>
     )
 }

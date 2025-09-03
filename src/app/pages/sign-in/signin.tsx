@@ -74,7 +74,6 @@ const SignInComponent = () =>{
       if(res.type=="auth/login/fulfilled"){
        const previousUrl = (location.state as { from?: string })?.from || searchParams.get('redirect') || '/'
         navigate(decodeURIComponent(previousUrl))
-        console.log(res, 're')
         localStorageService.saveItem('user', res)
       }else{
         setTitle('Login failed')

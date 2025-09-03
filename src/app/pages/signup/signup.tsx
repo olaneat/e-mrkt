@@ -9,13 +9,19 @@ import { Signup } from "../../slices/auth.slice";
 import { useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../store";
 import { Link } from "react-router-dom";
-
+import ToastComponent from "../../components/toast/toast";
+import { useNavigate } from "react-router-dom";
 
 
 const SignUpComponent=()=>{
   const dispatch = useDispatch<AppDispatch>();
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [disabledFlag, setDisableFlag] = useState(true); 
+  const [title, setTitle] = useState<string>('')
+  const [msg, setMsg] = useState<string>('')
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastType, setToastType] = useState<string>('')
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password:'',
@@ -59,7 +65,7 @@ const SignUpComponent=()=>{
      else{
       setDisableFlag(true);
      }
-
+     
 
   }
     const getData=(name:string, data:any)=>{
@@ -73,15 +79,29 @@ const SignUpComponent=()=>{
     const imgUrl = Images.Images
     
     const createUser = () =>{
-      dispatch(Signup(formData) as any)
-      .wrap(
-      )
+      dispatch(Signup(formData) as any).then((res:any)=>{
+        console.log(res, 'resp')
+        if(res.meta.requestStatus === 'fulfilled'){
+          setToastType('success');
+          setTitle('Sign up successful!');
+          setMsg('Signup successful! Please sign in to continue.');
+          setTimeout(()=>{
+            navigate('/sign-in')
+          },2000)
+        }else{
+          setTitle('Sign up failed');
+          setToastType('error');
+          setMsg(res.payload);
+        }
+        setShowToast(true);
+        setTimeout(()=>setShowToast(false),5000)
+      })
+      
     }
-    
-    useEffect(()=>{
-    })
-
-    
+     const closeToast = ()=>{
+      setShowToast(false)
+    }
+  
     
     return (
       <div className="signup-container">
@@ -146,6 +166,13 @@ const SignUpComponent=()=>{
             </div>
           </div>
         </div>
+        <ToastComponent 
+          title={title}
+          message={msg}
+          isOpen={showToast}
+          type={toastType}
+          handleClose={closeToast}
+        />
       </div>
     )
 

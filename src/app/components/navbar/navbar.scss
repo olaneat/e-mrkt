@@ -58,7 +58,7 @@
                         color: #666;
                         font-weight: 500;
                         background: #fff;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-family: 'Times New Roman', Times, serif;
                         align-self: stretch;
                         text-transform: capitalize;
                         text-wrap: nowrap;
@@ -109,7 +109,7 @@
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
             .signout{
-                font-family: 'Courier New', Courier, monospace;
+                font-family: 'Times New Roman', Times, serif;
                 font-size: 14px;
                 color: #DB4444;
                 font-weight: 600;
@@ -158,9 +158,10 @@
 
                     .profile{
                         font-size: 12px;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-family: 'Times New Roman', Times, serif;
                         font-weight: 60;
                         color: #666;
+                        font-weight: 600;
                     }
                 }
             }
@@ -186,9 +187,10 @@
                     }
                     .content{
                         font-size: 13px;
+                        font-weight: 600;
                         color: #212121;
                         height: 20px;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-family: 'Times New Roman', Times, serif;
                     }
                 }:hover{
                         background: #f1f1f1;
@@ -286,7 +288,7 @@
             .nav-header-txt{
                 color: #fff;
                 font-size: 16px;
-                font-family: 'Courier New', Courier, monospace;
+                font-family: 'Times New Roman', Times, serif;
 
             }
 
@@ -318,7 +320,7 @@
         //         }
         //         .sm-screen-name{
         //             color: #fff;
-        //             font-family: 'Courier New', Courier, monospace;
+        //             font-family: 'Times New Roman', Times, serif;
         //             font-size: 16px;
         //         }
         //     }
@@ -334,8 +336,10 @@
             position: absolute;
             z-index: 999;
             background: #fff;
-            box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+            box-shadow: rgba(25, 25, 25, 0.1) 0 0 2px 0;
             top: 0px;
+            height: 100vh;
+            background: #000;
             .company-name{
                 display: flex;
                 justify-content: space-between;
@@ -345,7 +349,7 @@
                 border-bottom: 1px solid #e5e5e5;
                 border-radius: 8px;
                 .name-name{
-                  font-family: 'Courier New', Courier, monospace;
+                  font-family: 'Times New Roman', Times, serif;
                   color: #999;
                   font-size: 20px;
                   font-weight: 600;
@@ -397,12 +401,12 @@
 
                     .profile{
                         font-size: 12px;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-family: 'Times New Roman', Times, serif;
                         font-weight: 60;
                         color: #666;
                     }
                     .signout{
-                        font-family: 'Courier New', Courier, monospace;
+                        font-family: 'Times New Roman', Times, serif;
                         font-size: 14px;
                         color: #DB4444;
                         font-weight: 600;
@@ -434,7 +438,7 @@
                         font-size: 13px;
                         color: #191919;
                         height: 20px;
-                        font-family: 'Courier New', Courier, monospace;
+                        font-family: 'Times New Roman', Times, serif;
                     }
                 }:hover{
                         background: #f1f1f1;
@@ -458,7 +462,7 @@
                 display: flex;
                 justify-items: flex-start;
                 padding: 8px;
-                color: #191919;
+                color: #fff;
                 font-size: 14px;
                 // border-bottom: 1px solid #f1f1f1;
                 text-decoration: none;
@@ -471,7 +475,7 @@
             // box-shadow: ;
             .title{
                 font-size: 16px;
-                color: #191919;
+                color: #fff;
                 font-weight: 700;
                 
             }
@@ -486,7 +490,7 @@
                 .items{
                     padding: 8px 12px;
                     font-size: 13px;
-                    color: #666;
+                    color: #fff;
                     font-weight: 500;
     
                 }
@@ -518,7 +522,7 @@
     .badge{
         background: #DB4444;
         color: #000;
-        font-family: 'Courier New', Courier, monospace;
+        font-family: 'Times New Roman', Times, serif;
         font-size: 10px;
         border-radius: 50%;
         padding: 3px;
@@ -538,4 +542,7 @@
 .link{
     text-decoration: none;
     width: 100%;
+}
+.plain-txt{
+    text-decoration: none;
 }
