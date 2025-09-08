@@ -13,7 +13,7 @@ import AuthService from "./app/services/auth.services"
 import { logout } from "./app/slices/login.slice"
 import { UseDispatch } from "react-redux"
 import ProductByCategory from "./app/pages/category-product/index"
-
+import VerifyPayment from "./app/pages/verify-payment/very-payment"
 const App = () => {
 
   const user = useSelector((state:RootState)=>state.user);
@@ -34,6 +34,8 @@ const App = () => {
         <Route path="/sign-in" element={<SignInComponent/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
         <Route path="/product-by-category/:id" element={<ProductByCategory />} />
+        <Route path="/verify-payment/" element={<VerifyPayment />}/>
+
       </Routes>
     </BrowserRouter>
   )

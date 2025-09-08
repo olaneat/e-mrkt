@@ -21,7 +21,7 @@ import EmptyStateComponent from "../../components/empty-state/empty-state";
 import Imgs from "../../constant/imgs.constant";
 import ToastComponent from "../../components/toast/toast";
 import {Order} from "../../slices/order-slice";
-
+import { useLocation, useNavigate } from 'react-router-dom';
 // const handleSuccess = ()=>{
 //     // delCart()
 //   }
@@ -58,7 +58,12 @@ const Checkout = () =>{
     const [title, setTitle] = useState<string>('')
     const [msg, setMsg] = useState<string>('')
     const [showToast, setShowToast] = useState<boolean>(false);
-    const [toastType, setToastType] = useState<string>('')
+    const paystackCheckoutUrl = useRef<HTMLAnchorElement>(null);;
+    const [toastType, setToastType] = useState<string>('');
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [previousUrl, setPreviousUrl] = useState<string | null>(null);
+    const [ref, setRef] = useState<any>()
     const [formData, setFormData] = useState<any >({
       address: editAddressModal ? address?.address! : '',
       phone_number: editAddressModal ? address?.phone_number! :"",
@@ -90,17 +95,26 @@ const Checkout = () =>{
     const icons = Icons.Icons;
   
     useEffect(()=>{
-      console.log('hellpoo')
       displayAddress();
       createStates(stateData)
+      // if(window)
     }, [])
+
+    useEffect(()=>{
+      console.log(location)
+      const prevUrl:string = location.state?.from || sessionStorage.getItem('previousUrl');
+      console.log(prevUrl, 'prev')
+      if (prevUrl?.includes('https://checkout.paystack.com/')) {
+            console.log('comin from paystack')
+    
+      }
+    }, )
 
 
   const displayAddress =()=>{
     let id = user.user!.id
     dispatch(DisplayAddress(id) as any)
     if(address?.state){
-        console.log('hehehe')
         createLgas(address.state);
       }
   }
@@ -114,7 +128,6 @@ const Checkout = () =>{
     }
   }
 
-
   const delCart = () =>{
     dispatch(clearCart() )
   }
@@ -124,7 +137,6 @@ const Checkout = () =>{
       setAddressModal(true);
     }
     else if(type== 'edit_address'){
-      console.log('jejejej edit')
       setEditAddressModal(true);
       setAddressModal(false);
       setNewAddressModal(false);
@@ -158,7 +170,6 @@ const Checkout = () =>{
     })
     setStates(states);
   }
-
   const   createLgas = (data:any)=>{
     let locals:string[] = [];
     setlgas([])
@@ -167,14 +178,25 @@ const Checkout = () =>{
       locals.push(x.name)
     })
     setlgas(locals)
-    console.log(locals, 'lgas')
   }
-  const config = {
-    email:user?.user! .email,
-    reference: (new Date()).getSeconds().toString(),
-    amount: (cart.shippingCost + cart.totalPrice) * 100,
-    publicKey: env.TEST_PK,
-    onSuccess: handleSuccess
+  // const config = {
+  //   email:user?.user! .email,
+  //   reference: (new Date()).getSeconds().toString(),
+  //   amount: (cart.shippingCost + cart.totalPrice) * 100,
+  //   publicKey: env.TEST_PK,
+  //   onSuccess: handleSuccess
+  // }
+
+  let paystackConfig:any
+  let openPaystackModal = usePaystackPayment(paystackConfig);
+  const clickBtn = ()=>{
+    console.log('btn click')
+    openPaystackModal({
+      onSuccess:(response)=>{
+        console.log(response, 'res')
+        
+      }
+    }) 
   }
 
    const closeToast = ()=>{
@@ -189,37 +211,54 @@ const Checkout = () =>{
       }
     })
   }
-  const payStackComponent ={
-    ...config,
-    text: 'Pay',
-    
-  }
+  
   const intiatePayment =()=>{
-    console.log(address, 'add')
     if(!address?.address || !address.phone_number){
-      console.log('heheh')
       setShowToast(true);
       setToastType('warning');
       setTitle('Address Required');
       setMsg('Please add a shipping address to proceed with checkout');
     }
     else{
+      console.log(env, 'en')
       const payload = {
         user: user?.user!.id!,
-        items:cart.cart
+        items:cart.cart,
+        callbackurl:`${env.HOST_URL}/verify-payment`
       }
       console.log(payload, 'payload')
       dispatch(Order(payload)as any).then((res:any)=>{
         console.log('Order created successfully', res.payload);
-        if(res.payload.success){
-          console.log('Order created successfully', res.payloadmessage);
+        if(res.payload.status_code==201){
+          console.log('Order created successfully', res.payload.message);
            setShowToast(true);
           setToastType('success');
           setTitle('Payment Initiated');
           setMsg(res.payload.message);
+          let data:any  = res.payload.data
+          setRef(data);
+          paystackConfig = {
+            email:user?.user!.email,
+            reference: data.reference,
+            amount: data.total_amount * 100,
+            publicKey: env.TEST_PK,
+            onSuccess: handleSuccess
+          }
+
+          // openPaystackModal= usePaystackPayment(paystackConfig)
+          if(data.payment_url){
+            
+            setTimeout(()=>window.open(data.payment_url, '_self'), 3000)
+          }
+          
+          // if(paystackCheckoutUrl.current){
+          //   console.log('btn activ')
+          //   paystackCheckoutUrl.current.click();
+          // }
+         
           setTimeout(()=>setShowToast(false),5000)
+
         }else{
-          console.log('Failed to create order', res.payload);
           setShowToast(true);
           setToastType('error');
           setTitle('Payment Failed');
@@ -231,18 +270,6 @@ const Checkout = () =>{
     }
   }
  
-
-  // const handleSelectValue = (name: string, value: string) => {
-  //   console.log(value, 'hahahah')
-  //   setFormData((prev:any)=>({
-  //       ...prev,
-  //       [name]:data
-  //     }))
-
-
-  //     console.log(formData, 'form')
-  //   dropdownRef.current?.selectValue(value); // Trigger value selection
-  // };
   
   return (
     <div className="checkout-container">
@@ -333,8 +360,13 @@ const Checkout = () =>{
                 </div>
                 <div className="btn">
                   {/* <paystackHook/> */}
-                  {/* <PaystackButton {...payStackComponent}/> */}
+                  {/* <a ref={paystackCheckoutUrl} style={{display: 'none'}} href=""></a> */}
                   <Button name='Pay' type="primary" handleClick={intiatePayment}/>
+                  <a ref={paystackCheckoutUrl} onClick={clickBtn} style={{display: 'none'}}>
+                    {/* <PaystackButton   {...payStackComponent}/> */}
+
+                  </a>
+
                 </div>
               </div>
 
@@ -488,7 +520,6 @@ const Checkout = () =>{
         type={toastType}
         handleClose={closeToast}
       />
-
     </div>
   )
 

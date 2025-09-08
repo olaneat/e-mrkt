@@ -3,7 +3,8 @@ export const env = {
     IMG_URL: import.meta.env.VITE_IMG_URL as string, 
     TEST_PK: import.meta.env.VITE_TEST_PK as string,
     TEST_SK: import.meta.env.VITE_TEST_SK as string,
-    DEBUG_MODE: import.meta.env.VITE_DEBUG_MODE === 'true',  
+    DEBUG_MODE: import.meta.env.VITE_DEBUG_MODE === 'true', 
+    HOST_URL: import.meta.env.VITE_HOST_URL as string
 }
 
 export default env

@@ -12,6 +12,7 @@ import UpdateAddressReducer from './slices/update-address.slice'
 import { saveState, loadState } from "./constant/persist-data"
 import { persistReducer} from 'redux-persist'; 
 import OrderReducer from "./slices/order-slice"
+import VerifyReducer, { verifyPayment } from './slices/verify-slice'
 import ProductByCategoryReducer from './slices/category-product.slice'    
 // import ProfileReducer from './slices/profile.slice'
 
@@ -32,7 +33,8 @@ import ProductByCategoryReducer from './slices/category-product.slice'
     user: persistReducer(persistConfig, LoginReducer),
     address:AddressReducer,
     updateAddress: UpdateAddressReducer,
-    orders: OrderReducer
+    orders: OrderReducer,
+    verifyPayment:VerifyReducer
   })
 
   // const persistedReducer:any = persistReducer(persistConfig, reducers)
