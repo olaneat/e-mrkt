@@ -245,17 +245,11 @@ const Checkout = () =>{
             onSuccess: handleSuccess
           }
 
-          // openPaystackModal= usePaystackPayment(paystackConfig)
           if(data.payment_url){
             
             setTimeout(()=>window.open(data.payment_url, '_self'), 3000)
           }
           
-          // if(paystackCheckoutUrl.current){
-          //   console.log('btn activ')
-          //   paystackCheckoutUrl.current.click();
-          // }
-         
           setTimeout(()=>setShowToast(false),5000)
 
         }else{
