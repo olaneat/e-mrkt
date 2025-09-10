@@ -9,7 +9,12 @@ import Icons from "../../constant/imgs.constant";
 import { useNavigate } from "react-router-dom";
 // import localStorageService from "../../services/local-storage.service";
 import { logout } from "../../slices/login.slice";
-const NavBar = () =>{
+
+interface categoryProps  {
+  catgeories: CategoryDTO[]
+}
+
+const NavBar:React.FC<categoryProps> = ({catgeories}) =>{
   const dispatch = useDispatch();
   const icon = Icons.Icons;
   const {cart} = useSelector((state:RootState)=>state.cart )
@@ -19,12 +24,12 @@ const NavBar = () =>{
   const user = useSelector((state:RootState)=>state.user)
   const [authUser, setUser] = useState<any>();
   useEffect(()=>{
-    getCategories()
     console.log(categories, 'cate')
     // let user = localStorageService.getItem('user')
     // setUser(user)
   },[])
 
+  
   const sigout =()=>{
     dispatch(logout());
     setdropDown(!dropDown);

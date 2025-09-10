@@ -5,11 +5,12 @@ import InputField from './../../components/input-field/input-field';
 import Button from './../../components/btns/btn';
 import { Link } from 'react-router-dom';
 import {Login } from '../../slices/login.slice'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation, useSearchParams} from "react-router-dom";
 import { AppDispatch } from 'app/store';
 import ToastComponent from '../../components/toast/toast';
 import localStorageService from '../../services/local-storage.service';
+import { RootState } from '../../store';
 
 const SignInComponent = () =>{
   const iconUrl = Icons.Icons;
@@ -21,6 +22,7 @@ const SignInComponent = () =>{
   const [title, setTitle] = useState<string>('')
   const [msg, setMsg] = useState<string>('')
   const [showToast, setShowToast] = useState<boolean>(false);
+  const {isLoading, isAuthenticated}   = useSelector((state:RootState)=>state.user)
   const [toastType, setToastType] = useState<string>('')
   const [formData, setFormData] = useState({
     email: '',
@@ -116,7 +118,7 @@ const SignInComponent = () =>{
             />
           </div>
           <div className="signup-btns">
-            <Button name="Login" disabled={disabledFlag} className="btn" handleClick={userLogin} type="primary" />
+            <Button name="Login" disabled={disabledFlag} loading={isLoading} handleClick={userLogin} type="primary" />
           </div>
           <div className="already">Don't have an account? 
               <Link className="sign-in" to={'/registration'}>

@@ -27,7 +27,7 @@ const EmptyStateComponent =({imgUrl, title, text, btnTxt}: EmptyState)=>{
     
       <Button 
         type="primary"
-        name={btnTxt}
+        name={btnTxt!}
         handleClick={goHome}
       />
     </div>

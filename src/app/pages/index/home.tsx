@@ -24,7 +24,8 @@ const HomePage = () => {
    useEffect(()=>{
     getCategories();
     getProducts()
-    console.log(categories)
+    console.log(loading, 'over')
+    console.log(isLoading, 'is lo')
 
   }, []);
 
@@ -37,58 +38,43 @@ const HomePage = () => {
 
 
   const getCategories = () =>{
-    // dispatch(displayCategories() as any)
+    dispatch(displayCategories() as any)
   }
 
   
 
-
-
-    return(
+if (isLoadingOverall) {
+    return (
       <div>
-        {
-         loading ? (
-            <div >
-              hi
-            </div>
-         )
-          :(
-            <div>
-              <NavBar />  
-              <div className="body"> 
-                <div className="top-div">
-                  {/* <div className="categories">
-                    <span className="category"> 
-                      {
-                        categories?.slice(0, 8)?.map((category:CategoryDTO)=>(
-                          <span key={category?.id} className="category"> {category?.name}</span>
-                        ))
-                      }
-                    </span>
-                  </div> */}
-                  <div className="slider">
-                  <Slider />
-                  </div>
-                </div>
-                <div className="list">
-                  <CountdownTimer />
-                  <ProductList  products={products || []} categories={categories|| []}/>
-                </div>
-                <div>
-                </div>
-              </div>
-                <div className="footer-div">
-                  <Footer />
-                </div>
-            </div>
-          )
-          }
-          
+        <LoaderComponent />
       </div>
-        
-      
+    );
+  }
 
-    )
+  return(
+        
+    <div>
+      <NavBar catgeories={categories || []} />  
+      <div className="body"> 
+        <div className="top-div">
+          
+          <div className="slider">
+          <Slider />
+          </div>
+        </div>
+        <div className="list">
+          <CountdownTimer />
+          <ProductList  products={products || []} categories={categories || []} />
+        </div>
+        <div>
+        </div>
+      </div>
+        <div className="footer-div">
+          <Footer />
+        </div>
+    </div>
+  
+  )
 }
 
 export default HomePage;

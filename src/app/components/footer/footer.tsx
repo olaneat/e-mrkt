@@ -33,7 +33,7 @@ const Footer = ()=>{
               </span>
               <span className="footer-txt">
               <img src={icons.whiteMail} className="footer-icon" alt="" /> 
-                info@abc.com
+                info@olastorez.com
               </span>
               <span className="footer-txt">
               <img src={icons.whitePhone} className="footer-icon" alt="" /> 

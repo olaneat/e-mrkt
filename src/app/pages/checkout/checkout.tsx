@@ -22,29 +22,11 @@ import Imgs from "../../constant/imgs.constant";
 import ToastComponent from "../../components/toast/toast";
 import {Order} from "../../slices/order-slice";
 import { useLocation, useNavigate } from 'react-router-dom';
-// const handleSuccess = ()=>{
-//     // delCart()
-//   }
-// const newConfig = {
-//       reference: (new Date()).getTime().toString(),
-//       email: "user@example.com",
-//       amount: 20000, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-//       publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
-//       onSuccess: handleSuccess
-//   };
-// const paystackHook = () =>{
-//     const initializePayment = usePaystackPayment(newConfig);
-//     return (
-//       <div>
-//         <Button handleClick={()=>{initializePayment(newConfig)
-//           }}/>
-//       </div>
-//     )
-//   }
 
 const Checkout = () =>{
     const dispatch = useDispatch();
-    const {address, isLoading,  error } = useSelector((state:RootState)=> state.address)
+    const {address, loading,  err } = useSelector((state:RootState)=> state.address)
+    const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
     const cart= useSelector((state:RootState)=>state.cart)
     const user = useSelector((state:RootState)=>state.user);
     const [addressModal, setAddressModal] = useState(false);
@@ -267,7 +249,12 @@ const Checkout = () =>{
   
   return (
     <div className="checkout-container">
-      <NavBar/>
+      <div className="checkout-inner-div">
+        <div className="nav">
+          <NavBar catgeories={categories || []} />
+
+        </div>
+
       {
         cart.cart.length>0
          ?
@@ -504,6 +491,7 @@ const Checkout = () =>{
           />
         </div>  
       }
+      </div>
       <div className="pg-footer">
         <Footer/>
       </div>  

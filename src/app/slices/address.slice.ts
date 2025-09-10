@@ -5,13 +5,13 @@ import { ProfileDTO, mapProfileDTO, ERROR_MESSAGES } from "../dto/profile.dto";
 
 interface AddressState{
     address:ProfileDTO | null
-    isLoading: boolean,
-    error:string | null
+    loading: boolean,
+    err:string | null
 }
 const initialState: AddressState = {
     address: null,
-    isLoading:false, 
-    error:null
+    loading:false, 
+    err:null
 }
 export const DisplayAddress = createAsyncThunk<
     ProfileDTO,
@@ -39,24 +39,24 @@ const AddressDetailSlice = createSlice({
     reducers:{
         cleaAddressDetail(state){
             state.address = null;
-            state.isLoading = false;
-            state.error = null
+            state.loading = false;
+            state.err = null
         }
     },
     extraReducers:(builder)=>{
         builder
         .addCase(DisplayAddress.pending, (state)=>{
-            state.isLoading = true;
-            state.error = null
+            state.loading = true;
+            state.err = null
         })
         .addCase(DisplayAddress.fulfilled, (state, action: PayloadAction<ProfileDTO>)=>{
             state.address = action.payload,
-            state.isLoading = false,
-            state.error = null
+            state.loading = false,
+            state.err = null
         })
         .addCase(DisplayAddress.rejected, (state, action)=>{
-            state.isLoading = false;
-            state.error = action.payload || ERROR_MESSAGES.FETCH_FAILED
+            state.loading = false;
+            state.err = action.payload || ERROR_MESSAGES.FETCH_FAILED
         })
     },
     

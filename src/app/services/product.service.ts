@@ -5,7 +5,6 @@ import axios from "axios";
 
  const getProductList = ()=>{
    const url = `${env.BASE_URL}/products/list`;
-   console.log(url)
     return api.get(url);
  }
 

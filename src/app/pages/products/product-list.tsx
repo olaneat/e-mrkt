@@ -3,7 +3,6 @@ import { useSelector} from "react-redux";
 import { ProductDTO } from "app/dto/products.dto";
 import { CategoryDTO } from "app/dto/categories.dto";
 import { DisplayProducts } from '../../slices/product-list.slice'
-// import { displayCategories } from "../../slices/categories.slice";
 import { useDispatch } from "react-redux";
 import env from "../../../environment/env";
 import "./product-list.scss"

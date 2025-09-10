@@ -8,7 +8,6 @@ import NavBar from "../../components/navbar/navbar";
 import Button from "../../components/btns/btn";
 import Icons from "../../constant/imgs.constant";
 import { increaseQuantity, removeItem, reduceQuantity } from "../../slices/cart.slice";
-import { UseDispatch } from "react-redux";
 import Footer from "../../components/footer/footer";
 import ToastComponent from "../../components/toast/toast";
 import EmptyStateComponent from "../../components/empty-state/empty-state";
@@ -17,6 +16,7 @@ import ModalComponent from "../../components/modal/modal";
 
 const Cart =() =>{
     const cart = useSelector((state:RootState)=>state.cart )
+    const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
     const icons = Icons.Icons;
     const dispatch  = useDispatch();
     const [totlPrice, setTotalPrice]=useState(0); 
@@ -89,7 +89,7 @@ const Cart =() =>{
       <div className="outer-container">
         <div className="cart-container">
           <div className="nav">
-            <NavBar />
+            <NavBar catgeories={categories || []} />
           </div>
           <span className="breadcrumb">
             <Link to={'/'}  className="home"> Home</Link>/

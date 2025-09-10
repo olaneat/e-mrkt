@@ -14,7 +14,10 @@ import ToastComponent from "../../components/toast/toast";
 const ProductDetail = () =>{
     const dispatch = useDispatch();
     // const [productDetail, setProductDetail] = useState<ProductDetailDTO>();
-    const { product, isLoading, error } = useSelector((state: RootState) => state.product);
+    const { product, loading, err } = useSelector((state: RootState) => state.product);
+      const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
+    
+    
     const params = useParams();
     const [tabvalue, setTabValue] = useState<string>("");
     let [quantity, setQuantity] = useState<number>(1)
@@ -108,7 +111,7 @@ const ProductDetail = () =>{
     }
     return (
       <div>
-        <NavBar />  
+        <NavBar catgeories={categories || []} />  
         <div className="main-body">
           <div className="nav">
             <span className="home">Home</span>

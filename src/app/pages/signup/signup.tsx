@@ -6,7 +6,7 @@ import Images from "../../constant/imgs.constant"
 import Button from "./../../components/btns/btn";
 import InputField from "./../../components/input-field/input-field";
 import { Signup } from "../../slices/auth.slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../store";
 import { Link } from "react-router-dom";
 import ToastComponent from "../../components/toast/toast";
@@ -18,6 +18,7 @@ const SignUpComponent=()=>{
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [disabledFlag, setDisableFlag] = useState(true); 
   const [title, setTitle] = useState<string>('')
+  const {loading} = useSelector((state:RootState)=>state.signup)
   const [msg, setMsg] = useState<string>('')
   const [showToast, setShowToast] = useState<boolean>(false);
   const [toastType, setToastType] = useState<string>('')
@@ -156,7 +157,7 @@ const SignUpComponent=()=>{
             </span>
 
             <div className="signup-btns">
-                <Button name="Create account" disabled={disabledFlag} handleClick={createUser}  className="btn" type="primary" />
+                <Button name="Create account" disabled={disabledFlag} loading={loading} handleClick={createUser} type="primary" />
             </div>
             <div className="already">Already have an account? 
               <Link className="sign-in" to={'/sign-in'}>
