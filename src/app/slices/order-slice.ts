@@ -17,12 +17,12 @@ interface OrderReponse {
 }
 
 interface OrderState{
-    isLoading:boolean;
+    orderLoading:boolean;
     error:string | null;
     response:OrderReponse['response'] | null;
 }
 const initialState:OrderState = {
-    isLoading: false,
+    orderLoading: false,
     error: null,
     response: null
 };
@@ -58,16 +58,16 @@ const OrderSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(Order.pending, (state) => {
-                state.isLoading = true;
+                state.orderLoading = true;
                 state.error = null;
             })
             .addCase(Order.fulfilled, (state, action) => {
-                state.isLoading = false;
+                state.orderLoading = false;
                 state.response = action.payload.response;
                 state.error = null;
             })
             .addCase(Order.rejected, (state, action) => {
-                state.isLoading = false;
+                state.orderLoading = false;
                 state.error = action.error.message || 'Failed to initiate order. Please try again.';
             });
     },

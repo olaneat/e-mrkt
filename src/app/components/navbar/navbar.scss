@@ -338,7 +338,9 @@
             background: #fff;
             box-shadow: rgba(25, 25, 25, 0.1) 0 0 2px 0;
             top: 0px;
-            height: 100vh;
+            min-height: 100%;
+            top: 0;
+            height: 100vh; 
             background: #000;
             .company-name{
                 display: flex;
@@ -403,7 +405,7 @@
                         font-size: 12px;
                         font-family: 'Times New Roman', Times, serif;
                         font-weight: 60;
-                        color: #666;
+                        color: #fff;
                     }
                     .signout{
                         font-family: 'Times New Roman', Times, serif;
@@ -429,15 +431,14 @@
                     align-self: stretch;
                     width: 100%;
                     justify-content: flex-start;
-                    align-items: flex-start;
+                    align-items: center;
                     img{
-                        width: 20px;
-                        height: 20px;
+                        width: 16px;
+                        height: 16px;
                     }
                     .span-option-txt{
                         font-size: 13px;
-                        color: #191919;
-                        height: 20px;
+                        color: #fff;
                         font-family: 'Times New Roman', Times, serif;
                     }
                 }:hover{

@@ -27,6 +27,7 @@ const Checkout = () =>{
     const dispatch = useDispatch();
     const {address, loading,  err } = useSelector((state:RootState)=> state.address)
     const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
+    const {orderLoading} = useSelector((state:RootState)=>state.orders)
     const cart= useSelector((state:RootState)=>state.cart)
     const user = useSelector((state:RootState)=>state.user);
     const [addressModal, setAddressModal] = useState(false);
@@ -200,9 +201,10 @@ const Checkout = () =>{
       setToastType('warning');
       setTitle('Address Required');
       setMsg('Please add a shipping address to proceed with checkout');
+      closeToast()
+    
     }
     else{
-      console.log(env, 'en')
       const payload = {
         user: user?.user!.id!,
         items:cart.cart,
@@ -342,7 +344,7 @@ const Checkout = () =>{
                 <div className="btn">
                   {/* <paystackHook/> */}
                   {/* <a ref={paystackCheckoutUrl} style={{display: 'none'}} href=""></a> */}
-                  <Button name='Pay' type="primary" handleClick={intiatePayment}/>
+                  <Button name='Pay' type="primary" loading={orderLoading} handleClick={intiatePayment}/>
                   <a ref={paystackCheckoutUrl} onClick={clickBtn} style={{display: 'none'}}>
                     {/* <PaystackButton   {...payStackComponent}/> */}
 
@@ -409,6 +411,7 @@ const Checkout = () =>{
                         data={formData.first_name}
                         name="first_name"
                         onChange={getData}
+                        placeholder="First Name"
                       />
 
                       <InputField
@@ -416,6 +419,8 @@ const Checkout = () =>{
                         data={formData.last_name}
                         onChange={getData}
                         name="last_name"
+                        placeholder="Last Name"
+
                       />
                     </div>
                     
@@ -428,6 +433,8 @@ const Checkout = () =>{
                         data={formData.phone_number}
                         name="phone_number"
                         onChange={getData}
+                        placeholder="Phone Number"
+
                       />
                     </div>
                     
@@ -439,6 +446,7 @@ const Checkout = () =>{
                         type="text"
                         onChange={getData}
                         name="address"
+                        placeholder="Address"
                         data={formData.address}
                       />
                                       
@@ -472,7 +480,7 @@ const Checkout = () =>{
                 </div>
                 <div className="footer">
                   <div className="btns">
-                  <Button name="Confirm" type="primary" handleClick={updateAddress} />
+                  <Button name="Confirm" loading={loading} type="primary" handleClick={updateAddress} />
                   <Button name="Cancel"  handleClick={closeModal}/>
 
                   </div>
@@ -492,9 +500,6 @@ const Checkout = () =>{
         </div>  
       }
       </div>
-      <div className="pg-footer">
-        <Footer/>
-      </div>  
       <ToastComponent 
         title={title}
         message={msg}
@@ -502,6 +507,10 @@ const Checkout = () =>{
         type={toastType}
         handleClose={closeToast}
       />
+      <div className="pg-footer">
+        <Footer/>
+      </div>  
+      
     </div>
   )
 

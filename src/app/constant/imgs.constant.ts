@@ -23,13 +23,15 @@ import Settings from '/icons/settings.svg'
 import payment from '/icons/payment.svg'
 import like from '/icons/like.svg'
 import chevronDown from '/icons/chevron-down.svg'
-
-
+import closeWhite from "/icons/close-white.svg";
+import settingWhite from '/icons/setting-white.svg'
+import whishListWhite from '/icons/wish-list.svg'
+import paymentWhite from '/icons/payment-white.svg'
+import OrderListWhite from '/icons/order-list-white.svg'
 // img list start here 
 import loginImg from '/imgs/shopping.png'
 // import signUpImg from '/imgs/signup-img.svg'
 import emptyStateCart from '/imgs/shoping-cart.jpeg'
-
 
 const Icons= {
     SendIcon,
@@ -54,7 +56,12 @@ const Icons= {
     payment,
     Settings,
     like,
-    chevronDown
+    chevronDown,
+    closeWhite,
+    whishListWhite,
+    settingWhite,
+    paymentWhite,
+    OrderListWhite
 }
 
 

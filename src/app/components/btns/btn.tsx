@@ -15,7 +15,10 @@ const Button: React.FC<ButtonProps> =({name,imgurl, type, disabled, loading, han
     useEffect(()=>{})
     return(
         <div className={disabled || loading? 'disable': 'full'}>
-          <div className={type=='primary' ? "parent-btn primaryBtn": "parent-btn secondaryBtn"} onClick={handleClick} >
+          <div 
+            className={`parent-btn ${type === "primary" ? "primaryBtn" : "secondaryBtn"} ${disabled ? "disable" : ""}`}
+            onClick={handleClick} 
+          >
             {
               loading ?
               (

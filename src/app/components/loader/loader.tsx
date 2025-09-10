@@ -1,14 +1,16 @@
 import React, {useEffect} from "react"
 import './style.scss'
 
+interface props{
+  title:string
+}
 
-
-const LoaderComponent = () =>{
+const LoaderComponent:React.FC<props> = ({title}) =>{
 
 return (
     <div className="page-loader">
       <span className="loader"></span>
-      <p className="loading-text">Loading store...</p>
+      <p className="loading-text">{title}...</p>
     </div>
   );
 

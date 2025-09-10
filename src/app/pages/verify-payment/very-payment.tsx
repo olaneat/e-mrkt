@@ -5,6 +5,7 @@ import { useSearchParams, useNavigate,} from 'react-router-dom';
 import ToastComponent from "../../components/toast/toast";
 import { RootState } from "../../store";
 import { clearCart } from "../../slices/cart.slice";
+import LoaderComponent from "../../components/loader/loader";
 const VerifyPayment = () =>{
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams()
@@ -16,6 +17,7 @@ const VerifyPayment = () =>{
     const cart = useSelector((state:RootState)=>state.cart )
     const [tile, setTitile] = useState<string>('');
     const navigate = useNavigate();
+    const {isLoading} = useSelector((state:RootState)=>state.verifyPayment)
     
     useEffect(()=>{
         verify()
@@ -47,6 +49,10 @@ const VerifyPayment = () =>{
     }
   return (
     <div>
+      {
+      isLoading ?
+        <LoaderComponent title="Please wait while we verify your payment"/>
+      : 
       <ToastComponent
         title={tile}
         type={toastType}
@@ -54,6 +60,7 @@ const VerifyPayment = () =>{
         isOpen={showToast}
         handleClose={closeToast}        
       />
+      }
     </div>
   )
 }

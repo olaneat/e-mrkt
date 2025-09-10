@@ -11,10 +11,11 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../slices/login.slice";
 
 interface categoryProps  {
-  catgeories: CategoryDTO[]
+  catgeories: CategoryDTO[],
+  pageType?:string
 }
 
-const NavBar:React.FC<categoryProps> = ({catgeories}) =>{
+const NavBar:React.FC<categoryProps> = ({catgeories, pageType}) =>{
   const dispatch = useDispatch();
   const icon = Icons.Icons;
   const {cart} = useSelector((state:RootState)=>state.cart )
@@ -24,9 +25,6 @@ const NavBar:React.FC<categoryProps> = ({catgeories}) =>{
   const user = useSelector((state:RootState)=>state.user)
   const [authUser, setUser] = useState<any>();
   useEffect(()=>{
-    console.log(categories, 'cate')
-    // let user = localStorageService.getItem('user')
-    // setUser(user)
   },[])
 
   
@@ -117,16 +115,19 @@ const NavBar:React.FC<categoryProps> = ({catgeories}) =>{
                 ): ''
               }
             </span>
-            <span className="title" onClick={goHome}>Ola Storez</span>
+            <span className="title" onClick={goHome}>Neat Storez</span>
           </div>
           
-          <div className="search-div">
-            <input 
-              type="search" 
-              placeholder="what can i search for u?" 
-              className="search-field"
-            />
-          </div>
+          {pageType=='list' ?
+              <div className="search-div">
+                <input 
+                  type="search" 
+                  placeholder="what can i search for u?" 
+                  className="search-field"
+                />
+            </div>
+          : ""
+          }
           <div className="nav-content" >
            <Link className="link" to="/">
             <span className="item"> Home</span>
@@ -217,20 +218,22 @@ const NavBar:React.FC<categoryProps> = ({catgeories}) =>{
                   <span className="company-name">
                     <Link to='/' className="name-name">
                       <span className="name-name">
-                        Ola storez
+                        Neat storez
                       </span>
                     
                     </Link>
-                    <img src={icon.closeIcon} alt="" onClick={toggleSidebar} className="close" />
+                    <img src={icon.closeWhite} alt="" onClick={toggleSidebar} className="close" />
                   </span>
                   <div className="list">
                     <Link className="item" to="/cart">
                       {/* <span className=""> Cart</span> */}
-                      <span className="icon">
+                      {/* <span className="icon">
                         <img src={icon.cartIcon} alt="" />
-                        <span className="badge">{cart.length}</span>
-
-                      </span>
+                        { cart.length>0 ?
+                          <span className="badge">{cart.length}</span>
+                          : 0
+                        }
+                      </span> */}
 
                     </Link>
                     { user.isAuthenticated 
@@ -251,19 +254,19 @@ const NavBar:React.FC<categoryProps> = ({catgeories}) =>{
                         </span>
                         <span className="span-list">
                           <span className="span-option">
-                            <img src={icon.WishList} alt="" />
+                            <img src={icon.OrderListWhite} alt="" />
                             <span className="span-option-txt">My Orders</span>
                           </span>
                           <span className="span-option">
-                            <img src={icon.payment} alt="" />
+                            <img src={icon.paymentWhite} alt="" />
                             <span className="span-option-txt">Payment</span>
                           </span>
                           <span className="span-option">
-                            <img src={icon.like} alt="" />
+                            <img src={icon.whishListWhite} alt="" />
                             <span className="span-option-txt">Wish List</span>
                           </span>
                           <span className="span-option">
-                            <img src={icon.Settings} alt="" />
+                            <img src={icon.settingWhite} alt="" />
                             <span className="span-option-txt">Settings</span>
                           </span>
                         </span>  
@@ -286,7 +289,7 @@ const NavBar:React.FC<categoryProps> = ({catgeories}) =>{
                       {
                         categories?.map((catgory:CategoryDTO)=>
                           (
-                            <Link to={`/product-by-category/${catgory.id}`} className="plain-txt">
+                            <Link to={`/product-by-category/${catgory.id}`} key={catgory.id} className="plain-txt">
                               <span key={catgory?.id} className="items"> {catgory?.name?.toLocaleUpperCase()}</span>
                             </Link>
                         ))
@@ -302,8 +305,10 @@ const NavBar:React.FC<categoryProps> = ({catgeories}) =>{
                   <img src={icon.toggleIcon} alt="" />
                 </span>
                 <div className="nav-header-div">
-                  <span className="nav-header-txt">Ola Storez</span>
-                  <Link to={'/cart'}>
+                  <Link className="link" to={'/'}>
+                    <span className="nav-header-txt">Neat Storez</span>
+                  </Link>
+                  <Link  to={'/cart'}>
                     <div className="icon">
                       {cart.length>0 
                         ?

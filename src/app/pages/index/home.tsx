@@ -24,15 +24,12 @@ const HomePage = () => {
    useEffect(()=>{
     getCategories();
     getProducts()
-    console.log(loading, 'over')
-    console.log(isLoading, 'is lo')
 
   }, []);
 
 
   const getProducts = () =>{
       // dispatch(DisplayProducts('args') as any);  
-      console.log('heh', products)
       dispatch(DisplayProducts())
     }
 
@@ -46,7 +43,7 @@ const HomePage = () => {
 if (isLoadingOverall) {
     return (
       <div>
-        <LoaderComponent />
+        <LoaderComponent  title="Loading store"/>
       </div>
     );
   }
@@ -54,7 +51,7 @@ if (isLoadingOverall) {
   return(
         
     <div>
-      <NavBar catgeories={categories || []} />  
+      <NavBar catgeories={categories || []} pageType="list"/>  
       <div className="body"> 
         <div className="top-div">
           
