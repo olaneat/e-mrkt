@@ -3,24 +3,27 @@ import { useSelector} from "react-redux";
 import { ProductDTO } from "app/dto/products.dto";
 import { CategoryDTO } from "app/dto/categories.dto";
 import { DisplayProducts } from '../../slices/product-list.slice'
-import { displayCategories } from "../../slices/categories.slice";
+// import { displayCategories } from "../../slices/categories.slice";
 import { useDispatch } from "react-redux";
 import env from "../../../environment/env";
 import "./product-list.scss"
 import { Link } from "react-router-dom";
 import { RootState, AppDispatch } from "../../store";
 
-const ProductList = () =>{
+interface props {
+  products: ProductDTO[]; 
+  categories: CategoryDTO[]
+}
+const ProductList: React.FC<props>= ({ products, categories }) =>{
     const dispatch = useDispatch<AppDispatch>();
     // const [productList, loading, error] = useSelector((state:RootState)=>state.product)
-    const {products, loading, err} = useSelector((state:RootState)=>state.products )
-    const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
-    const [catProducts, setCatProducts] = useState<ProductDTO[]>([])
-    useEffect(()=>{
-      console.log(loading, 'load')
-      getProducts();
-      getCategories()
-    },[dispatch])
+    // const {products, loading, err} = useSelector((state:RootState)=>state.products )
+    // const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
+    // useEffect(()=>{
+    //   console.log(products, 'load')
+    //   // getProducts();
+    //   // getCategories()
+    // },[])
 
     const percentPrice = (price:number) =>{
         let percentage = (price * 30)/100
@@ -32,10 +35,10 @@ const ProductList = () =>{
       dispatch(DisplayProducts())
     }
 
-    const getCategories = () =>{
-      dispatch(displayCategories())
+    // const getCategories = () =>{
+    //   dispatch(displayCategories())
       
-    }
+    // }
 
    
 
