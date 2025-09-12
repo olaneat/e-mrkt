@@ -45,10 +45,8 @@ const initialState: LoginState = {
 >('auth/login', async (form: LoginRequestDTO, { rejectWithValue }) => {
   try {
     const response = await AuthService.Login(form);
-    console.log(response.data, 'res')
     return response.data; // { user, token }
   } catch (err: any) {
-    console.log(err.response.data.non_field_errors[0], 'err')
     const errorMessage =
       err.response.data.non_field_errors[0] ||
       err.message ||
@@ -84,12 +82,10 @@ const LoginSlice = createSlice({
         })
         .addCase(Login.fulfilled, (state, action)=>{
             state.isAuthenticated = true;
-            console.log(action.payload, 'pay')
             state.error = null
             state.isLoading = false;
             state.user = action.payload.user;
             state.token = action.payload.refresh_token;
-            console.log(state, 'state')
             state.timeStamp = Date.now()
             // localStorageService.saveItem('user',action.payload);
             

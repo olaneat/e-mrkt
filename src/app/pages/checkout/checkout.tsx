@@ -84,11 +84,8 @@ const Checkout = () =>{
     }, [])
 
     useEffect(()=>{
-      console.log(location)
       const prevUrl:string = location.state?.from || sessionStorage.getItem('previousUrl');
-      console.log(prevUrl, 'prev')
       if (prevUrl?.includes('https://checkout.paystack.com/')) {
-            console.log('comin from paystack')
     
       }
     }, )
@@ -173,10 +170,8 @@ const Checkout = () =>{
   let paystackConfig:any
   let openPaystackModal = usePaystackPayment(paystackConfig);
   const clickBtn = ()=>{
-    console.log('btn click')
     openPaystackModal({
       onSuccess:(response)=>{
-        console.log(response, 'res')
         
       }
     }) 
@@ -209,11 +204,8 @@ const Checkout = () =>{
         items:cart.cart,
         callbackurl:`${env.HOST_URL}/verify-payment`
       }
-      console.log(payload, 'payload')
       dispatch(Order(payload)as any).then((res:any)=>{
-        console.log('Order created successfully', res.payload);
         if(res.payload.status_code==201){
-          console.log('Order created successfully', res.payload.message);
            setShowToast(true);
           setToastType('success');
           setTitle('Payment Initiated');

@@ -6,7 +6,6 @@ const Footer = ()=>{
   const [email, setEmail]= useState<string>("");
   const icons = Icons.Icons
   function sendMail(){
-    console.log(email)
   }
     
     return (

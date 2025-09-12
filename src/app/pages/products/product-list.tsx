@@ -14,32 +14,11 @@ interface props {
   categories: CategoryDTO[]
 }
 const ProductList: React.FC<props>= ({ products, categories }) =>{
-    const dispatch = useDispatch<AppDispatch>();
-    // const [productList, loading, error] = useSelector((state:RootState)=>state.product)
-    // const {products, loading, err} = useSelector((state:RootState)=>state.products )
-    // const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
-    // useEffect(()=>{
-    //   console.log(products, 'load')
-    //   // getProducts();
-    //   // getCategories()
-    // },[])
 
     const percentPrice = (price:number) =>{
         let percentage = (price * 30)/100
         return percentage
     }
-    const getProducts = () =>{
-      // dispatch(DisplayProducts('args') as any);  
-      console.log('heh', products)
-      dispatch(DisplayProducts())
-    }
-
-    // const getCategories = () =>{
-    //   dispatch(displayCategories())
-      
-    // }
-
-   
 
     return(
 

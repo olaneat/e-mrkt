@@ -1,83 +1,78 @@
-import type { Action, ThunkAction } from "@reduxjs/toolkit"
-import { combineReducers, combineSlices, configureStore,  } from "@reduxjs/toolkit"
-import { setupListeners } from "@reduxjs/toolkit/query"
-import productDetailReducer  from "./slices/product-detail.slice"
-import  CartReducer  from "./slices/cart.slice"
-import ProductReducer from "./slices/product-list.slice"
-import storage from 'redux-persist/lib/storage'
-import  CategoryReducer  from "./slices/categories.slice"
-import  LoginReducer from "./slices/login.slice"
-import AddressReducer from './slices/address.slice'
-import UpdateAddressReducer from './slices/update-address.slice'
-import { saveState, loadState } from "./constant/persist-data"
-import { persistReducer} from 'redux-persist'; 
-import OrderReducer from "./slices/order-slice"
-import VerifyReducer, { verifyPayment } from './slices/verify-slice'
-import SignupReducer from './slices/auth.slice'
-import ProductByCategoryReducer from './slices/category-product.slice'    
-// import ProfileReducer from './slices/profile.slice'
+import type { Action, ThunkAction } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import productDetailReducer from "./slices/product-detail.slice";
+import CartReducer from "./slices/cart.slice";
+import ProductReducer from "./slices/product-list.slice";
+import storage from "redux-persist/lib/storage";
+import CategoryReducer from "./slices/categories.slice";
+import LoginReducer from "./slices/login.slice";
+import AddressReducer from "./slices/address.slice";
+import UpdateAddressReducer from "./slices/update-address.slice";
+import { saveState, loadState } from "./constant/persist-data";
+import { persistReducer } from "redux-persist";
+import OrderReducer from "./slices/order-slice";
+import VerifyReducer from "./slices/verify-slice";
+import SignupReducer from "./slices/auth.slice";
+import ProductByCategoryReducer from "./slices/category-product.slice";
 
-  const persistState = loadState();
-  const persistConfig = {
-    key:'root',
-    storage,
-    debug: true,
-    version:1,
-    whitelist: ['cart', 'login']
-    
-  }
-  const reducers = combineReducers({
-    product: productDetailReducer,
-    cart:persistReducer(persistConfig, CartReducer),
-    products:ProductReducer,
-    category: CategoryReducer,
-    user: persistReducer(persistConfig, LoginReducer),
-    address:AddressReducer,
-    updateAddress: UpdateAddressReducer,
-    orders: OrderReducer,
-    verifyPayment:VerifyReducer,
-    signup: SignupReducer
-  })
+const persistState = loadState();
+const persistConfig = {
+  key: "root",
+  storage,
+  debug: true,
+  version: 1,
+  whitelist: ["cart", "login"],
+};
 
-  // const persistedReducer:any = persistReducer(persistConfig, reducers)
-// Infer the `RootState` type from the root reducer
-// export type RootState = ReturnType<typeof rootReducer>
+const reducers = combineReducers({
+  product: productDetailReducer,
+  cart: persistReducer(persistConfig, CartReducer),
+  products: ProductReducer,
+  category: CategoryReducer,
+  user: persistReducer(persistConfig, LoginReducer),
+  address: AddressReducer,
+  updateAddress: UpdateAddressReducer,
+  orders: OrderReducer,
+  verifyPayment: VerifyReducer,
+  signup: SignupReducer,
+  productByCategory: ProductByCategoryReducer, // Added from category-product.slice
+});
 
-// The store setup is wrapped in `makeStore` to allow reuse
-// when setting up tests that need the same store config
-// export const makeStore = (preloadedState?: Partial<RootState>) => {
-//   const store = configureStore({
-//     reducer: reducers,
-//     // Adding the api middleware enables caching, invalidation, polling,
-//     // and other useful features of `rtk-query`.
-//     // middleware: getDefaultMiddleware => {
-//     //   return getDefaultMiddleware().concat(quotesApiSlice.middleware)
-//     // },
-//     preloadedState,
-//   })
-//   // configure listeners using the provided defaults
-//   // optional, but required for `refetchOnFocus`/`refetchOnReconnect` behaviors
-//   setupListeners(store.dispatch)
-//   return store
-// }
+// Define makeStore to create a new store instance
+export const makeStore = (preloadedState = persistState) => {
+  const store = configureStore({
+    reducer: reducers,
+    preloadedState,
+    // middleware: (getDefaultMiddleware) =>
+    //   getDefaultMiddleware({
+    //     serializableCheck: false, // Disable for redux-persist
+    //   }).concat(ProductByCategoryReducer.middleware), // Add RTK Query middleware
+  });
 
-export const store = configureStore({
-  // reducer:persistedReducer,
-  reducer:reducers,
-  preloadedState:persistState,
+  // Setup listeners for RTK Query
+  setupListeners(store.dispatch);
+  return store;
+};
 
-  // devTools: true,
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware({
-  //     serializableCheck: {
-  //       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-  //     },
-  //   })
-    
-})
-const throttle = <T extends(...args:any[])=>void>(func: T, limit:number)=>{
+// Create the main store instance
+export const store = makeStore();
+
+// Infer types
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export type AppThunk<ThunkReturnType = void> = ThunkAction<
+  ThunkReturnType,
+  RootState,
+  unknown,
+  Action
+>;
+
+// Throttle state persistence
+const throttle = <T extends (...args: any[]) => void>(func: T, limit: number) => {
   let lastFunc: ReturnType<typeof setTimeout>;
-  let lastRun:number;
+  let lastRun: number;
   return function (this: any, ...args: Parameters<T>) {
     if (!lastRun) {
       func.apply(this, args);
@@ -92,33 +87,139 @@ const throttle = <T extends(...args:any[])=>void>(func: T, limit:number)=>{
       }, limit - (Date.now() - lastRun));
     }
   };
-}
-
+};
 
 store.subscribe(
   throttle(() => {
     saveState({
       cart: store.getState().cart,
-      user:store.getState().user
+      user: store.getState().user,
     });
-  }, 1000) // Save at most once per second
+  }, 1000)
 );
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-// setupListeners(store.dispatch)
-// export default store
+
+// import type { Action, ThunkAction } from "@reduxjs/toolkit"
+// import { combineReducers, combineSlices, configureStore,  } from "@reduxjs/toolkit"
+// import { setupListeners } from "@reduxjs/toolkit/query"
+// import productDetailReducer  from "./slices/product-detail.slice"
+// import  CartReducer  from "./slices/cart.slice"
+// import ProductReducer from "./slices/product-list.slice"
+// import storage from 'redux-persist/lib/storage'
+// import  CategoryReducer  from "./slices/categories.slice"
+// import  LoginReducer from "./slices/login.slice"
+// import AddressReducer from './slices/address.slice'
+// import UpdateAddressReducer from './slices/update-address.slice'
+// import { saveState, loadState } from "./constant/persist-data"
+// import { persistReducer} from 'redux-persist'; 
+// import OrderReducer from "./slices/order-slice"
+// import VerifyReducer, { verifyPayment } from './slices/verify-slice'
+// import SignupReducer from './slices/auth.slice'
+// import ProductByCategoryReducer from './slices/category-product.slice'    
+// // import ProfileReducer from './slices/profile.slice'
+
+//   const persistState = loadState();
+//   const persistConfig = {
+//     key:'root',
+//     storage,
+//     debug: true,
+//     version:1,
+//     whitelist: ['cart', 'login']
+    
+//   }
+//   const reducers = combineReducers({
+//     product: productDetailReducer,
+//     cart:persistReducer(persistConfig, CartReducer),
+//     products:ProductReducer,
+//     category: CategoryReducer,
+//     user: persistReducer(persistConfig, LoginReducer),
+//     address:AddressReducer,
+//     updateAddress: UpdateAddressReducer,
+//     orders: OrderReducer,
+//     verifyPayment:VerifyReducer,
+//     signup: SignupReducer
+//   })
+
+//   // const persistedReducer:any = persistReducer(persistConfig, reducers)
+// // Infer the `RootState` type from the root reducer
+// // export type RootState = ReturnType<typeof rootReducer>
+
+// // The store setup is wrapped in `makeStore` to allow reuse
+// // when setting up tests that need the same store config
+// // export const makeStore = (preloadedState?: Partial<RootState>) => {
+// //   const store = configureStore({
+// //     reducer: reducers,
+// //     // Adding the api middleware enables caching, invalidation, polling,
+// //     // and other useful features of `rtk-query`.
+// //     // middleware: getDefaultMiddleware => {
+// //     //   return getDefaultMiddleware().concat(quotesApiSlice.middleware)
+// //     // },
+// //     preloadedState,
+// //   })
+// //   // configure listeners using the provided defaults
+// //   // optional, but required for `refetchOnFocus`/`refetchOnReconnect` behaviors
+// //   setupListeners(store.dispatch)
+// //   return store
+// // }
+
+// export const store = configureStore({
+//   // reducer:persistedReducer,
+//   reducer:reducers,
+//   preloadedState:persistState,
+
+//   // devTools: true,
+//   // middleware: (getDefaultMiddleware) =>
+//   //   getDefaultMiddleware({
+//   //     serializableCheck: {
+//   //       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//   //     },
+//   //   })
+    
+// })
+// const throttle = <T extends(...args:any[])=>void>(func: T, limit:number)=>{
+//   let lastFunc: ReturnType<typeof setTimeout>;
+//   let lastRun:number;
+//   return function (this: any, ...args: Parameters<T>) {
+//     if (!lastRun) {
+//       func.apply(this, args);
+//       lastRun = Date.now();
+//     } else {
+//       clearTimeout(lastFunc);
+//       lastFunc = setTimeout(() => {
+//         if (Date.now() - lastRun >= limit) {
+//           func.apply(this, args);
+//           lastRun = Date.now();
+//         }
+//       }, limit - (Date.now() - lastRun));
+//     }
+//   };
+// }
 
 
-// setupListeners(store.dispatch)
-// export default store
-// // Infer the type of `store`
-// export type AppStore = typeof store
-// // Infer the `AppDispatch` type from the store itself
-// export type AppDispatch = AppStore["dispatch"]
-// export type AppThunk<ThunkReturnType = void> = ThunkAction<
-//   ThunkReturnType,
-//   RootState,
-//   unknown,
-//   Action
-// >
+// store.subscribe(
+//   throttle(() => {
+//     saveState({
+//       cart: store.getState().cart,
+//       user:store.getState().user
+//     });
+//   }, 1000) // Save at most once per second
+// );
+
+// export type RootState = ReturnType<typeof store.getState>;
+// export type AppDispatch = typeof store.dispatch;
+// // setupListeners(store.dispatch)
+// // export default store
+
+
+// // setupListeners(store.dispatch)
+// // export default store
+// // // Infer the type of `store`
+// // export type AppStore = typeof store
+// // // Infer the `AppDispatch` type from the store itself
+// // export type AppDispatch = AppStore["dispatch"]
+// // export type AppThunk<ThunkReturnType = void> = ThunkAction<
+// //   ThunkReturnType,
+// //   RootState,
+// //   unknown,
+// //   Action
+// // >

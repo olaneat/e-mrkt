@@ -29,7 +29,6 @@ export const verifyPayment = createAsyncThunk<
 >('order/verify-payment', async (data:string, { rejectWithValue })=>{
 
     try{
-        console.log('test',data)
         const response  = await CartService.verifyPayment(data);
         return response.data
     }

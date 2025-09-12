@@ -21,6 +21,5 @@ export const saveState = (state:{cart:any, user:any})=>{
         localStorage.setItem('reduxState', serializedState);
 
     }catch(err){
-        console.log(err, 'err')
     }
 }
