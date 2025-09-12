@@ -81,7 +81,6 @@ const SignUpComponent=()=>{
     
     const createUser = () =>{
       dispatch(Signup(formData) as any).then((res:any)=>{
-        console.log(res, 'resp')
         if(res.meta.requestStatus === 'fulfilled'){
           setToastType('success');
           setTitle('Sign up successful!');

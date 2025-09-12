@@ -10,9 +10,7 @@ export const Signup = createAsyncThunk(
      
       return response; // Return the data
     } catch (err: any) {
-      console.log('Thunk caught error:', err.response.data.message);
       const msg = err.response.data.message || 'Unknown error';
-      console.log('Error message:', msg);
       return thunkAPI.rejectWithValue(msg);
     }
   }

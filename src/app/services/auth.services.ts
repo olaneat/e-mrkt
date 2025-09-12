@@ -21,12 +21,10 @@ const isTokenExpired =(token:string | null, loginTime:number | null):boolean =>{
 
     try {
     const payload: TokenPayload = JSON.parse(atob(token.split('.')[1]));
-    console.log(payload.exp, 'ex')
     const isJwtExpired = payload.exp * 1000 < Date.now();
     const isTimeUp = Date.now() - loginTime! > 24 * 60 * 60 * 1000;
     return isJwtExpired || isTimeUp;
   } catch (error) {
-    console.error('Invalid token:', error);
     return true;
   }
 }

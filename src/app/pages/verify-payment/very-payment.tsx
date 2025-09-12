@@ -25,11 +25,8 @@ const VerifyPayment = () =>{
 
 
     const verify = ()=>{
-        console.log(reference, 'ref')
 
-        console.log(trxref, 'params')
         dispatch(verifyPayment(trxref!) as any).then((res:any)=>{
-          console.log('payment Verified successful', res)
             setShowToast(true),
             setTitile('Payment Successful')
             setToastMsg(res.payload.message)

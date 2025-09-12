@@ -29,7 +29,6 @@ const SelectField =  forwardRef<DropdownHandle, CustomDropdownProps>(
   const showDropDown = ()=>{
     //   isDropDownOpen != isDropDownOpen
       setDropDownOpen(!isDropDownOpen)
-      console.log(isDropDownOpen, 'yet')
   }
 
   const getData = (value:string) =>{
