@@ -202,7 +202,6 @@ const Checkout = () =>{
       setTitle('Address Required');
       setMsg('Please add a shipping address to proceed with checkout');
       closeToast()
-    
     }
     else{
       const payload = {
@@ -434,7 +433,6 @@ const Checkout = () =>{
                         name="phone_number"
                         onChange={getData}
                         placeholder="Phone Number"
-
                       />
                     </div>
                     

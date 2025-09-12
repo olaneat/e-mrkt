@@ -30,7 +30,6 @@ const ProductDetail = () =>{
     useEffect(() =>{
       setTabValue('overview')
       displayProdDetail()
-      
     },[])
 
 
@@ -76,7 +75,6 @@ const ProductDetail = () =>{
         quantity--
         setQuantity(quantity)
       }
-
     }
 
     const addItemToCart=()=>{

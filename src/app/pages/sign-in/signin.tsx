@@ -121,7 +121,7 @@ const SignInComponent = () =>{
             <Button name="Login" disabled={disabledFlag} loading={isLoading} handleClick={userLogin} type="primary" />
           </div>
           <div className="already">Don't have an account? 
-              <Link className="sign-in" to={'/registration'}>
+              <Link className="sign-in" to={'/sign-up'}>
               <span >Register</span>
               </Link>
           </div>

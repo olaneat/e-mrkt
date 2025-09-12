@@ -28,7 +28,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="" element={<Index />} />
-        <Route path="registration" element={<SignUpComponent/>}/>
+        <Route path="sign-up" element={<SignUpComponent/>}/>
         <Route path="/product/:id/detail" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/sign-in" element={<SignInComponent/>}/>

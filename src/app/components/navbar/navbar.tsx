@@ -186,7 +186,7 @@ const NavBar:React.FC<categoryProps> = ({catgeories, pageType}) =>{
                       <Link className="link" to="/sign-in">
                         <span className="items" >Login</span>
                       </Link>
-                      <Link className="link" to="/registration">
+                      <Link className="link" to="/sign-up">
                         <span className="items" >Signup</span>
                       </Link>
                     </span> 
@@ -276,7 +276,7 @@ const NavBar:React.FC<categoryProps> = ({catgeories, pageType}) =>{
                         <Link className="item" to="/sign-in">
                           <span className="" >Login</span>
                         </Link>
-                        <Link className="item" to="/registration">
+                        <Link className="item" to="/sign-up">
                           <span className="" >Signup</span>
                         </Link>
                       </div>
