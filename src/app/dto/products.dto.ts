@@ -19,8 +19,8 @@ export const mapProductListDTO = (data: any): ProductDTO[] => {
       ? data.map((item) => mapProductDTO(item))
       : [];
     // Debug: Log mapped data (development only)
-    if (process.env.NODE_ENV === 'development') {
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    // }
     return mapped;
   };
   export const ERROR_MESSAGES = {
