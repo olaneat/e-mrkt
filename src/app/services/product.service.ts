@@ -30,8 +30,7 @@ import axios from "axios";
  }
 
  const displayProductByCategory =(id:string)=>{
-  const url =''
-  // const url = `${env.BASE_URL}/products/product-category-list/${id}`;
+  const url = `${env.BASE_URL}/products/product-category-list/${id}`;
   return api.get(url)
  }
  
@@ -42,6 +41,6 @@ import axios from "axios";
     addNewProduct,
     updateProduct,
     deleteProduct,
-    // displayProductByCategory
+    displayProductByCategory
  }
  export default ProductService;
