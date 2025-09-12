@@ -17,8 +17,8 @@ export interface CategoryDTO {
       ? data.map((item) => mapCategoryDTO(item))
       : [];
     // Debug: Log mapped data (development only)
-    if (process.env.NODE_ENV === 'development') {
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    // }
     return mapped;
   };
   export const ERROR_MESSAGES = {
