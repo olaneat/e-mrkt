@@ -42,7 +42,6 @@
             align-items: center;
             .header-title{
                 font-weight: 700;
-                font-size: 30px;
                 font-family: "DM sans";
 
 
@@ -53,5 +52,22 @@
 }
 .countdown-display{
     font-family: "DM sans";
-    font-size: 18px;
+}
+
+@media (max-width:768px) {
+    .header-title{
+        font-size: 18px;
+    }    
+    .countdown-display{
+        font-size: 14px;        
+    }
+}
+@media (min-width:768px) {
+    .header-title{
+        font-size: 22px;
+    }
+
+    .countdown-display{
+        font-size: 18px;
+    }
 }
