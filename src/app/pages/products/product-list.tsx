@@ -16,8 +16,8 @@ interface props {
 const ProductList: React.FC<props>= ({ products, categories }) =>{
 
     const percentPrice = (price:number) =>{
-        let percentage = (price * 30)/100
-        return percentage
+        // let percentage = (price * 30)/100
+        // return percentage
     }
 
     return(
@@ -40,11 +40,9 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
                     </span>
                     <span className="price">
                       <span className="new-price">
-                        N{percentPrice(product.price!)}
+                      {product.price!.toLocaleString('en-US', { style: 'currency', currency: 'NGN' })}
                       </span> 
-                      <span className="old-price">
-                        {product.price}
-                      </span>
+                      
                             
                     </span>
 
