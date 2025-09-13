@@ -22,6 +22,7 @@ import Imgs from "../../constant/imgs.constant";
 import ToastComponent from "../../components/toast/toast";
 import {Order} from "../../slices/order-slice";
 import { useLocation, useNavigate } from 'react-router-dom';
+import LoaderComponent from "../../components/loader/loader";
 
 const Checkout = () =>{
     const dispatch = useDispatch();
@@ -160,23 +161,7 @@ const Checkout = () =>{
     })
     setlgas(locals)
   }
-  // const config = {
-  //   email:user?.user! .email,
-  //   reference: (new Date()).getSeconds().toString(),
-  //   amount: (cart.shippingCost + cart.totalPrice) * 100,
-  //   publicKey: env.TEST_PK,
-  //   onSuccess: handleSuccess
-  // }
 
-  let paystackConfig:any
-  let openPaystackModal = usePaystackPayment(paystackConfig);
-  const clickBtn = ()=>{
-    openPaystackModal({
-      onSuccess:(response)=>{
-        
-      }
-    }) 
-  }
 
    const closeToast = ()=>{
       setShowToast(false)
@@ -228,13 +213,13 @@ const Checkout = () =>{
           setMsg(res.payload.message);
           let data:any  = res.payload.data
           setRef(data);
-          paystackConfig = {
-            email:user?.user!.email,
-            reference: data.reference,
-            amount: data.total_amount * 100,
-            publicKey: env.TEST_PK,
-            onSuccess: handleSuccess
-          }
+          // paystackConfig = {
+          //   email:user?.user!.email,
+          //   reference: data.reference,
+          //   amount: data.total_amount * 100,
+          //   publicKey: env.TEST_PK,
+          //   onSuccess: handleSuccess
+          // }
 
           if(data.payment_url){
             
@@ -255,7 +240,11 @@ const Checkout = () =>{
     }
   }
  
-  
+  if(loading){
+    <div>
+      <LoaderComponent title="Loading Store..."/>
+    </div>
+  }
   return (
     <div className="checkout-container">
       <div className="checkout-inner-div">
@@ -349,14 +338,7 @@ const Checkout = () =>{
                   <div className="summary-item">{(cart.shippingCost + cart.totalPrice).toLocaleString('en-US', {style:'currency', currency:'NGN'})}</div>
                 </div>
                 <div className="btn">
-                  {/* <paystackHook/> */}
-                  {/* <a ref={paystackCheckoutUrl} style={{display: 'none'}} href=""></a> */}
                   <Button name='Pay' type="primary" loading={orderLoading} handleClick={intiatePayment}/>
-                  <a ref={paystackCheckoutUrl} onClick={clickBtn} style={{display: 'none'}}>
-                    {/* <PaystackButton   {...payStackComponent}/> */}
-
-                  </a>
-
                 </div>
               </div>
 
