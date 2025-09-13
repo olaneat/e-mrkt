@@ -47,6 +47,7 @@ const Checkout = () =>{
     const navigate = useNavigate();
     const [previousUrl, setPreviousUrl] = useState<string | null>(null);
     const [ref, setRef] = useState<any>()
+    let UpdateAddressLoader:boolean = false;
     const [formData, setFormData] = useState<any >({
       address: editAddressModal ? address?.address! : '',
       phone_number: editAddressModal ? address?.phone_number! :"",
@@ -182,21 +183,36 @@ const Checkout = () =>{
     }
 
   const updateAddress =()=>{   
+    UpdateAddressLoader = true;
     dispatch(UpdateAddress(formData) as any).then((res:any)=>{
       if(res.type='address/update-address/fulfilled'){
         dispatch(DisplayAddress(formData.id) as any)
+        setTitle('Address Updated Successfully');
+        setMsg('Your shipping address has been updated successfully.');
+        setToastType('success');
+        setShowToast(true);
+        setTimeout(()=>setShowToast(false),5000)
         closeModal();
+        UpdateAddressLoader = false;
+      }else{
+        setTitle('Address Update Failed');
+        setMsg(res.payload || 'An error occurred while updating your address. Please try again.');
+        setToastType('error');
+        setShowToast(true);
+        setTimeout(()=>setShowToast(false),5000)
+        UpdateAddressLoader = false;        
+      
       }
     })
   }
   
   const intiatePayment =()=>{
+    setShowToast(true);
     if(!address?.address || !address.phone_number){
-      setShowToast(true);
       setToastType('warning');
       setTitle('Address Required');
       setMsg('Please add a shipping address to proceed with checkout');
-      closeToast()
+      setTimeout(()=>setShowToast(false),5000)
     }
     else{
       const payload = {
@@ -231,7 +247,7 @@ const Checkout = () =>{
           setShowToast(true);
           setToastType('error');
           setTitle('Payment Failed');
-          setMsg(res.payload.non_field_errors[0] || 'An error occurred while initiating payment. Please try again.');
+          setMsg( 'An error occurred while initiating payment. Please try again.');
           setTimeout(()=>setShowToast(false),5000)
 
         }
@@ -382,18 +398,7 @@ const Checkout = () =>{
                   <img src={icons.closeIcon} className="close"  onClick={closeModal} alt="" />
                 </div>
                 <div className="address-body">
-                  {/* <div className="fields-div">
-                    <span className="field-name">Country/Region</span>
-                    <SelectField
-                      ref={dropdownRef}
-                      options={states}
-                      label="Select your state"
-                      placeholder="Select"
-                      preSelectedValue={formData.state}
-                      onChange={getData}
-                      fieldName="state"
-                    />
-                  </div> */}
+                  
                   <div className="fields-div">
                     <span className="field-name">Full names</span>
                     <div className="fields">
@@ -470,7 +475,7 @@ const Checkout = () =>{
                 </div>
                 <div className="footer">
                   <div className="btns">
-                  <Button name="Confirm" loading={loading} type="primary" handleClick={updateAddress} />
+                  <Button name="Confirm" loading={UpdateAddressLoader}  disabled={formData.address === '' || formData.first_name === '' || formData.last_name === ''} type="primary"  handleClick={updateAddress} />
                   <Button name="Cancel"  handleClick={closeModal}/>
 
                   </div>

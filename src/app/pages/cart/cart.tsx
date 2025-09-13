@@ -13,6 +13,7 @@ import ToastComponent from "../../components/toast/toast";
 import EmptyStateComponent from "../../components/empty-state/empty-state";
 import images from "../../constant/imgs.constant";
 import ModalComponent from "../../components/modal/modal";
+import LoaderComponent from "../../components/loader/loader";
 
 const Cart =() =>{
     const cart = useSelector((state:RootState)=>state.cart )
@@ -84,6 +85,10 @@ const Cart =() =>{
       }
       setShowToast(true)
       setTimeout(()=>setShowToast(false), 5000)
+    }
+
+    if(isLoading){
+      <LoaderComponent title="Loading store"/>
     }
     return( 
       <div className="outer-container">
