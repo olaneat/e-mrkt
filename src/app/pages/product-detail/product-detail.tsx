@@ -11,12 +11,13 @@ import env from "../../../environment/env";
 import {  addToCart, } from "../../slices/cart.slice";
 import { RootState, AppDispatch } from "../../store";
 import ToastComponent from "../../components/toast/toast";
+import LoaderComponent from "../../components/loader/loader";
 const ProductDetail = () =>{
     const dispatch = useDispatch();
     // const [productDetail, setProductDetail] = useState<ProductDetailDTO>();
     const { product, loading, err } = useSelector((state: RootState) => state.product);
-      const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
-    
+    const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
+    const isLoadingOverall = loading || isLoading; 
     
     const params = useParams();
     const [tabvalue, setTabValue] = useState<string>("");
@@ -55,6 +56,7 @@ const ProductDetail = () =>{
         setFlag(false);
       }
     }
+
 
 
     const changeQuantity=(type:string)=>{
@@ -102,6 +104,13 @@ const ProductDetail = () =>{
 
       setTimeout(()=>setShowToast(false), 5000)
     }
+    if(isLoadingOverall){
+      return (
+      <div>
+        <LoaderComponent title="Loading store"/>
+      </div>
+    )
+    }
     return (
       <div className="detail-container">
         <div className="detail-inner-div">
@@ -113,7 +122,6 @@ const ProductDetail = () =>{
               <span className="product-name">{product?.name}</span>
             </div>
             <div className="main-content">
-              <div className="imgs"></div>
               <div className="img">
                 <img className="prod-img" src={`${env.IMG_URL}/${product?.img}`} alt="" />
               </div>
