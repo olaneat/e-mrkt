@@ -50,9 +50,10 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
                 <Link to={`/product/${product.id}/detail`} className="flash-product" key={product.id}>
                   <div className="img">
                     <div className="flash-price">
-                      <span className="price">-30%</span>
                     </div>
-                    <img src={`${env.IMG_URL}${product.img}`} alt="" />
+                    <div className="flash-img">
+                      <img src={`${env.IMG_URL}${product.img}`} alt=""  className="img"/>
+                    </div>
                   </div>
                   <div className="txt">
                     <span className="name">
