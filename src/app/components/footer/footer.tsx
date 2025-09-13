@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import './style.scss'
 import Icons from "../../constant/imgs.constant";
+import { Link } from "react-router-dom";
 const Footer = ()=>{
 
   const [email, setEmail]= useState<string>("");
@@ -42,9 +43,15 @@ const Footer = ()=>{
             </div>
             <div className="info-div">
               <span className="footer-title">Account</span>
-              <span className="footer-txt">My account</span>
-              <span className="footer-txt">Login/Signup</span>
-              <span className="footer-txt">Cart</span>
+              <Link to={'/sign-in'}>
+                <span className="footer-txt">Login</span>
+              </Link>
+              <Link to={'/sign-up'}>
+                <span className="footer-txt">Signup</span>
+              </Link>
+              <Link to={'/cart'}>
+                <span className="footer-txt">Cart</span>
+              </Link>
             </div>
             <div className="info-div">
               <span className="footer-title">Quick Link</span>

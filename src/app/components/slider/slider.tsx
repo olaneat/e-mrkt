@@ -28,17 +28,13 @@ const Slider = ()=>{
     return (
       <div className="container">
         <div className="carousel">
-          <span className="arr arr-rite" onClick={nextSlide}>
-            <img src="icons/arr-rite.svg"  alt="" />
-          </span>
+          
           {imgs.map((item:any, index:any)=>{
             return(
               <img key={index} src={item.url} className={slide==index ? "slide": "hide-slide"}/>
             ) 
           })}
-          <span className="arr arr-lft" onClick={prevSlide}>
-            <img src="icons/arr-lft.svg" />
-          </span>
+          
         </div>
         <span className="indicators">
           {imgs.map((_:any, index:any)=>{

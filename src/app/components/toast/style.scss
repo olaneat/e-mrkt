@@ -4,8 +4,7 @@
     box-shadow: 0px 2px 10px 0, rgba(0, 0, 0, 0.1);
     position: absolute;
     left: calc(100vw - 250px);
-    animation: toast-in-left 0.5s ease-in forwards;;
-    top:calc(100vh - 100px);
+    animation: toast-in-left 0.5s ease-in forwards;
     z-index: 10000;
     background: #fff;
     padding: 8px;
@@ -92,4 +91,15 @@
   to {
     transform: translateX(0);
   }
+}
+
+@media (min-width:768px) {
+  .toast-container{
+    top:calc(100vh - 100px);
+  }
+}
+@media (max-width:768px) {
+ .toast-container{
+    bottom:calc(100vh - 100px);
+ } 
 }
