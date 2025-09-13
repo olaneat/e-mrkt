@@ -89,7 +89,7 @@
                     justify-content: space-between;
                     align-self: stretch;
                     align-items: center;
-                    box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+                    box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0, rgba(0, 0, 0, 0.1) 0 -3px 4px 0;
                     border-radius: 10px;
                     padding: 16px 10px ;
                     line-height: normal;
@@ -106,7 +106,6 @@
                             justify-content: center;
                             align-items: flex-start;
                             align-self: stretch;
-                            width: 350px;
                         .item-name{
                             display: flex;
                             justify-content: center;
@@ -178,10 +177,7 @@
                     }
                   }
                     
-                    .item-img{
-                        width: 150px;
-                        height: 150px;
-                    }
+                  
                     .del-icon{
                         padding: 8px;
                         display: flex;
@@ -202,7 +198,7 @@
             justify-content: space-between;
             align-self: stretch;
             align-items: center;
-            box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+            box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0, rgba(0, 0, 0, 0.1) 0 -3px 4px 0;
             border-radius: 10px;
             flex-direction: column;   
             height: fit-content;
@@ -305,7 +301,7 @@
 @media (max-width:768px) {
     .cart-detail{
         flex-direction: column;
-        padding: 12px;
+        padding: 12px 16px;
     }
     .cart{flex-direction: column;}
     .count{
@@ -326,6 +322,11 @@
         justify-content: center;
         align-self: stretch;
     }
+    .item-img{
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+    }
 }
 @media (min-width:768px) {
     .cart-detail{
@@ -333,9 +334,15 @@
 
     }
     .rgt-cart{
-            width: 35%;
-
+        width: 35%;
     }
+    .cart-item-detail{
+        width: 350px;
+    }
+      .item-img{
+            width: 200px;
+            height: 200px;
+        }
 }
 .modal{
     width: 300px;

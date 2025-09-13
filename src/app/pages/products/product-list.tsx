@@ -28,8 +28,6 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
               return(
                 <Link to={`/product/${product.id}/detail`} className="flash-product" key={product.id}>
                   <div className="img">
-                    <div className="flash-price">
-                    </div>
                     <div className="flash-img">
                       <img src={`${env.IMG_URL}${product.img}`} alt=""  className="img"/>
                     </div>

@@ -478,6 +478,9 @@
     grid-row-gap: 8px;
     
   }
+  .flash-img{
+    width: 100%;
+  }
 }
 
 
@@ -520,10 +523,7 @@
 }
 
 @media (min-width:768px) {
-  .flash-products{
-      padding: 16px;
 
-  }
   .categories{
       padding: 8px;
 

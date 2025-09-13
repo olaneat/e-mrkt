@@ -1,3 +1,13 @@
+.list{
+    display: flex;
+    align-self: stretch;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+
 @media (min-width:766px) {
     .body{
         display: flex;
@@ -34,14 +44,7 @@
                 }
             }
         }
-        .list{
-            display: flex;
-            align-self: stretch;
-            flex-direction: column;
-            gap: 16px;
-            align-items: center;
-            justify-content: center;
-        }
+        
     }
     
 }
