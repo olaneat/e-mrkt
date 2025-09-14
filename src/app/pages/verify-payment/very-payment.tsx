@@ -26,7 +26,7 @@ const VerifyPayment = () =>{
       setToastMsg('Invalid payment reference. Please try again.');
       setToastType('error');
       setShowToast(true);
-      setTimeout(() => navigate('/'), 3000); // Redirect after error
+      // setTimeout(() => navigate('/'), 3000); // Redirect after error
       return;
     }
         verify()
@@ -40,18 +40,18 @@ const VerifyPayment = () =>{
         .then((res:any)=>{
             setShowToast(true),
             setTitle('Payment Successful')
-            setToastMsg(res.payload.message)
             setToastType('success')
+            setToastMsg("Payment successfully verified")
             setTimeout(()=>setShowToast(false),2000)
             setTimeout(()=>{
+              dispatch(clearCart())
                 navigate('/')
-                dispatch(clearCart())
             }, 3000)
 
         })
         .catch((err:any) => {
         setTitle('Payment Failed');
-        setToastMsg(err.message || 'Verification failed. Please contact support.');
+        setToastMsg( 'Verification failed. Please contact support.');
         setToastType('error');
         setShowToast(true);
         setTimeout(() => setShowToast(false), 2000);
