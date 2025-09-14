@@ -15,20 +15,31 @@ const VerifyPayment = () =>{
     const [toastType, setToastType] = useState<string>('')
     const [toastMsg, setToastMsg] = useState('')
     const cart = useSelector((state:RootState)=>state.cart )
-    const [tile, setTitile] = useState<string>('');
+    const [title, setTitle] = useState<string>('');
     const navigate = useNavigate();
     const {isLoading} = useSelector((state:RootState)=>state.verifyPayment)
     
     useEffect(()=>{
+      if (!trxref || !reference) {
+      // Handle missing params early
+      setTitle('Payment Error');
+      setToastMsg('Invalid payment reference. Please try again.');
+      setToastType('error');
+      setShowToast(true);
+      setTimeout(() => navigate('/'), 3000); // Redirect after error
+      return;
+    }
         verify()
-    },[])
+    },[trxref, reference, dispatch, navigate])
 
 
     const verify = ()=>{
-
-        dispatch(verifyPayment(trxref!) as any).then((res:any)=>{
+         if (!trxref || !reference) return
+        dispatch(verifyPayment(trxref!) as any)
+        .unwrap()
+        .then((res:any)=>{
             setShowToast(true),
-            setTitile('Payment Successful')
+            setTitle('Payment Successful')
             setToastMsg(res.payload.message)
             setToastType('success')
             setTimeout(()=>setShowToast(false),2000)
@@ -38,6 +49,14 @@ const VerifyPayment = () =>{
             }, 3000)
 
         })
+        .catch((err:any) => {
+        setTitle('Payment Failed');
+        setToastMsg(err.message || 'Verification failed. Please contact support.');
+        setToastType('error');
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2000);
+        setTimeout(() => navigate('/'), 3000);
+      });
     
     }
 
@@ -51,7 +70,7 @@ const VerifyPayment = () =>{
         <LoaderComponent title="Please wait while we verify your payment"/>
       : 
       <ToastComponent
-        title={tile}
+        title={title}
         type={toastType}
         message={toastMsg}
         isOpen={showToast}
