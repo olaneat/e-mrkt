@@ -11,8 +11,12 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/(?!((index\\.html)|(assets/.*)|(favicon\\.ico)|(robots\\.txt)|(.*\\..+)))(.*)",
       "dest": "/index.html"
+    },
+    {
+      "src": "/(.*\\..+)",
+      "dest": "/$1"
     }
   ]
 }
