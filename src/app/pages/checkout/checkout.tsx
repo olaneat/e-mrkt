@@ -192,8 +192,8 @@ const Checkout = () =>{
   }
   
   const intiatePayment =()=>{
-    setShowToast(true);
     if(!address?.address || !address.phone_number){
+      setShowToast(true);
       setToastType('warning');
       setTitle('Address Required');
       setMsg('Please add a shipping address to proceed with checkout');
@@ -222,10 +222,8 @@ const Checkout = () =>{
           // }
 
           if(data.payment_url){
-            
-            setTimeout(()=>window.open(data.payment_url, '_self'), 3000)
+            setTimeout(()=>window.open(data.payment_url, '_self'), 1000)
           }
-          
           setTimeout(()=>setShowToast(false),5000)
 
         }else{

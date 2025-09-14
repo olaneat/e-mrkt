@@ -50,7 +50,7 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
                 )
             })}
           </div>
-          <div className="see-all">View all products</div>
+          {/* <div className="see-all">View all products</div> */}
           <div className="product-list">
           <div className="product-title">
               <div className="style">
