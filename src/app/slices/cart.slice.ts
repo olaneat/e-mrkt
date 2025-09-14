@@ -16,12 +16,14 @@ import { CartDTO } from 'app/dto/card.dto';
     cart: CartDTO[];
     totalPrice: number; // Total price of all items
     shippingCost:number
+    cartIsloading:boolean
   }
 
   const initialState: CartState = {
     cart: [],
     totalPrice: 0,
-    shippingCost:0
+    shippingCost:0,
+    cartIsloading:false
   };
 
 const calculateTotalCost = (cart:CartDTO[]) =>{
