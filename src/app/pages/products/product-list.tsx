@@ -15,94 +15,90 @@ interface props {
 }
 const ProductList: React.FC<props>= ({ products, categories }) =>{
 
-    const percentPrice = (price:number) =>{
-        // let percentage = (price * 30)/100
-        // return percentage
-    }
-
     return(
-
-        <div className="product-container">
-          <div className="flash-products">
-            {products?.slice(0,6)?.map((product:ProductDTO)=>{
-              return(
-                <Link to={`/product/${product.id}/detail`} className="flash-product" key={product.id}>
-                  <div className="img">
-                    <div className="flash-img">
-                      <img src={`${env.IMG_URL}${product.img}`} alt=""  className="img"/>
-                    </div>
+      <div className="product-container">
+        <div className="flash-products">
+          {products?.slice(0,6)?.map((product:ProductDTO)=>{
+            return(
+              <Link to={`/product/${product.id}/detail`} className="flash-product" key={product.id}>
+                <div className="img">
+                  <div className="flash-img">
+                    <img src={`${env.IMG_URL}${product.img}`} alt=""  className="img"/>
                   </div>
-                  <div className="txt">
-                    <span className="name">
-                      {product.name}
-                    </span>
-                    <span className="price">
-                      <span className="new-price">
-                      {product.price!.toLocaleString('en-US', { style: 'currency', currency: 'NGN' })}
-                      </span> 
-                      
-                            
-                    </span>
+                </div>
+                <div className="txt">
+                  <span className="name">
+                    {product.name}
+                  </span>
+                  <span className="price">
+                    <span className="new-price">
+                    {Number(product.price!).toLocaleString('en-US', { style: 'currency', currency: 'NGN' })}
+                    </span> 
+                    
+                          
+                  </span>
 
-                  </div>
-                </Link>
+                </div>
+              </Link>
 
-                )
-            })}
-          </div>
-          {/* <div className="see-all">View all products</div> */}
-          <div className="product-list">
-          <div className="product-title">
-              <div className="style">
-                <span className="icon"></span>
-                <div className="txt">Our Products</div>
-              </div>
-              <div className="title">Explore Our Products</div>
-              <div className="products">
-                {products?.slice(7,19)?.map((prod:ProductDTO)=>{
-                  return(
-                    <Link to={`/product/${prod.id}/detail`} className="product" key={prod.id}>
-                      <span className="name">{prod.name}</span>
-                      
-                      <div className="img">
-                        <img src={`${env.IMG_URL}/${prod.img}`} alt="" />
-
-                      </div>
-                      <span className="price">{prod.price}</span>
-
-                    </Link>
-                  )
-                })}
-              </div>
+              )
+          })}
+        </div>
+        {/* <div className="see-all">View all products</div> */}
+        <div className="product-list">
+        <div className="product-title">
+            <div className="style">
+              <span className="icon"></span>
+              <div className="txt">Our Products</div>
             </div>
-          </div>
-          <div className="category-div">
-            <div className="category-title">
-              <div className="style">
-                <span className="icon"></span>
-                <div className="txt">Category</div>
-              </div>
-              <div className="title">Shop by category</div>
-            </div>
-            <div className="categories">
-              {
-                categories?.slice(0, 6).map((category:CategoryDTO)=>{
+            <div className="title">Explore Our Products</div>
+            <div className="products">
+              {products?.slice(7,19)?.map((prod:ProductDTO)=>{
                 return(
-                  <div className="cat" key={category.id}>
-                    <Link to={`/product-by-category/${category.id}`} className="category">
-                      <img src={`${env.IMG_URL}${category.img}`} alt=""  className="category-img" />
-                      <span className="category-name">{category.name}</span>
-                    </Link>
-                  </div>
-                )
-              })
-              }
-            </div>
-            
-          </div>
+                  <Link to={`/product/${prod.id}/detail`} className="product" key={prod.id}>
+                    <span className="name">{prod.name}</span>
+                    
+                    <div className="img">
+                      <img src={`${env.IMG_URL}/${prod.img}`} alt="" />
 
+                    </div>
+                    <span className="price">
+                      {Number(prod.price!).toLocaleString('en-US', { style: 'currency', currency: 'NGN' })}
+                    </span>
+
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+        <div className="category-div">
+          <div className="category-title">
+            <div className="style">
+              <span className="icon"></span>
+              <div className="txt">Category</div>
+            </div>
+            <div className="title">Shop by category</div>
+          </div>
+          <div className="categories">
+            {
+              categories?.slice(0, 6).map((category:CategoryDTO)=>{
+              return(
+                <div className="cat" key={category.id}>
+                  <Link to={`/product-by-category/${category.id}`} className="category">
+                    <img src={`${env.IMG_URL}${category.img}`} alt=""  className="category-img" />
+                    <span className="category-name">{category.name}</span>
+                  </Link>
+                </div>
+              )
+            })
+            }
+          </div>
           
         </div>
+
+        
+      </div>
     )
 }
 

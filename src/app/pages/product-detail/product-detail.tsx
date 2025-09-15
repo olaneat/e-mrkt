@@ -2,7 +2,7 @@ import React , { useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { displayProductDetail } from "../../slices/product-detail.slice";
 import { ProductDetailDTO } from "../../dto/product-detail.dto";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import NavBar from '../../components/navbar/navbar'
 import Footer from "../../components/footer/footer"
 import Button from "../../components/btns/btn";
@@ -12,6 +12,8 @@ import {  addToCart, } from "../../slices/cart.slice";
 import { RootState, AppDispatch } from "../../store";
 import ToastComponent from "../../components/toast/toast";
 import LoaderComponent from "../../components/loader/loader";
+import Icons from '../../constant/imgs.constant'
+
 const ProductDetail = () =>{
     const dispatch = useDispatch();
     // const [productDetail, setProductDetail] = useState<ProductDetailDTO>();
@@ -27,10 +29,12 @@ const ProductDetail = () =>{
     const [toastTitle, setToastTitle] = useState<string>('');
     const [toastMsg, setToastMsg] = useState<string>('')
     const [toastType, setToastType] = useState<string>('')
+    const icons = Icons.Icons;
 
     useEffect(() =>{
       setTabValue('overview')
       displayProdDetail()
+      console.log(categories, 'cat')
     },[])
 
 
@@ -117,13 +121,15 @@ const ProductDetail = () =>{
           <NavBar catgeories={categories || []} />  
           <div className="main-body">
             <div className="nav">
-              <span className="home">Home</span>
+              <Link to={'/'} className="link"><span className="home">Home</span></Link>
+              <img src={icons.chevronRite} alt="" className="arr-rite" />
               <span className="home">{product?.category}</span>
+              <img src={icons.chevronRite} alt="" className="arr-rite" />
               <span className="product-name">{product?.name}</span>
             </div>
             <div className="main-content">
               <div className="img">
-                <img className="prod-img" src={`${env.IMG_URL}/${product?.img}`} alt="" />
+                <img className="prod-img" src={`${env.IMG_URL}${product?.img}`} alt="" />
               </div>
               <div className="description-div">
                 <span className="name">{product?.name}</span>
@@ -137,10 +143,11 @@ const ProductDetail = () =>{
                   <span className="name">price: </span>
                   <span className="price">
                     {
-                      product?.price.toLocaleString('en-US', {
-                      style:'currency',
-                      currency:'NGN'
-                    })}
+                      Number(product?.price).toLocaleString('en-US', {
+                        style:'currency',
+                        currency:'NGN'
+                      })
+                    }
                   </span>
                 </div>
               

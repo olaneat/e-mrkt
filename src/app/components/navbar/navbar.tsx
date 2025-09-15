@@ -154,19 +154,19 @@ const NavBar:React.FC<categoryProps> = ({catgeories, pageType}) =>{
                           </span>
                         </span>
                         <span className="span-list">
-                          <span className="list">
+                          <span className="nav-list">
                             <img src={icon.WishList} alt="" />
                             <span className="content">My Orders</span>
                           </span>
-                          <span className="list">
+                          <span className="nav-list">
                             <img src={icon.payment} alt="" />
                             <span className="content">Payment</span>
                           </span>
-                          <span className="list">
+                          <span className="nav-list">
                             <img src={icon.like} alt="" />
                             <span className="content">Wish List</span>
                           </span>
-                          <span className="list">
+                          <span className="nav-list">
                             <img src={icon.Settings} alt="" />
                             <span className="content">Settings</span>
                           </span>
