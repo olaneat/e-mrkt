@@ -1,3 +1,6 @@
+.navbar-container{
+    width: 100%;
+}
 .lg-screen{
     display: flex;
     justify-content: space-between;
@@ -182,6 +185,7 @@
                     width: 100%;
                     justify-content: flex-start;
                     align-items: center;
+                    text-decoration: none;
                     img{
                         width: 20px;
                         height: 20px;
@@ -433,6 +437,7 @@
                     width: 100%;
                     justify-content: flex-start;
                     align-items: center;
+                    text-decoration: none;
                     img{
                         width: 16px;
                         height: 16px;

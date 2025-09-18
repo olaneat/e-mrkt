@@ -88,7 +88,7 @@ const NavBar:React.FC<categoryProps> = ({catgeories, pageType}) =>{
 
   
     return(
-      <div>
+      <div className="navbar-container">
         <div className="container ">
           <div className="lg-screen">
 
@@ -166,10 +166,11 @@ const NavBar:React.FC<categoryProps> = ({catgeories, pageType}) =>{
                             <img src={icon.like} alt="" />
                             <span className="content">Wish List</span>
                           </span>
-                          <span className="nav-list">
+
+                          <Link to={'/settings'} className="nav-list">
                             <img src={icon.Settings} alt="" />
                             <span className="content">Settings</span>
-                          </span>
+                          </Link>
                         </span>  
                       </span>
                     : ""
@@ -265,11 +266,11 @@ const NavBar:React.FC<categoryProps> = ({catgeories, pageType}) =>{
                             <img src={icon.whishListWhite} alt="" />
                             <span className="span-option-txt">Wish List</span>
                           </span>
-                          <span className="span-option">
+                          <Link to={'/settings'} className="span-option">
                             <img src={icon.settingWhite} alt="" />
                             <span className="span-option-txt">Settings</span>
-                          </span>
-                        </span>  
+                          </Link>
+                        </span>
                       </div>
                       : 
                       <div>
