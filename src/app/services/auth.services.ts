@@ -29,11 +29,16 @@ const isTokenExpired =(token:string | null, loginTime:number | null):boolean =>{
   }
 }
 
+const changePassword = (data:any)=>{
+  const url = `${env.BASE_URL}/account/${data.id}/change-password`;
+  return api.patch(url, data).then();
+}
 
 const AuthService = {
     Login,
     SignUp,
-    isTokenExpired
+    isTokenExpired,
+    changePassword
 }
 
 export default AuthService;

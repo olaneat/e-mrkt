@@ -23,5 +23,11 @@ export class ProfileDTO{
 
 }
 
+export class ChangePasswordDTO{
+    id!:string;
+    old_password!:string;
+    new_password!:string;
+    confirm_password!:string;
+}
 
 

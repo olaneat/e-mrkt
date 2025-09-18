@@ -27,7 +27,11 @@ api.interceptors.response.use(
       if(error.response.status == 401){
           window.location.href = 'sign-in'
       }
-      return Promise.reject(error);
+      return Promise.reject({
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data || error.message,
+      });
     }
 )
 

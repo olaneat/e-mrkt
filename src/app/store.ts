@@ -15,6 +15,7 @@ import OrderReducer from "./slices/order-slice";
 import VerifyReducer from "./slices/verify-slice";
 import SignupReducer from "./slices/auth.slice";
 import ProductByCategoryReducer from "./slices/category-product.slice";
+import ChangePasswordReducer from "./slices/change-pswd.slice";
 
 const persistState = loadState();
 const persistConfig = {
@@ -36,7 +37,8 @@ const reducers = combineReducers({
   orders: OrderReducer,
   verifyPayment: VerifyReducer,
   signup: SignupReducer,
-  productByCategory: ProductByCategoryReducer, // Added from category-product.slice
+  productByCategory: ProductByCategoryReducer, 
+  changePswd: ChangePasswordReducer
 });
 
 // Define makeStore to create a new store instance
