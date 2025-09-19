@@ -57,7 +57,30 @@
                     color: #000;
                 }
             }
-    }
+        }
+
+        .setting-content{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 16px;
+            border-radius: 10px;
+            background-color: #fff;
+            padding: 16px;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0, rgba(0, 0, 0, 0.1) 0 -3px 4px 0;
+            .profile-img{
+                border-radius: 50%;
+                width: 100px;
+                height: 100px;
+                background-color: #eee;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+        }
     }
 }   
 
@@ -103,9 +126,7 @@
         padding: 12px;
         border-top: 1px solid #e5e5e5;
         gap: 8px;
-        .btn{
-            width: 40%;
-        }
+        
     }
 }
 
@@ -116,5 +137,17 @@
 @media (min-width:768px) {
     .change-pswd-modal{
         width: 500px;
+    }
+    .btn{
+            width: 40%;
+        }
+}
+
+@media (max-width:767px) {
+    .change-pswd-modal{
+        width: calc(100vw - 32px);
+        .btn{
+            width: 50%;
+        }
     }
 }
