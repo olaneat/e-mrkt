@@ -9,6 +9,8 @@
     left: 50% ;
     transform: translate(-50%, -50%);
     border: 0px;
+    width: fit-content !important;
+    padding: 0px;
 }
 
 .modal-container::backdrop {
