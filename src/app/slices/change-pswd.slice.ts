@@ -27,7 +27,6 @@ ChangePasswordDTO,
 { rejectValue: string }
 >('auth/changePswd', async (form: ChangePasswordDTO, {rejectWithValue}) => {
     try {
-        console.log(form, 'form')
       const response = await AuthService.changePassword(form);
       return response.data; // Return the data
     } catch (error: any) {

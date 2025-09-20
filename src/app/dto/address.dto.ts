@@ -1,4 +1,4 @@
-export interface ProfileDTO{
+export interface AddressDTO{
     first_name:string;
     last_name:string;
     phone_number:string;
@@ -11,7 +11,7 @@ export interface ProfileDTO{
 }
 
 
-export const mapProfileDTO = (data:any): ProfileDTO => ({
+export const mapAddressDTO = (data:any): AddressDTO => ({
     id:data.uuid ?? undefined,
     first_name: data?.first_name ?? undefined,
     last_name: data?.last_name ?? undefined,

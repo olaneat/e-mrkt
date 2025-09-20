@@ -1,20 +1,20 @@
 import AddressService from "../services/address.service";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ProfileDTO, mapProfileDTO, ERROR_MESSAGES } from "../dto/profile.dto";
+import { AddressDTO, mapAddressDTO, ERROR_MESSAGES,  } from "../dto/address.dto";
 
 
 interface AddressState{
-    address:ProfileDTO | null
-    loading: boolean,
+    address:AddressDTO | null
+    addressIsLoading: boolean,
     err:string | null
 }
 const initialState: AddressState = {
     address: null,
-    loading:false, 
+    addressIsLoading:false, 
     err:null
 }
 export const DisplayAddress = createAsyncThunk<
-    ProfileDTO,
+    AddressDTO,
     string,
     {rejectValue: string }
     >
@@ -22,7 +22,7 @@ export const DisplayAddress = createAsyncThunk<
         async (id, {rejectWithValue }) => {
             try{
                 const response = await AddressService.GetAddress(id);
-                let detail = mapProfileDTO(response.data.data);
+                let detail = mapAddressDTO(response.data.data);
                 return detail
             }catch(error:any){
                 return rejectWithValue(
@@ -39,23 +39,23 @@ const AddressDetailSlice = createSlice({
     reducers:{
         cleaAddressDetail(state){
             state.address = null;
-            state.loading = false;
+            state.addressIsLoading = false;
             state.err = null
         }
     },
     extraReducers:(builder)=>{
         builder
         .addCase(DisplayAddress.pending, (state)=>{
-            state.loading = true;
+            state.addressIsLoading = true;
             state.err = null
         })
-        .addCase(DisplayAddress.fulfilled, (state, action: PayloadAction<ProfileDTO>)=>{
+        .addCase(DisplayAddress.fulfilled, (state, action: PayloadAction<AddressDTO>)=>{
             state.address = action.payload,
-            state.loading = false,
+            state.addressIsLoading = false,
             state.err = null
         })
         .addCase(DisplayAddress.rejected, (state, action)=>{
-            state.loading = false;
+            state.addressIsLoading = false;
             state.err = action.payload || ERROR_MESSAGES.FETCH_FAILED
         })
     },

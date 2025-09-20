@@ -6,7 +6,7 @@ export interface ProfileDTO{
     lga:string;
     address:string;
     id:string;
-    username: string
+    username?: string
     img?: string
 
 }
