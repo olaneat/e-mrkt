@@ -1,4 +1,4 @@
-import React, {useEffect, useState}  from "react";
+import React, {useEffect, useRef, useState}  from "react";
 import "./style.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "app/store";
@@ -13,23 +13,31 @@ import { ChangePswd } from "../../slices/change-pswd.slice";
 import { Dispatch } from "@reduxjs/toolkit";
 import { AppDispatch } from "app/store";
 import ToastComponent from "../../components/toast/toast";
-
-
+import SelectField,  {DropdownHandle}  from "../../components/input-field/custom-select-field";
+import JSONstates from  '../../constant/states.json'
+import { ProfileDTO } from "../../dto/profile.dto";
+import { DisplayProfile } from "../../slices/profile.slice";
+import { UpdateProfileData } from "../../slices/update-profile.slice";
 
 
 const SettingPage = () => {
   const [activeTab, setActiveTab] = useState('profile');
   const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
-  const { address, loading, err } = useSelector((state: RootState) => state.address);
-  const { changePswdLoading } = useSelector((state: RootState) => state.changePswd);
+  const { Profile, profileLoading, profileErr} = useSelector((state: RootState) => state.profile);
+  const {changePswdLoading} = useSelector((state:RootState)=> state.changePswd)
+  const {updateProfile, updateProfileLoading, updateProfileError} = useSelector((state:RootState)=> state.updateProfle)
   const [message, setMessage] = useState<string>('');
   const [type, setType] = useState<string >('');
   const [showToast, setShowToast] = useState(false);
   const [title, setTitle] = useState<string >('');
   const { user } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
+  const [states, setStates] = useState<any>();
+  const [lgas, setlgas] = useState<any>();
   const [openPswdModal, setOpenPswModal] = useState(false);
   const icons = Icons.Icons
+  const stateData = JSONstates;
+  const dropdownRef = useRef<DropdownHandle>(null);
   const [formData, setFormData] = useState<any>({
     old_password: '',
     new_password: '',
@@ -37,12 +45,44 @@ const SettingPage = () => {
     id: user?.id || ''
   });
 
+
   const [errMsg, setErrMsg] = useState({
     old_password: '',
     confirm_password: '',
     new_password: ''
   })
+  const getData = (name:string, data:ProfileDTO) =>{
+    setFormData((prev:any)=>({
+      ...prev,
+      [name]:data
+    }))
 
+    
+  }
+  const createStates = (data:any)=>{
+    let values:string[] = []
+    data.map((item:any)=>{
+      values.push(item?.state?.name)
+    })
+    setStates(values);
+    
+  }
+  const   createLgas = (data:any)=>{
+    let locals:string[] = [];
+    setlgas([])
+    const state:any = stateData.find(item => item.state.name == data )
+    state.state.locals.forEach((x:any)=>{
+      locals.push(x.name)
+    })
+    setlgas(locals)
+  }
+  const closeModal =(type:string) =>{
+    if(type=='change_pswd'){
+      setOpenPswModal(false)
+
+    }
+    setActiveTab('profile')
+  }
   const handleErr =(name:string)=>{
      if(name=="new_password"){
       setErrMsg((prev)=>({
@@ -59,16 +99,38 @@ const SettingPage = () => {
   }
   interface FormDTO {
     currentPassword: string;
-    password: string;
-    confirmPassword: string;
+    new_password: string;
+    confirm_Password: string;
   }
+  const [updateProfileForm, setUpdateProfileForm]= useState<ProfileDTO>({
+    first_name: Profile?.first_name ? Profile.first_name : '',
+    last_name: Profile?.last_name ? Profile.last_name : "",
+    state : Profile?.state ? Profile.state : "",
+    lga: Profile?.lga ? Profile.lga : "",
+    phone_number: Profile?.phone_number ? Profile.phone_number : "",
+    img : Profile?.img ? Profile.img : "",
+    address: Profile?.address ? Profile.address  :"",
+    id: Profile?.id ?Profile.id : "" 
 
-  const getValue=(name:string, value:FormDTO)=>{
-    setFormData((prevState:any) => ({
+  })
+
+  const getValue=(name:string, value:any,)=>{
+    {setFormData((prevState:any) => ({
       ...prevState,
       [name]: value
     }));
+}
+    
+  }
 
+  const getProfileData = (name:string, value:ProfileDTO) =>{
+    setUpdateProfileForm((prevState:any)=>({
+      ...prevState,
+      [name]:value
+    }))
+    if(name=='state'){
+      createLgas(value)
+    }
   }
 
   const openModal=()=>{
@@ -77,11 +139,20 @@ const SettingPage = () => {
   }
 
   useEffect(()=>{
-  })
+    createStates(stateData)
+    getProfile();
+    if(Profile?.state){
+      createLgas(Profile?.state)
+    
+    }
+
+    
+  },[])
+
+
 
 const changePassword =()=>{
   dispatch(ChangePswd(formData) as any).then((res:any)=>{
-    console.log(res, 'resssssss')
     if(res.payload?.code==200){
       setOpenPswModal(false)
       setTitle('Password changed')
@@ -91,6 +162,7 @@ const changePassword =()=>{
       setTimeout(()=>{
         setShowToast(false)
       }, 3000)
+      setActiveTab('profile')
     }else{
       let errMsg = res.payload?.data?.errors;
       if(errMsg?.old_password.length > 0){ 
@@ -108,7 +180,29 @@ const changePassword =()=>{
   })
 }
 
-  if(isLoading || loading){
+const getProfile = () => {
+  dispatch(DisplayProfile(user?.id || '') as any);
+}
+const updateUserProfile = ()=>{
+  dispatch(UpdateProfileData(updateProfileForm)).then((resp:any)=>{
+    console.log(resp, 'resp')
+    if(resp.payload.status == "success"){
+      setTitle('profile Updated')
+      setShowToast(true)
+      setType('success')
+      setMessage(resp.payload.message)
+      setTimeout(()=>{setShowToast(false)},2000)
+    }else{
+      setTitle('Error Occured')
+      setShowToast(true)
+      setType('error')
+      setMessage(resp.payload.message)
+      setTimeout(()=>{setShowToast(false)},2000)
+
+    }
+  })
+}
+  if(profileLoading){
     return(
       <LoaderComponent title="loading ..."/>
   )
@@ -125,8 +219,89 @@ const changePassword =()=>{
             <span className={activeTab === 'address' ? 'active' : 'inactive-tab'} onClick={() => setActiveTab('address')}>Address Book</span>
           </div>
           <div className="setting-content">
+            {activeTab === 'profile' 
+              ?(
+                <div className="profile-content">
+                  <div className="profile-img">
+                    <img src="" className="dp" alt="" />
+                  </div>
+                  <div className="profile-detail">
+                    <div className="profile-group-fields">
+                      <div className="field-div">
+                        <InputField type="text" 
+                          data={updateProfileForm?.first_name} 
+                          placeholder="Enter first name" 
+                          name="first_name"
+                          onChange={getProfileData}
+                        />
+                      </div>
+                      <div className="field-div">
+                        <InputField
+                          type="text" 
+                          data={updateProfileForm?.last_name}
+                          placeholder="Enter last name"
+                          onChange={getProfileData}
+                          name="last_name"
+                          
 
+                        />
+                      </div>
+                    </div>
+                    <div className="profile-group-fields">
+                      <div className="field-div">
+                        <InputField 
+                          type="text" 
+                          data={updateProfileForm?.phone_number}  
+                          placeholder="Enter last name"
+                          onChange={getProfileData}
+                          name="phone_number"
+                         />
+                      </div>
+                    </div>
+                    <div className="profile-group-fields">
+                      <div className="field-div">
+                        <InputField 
+                          type="text" 
+                          data={updateProfileForm?.address}  
+                          placeholder="Enter state"
+                          onChange={getProfileData}
+                          name="address"
+                         />
+                      </div>
+                    </div>
+                    <div className="profile-group-fields">
+                      <div className="fields">
+                        <SelectField
+                          ref={dropdownRef}
+                          options={states}
+                          label="Select your state"
+                          placeholder="Select Your state"
+                          preSelectedValue={updateProfileForm?.state}
+                          onChange={getProfileData}
+                          fieldName="state"
+                      />
+                      </div>
+                      <div className="fields">
+                        <SelectField
+                          fieldName="lga"
+                          label="Select your LGA"
+                          options={lgas}
+                          preSelectedValue={updateProfileForm?.lga}
+                          placeholder="Select LGA"
+                          onChange={getProfileData}
+                        />
+                      </div>
+                    </div>
+                    <Button name="Update prodile" handleClick={updateUserProfile}  loading={updateProfileLoading} type="primary"   />
 
+                  </div>
+
+                 
+                </div>
+              ) : (
+                <div></div>
+              )
+            }
             <ModalComponent
               isOpen={openPswdModal}
               onClose={() => setOpenPswModal(false)}
@@ -135,7 +310,7 @@ const changePassword =()=>{
               <div className="change-pswd-modal">
                 <div className="modal-header">
                   <span className="change-pswd-title">Change Password</span>
-                  <img onClick={()=>setOpenPswModal(false)} src={icons.closeIcon} className="close-icon" />
+                  <img onClick={()=>closeModal('change_pswd')} src={icons.closeIcon} className="close-icon" />
                 </div>
 
                 <div className="change-pswd-body">
@@ -170,7 +345,7 @@ const changePassword =()=>{
                 </div>
                 <div className="change-footer">
                   <div className="btn">
-                    <Button name="Cancel" type="secondary" handleClick={()=>setOpenPswModal(false)}/>
+                    <Button name="Cancel" type="secondary" handleClick={()=>closeModal('change_pswd')}/>
                   </div>
                   <div className="btn">
                     <Button name="Update Password" disabled={!formData.old_password || !formData.confirm_password || formData.new_password !== formData.confirm_password} type="primary" loading={changePswdLoading} handleClick={changePassword} />
@@ -186,7 +361,8 @@ const changePassword =()=>{
               type={type}
               isOpen={showToast}
               handleClose={() => setShowToast(false)}
-            /> 
+            />
+
           </div>
         </div>
       </div>

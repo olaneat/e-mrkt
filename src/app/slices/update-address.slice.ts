@@ -5,12 +5,12 @@ import AddressService from "../services/address.service";
 interface AddressState{
     address:AddressDTO | null
     updateAddressLoading: boolean,
-    error:any | null
+    updateAddressError:any | null
 }
 const initialState: AddressState = {
     address: null,
     updateAddressLoading:false, 
-    error:null
+    updateAddressError:null
 }
 
 
@@ -60,22 +60,22 @@ export const UpdateAddress = createAsyncThunk<
         clearAddress(state){
             state.address = null;
             state.updateAddressLoading = false,
-            state.error = null
+            state.updateAddressError = null
         }
     },
     extraReducers(builder) {
         builder.addCase(UpdateAddress.pending, (state)=>{
             state.address = null,
             state.updateAddressLoading = true,
-            state.error =null            
+            state.updateAddressError =null            
         })
         builder.addCase(UpdateAddress.fulfilled, (state, action)=>{
             state.updateAddressLoading = false,
             state.address = action.payload
-            state.error = null
+            state.updateAddressError = null
         })
         builder.addCase(UpdateAddress.rejected, (state, action)=>{
-            state.error = action.error
+            state.updateAddressError = action.error
             state.updateAddressLoading = false
             state.address = null
         })

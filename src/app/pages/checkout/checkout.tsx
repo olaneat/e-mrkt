@@ -12,7 +12,7 @@ import { increaseQuantity, reduceQuantity, clearCart } from "../../slices/cart.s
 import ModalComponent from "../../components/modal/modal";
 import Icons from "../../constant/imgs.constant";
 import InputField from "../../components/input-field/input-field";
-import { ProfileDTO } from "../../dto/auth.dto";
+import { AddressDTO } from "app/dto/address.dto";
 import { UpdateAddress } from "../../slices/update-address.slice";
 import { PaystackButton, usePaystackPayment } from "react-paystack";
 import JSONstates from  '../../constant/states.json'
@@ -26,9 +26,10 @@ import LoaderComponent from "../../components/loader/loader";
 
 const Checkout = () =>{
     const dispatch = useDispatch();
-    const {address, loading,  err } = useSelector((state:RootState)=> state.address)
+    const {address, addressIsLoading,  err } = useSelector((state:RootState)=> state.address)
     const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
     const {orderLoading} = useSelector((state:RootState)=>state.orders)
+    const {updateAddressError, updateAddressLoading} = useSelector((state:RootState)=>state.updateAddress)
     const cart= useSelector((state:RootState)=>state.cart)
     const user = useSelector((state:RootState)=>state.user);
     const [addressModal, setAddressModal] = useState(false);
@@ -48,7 +49,6 @@ const Checkout = () =>{
     const navigate = useNavigate();
     const [previousUrl, setPreviousUrl] = useState<string | null>(null);
     const [ref, setRef] = useState<any>()
-    let UpdateAddressLoader:boolean = false;
     const [formData, setFormData] = useState<any >({
       address: editAddressModal ? address?.address! : '',
       phone_number: editAddressModal ? address?.phone_number! :"",
@@ -66,7 +66,7 @@ const Checkout = () =>{
       lastName: ""
     })
 
-    const getData = (name:string, data:ProfileDTO) =>{
+    const getData = (name:string, data:AddressDTO) =>{
       setFormData((prev:any)=>({
         ...prev,
         [name]:data
@@ -81,8 +81,11 @@ const Checkout = () =>{
   
     useEffect(()=>{
       displayAddress();
+      console.log(addressIsLoading, 'lo')
       createStates(stateData)
-      // if(window)
+      if(address?.state){
+        createLgas(address.state)
+      }
     }, [])
 
     useEffect(()=>{
@@ -141,9 +144,7 @@ const Checkout = () =>{
     
   }
 
-  const handleSuccess = ()=>{
-    delCart()
-  }
+
 
   const createStates = (data:any)=>{
     let states:string[] = []
@@ -168,7 +169,6 @@ const Checkout = () =>{
     }
 
   const updateAddress =()=>{   
-    UpdateAddressLoader = true;
     dispatch(UpdateAddress(formData) as any).then((res:any)=>{
       if(res.type='address/update-address/fulfilled'){
         dispatch(DisplayAddress(formData.id) as any)
@@ -178,14 +178,12 @@ const Checkout = () =>{
         setShowToast(true);
         setTimeout(()=>setShowToast(false),5000)
         closeModal();
-        UpdateAddressLoader = false;
       }else{
         setTitle('Address Update Failed');
         setMsg(res.payload || 'An error occurred while updating your address. Please try again.');
         setToastType('error');
         setShowToast(true);
         setTimeout(()=>setShowToast(false),5000)
-        UpdateAddressLoader = false;        
       
       }
     })
@@ -238,7 +236,7 @@ const Checkout = () =>{
     }
   }
  
-  if(loading){
+  if(addressIsLoading || isLoading ){
     <div>
       <LoaderComponent title="Loading Store..."/>
     </div>
@@ -455,7 +453,7 @@ const Checkout = () =>{
                 </div>
                 <div className="footer">
                   <div className="btns">
-                  <Button name="Confirm" loading={UpdateAddressLoader}  disabled={formData.address === '' || formData.first_name === '' || formData.last_name === ''} type="primary"  handleClick={updateAddress} />
+                  <Button name="Confirm" loading={updateAddressLoading}  disabled={formData.address === '' || formData.first_name === '' || formData.last_name === ''} type="primary"  handleClick={updateAddress} />
                   <Button name="Cancel"  handleClick={closeModal}/>
 
                   </div>

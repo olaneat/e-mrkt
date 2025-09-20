@@ -15,11 +15,12 @@ export class LoginDTO{
 
 export class ProfileDTO{
     phoneNUmber!:string;
-    firstName!:string;
+    first_name!:string;
     state!:string;
     lga!:string;
     address!:string;
     lastName!:string;
+    img!:string;
 
 }
 

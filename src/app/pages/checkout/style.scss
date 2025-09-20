@@ -284,6 +284,7 @@
     gap: 16px;
     justify-content: center;
     align-items: center;
+    padding: 16px;
 
     .modal-header{
         width: 100%;
@@ -350,6 +351,7 @@
     border: #e5e5e5;
     border-radius: 10px;
     flex-direction: column;
+    padding: 16px;
     .header{
         align-self: stretch;
         justify-content: space-between;
@@ -431,6 +433,7 @@
     }
     .display-address-modal, .address-modal{
         width: 600px;
+
     }
     .btn{
         width: 40%;    

@@ -40,16 +40,10 @@ const SelectField =  forwardRef<DropdownHandle, CustomDropdownProps>(
   }, [])
 
 
-    let  handleChange =(event:any)=>{
-      let data:any = event.target.value
-      .onChange(name, event.target.value);
-    }
+
   useImperativeHandle(ref, () => ({
-  
-      toggleDropdown: () => setIsOpen((prev) => !false),
+    toggleDropdown: () => setIsOpen((prev) => !false),
       selectValue: (val: string) => {
-        // onChange(val);
-        // setIsOpen(false);
         setSelectedValue(val)
       },
     }));
