@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ProfileDTO, mapProfileDTO, ERROR_MESSAGES } from "../dto/profile.dto";
-import AddressService from "../services/address.service";
 import { UpdateAddress } from "./update-address.slice";
+import ProfileService from "../services/profile.service";
 
 interface ProfileState{
     updateProfile:ProfileDTO | null
@@ -29,23 +29,15 @@ const initialState: ProfileState = {
 
 export const UpdateProfileData = createAsyncThunk<
     ProfileDTO,
-    ProfileDTO,
+    any,
    { rejectValue: string }
 >(
     'profile/update-profile',
-    async (profileForm:ProfileDTO, {rejectWithValue}) => {
+    async (profileForm:any, {rejectWithValue}) => {
         try{
-            const payload:ProfileDTO ={
-                address: profileForm.address,
-                first_name: profileForm.first_name,
-                last_name: profileForm.last_name,
-                lga: profileForm.lga,
-                phone_number: profileForm.phone_number,
-                state: profileForm.state,
-                id: profileForm.id,
-                img: profileForm.img
-            } 
-            const update =  await AddressService.UpdateAddress(profileForm.id, payload);
+            
+            const id = typeof profileForm.get === 'function' ? profileForm.get('id') : profileForm.id;
+            const update =  await ProfileService.UpdateProfile(id, profileForm);
             return update.data
         }catch(error: any){
            const errorMessage =

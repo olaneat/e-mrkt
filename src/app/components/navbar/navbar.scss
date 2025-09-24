@@ -464,6 +464,7 @@
             flex-direction: column;
             justify-content: flex-start;
             align-self: stretch;
+            justify-self: start !important;
     
             .item{
                 display: flex;

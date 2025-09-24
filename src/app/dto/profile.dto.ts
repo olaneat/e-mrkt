@@ -7,7 +7,7 @@ export interface ProfileDTO{
     address:string;
     id:string;
     username?: string
-    img?: string
+    profile_image?: any
 
 }
 
@@ -21,7 +21,7 @@ export const mapProfileDTO = (data:any): ProfileDTO => ({
     phone_number:data?.phone_number ?? undefined,
     username: data?.username ?? undefined,
     address: data?.address ?? undefined,
-    img : data?.img ?? undefined
+    profile_image : data?.profile_image ?? undefined
 }) 
 
 export const ERROR_MESSAGES = {
