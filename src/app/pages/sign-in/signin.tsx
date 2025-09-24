@@ -18,7 +18,6 @@ const SignInComponent = () =>{
 
   const dispatch = useDispatch<AppDispatch>();
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const [disabledFlag, setDisableFlag] = useState(true); 
   const [title, setTitle] = useState<string>('')
   const [msg, setMsg] = useState<string>('')
   const [showToast, setShowToast] = useState<boolean>(false);
@@ -48,14 +47,6 @@ const SignInComponent = () =>{
         ...prev,
         password: formData.password.length<8 ?'Password must be 8 character long': '' 
       }))
-    }
-     
-    if(!errMsg.email){
-      setDisableFlag(false);
-    } 
-    
-    else{
-      setDisableFlag(true);
     }
   }
 
@@ -118,7 +109,7 @@ const SignInComponent = () =>{
             />
           </div>
           <div className="signup-btns">
-            <Button name="Login" disabled={disabledFlag} loading={isLoading} handleClick={userLogin} type="primary" />
+            <Button name="Login" disabled={!formData.email || !formData.password || formData.password.length <8} loading={isLoading} handleClick={userLogin} type="primary" />
           </div>
           <div className="already">Don't have an account? 
               <Link className="sign-in" to={'/sign-up'}>

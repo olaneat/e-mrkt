@@ -18,7 +18,7 @@ import JSONstates from  '../../constant/states.json'
 import { ProfileDTO } from "../../dto/profile.dto";
 import { DisplayProfile } from "../../slices/profile.slice";
 import { UpdateProfileData } from "../../slices/update-profile.slice";
-
+import env from "../../../environment/env";
 
 const SettingPage = () => {
   const [activeTab, setActiveTab] = useState('profile');
@@ -35,6 +35,8 @@ const SettingPage = () => {
   const [states, setStates] = useState<any>();
   const [lgas, setlgas] = useState<any>();
   const [openPswdModal, setOpenPswModal] = useState(false);
+  const [previewLink, setpreviewLink] = useState('');
+
   const icons = Icons.Icons
   const stateData = JSONstates;
   const dropdownRef = useRef<DropdownHandle>(null);
@@ -51,14 +53,7 @@ const SettingPage = () => {
     confirm_password: '',
     new_password: ''
   })
-  const getData = (name:string, data:ProfileDTO) =>{
-    setFormData((prev:any)=>({
-      ...prev,
-      [name]:data
-    }))
-
-    
-  }
+  
   const createStates = (data:any)=>{
     let values:string[] = []
     data.map((item:any)=>{
@@ -103,24 +98,32 @@ const SettingPage = () => {
     confirm_Password: string;
   }
   const [updateProfileForm, setUpdateProfileForm]= useState<ProfileDTO>({
-    first_name: Profile?.first_name ? Profile.first_name : '',
-    last_name: Profile?.last_name ? Profile.last_name : "",
-    state : Profile?.state ? Profile.state : "",
-    lga: Profile?.lga ? Profile.lga : "",
-    phone_number: Profile?.phone_number ? Profile.phone_number : "",
-    img : Profile?.img ? Profile.img : "",
-    address: Profile?.address ? Profile.address  :"",
-    id: Profile?.id ?Profile.id : "" 
+    first_name:  '',
+    last_name: "",
+    state : " ",
+    lga: " ",
+    phone_number:  " ",
+    profile_image : " ",
+    address: " ",
+    id:  " " 
 
   })
 
-  const getValue=(name:string, value:any,)=>{
+  const getValue=(name:string, value:FormDTO,)=>{
     {setFormData((prevState:any) => ({
       ...prevState,
       [name]: value
     }));
 }
     
+  }
+
+  const handleFileUpload = (e:any)=>{
+    const selectField = e.target.files[0];
+    let name ="profile_image";
+    setpreviewLink(URL.createObjectURL(selectField));
+    // updateProfileForm.profile_image = 
+    getProfileData(name, selectField)
   }
 
   const getProfileData = (name:string, value:ProfileDTO) =>{
@@ -135,21 +138,30 @@ const SettingPage = () => {
 
   const openModal=()=>{
     setOpenPswModal(true)
-    setActiveTab('change_password')
+    setActiveTab('profile')
   }
 
   useEffect(()=>{
     createStates(stateData)
     getProfile();
-    if(Profile?.state){
+  },[dispatch])
+
+
+  useEffect(()=>{
+     if(Profile){
       createLgas(Profile?.state)
-    
+      setUpdateProfileForm({
+        first_name: Profile?.first_name || '',
+        last_name: Profile?.last_name || "",
+        state : Profile?.state || "",
+        lga: Profile?.lga || "",
+        phone_number: Profile?.phone_number || "",
+        profile_image : Profile?.profile_image || "",
+        address: Profile?.address ? Profile.address  :"",
+        id: Profile?.id ?Profile.id : "" 
+      })
     }
-
-    
-  },[])
-
-
+  },[Profile])
 
 const changePassword =()=>{
   dispatch(ChangePswd(formData) as any).then((res:any)=>{
@@ -184,8 +196,11 @@ const getProfile = () => {
   dispatch(DisplayProfile(user?.id || '') as any);
 }
 const updateUserProfile = ()=>{
-  dispatch(UpdateProfileData(updateProfileForm)).then((resp:any)=>{
-    console.log(resp, 'resp')
+   const formData = new FormData();
+    Object.entries(updateProfileForm).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+  dispatch(UpdateProfileData(formData) as any).then((resp:any)=>{
     if(resp.payload.status == "success"){
       setTitle('profile Updated')
       setShowToast(true)
@@ -196,7 +211,7 @@ const updateUserProfile = ()=>{
       setTitle('Error Occured')
       setShowToast(true)
       setType('error')
-      setMessage(resp.payload.message)
+      setMessage(resp.payload)
       setTimeout(()=>{setShowToast(false)},2000)
 
     }
@@ -210,7 +225,9 @@ const updateUserProfile = ()=>{
   return (
     <div className="setting-page">
       <div className="setting-header">
-        <NavBar catgeories={categories || []} />
+        <div className="lg-nav">
+          <NavBar catgeories={categories || []} />
+        </div>
         <div className="setting-body">
           <div className="setting-nav">
             <span className={activeTab === 'profile' ? 'active' : 'inactive-tab'} onClick={() => setActiveTab('profile')}>Profile</span>
@@ -222,9 +239,10 @@ const updateUserProfile = ()=>{
             {activeTab === 'profile' 
               ?(
                 <div className="profile-content">
-                  <div className="profile-img">
-                    <img src="" className="dp" alt="" />
+                  <div className={! updateProfileForm.profile_image ? "blank-img" : ""}>
+                    <img src={previewLink || `${env.IMG_URL}${updateProfileForm?.profile_image}`} className="profile-img" alt="" />
                   </div>
+                  <input type="file" onChange={handleFileUpload} accept="image/*" name="profile_image" />
                   <div className="profile-detail">
                     <div className="profile-group-fields">
                       <div className="field-div">

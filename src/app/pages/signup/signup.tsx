@@ -16,23 +16,23 @@ import { useNavigate } from "react-router-dom";
 const SignUpComponent=()=>{
   const dispatch = useDispatch<AppDispatch>();
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const [disabledFlag, setDisableFlag] = useState(true); 
   const [title, setTitle] = useState<string>('')
   const {loading} = useSelector((state:RootState)=>state.signup)
   const [msg, setMsg] = useState<string>('')
   const [showToast, setShowToast] = useState<boolean>(false);
   const [toastType, setToastType] = useState<string>('')
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SignUpDTO>({
     email: '',
     password:'',
     confirmPassword:'',
     username:''
   })
-  const [errMsg, setErrMsg] = useState({
+  const [errMsg, setErrMsg] = useState<SignUpDTO>({
         email: '',
         confirmPassword:'',
-        password:''
+        password:'',
+        username: ""
       })
   
   const handleErr = (name: string, event:any)=>{
@@ -56,20 +56,14 @@ const SignUpComponent=()=>{
           confirmPassword: formData.confirmPassword !== formData.password ?'Password do not match': '' 
         }))
      }
-     if(!errMsg.email){
-
-      setDisableFlag(false);
-     } 
-     if(!errMsg.confirmPassword){
-        setDisableFlag(false);
+     if(name=="username"){
+      setErrMsg((prev)=>({
+          ...prev,
+          username: formData.username.length<0 ?'username must be 3 characters long': '' 
+        }))
      }
-     else{
-      setDisableFlag(true);
-     }
-     
-
   }
-    const getData=(name:string, data:any)=>{
+    const getData=(name:string, data:SignUpDTO)=>{
       setFormData((prev)=>({
         ...prev, 
         [name]:data
@@ -156,7 +150,7 @@ const SignUpComponent=()=>{
             </span>
 
             <div className="signup-btns">
-                <Button name="Create account" disabled={disabledFlag} loading={loading} handleClick={createUser} type="primary" />
+                <Button name="Create account" disabled={!formData.email || formData.password.length<8 || formData.confirmPassword !== formData.password || !formData.username} loading={loading} handleClick={createUser} type="primary" />
             </div>
             <div className="already">Already have an account? 
               <Link className="sign-in" to={'/sign-in'}>
