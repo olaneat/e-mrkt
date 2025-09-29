@@ -14,7 +14,9 @@ interface props {
   categories: CategoryDTO[]
 }
 const ProductList: React.FC<props>= ({ products, categories }) =>{
+  useEffect(()=>{
 
+  },[categories])
     return(
       <div className="product-container">
         <div className="flash-products">

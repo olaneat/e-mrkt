@@ -34,8 +34,7 @@ const ProductDetail = () =>{
     useEffect(() =>{
       setTabValue('overview')
       displayProdDetail()
-      console.log(categories, 'cat')
-    },[])
+    },[categories])
 
 
     const toggleStatus=(status:string)=>{

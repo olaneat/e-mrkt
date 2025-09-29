@@ -144,12 +144,14 @@ const SettingPage = () => {
   useEffect(()=>{
     createStates(stateData)
     getProfile();
-  },[dispatch])
+  },[categories])
 
 
   useEffect(()=>{
      if(Profile){
-      createLgas(Profile?.state)
+      if(Profile.state){
+        createLgas(Profile?.state)
+      }
       setUpdateProfileForm({
         first_name: Profile?.first_name || '',
         last_name: Profile?.last_name || "",
