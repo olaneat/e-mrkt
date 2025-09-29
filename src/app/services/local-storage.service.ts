@@ -15,12 +15,15 @@ const getItem = (key:any) =>{
 const clearItem = ()=>{
     localStorage.clear()
 }
-
+const removeItem = (key:string) =>{
+    localStorage.removeItem(key);
+}
 
 const localStorageService = {
     saveItem,
     getItem,
-    clearItem
+    clearItem,
+    removeItem
 }
 
 export default localStorageService;

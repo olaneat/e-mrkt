@@ -32,6 +32,7 @@ api.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error) => {
     if (error.response?.status === 401) {
+      localStorageService.removeItem('user')
       window.location.href = "sign-in";
     }
     return Promise.reject({

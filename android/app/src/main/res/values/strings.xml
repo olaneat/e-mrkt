@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">neat-storez</string>
+    <string name="title_activity_main">neat-storez</string>
+    <string name="package_name">come.neat_storez.app</string>
+    <string name="custom_url_scheme">come.neat_storez.app</string>
+</resources>
