@@ -11,6 +11,9 @@ import { AppDispatch } from 'app/store';
 import ToastComponent from '../../components/toast/toast';
 import localStorageService from '../../services/local-storage.service';
 import { RootState } from '../../store';
+import { RequestPassword } from '../../slices/request-password.slice';
+
+
 
 const SignInComponent = () =>{
   const iconUrl = Icons.Icons;
@@ -22,7 +25,9 @@ const SignInComponent = () =>{
   const [msg, setMsg] = useState<string>('')
   const [showToast, setShowToast] = useState<boolean>(false);
   const {isLoading, isAuthenticated}   = useSelector((state:RootState)=>state.user)
+  const {isRequestPswdErr, isRequestPswsLoading, response} = useSelector((state:RootState)=>state.requestPassword)
   const [toastType, setToastType] = useState<string>('')
+  const [forgotPswd, setForgpswd] = useState<boolean>(false)
   const [formData, setFormData] = useState({
     email: '',
     password:'',
@@ -64,29 +69,96 @@ const SignInComponent = () =>{
 
   const userLogin=()=>{
     dispatch(Login(formData) as any).then((res:any)=>{
-      if(res.type=="auth/login/fulfilled"){
+      if(res.payload.status_code==200){
        const previousUrl = (location.state as { from?: string })?.from || searchParams.get('redirect') || '/'
         navigate(decodeURIComponent(previousUrl))
+        setShowToast(true);
         console.log(res, 'res')
+        setTitle('Login Successful');
+        setMsg('Login successfully');
         localStorageService.saveItem('user', res)
       }else{
+        console.log(res)
         setTitle('Login failed')
-        let errMsg = res.payload
         setToastType('err')
         setMsg(res?.payload)
       }
       setShowToast(true);
-      setTimeout(()=>setShowToast(false),5000)
+        setTimeout(()=>setShowToast(false),5000)
     })
   }
+
+
+  const requestPswd  = ()=>{
+    if(forgotPswd){
+      dispatch(RequestPassword(formData)).then((res:any)=>{
+        setShowToast(true);
+        if(res.type=="auth/forgot password/fulfilled"){
+          setTitle('Password ')
+          setMsg(res.payload.message);
+          setToastType('success')
+        
+          
+        }else{
+          setTitle('Error Occur');
+          setErrMsg(res.error.message);
+          setToastType('err');
+        }
+      })
+      setTimeout(()=>{setShowToast(false)},2000)
+    }
+  }
+
+  useEffect(()=>{
+    localStorageService.removeItem('user')
+  })
   return (
     <div className='sign-container'>
       <img src={imgUrl.loginImg} alt="" className='login-img' />
-      <div className="rite">
-        <span className="sign-title">Login to access your Account</span>
-        <span className='sign-sub'>Enter Your detail below</span>
+      {
+        !forgotPswd ?
+          <div className="rite">
+            <span className="sign-title">Login to access your Account</span>
+            <span className='sign-sub'>Enter Your detail below</span>
 
-        <div className="form">
+            <div className="form">
+              <div className="field">
+                <InputField 
+                  type="email"
+                  name="email" 
+                  onBlur={handleErr} 
+                  onChange={getData} 
+                  err={errMsg.email}
+                  placeholder="Enter your email address"
+
+                />
+              </div>
+              <div className='field'>
+                <InputField 
+                  type="password"
+                  name="password" 
+                  onBlur={handleErr} 
+                  onChange={getData} 
+                  err={errMsg.password}
+                  placeholder="Enter your Password"
+
+                />
+              </div>
+              <div className="forgt-pswd" onClick={()=>setForgpswd(true)}>
+                Forgot password ?
+              </div>
+              <div className="signup-btns">
+                <Button name="Login" disabled={(!formData.email || !emailPattern.test(formData.email)) || !formData.password || formData.password.length <8} loading={isLoading} handleClick={userLogin} type="primary" />
+              </div>
+              <div className="already">Don't have an account? 
+                  <Link className="sign-in" to={'/sign-up'}>
+                  <span >Register</span>
+                  </Link>
+              </div>
+            </div>
+          </div>
+        :
+        <div className='forgt-pswd-div'>
           <div className="field">
             <InputField 
               type="email"
@@ -98,27 +170,11 @@ const SignInComponent = () =>{
 
             />
           </div>
-          <div className='field'>
-            <InputField 
-              type="password"
-              name="password" 
-              onBlur={handleErr} 
-              onChange={getData} 
-              err={errMsg.password}
-              placeholder="Enter your Password"
-
-            />
-          </div>
           <div className="signup-btns">
-            <Button name="Login" disabled={!formData.email || !formData.password || formData.password.length <8} loading={isLoading} handleClick={userLogin} type="primary" />
-          </div>
-          <div className="already">Don't have an account? 
-              <Link className="sign-in" to={'/sign-up'}>
-              <span >Register</span>
-              </Link>
+            <Button name="Cotinue" disabled={!emailPattern.test(formData.email) || !formData.email} loading={isRequestPswsLoading} handleClick={requestPswd} type="primary" />
           </div>
         </div>
-      </div>
+      }
         
       <ToastComponent 
         title={title}

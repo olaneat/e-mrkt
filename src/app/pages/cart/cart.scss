@@ -336,9 +336,7 @@
     .rgt-cart{
         width: 35%;
     }
-    .cart-item-detail{
-        width: 350px;
-    }
+   
       .item-img{
             width: 200px;
             height: 200px;
@@ -351,7 +349,7 @@
     gap: 12px;
     align-items: center;
     justify-content: center;
-
+    padding: 16px;
 
     .header{
         display: flex;
@@ -395,4 +393,17 @@
     cursor: none !important;
     pointer-events: none;
     opacity: .0;
+}
+
+
+@media (min-width:769px) and (max-width: 950px) {
+     .cart-item-detail{
+        width: 250px;
+    }
+}
+
+@media (min-width:951px) {
+     .cart-item-detail{
+        width: 350px;
+    }
 }

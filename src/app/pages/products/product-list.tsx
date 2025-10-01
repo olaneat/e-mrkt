@@ -82,7 +82,7 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
             </div>
             <div className="title">Shop by category</div>
           </div>
-          <div className="categories">
+          <div className="category-list">
             {
               categories?.slice(0, 6).map((category:CategoryDTO)=>{
               return(

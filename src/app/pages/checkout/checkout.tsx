@@ -201,7 +201,7 @@ const Checkout = () =>{
       const payload = {
         user: user?.user!.id!,
         items:cart.cart,
-        callbackurl:`${env.HOST_URL}/verify-payment`
+        callback_url:`${env.HOST_URL}/verify-payment`
       }
       dispatch(Order(payload)as any).then((res:any)=>{
         if(res.payload.status_code==201){

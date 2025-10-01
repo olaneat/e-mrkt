@@ -11,7 +11,7 @@ import { RootState, AppDispatch } from "../../store";
 import { Link } from "react-router-dom";
 import ToastComponent from "../../components/toast/toast";
 import { useNavigate } from "react-router-dom";
-
+import localStorageService from "../../services/local-storage.service";
 
 const SignUpComponent=()=>{
   const dispatch = useDispatch<AppDispatch>();
@@ -95,7 +95,7 @@ const SignUpComponent=()=>{
      const closeToast = ()=>{
       setShowToast(false)
     }
-  
+    useEffect(()=>{localStorageService.removeItem('user')})
     
     return (
       <div className="signup-container">

@@ -18,6 +18,8 @@ import ProductByCategoryReducer from "./slices/category-product.slice";
 import ChangePasswordReducer from "./slices/change-pswd.slice";
 import ProfileReducer from "./slices/profile.slice";
 import UpdateProfileReducer from "./slices/update-profile.slice";
+import  RequestPasswordReducer  from "./slices/request-password.slice";
+import ResetPasswordReducer from './slices/rest-pswd.slice'
 
 const persistState = loadState();
 const persistConfig = {
@@ -42,7 +44,9 @@ const reducers = combineReducers({
   productByCategory: ProductByCategoryReducer, 
   changePswd: ChangePasswordReducer,
   profile: ProfileReducer,
-  updateProfle: UpdateProfileReducer
+  updateProfle: UpdateProfileReducer,
+  requestPassword:RequestPasswordReducer,
+  resetPassword: ResetPasswordReducer
 });
 
 // Define makeStore to create a new store instance

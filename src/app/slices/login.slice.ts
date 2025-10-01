@@ -48,7 +48,7 @@ const initialState: LoginState = {
     return response.data; // { user, token }
   } catch (err: any) {
     const errorMessage =
-      err.response.data.non_field_errors[0] ||
+      err.data.non_field_errors[0] ||
       err.message ||
       'Failed to log in. Please try again.';
     return rejectWithValue(errorMessage);

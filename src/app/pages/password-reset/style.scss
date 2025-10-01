@@ -1,0 +1,44 @@
+.reset-password-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    gap: 48px;
+    .change-pwd-body{
+        display: flex;
+        align-self: stretch;
+        justify-content: center;
+        .pswd-form{
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding: 34px 64px;
+            border-radius: 10px;
+            box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0, rgba(0, 0, 0, 0.1) 0 -3px 4px 0;
+            justify-content: center;
+            .reset-password{
+                font-size: 20px;
+                font-weight: 600;
+                font-family: 'Times New Roman', Times, serif;
+                color: #333;
+            }
+            
+        }
+
+    }
+}
+
+
+@media (max-width:768px) {
+    .pswd-form{
+        width: calc(100% - 64px);
+    }
+}
+@media (min-width:769px) {
+    .pswd-form{
+        width: 500px;
+        
+    }
+
+
+}

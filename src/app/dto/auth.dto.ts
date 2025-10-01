@@ -32,3 +32,10 @@ export class ChangePasswordDTO{
 }
 
 
+
+export interface ResetPasswordDTO{
+    confirm_password:string
+    password: string,
+    token:string,
+    uuidb64:string
+}

@@ -1,5 +1,5 @@
 import env from "../../environment/env";
-import { SignUpDTO, LoginDTO, ProfileDTO } from "../dto/auth.dto";
+import { SignUpDTO, LoginDTO, ProfileDTO, ResetPasswordDTO } from "../dto/auth.dto";
 import api from "../../app/interceptor/auth.interceptor";
 interface TokenPayload {
   exp: number;
@@ -29,16 +29,29 @@ const isTokenExpired =(token:string | null, loginTime:number | null):boolean =>{
   }
 }
 
+const RequestPassword =(email:any)=>{
+  const url =`${env.BASE_URL}/account/request-password`;
+  return api.post(url, email).then();
+}
+
 const changePassword = (data:any)=>{
   const url = `${env.BASE_URL}/account/${data.id}/change-password`;
   return api.patch(url, data).then();
+}
+
+const ResetPassword = (data:ResetPasswordDTO)=>{
+  const url = `${env.BASE_URL}/account/password-reset-successful/?uuidb64=${data.uuidb64}&token=${data.token}`;
+  return api.post(url, data).then();
 }
 
 const AuthService = {
     Login,
     SignUp,
     isTokenExpired,
-    changePassword
+    changePassword,
+    RequestPassword,
+    ResetPassword
+
 }
 
 export default AuthService;
