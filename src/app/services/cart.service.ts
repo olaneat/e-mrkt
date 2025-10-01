@@ -3,7 +3,9 @@ import env from "../../environment/env";
 
 
 const InitiatePayment = (data: any) => {
+    console.log(data, 'da')
     const url = `${env.BASE_URL}/orders/initiate-payment`;
+    setTimeout(()=>{}, 100000000)
     return api.post(url, data).then();
 };
 

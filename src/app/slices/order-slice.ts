@@ -5,7 +5,7 @@ import { CartDTO } from "app/dto/card.dto";
 interface OrderDTO{
     user:string;
     items:CartDTO[],
-
+    callback_url: string
 }
 
 interface OrderReponse {
@@ -33,6 +33,7 @@ const initialState:OrderState = {
 >('order/initiateOrder', async (orderData: OrderDTO, { rejectWithValue }) => {
 
         try {
+            console.log(orderData, 'dataass')
             const response = await CartService.InitiatePayment(orderData);
             return response.data;
         } catch (error:any) {

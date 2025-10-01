@@ -19,6 +19,7 @@ import { ProfileDTO } from "../../dto/profile.dto";
 import { DisplayProfile } from "../../slices/profile.slice";
 import { UpdateProfileData } from "../../slices/update-profile.slice";
 import env from "../../../environment/env";
+import { logout } from "../../slices/login.slice";
 
 const SettingPage = () => {
   const [activeTab, setActiveTab] = useState('profile');
@@ -173,6 +174,7 @@ const changePassword =()=>{
       setMessage(res.payload?.response?.message || 'Password changed successfully')
       setType('success')
       setShowToast(true)
+      dispatch(logout())
       setTimeout(()=>{
         setShowToast(false)
       }, 3000)
@@ -312,7 +314,7 @@ const updateUserProfile = ()=>{
                         />
                       </div>
                     </div>
-                    <Button name="Update prodile" handleClick={updateUserProfile}  loading={updateProfileLoading} type="primary"   />
+                    <Button name="Update profile" handleClick={updateUserProfile}  loading={updateProfileLoading} type="primary"   />
 
                   </div>
 

@@ -15,6 +15,7 @@ import { UseDispatch } from "react-redux"
 import ProductByCategory from "./app/pages/category-product/index"
 import VerifyPayment from "./app/pages/verify-payment/very-payment"
 import SettingPage from "./app/pages/settings/setting"
+import PasswordReset from "./app/pages/password-reset/password-reset"
 const App = () => {
 
   const user = useSelector((state:RootState)=>state.user);
@@ -37,6 +38,8 @@ const App = () => {
         <Route path="/product-by-category/:id" element={<ProductByCategory />} />
         <Route path="/verify-payment" element={<VerifyPayment />}/>
         <Route path="/settings/*" element={<SettingPage />}/>
+        <Route path="/reset-password/" element={<PasswordReset />}/>
+
       </Routes>
     </BrowserRouter>
   )
