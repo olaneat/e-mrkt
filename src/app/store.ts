@@ -20,7 +20,7 @@ import ProfileReducer from "./slices/profile.slice";
 import UpdateProfileReducer from "./slices/update-profile.slice";
 import  RequestPasswordReducer  from "./slices/request-password.slice";
 import ResetPasswordReducer from './slices/rest-pswd.slice'
-
+import SearchReducer  from './slices/search.slice'
 const persistState = loadState();
 const persistConfig = {
   key: "root",
@@ -46,7 +46,8 @@ const reducers = combineReducers({
   profile: ProfileReducer,
   updateProfle: UpdateProfileReducer,
   requestPassword:RequestPasswordReducer,
-  resetPassword: ResetPasswordReducer
+  resetPassword: ResetPasswordReducer,
+  search :SearchReducer
 });
 
 // Define makeStore to create a new store instance
