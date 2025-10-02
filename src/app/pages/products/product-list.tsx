@@ -74,14 +74,43 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
             </div>
           </div>
         </div>
+        
         <div className="category-div">
-          <div className="category-title">
+        <div className="category-title">
             <div className="style">
               <span className="icon"></span>
-              <div className="txt">Category</div>
+              <div className="txt">Catergory</div>
             </div>
             <div className="title">Shop by category</div>
           </div>
+        <div className="flash-products">
+          {categories?.slice(0, 6).map((category:CategoryDTO)=>{
+            return(
+              <Link to={`/product/${category.id}/detail`} className="flash-product" key={category.id}>
+                <div className="img">
+                  <div className="flash-img">
+                    <img src={`${env.IMG_URL}${category.img}`} alt=""  className="img"/>
+                  </div>
+                </div>
+                <div className="txt">
+                  <span className="name">
+                    {category.name}
+                  </span>
+                  <span className="price">
+                   
+                    
+                          
+                  </span>
+
+                </div>
+              </Link>
+
+              )
+          })}
+        </div>
+        </div>
+        {/* <div className="category-div">
+          
           <div className="category-list">
             {
               categories?.slice(0, 6).map((category:CategoryDTO)=>{
@@ -97,7 +126,7 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
             }
           </div>
           
-        </div>
+        </div> */}
 
         
       </div>

@@ -29,6 +29,9 @@ import whishListWhite from '/icons/wish-list.svg'
 import paymentWhite from '/icons/payment-white.svg'
 import OrderListWhite from '/icons/order-list-white.svg'
 import chevronRite from '/icons/arr-rite.svg'
+import whiteSearch from '/icons/white-search.svg'
+
+
 // img list start here 
 import loginImg from '/imgs/shopping.png'
 // import signUpImg from '/imgs/signup-img.svg'
@@ -63,7 +66,8 @@ const Icons= {
     settingWhite,
     paymentWhite,
     OrderListWhite,
-    chevronRite
+    chevronRite,
+    whiteSearch
 }
 
 

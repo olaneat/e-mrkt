@@ -41,7 +41,6 @@
                 z-index: 10;
                 .title{
                     font-size: 13px;
-                    font-family: 'DM Sans';
                     color: #333;
                     border-bottom: 1px solid #f1f1f1;
                     width: 100%;
@@ -62,7 +61,6 @@
                         color: #666;
                         font-weight: 500;
                         background: #fff;
-                        font-family: 'Times New Roman', Times, serif;
                         align-self: stretch;
                         text-transform: capitalize;
                         text-wrap: nowrap;
@@ -113,7 +111,6 @@
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
             .signout{
-                font-family: 'Times New Roman', Times, serif;
                 font-size: 14px;
                 color: #DB4444;
                 font-weight: 600;
@@ -162,7 +159,6 @@
 
                     .profile{
                         font-size: 12px;
-                        font-family: 'Times New Roman', Times, serif;
                         font-weight: 60;
                         color: #666;
                         font-weight: 600;
@@ -195,7 +191,6 @@
                         font-weight: 600;
                         color: #212121;
                         height: 20px;
-                        font-family: 'Times New Roman', Times, serif;
                     }
                 }:hover{
                         background: #f1f1f1;
@@ -242,6 +237,40 @@
          }
 
         
+    }
+    .search-list{
+        position: relative;
+        width: 400px;
+        .response-div{
+        width: 100%;
+        padding: 12px;
+        position: absolute;
+        top: 42px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0, rgba(0, 0, 0, 0.1) 0 -3px 4px 0;
+        border: 1px solid #f1f1f1;
+        border-radius: 10px;
+        z-index: 9999;
+        background: #fff;
+        .response{
+            display: flex;
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            cursor: pointer;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 90%;
+            overflow: hidden;
+            transition: color 0.3s ease-in-out;
+        }
+        :hover{
+            color: #DB4444;
+        }
+
+}
     }
 }
 
@@ -293,7 +322,6 @@
             .nav-header-txt{
                 color: #fff;
                 font-size: 16px;
-                font-family: 'Times New Roman', Times, serif;
 
             }
 
@@ -325,7 +353,6 @@
         //         }
         //         .sm-screen-name{
         //             color: #fff;
-        //             font-family: 'Times New Roman', Times, serif;
         //             font-size: 16px;
         //         }
         //     }
@@ -356,7 +383,6 @@
                 border-bottom: 1px solid #e5e5e5;
                 border-radius: 8px;
                 .name-name{
-                  font-family: 'Times New Roman', Times, serif;
                   color: #999;
                   font-size: 20px;
                   font-weight: 600;
@@ -408,12 +434,10 @@
 
                     .profile{
                         font-size: 12px;
-                        font-family: 'Times New Roman', Times, serif;
                         font-weight: 60;
                         color: #fff;
                     }
                     .signout{
-                        font-family: 'Times New Roman', Times, serif;
                         font-size: 14px;
                         color: #DB4444;
                         font-weight: 600;
@@ -445,7 +469,6 @@
                     .span-option-txt{
                         font-size: 13px;
                         color: #fff;
-                        font-family: 'Times New Roman', Times, serif;
                     }
                 }:hover{
                         background: #f1f1f1;
@@ -531,7 +554,6 @@
     .badge{
         background: #DB4444;
         color: #000;
-        font-family: 'Times New Roman', Times, serif;
         font-size: 10px;
         border-radius: 50%;
         padding: 3px;

@@ -34,13 +34,17 @@ import axios from "axios";
   return api.get(url)
  }
  
-
+ const searchItem =(searchText:string)=>{
+    const url = `${env.BASE_URL}/products/search-item?q=${searchText}`;
+    return api.get(url).then();
+ }
  const  ProductService = {
     getProductList,
     getProductDetail,
     addNewProduct,
     updateProduct,
     deleteProduct,
-    displayProductByCategory
+    displayProductByCategory,
+    searchItem
  }
  export default ProductService;

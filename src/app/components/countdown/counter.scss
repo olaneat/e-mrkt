@@ -30,7 +30,6 @@
                 font-size: 20px;
                 font-weight: 700;
                 color: #DB4444;
-                font-family: "DM sans";
 
 
             }
@@ -42,7 +41,6 @@
             align-items: center;
             .header-title{
                 font-weight: 700;
-                font-family: "DM sans";
 
 
             }
@@ -50,9 +48,7 @@
     }
 
 }
-.countdown-display{
-    font-family: "DM sans";
-}
+
 
 @media (max-width:768px) {
     .header-title{
