@@ -48,7 +48,11 @@ const ProductByCategory = ()=>{
             <span className="name cat-name">{categoryProducts?.category} </span>
           </div>
           {
-            categoryProducts?.products.length! >0 ?
+            categoryProducts?.products.length! <=0 && !loading ?
+              <div className="empty-state">
+                <EmptyStateComponent btnTxt="Try exploring other categories" imgUrl={icons.emptyStateCart} title="No products here yet"/>
+              </div>
+            :
               <div className="products-list">
                 {
                   categoryProducts?.products.map((product)=>(
@@ -61,8 +65,6 @@ const ProductByCategory = ()=>{
                 }
 
               </div>
-            :
-            <EmptyStateComponent btnTxt="Try exploring other categories" imgUrl={icons.emptyStateCart} title="No products here yet"/>
           }
         </div>
 
