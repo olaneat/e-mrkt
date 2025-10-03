@@ -132,12 +132,12 @@ const ProductDetail = () =>{
               </div>
               <div className="description-div">
                 <span className="name">{product?.name}</span>
-                <div className="rating-div">
+                {/* <div className="rating-div">
                   <span className="rating"> </span>
                   <span className="available">
                     
                   </span>
-                </div>
+                </div> */}
                 <div className="price-div">
                   <span className="name">price: </span>
                   <span className="price">

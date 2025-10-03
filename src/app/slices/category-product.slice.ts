@@ -1,21 +1,24 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import ProductService from "../services/product.service";
-import { ProductDTO, ERROR_MESSAGES, mapProductListDTO } from "../dto/products.dto";
+import { CategoryProductDTO, ERROR_MESSAGES, mapProductDTO } from "../dto/cat-prodct.dto";
 
 interface ProductState{
-    categoryProducts: ProductDTO[] | null,
+    
+    categoryProducts: CategoryProductDTO | null,
     err: string | null,
     loading : boolean,
+    category:string| null
 }
 
 const initialState:ProductState = {
     categoryProducts: null,
     loading: false,
-    err:null
+    err:null,
+    category: null
 };
 
 export const DisplayProductsByCategory = createAsyncThunk <
-  ProductDTO[],
+  CategoryProductDTO,
   string,
  { rejectValue: string }
 >(
@@ -23,7 +26,9 @@ export const DisplayProductsByCategory = createAsyncThunk <
   async (id, { rejectWithValue }) =>{
    try {
         const response = await ProductService.displayProductByCategory(id);
-         let detail = mapProductListDTO(response.data); // Use plain function
+        console.log(response, 'res') 
+        let detail = mapProductDTO(response.data); // Use plain function
+         console.log(detail, 'de  ')
          return detail
       } catch (error:any){
       return rejectWithValue(
@@ -50,14 +55,17 @@ const ProductByCategorySlice = createSlice({
         state.loading = false,
         state.err = null,
         state.categoryProducts = null;
+        state.category = null
     }
   },
   extraReducers:(builder)=>{
     builder
     .addCase(DisplayProductsByCategory.fulfilled,(state, action)=>{
+      console.log(action.payload, 'action')
       state.categoryProducts = action.payload,
       state.err = null,
       state.loading = false
+      
     })
     .addCase(DisplayProductsByCategory.pending, (state)=>{
         state.err = null,

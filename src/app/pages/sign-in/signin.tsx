@@ -97,15 +97,15 @@ const SignInComponent = () =>{
           setTitle('Password ')
           setMsg(res.payload.message);
           setToastType('success')
-        
+          setTimeout(()=>{setShowToast(false)},2000)
           
         }else{
           setTitle('Error Occur');
           setErrMsg(res.error.message);
           setToastType('err');
+          setTimeout(()=>{setShowToast(false)},2000)
         }
       })
-      setTimeout(()=>{setShowToast(false)},2000)
     }
   }
 
