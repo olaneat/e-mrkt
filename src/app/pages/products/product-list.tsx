@@ -86,7 +86,7 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
         <div className="flash-products">
           {categories?.slice(0, 6).map((category:CategoryDTO)=>{
             return(
-              <Link to={`/product/${category.id}/detail`} className="flash-product" key={category.id}>
+              <Link to={`product-by-category/${category.id}`} className="flash-product" key={category.id}>
                 <div className="img">
                   <div className="flash-img">
                     <img src={`${env.IMG_URL}${category.img}`} alt=""  className="img"/>

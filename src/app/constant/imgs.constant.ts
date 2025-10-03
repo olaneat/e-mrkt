@@ -36,6 +36,7 @@ import whiteSearch from '/icons/white-search.svg'
 import loginImg from '/imgs/shopping.png'
 // import signUpImg from '/imgs/signup-img.svg'
 import emptyStateCart from '/imgs/shoping-cart.jpeg'
+import EmptyProductsImg from '/imgs/empty-state.svg'
 
 const Icons= {
     SendIcon,
@@ -75,7 +76,8 @@ const Icons= {
 const Images ={
     // signUpImg,
     emptyStateCart,
-    loginImg
+    loginImg,
+    EmptyProductsImg
 
 }
 export default {Icons, Images}
