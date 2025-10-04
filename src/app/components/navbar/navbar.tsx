@@ -324,7 +324,7 @@ const fetchSuggestions = useCallback(
                         </span>
                       </div>
                       : 
-                      <div>
+                      <div className="account-link">
                         <Link className="item" to="/sign-in">
                           <span className="" >Login</span>
                         </Link>

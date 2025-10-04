@@ -33,11 +33,11 @@ const Footer = ()=>{
               </span>
               <span className="footer-txt">
               <img src={icons.whiteMail} className="footer-icon" alt="" /> 
-                info@neatstorez.com
+                neatstorez01@gmail.com
               </span>
               <span className="footer-txt">
               <img src={icons.whitePhone} className="footer-icon" alt="" /> 
-                +234-7012-345-678
+                +2348153310708
               </span>
 
             </div>

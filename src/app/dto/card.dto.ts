@@ -7,5 +7,7 @@ export interface CartDTO {
     img:string
     shippingCost: number
     totalShippingCost: number
+    availabeQuantity: number; 
+
 
   }
