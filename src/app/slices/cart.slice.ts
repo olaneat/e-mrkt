@@ -62,7 +62,9 @@ const  CartSlice = createSlice({
             const { id } = action.payload;
             const item = state.cart.find((item) => item.id === id);
             if (item) {
-              item.quantity+=1;
+              if(item.quantity < item.availabeQuantity){
+                item.quantity+=1;
+              }
               item.totalPrice = item.quantity * item.price;
               item.totalShippingCost = item.quantity * item.shippingCost
               state.totalPrice = calculateTotalCost(state.cart);

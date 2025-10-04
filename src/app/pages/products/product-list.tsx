@@ -29,7 +29,7 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
                   </div>
                 </div>
                 <div className="txt">
-                  <span className="name">
+                  <span className="name wrap-txt">
                     {product.name}
                   </span>
                   <span className="price">
@@ -49,21 +49,51 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
         {/* <div className="see-all">View all products</div> */}
         <div className="product-list">
         <div className="product-title">
-            <div className="style">
-              <span className="icon"></span>
-              <div className="txt">Our Products</div>
-            </div>
-            <div className="title">Explore Our Products</div>
-            <div className="products">
+          <div className="style">
+            <span className="icon"></span>
+            <div className="txt">Our Products</div>
+          </div>
+          <div className="title">Explore Our Products</div>
+          <div className="flash-products">
+          {products?.slice(7,19)?.map((product:ProductDTO)=>{
+            return(
+              <Link to={`/product/${product.id}/detail`} className="flash-product" key={product.id}>
+                <div className="img">
+                  <div className="flash-img">
+                    <img src={`${env.IMG_URL}${product.img}`} alt=""  className="img"/>
+                  </div>
+                </div>
+                <div className="txt">
+                  <span className="name wrap-txt">
+                    {product.name}
+                  </span>
+                  <span className="price">
+                    <span className="new-price">
+                    {Number(product.price!).toLocaleString('en-US', { style: 'currency', currency: 'NGN' })}
+                    </span> 
+                    
+                          
+                  </span>
+
+                </div>
+              </Link>
+
+              )
+          })}
+        </div>  
+            
+            
+            
+            {/* <div className="products">
               {products?.slice(7,19)?.map((prod:ProductDTO)=>{
                 return(
                   <Link to={`/product/${prod.id}/detail`} className="product" key={prod.id}>
-                    <span className="name">{prod.name}</span>
                     
                     <div className="img">
                       <img src={`${env.IMG_URL}/${prod.img}`} alt="" />
 
                     </div>
+                    <span className="name wrap-txt">{prod.name}</span>
                     <span className="price">
                       {Number(prod.price!).toLocaleString('en-US', { style: 'currency', currency: 'NGN' })}
                     </span>
@@ -71,7 +101,7 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
                   </Link>
                 )
               })}
-            </div>
+            </div> */}
           </div>
         </div>
         
@@ -82,7 +112,7 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
               <div className="txt">Catergory</div>
             </div>
             <div className="title">Shop by category</div>
-          </div>
+        </div>
         <div className="flash-products">
           {categories?.slice(0, 6).map((category:CategoryDTO)=>{
             return(
@@ -93,7 +123,7 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
                   </div>
                 </div>
                 <div className="txt">
-                  <span className="name">
+                  <span className="name wrap-txt">
                     {category.name}
                   </span>
                   <span className="price">

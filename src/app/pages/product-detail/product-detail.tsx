@@ -90,7 +90,8 @@ const ProductDetail = () =>{
         id: product?.id,
         img: product?.img,
         totalPrice: quantity * product!.price,
-        shippingCost:300
+        shippingCost:300,
+        availabeQuantity: product?.stock
       }
       dispatch(addToCart(payload))
         openToast();
@@ -128,7 +129,7 @@ const ProductDetail = () =>{
             </div>
             <div className="main-content">
               <div className="img">
-                <img className="prod-img" src={`${env.IMG_URL}${product?.img}`} alt="" />
+                <img className="detail-img" src={`${env.IMG_URL}${product?.img}`} alt="" />
               </div>
               <div className="description-div">
                 <span className="name">{product?.name}</span>

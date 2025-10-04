@@ -326,6 +326,7 @@
             }
 
         }
+        
     }
 
 
@@ -498,6 +499,13 @@
                 // border-bottom: 1px solid #f1f1f1;
                 text-decoration: none;
             }
+            .account-link{
+            display: flex;
+            justify-content: flex-start;
+            align-self: stretch;
+            gap: 8px;
+            flex-direction: column;
+        }
         }
         .navbar-categories{
             display: flex;

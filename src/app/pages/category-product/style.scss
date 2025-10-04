@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    height: 100vh;
     .content-header{
         width: 100%;
         height: 100%;
@@ -65,7 +64,7 @@
                     }
                      .product-imf{
                         width: 250px;
-                        height: 350x;
+                        height: 250x;
                     }
                 }
 
@@ -83,7 +82,13 @@
         gap: 10px; /* Gap between grid items */
         padding: 10px;
     }
+
+    .category-list-container{
+        height: 100vh;
+
+    }
 }
+
 
 @media (max-width:768px) {
     .parent-div{padding: 16px;}
@@ -102,6 +107,7 @@
         place-items: center;
         .product{
             width: 100%;
+            align-items: center;
         }
       }
 

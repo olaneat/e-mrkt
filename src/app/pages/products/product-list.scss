@@ -8,11 +8,12 @@
     width: 100%;
 
     .flash-products{
-      display: flex;
-      gap: 8px;
-      align-self: stretch;
-      justify-content: center;
-      align-items: center;
+      display: grid;
+      grid-template-rows: auto;
+      grid-column-gap: 8px;
+      width: 100%;
+      padding: 12px;
+
       cursor: pointer;
       .flash-product{
         display: flex;
@@ -20,7 +21,9 @@
         justify-content: center;
         flex-direction: column;
         gap: 12px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0, rgba(0, 0, 0, 0.1) 0 -3px 4px 0;
+        border-radius: 10px;
+        border: 1px solid #efefef;
         padding: 8px ;
         text-decoration: none;
         .img{
@@ -54,15 +57,13 @@
           align-self: stretch;
           flex-direction: column;
           gap: 6px;
+          width: 100%;
           
           .name{
             font-size: 13px;
             color: #666;
             font-weight: 600;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: 190px;
-            overflow: hidden;
+            
             text-transform:capitalize;
           }
           .price{
@@ -249,8 +250,8 @@
           .img{
             padding: 16px;
             img{
-              width: 150;
-              height: 120px;
+              width: 180px;
+              height: 180px;
             }
           }
 
@@ -327,7 +328,9 @@
    }
   }
   .flash-products{
-    flex-direction: column;
+    grid-template-columns: 1fr; /* Single column for small screens */
+    width: 100%;
+    gap: 12px;
     .flash-product{
       width: 100%;
       padding: 0px;
@@ -340,28 +343,28 @@
      grid-row-gap: 16px;
     display: grid;
     width: 100%;
-    .category{
-      flex-direction: column;
-      align-items: center;
-      justify-content: center ;
-      display: flex;
-      gap: 16px;
-      text-decoration: none;
+    // .category{
+    //   flex-direction: column;
+    //   align-items: center;
+    //   justify-content: center ;
+    //   display: flex;
+    //   gap: 16px;
+    //   text-decoration: none;
     
-      img{
-        width: 150px;
-        height: 150px;
+    //   img{
+    //     width: 150px;
+    //     height: 150px;
 
         
-      }
-      .name{
-        text-transform:capitalize;
-        font-size: 20px;
-        color: #0006;
-        text-decoration: none;
+    //   }
+    //   .name{
+    //     text-transform:capitalize;
+    //     font-size: 20px;
+    //     color: #0006;
+    //     text-decoration: none;
         
-      }
-    }
+    //   }
+    // }
     
     
   }
@@ -385,12 +388,24 @@
 
     .img{
       // height: 200px;
-      width: 250px !important;
+      // width: 100% ;
     }
+  }
+
+  .wrap-txt{
+    max-width: calc(100vw - 100px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
 
 @media (min-width:760px) {
+  .flash-products{
+      grid-template-columns: repeat(6, auto);
+
+  }
+  
   .categories{
     width: fit-content;
 
@@ -488,6 +503,14 @@
   }
   .flash-img{
     width: 100%;
+    .img{
+      width: 100%;
+    }
+  }
+
+  .wrap-txt{
+    max-width: calc(100% - 20%);
+
   }
 }
 
@@ -530,13 +553,15 @@
   transform: scale(1,1);
 }
 
-@media (min-width:768px) {
 
-
-  .flash-img{
-    img{
-      height: 150px;
-      width: 100%;
-    }
+@media (min-width: 769px) and (max-width: 1200px) {
+  .flash-products {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for mid-range screens */
   }
 }
+
+.wrap-txt{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
