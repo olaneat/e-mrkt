@@ -6,13 +6,13 @@ interface ProductState{
     
     categoryProducts: CategoryProductDTO | null,
     err: string | null,
-    loading : boolean,
+    isProdCateLoading : boolean,
     category:string| null
 }
 
 const initialState:ProductState = {
     categoryProducts: null,
-    loading: false,
+    isProdCateLoading: false,
     err:null,
     category: null
 };
@@ -52,7 +52,7 @@ const ProductByCategorySlice = createSlice({
   initialState,
   reducers: {
     clearProduct(state){
-        state.loading = false,
+        state.isProdCateLoading = false,
         state.err = null,
         state.categoryProducts = null;
         state.category = null
@@ -64,17 +64,17 @@ const ProductByCategorySlice = createSlice({
       console.log(action.payload, 'action')
       state.categoryProducts = action.payload,
       state.err = null,
-      state.loading = false
+      state.isProdCateLoading = false
       
     })
     .addCase(DisplayProductsByCategory.pending, (state)=>{
         state.err = null,
-        state.loading = true,
+        state.isProdCateLoading = true,
         state.categoryProducts = null
     })
     .addCase(DisplayProductsByCategory.rejected, (state, action)=>{
         state.err = action.payload || ERROR_MESSAGES.FETCH_FAILED,
-        state.loading = false,
+        state.isProdCateLoading = false,
         state.categoryProducts = null
     })
   }    

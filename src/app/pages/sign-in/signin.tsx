@@ -4,7 +4,7 @@ import Icons from "../../constant/imgs.constant";
 import InputField from './../../components/input-field/input-field';
 import Button from './../../components/btns/btn';
 import { Link } from 'react-router-dom';
-import {Login } from '../../slices/login.slice'
+import {Login, removeUser } from '../../slices/login.slice'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation, useSearchParams} from "react-router-dom";
 import { AppDispatch } from 'app/store';
@@ -12,7 +12,6 @@ import ToastComponent from '../../components/toast/toast';
 import localStorageService from '../../services/local-storage.service';
 import { RootState } from '../../store';
 import { RequestPassword } from '../../slices/request-password.slice';
-
 
 
 const SignInComponent = () =>{
@@ -111,6 +110,7 @@ const SignInComponent = () =>{
 
   useEffect(()=>{
     localStorageService.removeItem('user')
+    dispatch(removeUser())
   })
   return (
     <div className='sign-container'>
