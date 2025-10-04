@@ -14,7 +14,6 @@
       width: 100%;
       padding: 12px;
 
-      cursor: pointer;
       .flash-product{
         display: flex;
         align-items: center;
@@ -25,6 +24,8 @@
         border-radius: 10px;
         border: 1px solid #efefef;
         padding: 8px ;
+        cursor: pointer;
+
         text-decoration: none;
         .img{
           display: flex;
