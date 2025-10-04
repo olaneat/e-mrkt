@@ -392,7 +392,7 @@ const updateUserProfile = ()=>{
 
 
     </div>
-   )
+  )
 }
 
 export default SettingPage;

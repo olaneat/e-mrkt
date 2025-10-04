@@ -328,12 +328,15 @@
    }
   }
   .flash-products{
-    grid-template-columns: 1fr; /* Single column for small screens */
+   grid-template-columns: repeat(2, 1fr);; /* Single column for small screens */
     width: 100%;
     gap: 12px;
     .flash-product{
       width: 100%;
       padding: 0px;
+      .img{
+        max-width: 100%;
+      }
     }
 
   }
@@ -393,10 +396,7 @@
   }
 
   .wrap-txt{
-    max-width: calc(100vw - 100px);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    max-width:120px
   }
 }
 

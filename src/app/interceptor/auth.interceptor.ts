@@ -1,7 +1,6 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse } from "axios";
 import env from "../../environment/env";
 import localStorageService from "../services/local-storage.service";
-
 const api: AxiosInstance = axios.create({
   baseURL: env.BASE_URL,
 });

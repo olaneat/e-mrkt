@@ -17,7 +17,7 @@ const ProductByCategory = ()=>{
   const icons = {...imgsConstant.Icons, ...imgsConstant.Images}
 
   const dispatch = useDispatch();
-  const {categoryProducts, loading, err} = useSelector((state:RootState)=>state.productByCategory)
+  const {categoryProducts, isProdCateLoading, err} = useSelector((state:RootState)=>state.productByCategory)
   const {categories} = useSelector((state:RootState)=>state.category)
   useEffect(()=>{
     displayProduct();
@@ -29,14 +29,19 @@ const ProductByCategory = ()=>{
   }
 
 
+  if(isProdCateLoading){
 
-  {loading
-    ? <div>
-        <LoaderComponent title="Loading store"/>
+    return (
+      <div>
+         <div>
+            <LoaderComponent title="Loading store"/>
+          </div>
+      
+  
       </div>
-    : 
-    ""
+    )
   }
+  
   return (
     <div className="category-list-container">
       <div className="content-header">
@@ -48,7 +53,7 @@ const ProductByCategory = ()=>{
             <span className="name cat-name">{categoryProducts?.category} </span>
           </div>
           {
-            categoryProducts?.products.length! <=0 && !loading ?
+            categoryProducts?.products.length! <=0 && !isProdCateLoading ?
               <div className="empty-state">
                 <EmptyStateComponent btnTxt="Try exploring other categories" imgUrl={icons.emptyStateCart} title="No products here yet"/>
               </div>

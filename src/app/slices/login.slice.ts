@@ -70,6 +70,10 @@ const LoginSlice = createSlice({
             state.timeStamp = null;
 
         },
+        removeUser: (state)=>{
+          state.user = initialState.user;
+          state.token = ""
+        },
         clearError: (state) => {
             state.error = null;
           },
@@ -87,7 +91,6 @@ const LoginSlice = createSlice({
             state.user = action.payload.user;
             state.token = action.payload.refresh_token;
             state.timeStamp = Date.now()
-            // localStorageService.saveItem('user',action.payload);
             
 
         })
@@ -99,5 +102,5 @@ const LoginSlice = createSlice({
 })
 
 
-export const { logout, clearError } = LoginSlice.actions;
+export const { logout, clearError, removeUser} = LoginSlice.actions;
 export default LoginSlice.reducer;
