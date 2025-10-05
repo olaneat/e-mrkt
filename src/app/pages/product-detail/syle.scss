@@ -8,6 +8,9 @@
     .detail-inner-div{
         display: flex;
         flex-direction: column;
+        align-self: stretch;
+        justify-content: space-between;
+        align-items: flex-start;
         width: 100%;
     }
 }
@@ -387,4 +390,9 @@
 
     }
 
+}
+
+.detail-img{
+    width: 250px;
+    height: 300px;
 }

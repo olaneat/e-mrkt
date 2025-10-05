@@ -289,7 +289,7 @@ const Checkout = () =>{
                             <div className="price-qua-div">
                               <span className="price">{item.totalPrice.toLocaleString('en-US',{style:"currency", currency: "NGN"})}</span>
                               <div className="quantity">
-                                <span className={`change-quantity ${item.quantity<=1 ? 'disble-btn': ''}`} onClick={changeQuantity('decrease', item.id)}>-</span>
+                                <span className={`increase-btn ${item.quantity<=1 ? 'disble-btn': ''}`} onClick={changeQuantity('decrease', item.id)}>-</span>
                                 <span className="quantity">{item.quantity}</span>
                                 <span className="increase-btn" onClick={changeQuantity('increase', item.id)}>+</span>
 
