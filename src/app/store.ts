@@ -44,7 +44,7 @@ const reducers = combineReducers({
   productByCategory: ProductByCategoryReducer, 
   changePswd: ChangePasswordReducer,
   profile: ProfileReducer,
-  updateProfle: UpdateProfileReducer,
+  updateProfile: UpdateProfileReducer,
   requestPassword:RequestPasswordReducer,
   resetPassword: ResetPasswordReducer,
   search :SearchReducer
