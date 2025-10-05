@@ -111,7 +111,7 @@ const SignInComponent = () =>{
   useEffect(()=>{
     localStorageService.removeItem('user')
     dispatch(removeUser())
-  })
+  },[])
   return (
     <div className='sign-container'>
       <img src={imgUrl.loginImg} alt="" className='login-img' />

@@ -26,7 +26,7 @@ const SettingPage = () => {
   const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
   const { Profile, profileLoading, profileErr} = useSelector((state: RootState) => state.profile);
   const {changePswdLoading} = useSelector((state:RootState)=> state.changePswd)
-  const {updateProfile, updateProfileLoading, updateProfileError} = useSelector((state:RootState)=> state.updateProfle)
+  const {updateProfile, updateProfileLoading, updateProfileError} = useSelector((state:RootState)=> state.updateProfile)
   const [message, setMessage] = useState<string>('');
   const [type, setType] = useState<string >('');
   const [showToast, setShowToast] = useState(false);

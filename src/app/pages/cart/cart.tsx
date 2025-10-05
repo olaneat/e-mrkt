@@ -97,7 +97,8 @@ const Cart =() =>{
             <NavBar catgeories={categories || []} />
           </div>
           <span className="breadcrumb">
-            <Link to={'/'}  className="home"> Home</Link>/
+            <Link to={'/'}  className="home"> Home</Link>
+            <img className="chev" src={icons.chevronRite}/>
             <span className="cart">Cart</span> 
           </span>
           {
