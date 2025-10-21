@@ -23,7 +23,6 @@ import { logout } from "../../slices/login.slice";
 
 const SettingPage = () => {
   const [activeTab, setActiveTab] = useState('profile');
-  const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
   const { Profile, profileLoading, profileErr} = useSelector((state: RootState) => state.profile);
   const {changePswdLoading} = useSelector((state:RootState)=> state.changePswd)
   const {updateProfile, updateProfileLoading, updateProfileError} = useSelector((state:RootState)=> state.updateProfile)
@@ -145,7 +144,7 @@ const SettingPage = () => {
   useEffect(()=>{
     createStates(stateData)
     getProfile();
-  },[categories])
+  },[])
 
 
   useEffect(()=>{
@@ -230,7 +229,7 @@ const updateUserProfile = ()=>{
     <div className="setting-page">
       <div className="setting-header">
         <div className="lg-nav">
-          <NavBar catgeories={categories || []} />
+          <NavBar  />
         </div>
         <div className="setting-body">
           <div className="setting-nav">

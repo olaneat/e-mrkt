@@ -149,16 +149,16 @@ const SignUpComponent=()=>{
               />
             </span>
 
-            <div className="signup-btns">
-                <Button name="Create account" disabled={!formData.email || formData.password.length<8 || formData.confirmPassword !== formData.password || !formData.username} loading={loading} handleClick={createUser} type="primary" />
-            </div>
-            <div className="already">Already have an account? 
-              <Link className="sign-in" to={'/sign-in'}>
-              <span >Sign in</span>
-              </Link>
-              
-            </div>
           </div>
+            <div className="signup-btns">
+              <Button name="Create account" disabled={!formData.email || formData.password.length<8 || formData.confirmPassword !== formData.password || !formData.username} loading={loading} handleClick={createUser} type="primary" />
+              <div className="already">Already have an account? 
+                <Link className="sign-in" to={'/sign-in'}>
+                <span >Sign in</span>
+                </Link>
+                
+              </div>
+            </div>
         </div>
         <ToastComponent 
           title={title}

@@ -12,8 +12,8 @@ import { logout } from "../../slices/login.slice";
 import InputField from "../input-field/input-field";
 import debounce from 'lodash.debounce';
 import { SearchItem } from "../../slices/search.slice";
-interface categoryProps  {
-  catgeories: CategoryDTO[],
+interface propsDTO  {
+  // catgeories: CategoryDTO[],
   pageType?:string
 }
 
@@ -25,7 +25,7 @@ interface SearchSuggestion {
 }
 
 
-const NavBar:React.FC<categoryProps> = ({catgeories, pageType}) =>{
+const NavBar:React.FC<propsDTO> = ({pageType}) =>{
   const dispatch = useDispatch();
   const icon = Icons.Icons;
   const {cart} = useSelector((state:RootState)=>state.cart )
@@ -40,8 +40,6 @@ const NavBar:React.FC<categoryProps> = ({catgeories, pageType}) =>{
   })
   const user = useSelector((state:RootState)=>state.user)
   const [authUser, setUser] = useState<any>();
-  useEffect(()=>{
-  },[])
 
   
   const sigout =()=>{
@@ -82,11 +80,11 @@ const fetchSuggestions = useCallback(
   const [dropDownMenu, setdropDownMenu] = useState(false);
   const [dropDown, setdropDown] = useState(false);
   const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
-  
-  // const [Categories, setCategories] = useState<CategoryDTO[]>([]);
+
  
   useEffect(()=>{
-  })
+    // getCategories()
+  }, [])
 
   const toggleSidebar = () =>{
     
@@ -117,16 +115,9 @@ const fetchSuggestions = useCallback(
   const goHome= ()=>{
     navigate('/')
   }
-  const titleCase =(element:string) =>{
-    if(element == null || element === ""){
-      return false;
+   const getCategories = () =>{
+      dispatch(displayCategories() as any)
     }
-    return element.replace(/\w\s*/g, 
-      function convertTxt(txt:string){
-        return txt.charAt(0).toLocaleUpperCase() + txt.substring(1);
-      }
-    )
-  }
  
   
     return(

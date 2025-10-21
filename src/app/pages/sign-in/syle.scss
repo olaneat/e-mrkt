@@ -17,13 +17,13 @@
             color: #212121;
             
             text-align: center;
-            font-weight: 600;
+            font-weight: 500;
         }
         .sign-sub{
             font-size: 14px;
             color: #333;
             
-            font-weight: 600;
+            font-weight: 400;
 
         }
         .form{
@@ -46,29 +46,29 @@
                 justify-content: flex-end;
                 font-size: 13px;
                 
-                font-weight: 600;
+                font-weight: 400;
                 cursor: pointer;
                 color: #DB4444;
             }
-            .signup-btns{
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-                justify-content: center;
-                align-self: stretch;
-                align-items: center;
-                width: 100%;
+            
+        }
+        .signup-btns{
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: center;
+            align-self: stretch;
+            align-items: center;
+            width: 100%;
 
-            }
             .already{
-                margin-top: 16px;
                 display: flex;
                 justify-content: flex-end;
                 align-items: flex-end;
                 align-self: stretch;
                 font-size: 12px;
                 color: #333;
-                font-weight: 600;
+                font-weight: 400;
 
                 .sign-in{
                     margin-left: 2px;
@@ -77,7 +77,6 @@
                     text-decoration: none;
                 }
             }
-
         }
         
     }

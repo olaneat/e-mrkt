@@ -17,7 +17,6 @@ import LoaderComponent from "../../components/loader/loader";
 
 const Cart =() =>{
     const cart = useSelector((state:RootState)=>state.cart )
-    const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
     const icons = Icons.Icons;
     const dispatch  = useDispatch();
     const [totlPrice, setTotalPrice]=useState(0); 
@@ -87,14 +86,14 @@ const Cart =() =>{
       setTimeout(()=>setShowToast(false), 5000)
     }
 
-    if(isLoading){
-      <LoaderComponent title="Loading store"/>
-    }
+    // if(isLoading){
+    //   <LoaderComponent title="Loading store"/>
+    // }
     return( 
       <div className="outer-container">
         <div className="cart-container">
           <div className="nav">
-            <NavBar catgeories={categories || []} />
+            <NavBar />
           </div>
           <span className="breadcrumb">
             <Link to={'/'}  className="home"> Home</Link>

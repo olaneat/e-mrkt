@@ -38,7 +38,7 @@ const App = () => {
         <Route path="/product-by-category/:id" element={<ProductByCategory />} />
         <Route path="/verify-payment" element={<VerifyPayment />}/>
         <Route path="/settings/*" element={<SettingPage />}/>
-        <Route path="/reset-password/" element={<PasswordReset />}/>
+        <Route path="/reset-password/*" element={<PasswordReset />}/>
 
       </Routes>
     </BrowserRouter>
