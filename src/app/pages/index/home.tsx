@@ -51,7 +51,7 @@ if (isLoadingOverall) {
   return(
         
     <div>
-      <NavBar catgeories={categories || []} pageType="list"/>  
+      <NavBar pageType="list"/>  
       <div className="body"> 
         <div className="top-div">
           

@@ -18,8 +18,7 @@ const ProductDetail = () =>{
     const dispatch = useDispatch();
     // const [productDetail, setProductDetail] = useState<ProductDetailDTO>();
     const { product, loading, err } = useSelector((state: RootState) => state.product);
-    const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
-    const isLoadingOverall = loading || isLoading; 
+    const isLoadingOverall = loading; 
     
     const params = useParams();
     const [tabvalue, setTabValue] = useState<string>("");
@@ -34,7 +33,7 @@ const ProductDetail = () =>{
     useEffect(() =>{
       setTabValue('overview')
       displayProdDetail()
-    },[categories])
+    },[])
 
 
     const toggleStatus=(status:string)=>{
@@ -118,7 +117,7 @@ const ProductDetail = () =>{
     return (
       <div className="detail-container">
         <div className="detail-inner-div">
-          <NavBar catgeories={categories || []} />  
+          <NavBar />  
           <div className="main-body">
             <div className="nav">
               <Link to={'/'} className="link"><span className="home">Home</span></Link>

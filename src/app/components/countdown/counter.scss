@@ -28,7 +28,7 @@
             }
             .txt-title{
                 font-size: 20px;
-                font-weight: 700;
+                font-weight: 600;
                 color: #DB4444;
 
 
@@ -40,7 +40,7 @@
             justify-content: center;
             align-items: center;
             .header-title{
-                font-weight: 700;
+                font-weight: 600;
 
 
             }
@@ -48,6 +48,14 @@
     }
 
 }
+
+.countdown-display{
+    font-weight: 400;
+    font-size: 14px;
+    color: #212121;
+}
+
+
 
 
 @media (max-width:768px) {

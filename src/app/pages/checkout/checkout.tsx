@@ -27,7 +27,6 @@ import LoaderComponent from "../../components/loader/loader";
 const Checkout = () =>{
     const dispatch = useDispatch();
     const {address, addressIsLoading,  err } = useSelector((state:RootState)=> state.address)
-    const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
     const {orderLoading} = useSelector((state:RootState)=>state.orders)
     const {updateAddressError, updateAddressLoading} = useSelector((state:RootState)=>state.updateAddress)
     const cart= useSelector((state:RootState)=>state.cart)
@@ -236,7 +235,7 @@ const Checkout = () =>{
     }
   }
  
-  if(addressIsLoading || isLoading ){
+  if(addressIsLoading){
     <div>
       <LoaderComponent title="Loading Store..."/>
     </div>
@@ -245,7 +244,7 @@ const Checkout = () =>{
     <div className="checkout-container">
       <div className="checkout-inner-div">
         <div className="nav">
-          <NavBar catgeories={categories || []} />
+          <NavBar />
 
         </div>
 

@@ -147,14 +147,14 @@ const SignInComponent = () =>{
               <div className="forgt-pswd" onClick={()=>setForgpswd(true)}>
                 Forgot password ?
               </div>
+              </div>
               <div className="signup-btns">
                 <Button name="Login" disabled={(!formData.email || !emailPattern.test(formData.email)) || !formData.password || formData.password.length <8} loading={isLoading} handleClick={userLogin} type="primary" />
-              </div>
-              <div className="already">Don't have an account? 
-                  <Link className="sign-in" to={'/sign-up'}>
-                  <span >Register</span>
-                  </Link>
-              </div>
+                <div className="already">Don't have an account? 
+                    <Link className="sign-in" to={'/sign-up'}>
+                    <span >Register</span>
+                    </Link>
+                </div>
             </div>
           </div>
         :
