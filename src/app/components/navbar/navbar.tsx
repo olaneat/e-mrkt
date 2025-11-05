@@ -13,7 +13,7 @@ import InputField from "../input-field/input-field";
 import debounce from 'lodash.debounce';
 import { SearchItem } from "../../slices/search.slice";
 interface propsDTO  {
-  // catgeories: CategoryDTO[],
+  catgeories: CategoryDTO[],
   pageType?:string
 }
 
