@@ -83,15 +83,15 @@ const InputField = (props:any)=>{
             </span>
           : props.type=="search"
           ? <span className="field-span">
-              <img src={imgUrl.whiteSearch} className="img" alt="" />
+              <img src={props.searchType=='default'?  imgUrl.search  : imgUrl.whiteSearch} className="img" alt="" />
               <input 
                 name={props.name}
                 type="search" 
                 placeholder={props.placeholder}
-                className="search-field field" 
+                className={`search-field field ${props.searchType =="default" ? 'dark-txt': 'white-txt'}`} 
                 onChange={handleChange}
                 id="search"
-                
+                value={props.data}
               />
           </span>
           : props.type=="email"

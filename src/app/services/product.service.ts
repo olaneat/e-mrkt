@@ -1,7 +1,6 @@
 import env from "../../environment/env";
-import { ProductDTO } from "../dto/products.dto";
+import { ProductDTO, OrderSearchDTO } from "../dto/products.dto";
 import api from "../../app/interceptor/auth.interceptor";
-import axios from "axios";
 
  const getProductList = ()=>{
    const url = `${env.BASE_URL}/products/list`;
@@ -38,6 +37,21 @@ import axios from "axios";
     const url = `${env.BASE_URL}/products/search-item?q=${searchText}`;
     return api.get(url).then();
  }
+
+ const getOrders = (data: OrderSearchDTO) => {
+    let query = "";
+    if(data.searchText){
+      query +=`search=${data.searchText}&`
+    }
+
+    if(data.status){
+      query+= `&status=${data.status}`
+    }
+
+    const url = `${env.BASE_URL}/orders/list?${query}`;
+    return api.get(url).then();
+
+ }
  const  ProductService = {
     getProductList,
     getProductDetail,
@@ -45,6 +59,7 @@ import axios from "axios";
     updateProduct,
     deleteProduct,
     displayProductByCategory,
-    searchItem
+    searchItem,
+    getOrders
  }
  export default ProductService;
