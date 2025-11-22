@@ -58,8 +58,14 @@
     font-size: 10px;
     color: red;
 }
-.search-field{
+.dark-txt{
+    color: #666 !important;
+}
+.white-txt{
     color: #fff !important;
+}
+.search-field{
+    // color: #fff !important;
     padding: 25px;
     font-size: 15px !important;
     height: 40px;

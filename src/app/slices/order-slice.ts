@@ -33,7 +33,6 @@ const initialState:OrderState = {
 >('order/initiateOrder', async (orderData: OrderDTO, { rejectWithValue }) => {
 
         try {
-            console.log(orderData, 'dataass')
             const response = await CartService.InitiatePayment(orderData);
             return response.data;
         } catch (error:any) {

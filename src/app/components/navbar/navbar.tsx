@@ -58,6 +58,7 @@ const NavBar:React.FC<propsDTO> = ({pageType}) =>{
     setFlag(false)
     
   }
+  console.log(searchValue, 'sjsjdjdj')
   
  fetchSuggestions(data)
 }
@@ -196,10 +197,10 @@ const fetchSuggestions = useCallback(
                             </span>
                           </span>
                           <span className="span-list">
-                            <span className="nav-list">
+                            <Link to={'/orders'} className="nav-list">
                               <img src={icon.WishList} alt="" />
                               <span className="content">My Orders</span>
-                            </span>
+                            </Link>
                             <span className="nav-list">
                               <img src={icon.payment} alt="" />
                               <span className="content">Payment</span>
@@ -296,10 +297,10 @@ const fetchSuggestions = useCallback(
                           </span>
                         </span>
                         <span className="span-list">
-                          <span className="span-option">
+                          <Link to={'/orders'} className="span-option">
                             <img src={icon.OrderListWhite} alt="" />
                             <span className="span-option-txt">My Orders</span>
-                          </span>
+                          </Link>
                           <span className="span-option">
                             <img src={icon.paymentWhite} alt="" />
                             <span className="span-option-txt">Payment</span>

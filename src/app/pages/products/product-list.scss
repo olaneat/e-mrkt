@@ -404,6 +404,12 @@
 @media (min-width:760px) {
   .flash-products{
       grid-template-columns: repeat(6, auto);
+      scrollbar-width: none;
+      overflow-x: auto;
+      -ms-overflow-style:none;
+      &::-webkit-scrollbar {
+        display: none; 
+      }
 
   }
   

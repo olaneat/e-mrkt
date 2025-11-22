@@ -16,6 +16,8 @@ import ProductByCategory from "./app/pages/category-product/index"
 import VerifyPayment from "./app/pages/verify-payment/very-payment"
 import SettingPage from "./app/pages/settings/setting"
 import PasswordReset from "./app/pages/password-reset/password-reset"
+import Orders from "./app/pages/orders/orders";
+
 const App = () => {
 
   const user = useSelector((state:RootState)=>state.user);
@@ -39,7 +41,7 @@ const App = () => {
         <Route path="/verify-payment" element={<VerifyPayment />}/>
         <Route path="/settings/*" element={<SettingPage />}/>
         <Route path="/reset-password/*" element={<PasswordReset />}/>
-
+        <Route path="/orders" element={<Orders/>}/>
       </Routes>
     </BrowserRouter>
   )

@@ -27,3 +27,8 @@ export const mapProductListDTO = (data: any): ProductDTO[] => {
     FETCH_FAILED: 'Failed to fetch categories', // Updated for categories
   };
   
+
+  export interface OrderSearchDTO{
+    searchText: string
+    status?:string
+  } 
