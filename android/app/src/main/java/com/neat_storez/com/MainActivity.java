@@ -1,4 +1,4 @@
-package come.neat_storez.app;
+package com.neat_storez.com;
 
 import com.getcapacitor.BridgeActivity;
 

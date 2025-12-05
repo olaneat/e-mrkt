@@ -1,9 +1,10 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'come.neat_storez.app',
+  appId: 'com.neatstorez.app',
   appName: 'neat-storez',
-  webDir: 'dist'
+  webDir: 'dist',
+  bundledWebRuntime: false
 };
 
 export default config;
