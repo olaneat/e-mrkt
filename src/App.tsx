@@ -17,6 +17,7 @@ import VerifyPayment from "./app/pages/verify-payment/very-payment"
 import SettingPage from "./app/pages/settings/setting"
 import PasswordReset from "./app/pages/password-reset/password-reset"
 import Orders from "./app/pages/orders/orders";
+import { App as CapApp } from '@capacitor/app';
 
 const App = () => {
 
@@ -28,6 +29,24 @@ const App = () => {
       dispatch(logout());
     }
   },[user.token])
+
+  useEffect(()=>{
+    const handleBackButton = ()=>{
+      if(window.history.length>1){
+        window.history.back();
+      }else{
+        if(confirm("Are you sure you want to exist this app")){
+          CapApp.exitApp();
+        }
+      }
+    }
+    const listener = CapApp.addListener('backButton', handleBackButton);
+
+
+    return()=>{
+      // listener.remove();
+    }
+  }, [])
   return (
     <BrowserRouter>
       <Routes>

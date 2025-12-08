@@ -8,6 +8,7 @@ export interface CartDTO {
     shippingCost: number
     totalShippingCost: number
     availabeQuantity: number; 
+    size:any
 
 
   }

@@ -14,7 +14,6 @@
         align-items: center;
         height: 100%;
         width: 100%;
-        padding: 20px 64px;
         .title{
             font-size: 24px;
             color: #333;
@@ -37,10 +36,8 @@
                     display: flex;
                     gap: 8px;
                     align-self: stretch;
-                    justify-content: center;
                     .tab{
                         display: flex;
-                        justify-content: center;
                         align-items: center;
                         color: #333;
                         font-size: 12px;
@@ -49,7 +46,8 @@
                         border-bottom: 1px solid #e5e5e5;
                         cursor: pointer;
                         text-transform:capitalize;
-                        transition: background-color 0.3s ease, transform 0.2s ease
+                        transition: background-color 0.3s ease, transform 0.2s ease;
+                        text-wrap: nowrap;
                     }
                     :hover{
                        background-color: #E98C8C;
@@ -210,5 +208,47 @@
                 }
             }
         }
+    }
+}
+
+@media (max-width:768px) {
+    .nav-div{
+        flex-direction: column;
+        gap: 8px;
+
+        .tabs{
+            width:calc(100vw - 32px);
+            overflow-x: auto;
+            justify-content: flex-start;
+        }
+        .search{
+            width: 100%;
+        }
+    }
+
+    .orders-div{
+        padding: 16px;
+    }
+
+    .detail{
+        flex-direction: column;
+    }
+    .item-name{
+         text-wrap: nowrap;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: calc(100vw - 80px);
+        overflow: hidden;
+    }
+}
+
+@media (min-width:768px) {
+    .orders-div{
+        padding: 20px 64px;
+
+    }
+    .tabs{
+        justify-content: center;
+
     }
 }

@@ -14,7 +14,7 @@ export interface ProductDetailDTO {
     rearCamera: string;
     display: string;
     sku: string;
-    size: string;
+    size: any[];
     processor: string;
     category: string;
     wlan: string;

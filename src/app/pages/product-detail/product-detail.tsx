@@ -29,6 +29,7 @@ const ProductDetail = () =>{
     const [toastTitle, setToastTitle] = useState<string>('');
     const [toastMsg, setToastMsg] = useState<string>('')
     const [toastType, setToastType] = useState<string>('')
+    const [size, setSize] = useState();
     const icons = Icons.Icons;
 
     useEffect(() =>{
@@ -60,7 +61,9 @@ const ProductDetail = () =>{
       }
     }
 
-
+    const selectSize =(size:any)=>{
+      setSize(size);
+    }
 
     const changeQuantity=(type:string)=>{
       if(type == 'add'){
@@ -83,6 +86,11 @@ const ProductDetail = () =>{
     }
 
     const addItemToCart=()=>{
+      if(product?.size.length!>0 && !size){
+        setShowToast(true)
+        setToastMsg('please select a size')
+        setToastType('warning')
+      }
       const payload:any = {
         price: product?.price,
         name: product?.name,
@@ -91,7 +99,8 @@ const ProductDetail = () =>{
         img: product?.img,
         totalPrice: quantity * product!.price,
         shippingCost:300,
-        availabeQuantity: product?.stock
+        availabeQuantity: product?.stock,
+        size:size
       }
       dispatch(addToCart(payload))
         openToast();
@@ -139,6 +148,18 @@ const ProductDetail = () =>{
                     
                   </span>
                 </div> */}
+
+                {
+                  product?.size ?
+                  <div className="size-div">
+                    <span className="variation-txt">Variation Available</span>
+                    <span className="size-arr">{product.size.map((x)=>(
+                      <span className={`size  ${size==x ?"active-size" : ''}`} key={x} onClick={()=>selectSize(x)}>{x}</span>
+                    ))}</span>
+
+                  </div>
+                  :""
+                }
                 <div className="price-div">
                   <span className="name">price: </span>
                   <span className="price">
@@ -150,7 +171,7 @@ const ProductDetail = () =>{
                     }
                   </span>
                 </div>
-              
+                  
                 <div className="add-cart">
                   <div className="outer">
                     <div className="quantity-div">
@@ -213,7 +234,7 @@ const ProductDetail = () =>{
                   </span>
                   : tabvalue=='specification'
                   ? 
-                  <div>
+                  <div className="extra-div">
                     <div className="specification-div">
                       {
                       
@@ -267,16 +288,8 @@ const ProductDetail = () =>{
                           </div>
                           :""
                         } 
-                        {
-                          product?.size ?
-                          <div className="itemss">
-                            <span className="product-color">size:</span>
-                            <span className="desc-txt">{product.size}</span>
-
-                          </div>
-                          :""
-                        }
-                        {
+                        
+                        {/* {
                           product?.slug ?
                           
                           <div className="itemss">
@@ -284,7 +297,7 @@ const ProductDetail = () =>{
                             <span className="desc-txt">{product.slug}</span>
                           </div>
                           :""
-                        }
+                        } */}
                         {
                           product?.display ?
                           <div className="itemss">
@@ -359,7 +372,7 @@ const ProductDetail = () =>{
 
                   </div>
                       :tabvalue=='overview'
-                      ? <div className="detail"></div>
+                      ? <div className="detail-div"></div>
                       :""
                 }
               </div>
