@@ -113,7 +113,14 @@ const Cart =() =>{
                               <span className="count">{index+1}</span>
                               <img src={`${env.IMG_URL}/${item.img}`} alt="" className="item-img" />
                               <div className="cart-item-detail">
-                                <span className="item-name max" >{item.name} </span>
+                                <span className="cart-product-name max" >{item.name} </span>
+
+                                <div className="size-div">
+                                  <span className="size-txt">Size:</span>
+                                  <span className="size">
+                                    {item.size}
+                                  </span>
+                                </div>
                                 <div className="price-div">
                                   <span className="price-detail">
                                     <span className="unit-price"> Unit price:</span>

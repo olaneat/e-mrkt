@@ -19,7 +19,7 @@ const ProductDetail = () =>{
     // const [productDetail, setProductDetail] = useState<ProductDetailDTO>();
     const { product, loading, err } = useSelector((state: RootState) => state.product);
     const isLoadingOverall = loading; 
-    const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
+    const { categories, isCategoryLoading, categoryError } = useSelector((state: RootState) => state.category);
       
     const params = useParams();
     const [tabvalue, setTabValue] = useState<string>("");

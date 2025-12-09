@@ -115,14 +115,31 @@
 
                                         
                                     }
+                                    .checkout-size-div{
+                                        display: flex;
+                                        gap: 8px;
+                                        align-self: stretch;
+                                        justify-content: flex-start;
+                                        align-items: center;
+                                    
+                                        .size-txt{
+                                            font-size: 12px;
+                                            color: #666;
+                                        }
+                                        .size{
+                                            color: #333;
+                                            font-size: 12px;
+                                        }
+                                    }
                                     .price-qua-div{
                                         display: flex;
                                         justify-content: space-between;
                                         align-self: center;
                                         align-self: stretch;
+                                       
                                         .price{
-                                            font-size: 15px;
-                                            color: #000;
+                                            font-size: 13px;
+                                            color: #666;
 
                                         }
                                         .quantity{

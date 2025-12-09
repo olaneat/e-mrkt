@@ -11,16 +11,32 @@ import { CategoryDTO } from "../../dto/categories.dto"
 import { RootState, AppDispatch } from "../../store";
 import LoaderComponent from "../../components/loader/loader"
 import { DisplayProducts } from '../../slices/product-list.slice'
-
+import { useGetProductsQuery } from "../../slices/new-product.slice"
 
 
 const HomePage = () => {
 
   const dispatch = useDispatch<AppDispatch>();
-  const {products, loading, err} = useSelector((state:RootState)=>state.products )
-  const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
+  // const {products, loading, err} = useSelector((state:RootState)=>state.products )
+  const { 
+    data: products, 
+    isLoading, 
+    isFetching,
+  } = useGetProductsQuery(undefined, {
+    // THIS COMBO MAKES OFFLINE WORK PERFECTLY
+    refetchOnMountOrArgChange: false,
+    refetchOnFocus: false,
+    refetchOnReconnect: false,
+    // Show cached data immediately, even if stale
+    selectFromResult: ({ data, isLoading, isFetching }) => ({
+      data: data ?? [], // use cached data if available
+      isLoading: isLoading && !data, // only show loading first time
+      isFetching,
+    }),
+  });
+  const { categories, isCategoryLoading, categoryError } = useSelector((state: RootState) => state.category);
   
-  const isLoadingOverall = loading || isLoading;
+  const isLoadingOverall =  isLoading;
    useEffect(()=>{
     getCategories();
     getProducts()

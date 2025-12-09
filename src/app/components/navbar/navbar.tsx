@@ -80,7 +80,7 @@ const fetchSuggestions = useCallback(
   const [showSidebar, setShowSidebar] = useState(false)
   const [dropDownMenu, setdropDownMenu] = useState(false);
   const [dropDown, setdropDown] = useState(false);
-  const { categories, isLoading, error } = useSelector((state: RootState) => state.category);
+  const { categories, isCategoryLoading, categoryError } = useSelector((state: RootState) => state.category);
 
  
   useEffect(()=>{

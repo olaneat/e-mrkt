@@ -22,6 +22,7 @@ import  RequestPasswordReducer  from "./slices/request-password.slice";
 import ResetPasswordReducer from './slices/rest-pswd.slice'
 import SearchReducer  from './slices/search.slice'
 import OrderListReducer from "./slices/orders.slice";
+import { productListData } from "./slices/new-product.slice";
 const persistState = loadState();
 const persistConfig = {
   key: "root",
@@ -49,7 +50,12 @@ const reducers = combineReducers({
   requestPassword:RequestPasswordReducer,
   resetPassword: ResetPasswordReducer,
   search :SearchReducer,
-  OrderList: OrderListReducer
+  OrderList: OrderListReducer,
+
+
+
+  [productListData.reducerPath]: productListData.reducer,
+
 });
 
 // Define makeStore to create a new store instance
@@ -57,6 +63,11 @@ export const makeStore = (preloadedState = persistState) => {
   const store = configureStore({
     reducer: reducers,
     preloadedState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false, // for redux-persist
+    }).concat(productListData.middleware), //
+    
     // middleware: (getDefaultMiddleware) =>
     //   getDefaultMiddleware({
     //     serializableCheck: false, // Disable for redux-persist

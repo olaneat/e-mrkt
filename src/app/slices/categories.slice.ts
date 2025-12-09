@@ -4,13 +4,13 @@ import CategoryService from "../services/categories.service";
 import { CategoryDTO, ERROR_MESSAGES, mapCategoryListDTO} from '../dto/categories.dto';
 interface CategoryState {
     categories: CategoryDTO[] | null;
-    error: string | null;
-    isLoading :boolean;
+    categoryError: string | null;
+    isCategoryLoading :boolean;
 }
 const initialState: CategoryState = {
     categories: null,
-    isLoading: false,
-    error: null
+    isCategoryLoading: false,
+    categoryError: null
 }
 
 export const newCategorySlice = createAsyncThunk(
@@ -66,24 +66,24 @@ const CategorySlice = createSlice({
     reducers: {
         clearCategories(state) {
           state.categories = null;
-          state.error = null;
-          state.isLoading = false;
+          state.categoryError = null;
+          state.isCategoryLoading = false;
         },
       },
       extraReducers: (builder) => {
         builder
           .addCase(displayCategories.pending, (state) => {
-            state.isLoading = true;
-            state.error = null;
+            state.isCategoryLoading = true;
+            state.categoryError = null;
           })
           .addCase(displayCategories.fulfilled, (state, action: PayloadAction<CategoryDTO[]>) => {
-            state.isLoading = false;
+            state.isCategoryLoading = false;
             state.categories = action.payload;
-            state.error = null;
+            state.categoryError = null;
           })
           .addCase(displayCategories.rejected, (state, action) => {
-            state.isLoading = false;
-            state.error = action.payload || ERROR_MESSAGES.FETCH_FAILED;
+            state.isCategoryLoading = false;
+            state.categoryError = action.payload || ERROR_MESSAGES.FETCH_FAILED;
           });
       },
     //     builder.addCase(newCategorySlice.fulfilled, (state:any, action:any)=>{

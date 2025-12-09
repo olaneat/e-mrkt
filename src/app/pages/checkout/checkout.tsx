@@ -285,6 +285,10 @@ const Checkout = () =>{
                           <img src={`${env.IMG_URL}/${item.img}`} className="img-item" alt="" />
                           <div className="item-infor">
                             <span className="name">{item.name}</span>
+                              <span className="checkout-size-div">
+                                <span className="size-txt">Size:</span>
+                                <span className="size">{item.size}</span>
+                              </span>
                             <div className="price-qua-div">
                               <span className="price">{item.totalPrice.toLocaleString('en-US',{style:"currency", currency: "NGN"})}</span>
                               <div className="quantity">
