@@ -38,3 +38,12 @@ if (container) {
     "Root element with ID 'root' was not found in the document. Ensure there is a corresponding HTML element with the ID 'root' in your HTML file.",
   )
 }
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then(() => console.log("Service Worker Registered ✓"))
+      .catch(err => console.error("SW registration failed:", err))
+  })
+}

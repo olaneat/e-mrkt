@@ -54,7 +54,7 @@ const reducers = combineReducers({
 
 
 
-  [productListData.reducerPath]: productListData.reducer,
+  // [productListData.reducerPath]: productListData.reducer,
 
 });
 
@@ -63,10 +63,10 @@ export const makeStore = (preloadedState = persistState) => {
   const store = configureStore({
     reducer: reducers,
     preloadedState,
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: false, // for redux-persist
-    }).concat(productListData.middleware), //
+    // middleware: (getDefaultMiddleware) =>
+    //   getDefaultMiddleware({
+    //     serializableCheck: false, // for redux-persist
+    // }).concat(productListData.middleware), //
     
     // middleware: (getDefaultMiddleware) =>
     //   getDefaultMiddleware({

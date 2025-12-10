@@ -17,26 +17,26 @@ import { useGetProductsQuery } from "../../slices/new-product.slice"
 const HomePage = () => {
 
   const dispatch = useDispatch<AppDispatch>();
-  // const {products, loading, err} = useSelector((state:RootState)=>state.products )
-  const { 
-    data: products, 
-    isLoading, 
-    isFetching,
-  } = useGetProductsQuery(undefined, {
-    // THIS COMBO MAKES OFFLINE WORK PERFECTLY
-    refetchOnMountOrArgChange: false,
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-    // Show cached data immediately, even if stale
-    selectFromResult: ({ data, isLoading, isFetching }) => ({
-      data: data ?? [], // use cached data if available
-      isLoading: isLoading && !data, // only show loading first time
-      isFetching,
-    }),
-  });
+  const {products, loading, err} = useSelector((state:RootState)=>state.products )
+  // const { 
+  //   data: products, 
+  //   isLoading, 
+  //   isFetching,
+  // } = useGetProductsQuery(undefined, {
+  //   // THIS COMBO MAKES OFFLINE WORK PERFECTLY
+  //   refetchOnMountOrArgChange: false,
+  //   refetchOnFocus: false,
+  //   refetchOnReconnect: false,
+  //   // Show cached data immediately, even if stale
+  //   selectFromResult: ({ data, isLoading, isFetching }) => ({
+  //     data: data ?? [], // use cached data if available
+  //     isLoading: isLoading && !data, // only show loading first time
+  //     isFetching,
+  //   }),
+  // });
   const { categories, isCategoryLoading, categoryError } = useSelector((state: RootState) => state.category);
   
-  const isLoadingOverall =  isLoading;
+  const isLoadingOverall =  isCategoryLoading || loading;
    useEffect(()=>{
     getCategories();
     getProducts()
