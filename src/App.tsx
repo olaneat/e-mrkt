@@ -18,10 +18,12 @@ import SettingPage from "./app/pages/settings/setting"
 import PasswordReset from "./app/pages/password-reset/password-reset"
 import Orders from "./app/pages/orders/orders";
 import { App as CapApp } from '@capacitor/app';
+import DashboardPage from "./app/pages/admin/dashboard/dashboard"
+import AdminSignInPage  from "./app/pages/admin/login/sigin"
 
 const App = () => {
 
-  const user = useSelector((state:RootState)=>state.user);
+  const user = useSelector((state:RootState)=>state?.user);
   const dispatch = useDispatch();
   useEffect(()=>{
     let response = (AuthService.isTokenExpired(user.token, user.timeStamp))
@@ -63,6 +65,8 @@ const App = () => {
         <Route path="/settings/*" element={<SettingPage />}/>
         <Route path="/reset-password/*" element={<PasswordReset />}/>
         <Route path="/orders" element={<Orders/>}/>
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/auth-admin" element={<AdminSignInPage />} />
       </Routes>
     </BrowserRouter>
   )

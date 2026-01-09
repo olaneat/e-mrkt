@@ -1,0 +1,65 @@
+.admin-login-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+   .admin-form-div{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    
+    .title{
+        font-size: 20px;
+        font-weight: 600;
+        color: #666;
+        text-align: center;
+    }
+    .admin-login-form{
+        display: flex;
+        flex-direction: column;  
+        align-self: stretch;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        .field{
+            width: 100%;
+        }
+        
+        .forgot{
+            font-size: 12.8px;
+            color: #666;
+            text-align: right;
+            cursor: pointer;
+            display: flex;
+            align-self: stretch;
+            justify-content: flex-end;
+            align-items: flex-end;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+   }
+}
+
+@media (min-width:768px) {
+    .admin-login-container{
+        background-image: url('/public/imgs/admin-login-bg.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        .admin-form-div{
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(100, 200, 255, 0.2);
+            border-radius: 12px;
+            padding: 32px ; 
+            max-width: fit-content;
+            margin: 2rem auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+        }
+    }
+}   

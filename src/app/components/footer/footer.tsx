@@ -4,7 +4,7 @@ import Icons from "../../constant/imgs.constant";
 import { Link } from "react-router-dom";
 const Footer = ()=>{
 
-  const [email, setEmail]= useState<string>("");
+  const [email, setEmail]= useState<string>(" ");
   const icons = Icons.Icons
   function sendMail(){
   }

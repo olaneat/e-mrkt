@@ -25,7 +25,7 @@ const ToastComponent = ({type, message, title, handleClose, isOpen}:toast)=>{
         <div className={`toast-container ${type=='success' ? 'success': 'error'}`}>
           {type == 'success' ?
             <div className="toast-content">
-              <img src={icons.success} alt="" className="img" />
+              <img src={icons?.success} alt="" className="img" />
               <div className="toast-body">
             <span className="toast-title">{title}</span>
             <span className="toast-txt">{message} </span>

@@ -37,7 +37,7 @@ import loginImg from '/imgs/shopping.png'
 // import signUpImg from '/imgs/signup-img.svg'
 import emptyStateCart from '/imgs/shoping-cart.jpeg'
 import EmptyProductsImg from '/imgs/empty-state.svg'
-
+import AdminLoginBgImg from '/imgs/admin-login-bg.jpg'
 const Icons= {
     SendIcon,
     locationIcon,
@@ -77,7 +77,8 @@ const Images ={
     // signUpImg,
     emptyStateCart,
     loginImg,
-    EmptyProductsImg
+    EmptyProductsImg,
+    AdminLoginBgImg
 
 }
 export default {Icons, Images}

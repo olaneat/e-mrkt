@@ -14,6 +14,9 @@ interface LoginResponseDTO {
     lastName?: string;
     username?: string;
     profileImage?:string
+    is_staff?:boolean
+    is_admin?:boolean
+
   };
   refresh_token: string;
   access_token: string;

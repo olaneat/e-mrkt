@@ -24,7 +24,7 @@ const ProductByCategory = ()=>{
   }, [])
 
   const displayProduct = ()=>{
-    let catId:any = params.id;
+    let catId:any = params?.id;
     dispatch(DisplayProductsByCategory(catId) as any);
   }
 
@@ -61,7 +61,7 @@ const ProductByCategory = ()=>{
               <div className="products-list">
                 {
                   categoryProducts?.products.map((product)=>(
-                    <Link to={`/product/${product.id}/detail`} className="product" id={product.id}>
+                    <Link to={`/product/${product.id}/detail`} key={product.id} className="product" id={product.id}>
                       <img src={`${env.IMG_URL}/${product.img}`} alt="" className="product-imf" />
                       <span className="product-name">{product.name}</span>
                       <span className="price">{Number(product.price).toLocaleString('en-US', {currency:'NGN', style:'currency'})}</span>
