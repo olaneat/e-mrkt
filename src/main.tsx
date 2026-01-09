@@ -39,11 +39,31 @@ if (container) {
   )
 }
 
+// In your main entry file (index.tsx / main.tsx / App entry point)
 if ("serviceWorker" in navigator) {
+  // Wait for the page to be fully loaded before registering
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("/service-worker.js")
-      .then(() => console.log("Service Worker Registered ✓"))
-      .catch(err => console.error("SW registration failed:", err))
-  })
+      .register("/service-worker.js", { scope: "/" }) // optional: scope
+      .then((registration) => {
+        console.log("Service Worker Registered Successfully! 🎉", registration.scope);
+
+        // Optional: Listen for updates (very useful during development)
+        registration.addEventListener("updatefound", () => {
+          console.log("New Service Worker found, installing...");
+        });
+      })
+      .catch((error) => {
+        console.error("Service Worker registration failed:", error);
+      });
+  });
 }
+// if ("serviceWorker" in navigator) {
+//   window.addEventListener("load", () => {
+//     navigator.serviceWorker
+//       .register("/service-worker.js")
+//       .then(() => console.log("Service Worker Registered ✓"))
+//       .catch(err => console.error("SW registration failed:", err))
+//   })
+// }
+

@@ -20,37 +20,82 @@ import Orders from "./app/pages/orders/orders";
 import { App as CapApp } from '@capacitor/app';
 import DashboardPage from "./app/pages/admin/dashboard/dashboard"
 import AdminSignInPage  from "./app/pages/admin/login/sigin"
-
+import { PluginListenerHandle } from "@capacitor/core";
 const App = () => {
 
   const user = useSelector((state:RootState)=>state?.user);
   const dispatch = useDispatch();
   useEffect(()=>{
-    let response = (AuthService.isTokenExpired(user.token, user.timeStamp))
-    if(user.isAuthenticated && response){
+    const expired = (AuthService.isTokenExpired(user.token, user.timeStamp))
+    if(user.isAuthenticated && expired){
       dispatch(logout());
     }
-  },[user.token])
+  },[user.token, user.isAuthenticated, user.timeStamp, dispatch])
+  useEffect(() => {
+    let backButtonListener: PluginListenerHandle | undefined;
 
-  useEffect(()=>{
-    const handleBackButton = ()=>{
-      if(window.history.length>1){
-        window.history.back();
-      }else{
-        if(confirm("Are you sure you want to exist this app")){
-          CapApp.exitApp();
+    const setup = async () => {
+      backButtonListener = await CapApp.addListener('backButton', ({ canGoBack }) => {
+        if (canGoBack) {
+          window.history.back();
+        } else {
+          if (confirm("Are you sure you want to exit this app?")) {
+            CapApp.exitApp();
+          }
         }
-      }
-    }
-    const listener = CapApp.addListener('backButton', handleBackButton);
+      });
+    };
+
+    setup().catch(console.error);
+
+    return () => {
+      backButtonListener?.remove();
+    };
+  }, []);
+
+  // useEffect(()=>{
+  //   const handleBackButton = ()=>{
+  //     if(window.history.length>1){
+  //       window.history.back();
+  //     }else{
+  //       if(confirm("Are you sure you want to exist this app")){
+  //         CapApp.exitApp();
+  //       }
+  //     }
+  //   }
+  //   const listener = CapApp.addListener('backButton', handleBackButton);
 
 
    
 
-    return()=>{
-      // listener.remove();
-    }
-  }, [])
+  //   return()=>{
+  //     // listener.remove();
+  //   }
+  // }, [])
+//   useEffect(() => {
+//   let backButtonListener: PluginListenerHandle | undefined;
+
+//   const setupBackButton = async () => {
+//     backButtonListener = await CapApp.addListener('backButton', ({ canGoBack }) => {
+//       if (window.history.length > 1 && canGoBack) {
+//         window.history.back(); // ← normal navigation
+//       } else {
+//         if (confirm("Are you sure you want to exit this app?")) {
+//           CapApp.exitApp(); // ← only exit when at root
+//         }
+//       }
+//     });
+//   };
+
+//   setupBackButton().catch(console.error);
+
+//   // Cleanup: remove listener when component unmounts
+//   return () => {
+//     if (backButtonListener) {
+//       backButtonListener.remove();
+//     }
+//   };
+// }, []);
   return (
     <BrowserRouter>
       <Routes>
