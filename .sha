@@ -1,0 +1,10 @@
+> Task :app:signingReport
+Variant: debug
+Config: debug
+Store: /Users/seam/.android/debug.keystore
+Alias: AndroidDebugKey
+MD5: 66:00:15:02:50:5A:37:38:24:2E:39:C9:EB:76:53:BC
+SHA1: C0:CA:00:7D:32:40:EC:84:FA:D1:04:7C:D7:C4:62:A8:12:D3:15:A1
+SHA-256: 6C:AF:7D:5E:DD:DA:8A:7A:65:B5:B8:17:D9:CF:F7:9B:CD:ED:EB:0A:E4:73:F2:39:1F:11:31:79:9F:D5:71:22
+Valid until: Sunday, September 19, 2055
+----------

@@ -23,7 +23,7 @@ import ToastComponent from "../../components/toast/toast";
 import {Order} from "../../slices/order-slice";
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoaderComponent from "../../components/loader/loader";
-
+import { Browser } from '@capacitor/browser';
 const Checkout = () =>{
     const dispatch = useDispatch();
     const {address, addressIsLoading,  err } = useSelector((state:RootState)=> state.address)
@@ -201,6 +201,7 @@ const Checkout = () =>{
         user: user?.user!.id!,
         items:cart.cart,
         callback_url:`${env.HOST_URL}/verify-payment`
+        // callback_url:`neatstorez://verify-payment`
       }
       dispatch(Order(payload)as any).then((res:any)=>{
         if(res.payload.status_code==201){
@@ -219,7 +220,8 @@ const Checkout = () =>{
           // }
 
           if(data.payment_url){
-            setTimeout(()=>window.open(data.payment_url, '_self'), 1000)
+            setTimeout(()=>{Browser.open({url: data.payment_url, presentationStyle: 'popover'})}, 1000)
+            // setTimeout(()=>window.open(data.payment_url, '_self'), 1000)
           }
           setTimeout(()=>setShowToast(false),5000)
 

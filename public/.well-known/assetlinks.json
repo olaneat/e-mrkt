@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { 
+        "namespace": "android_app",
+        "package_name": "com.neatstorez.app",
+        "sha256_cert_fingerprints": ["6C:AF:7D:5E:DD:DA:8A:7A:65:B5:B8:17:D9:CF:F7:9B:CD:ED:EB:0A:E4:73:F2:39:1F:11:31:79:9F:D5:71:22"]
+    }
+}]
