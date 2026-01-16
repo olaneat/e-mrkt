@@ -218,7 +218,7 @@ const Checkout = () =>{
           //   publicKey: env.TEST_PK,
           //   onSuccess: handleSuccess
           // }
-
+          console.log(data, 'url')
           if(data.payment_url){
             setTimeout(()=>{Browser.open({url: data.payment_url, presentationStyle: 'popover'})}, 1000)
             // setTimeout(()=>window.open(data.payment_url, '_self'), 1000)

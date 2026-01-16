@@ -1,3 +1,4 @@
+
 /* src/index.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 * {
@@ -125,4 +126,26 @@ code {
   font-family: "Poppins", serif;
   font-weight: 900;
   font-style: italic;
+}
+
+:root {
+ --safe-area-inset-top: env(safe-area-inset-top, 24px);    /* fallback */
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0);
+}
+header,
+.app-header,
+.fixed-top-bar,
+.navbar,
+.top-bar {               /* whatever class/id your header uses */
+  padding-top: var(--safe-area-inset-top);
+  /* Optional: make header background extend under status bar for nice look */
+  background-color: inherit;   /* or your actual header color, e.g. #000 */
+  position: sticky;            /* or fixed, depending on your design */
+  top: 0;
+  z-index: 1000;
+}
+
+/* If your header is fixed/absolute */
+.fixed-header {
+  top: var(--safe-area-inset-top);
 }

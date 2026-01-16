@@ -29,16 +29,21 @@
                 <data android:scheme="emrkt" />
             </intent-filter>
             
-            <!-- <intent-filter android:autoVerify="true">
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data
-                android:scheme="https"
-                android:host="yourdomain.com"
-                android:pathPrefix="/checkout" />
-        </intent-filter> -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
+                <!-- Support http → https redirect and direct https -->
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+
+                <!-- Your domain (replace with real owned domain later) -->
+                <data android:host="neatstorez.vercel.app" />
+
+                <!-- Optional: limit to specific paths for security -->
+                <!-- <data android:host="neatstorez.vercel.app" android:pathPrefix="/verify-payment" /> -->
+            </intent-filter>
         </activity>
 
         <provider

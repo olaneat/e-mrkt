@@ -34,10 +34,12 @@ const VerifyPayment = () =>{
 
 
     const verify = ()=>{
+    
          if (!trxref || !reference) return
         dispatch(verifyPayment(trxref!) as any)
         .unwrap()
         .then((res:any)=>{
+          console.log(res, 'res verify')
             setShowToast(true),
             setTitle('Payment Successful')
             setToastType('success')

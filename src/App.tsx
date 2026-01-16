@@ -21,6 +21,10 @@ import { App as CapApp } from '@capacitor/app';
 import DashboardPage from "./app/pages/admin/dashboard/dashboard"
 import AdminSignInPage  from "./app/pages/admin/login/sigin"
 import { PluginListenerHandle } from "@capacitor/core";
+import { AppUrlListener } from "./app/components/deep-link/deep-link"
+
+
+
 const App = () => {
 
   const user = useSelector((state:RootState)=>state?.user);
@@ -53,51 +57,10 @@ const App = () => {
     };
   }, []);
 
-  // useEffect(()=>{
-  //   const handleBackButton = ()=>{
-  //     if(window.history.length>1){
-  //       window.history.back();
-  //     }else{
-  //       if(confirm("Are you sure you want to exist this app")){
-  //         CapApp.exitApp();
-  //       }
-  //     }
-  //   }
-  //   const listener = CapApp.addListener('backButton', handleBackButton);
-
-
-   
-
-  //   return()=>{
-  //     // listener.remove();
-  //   }
-  // }, [])
-//   useEffect(() => {
-//   let backButtonListener: PluginListenerHandle | undefined;
-
-//   const setupBackButton = async () => {
-//     backButtonListener = await CapApp.addListener('backButton', ({ canGoBack }) => {
-//       if (window.history.length > 1 && canGoBack) {
-//         window.history.back(); // ← normal navigation
-//       } else {
-//         if (confirm("Are you sure you want to exit this app?")) {
-//           CapApp.exitApp(); // ← only exit when at root
-//         }
-//       }
-//     });
-//   };
-
-//   setupBackButton().catch(console.error);
-
-//   // Cleanup: remove listener when component unmounts
-//   return () => {
-//     if (backButtonListener) {
-//       backButtonListener.remove();
-//     }
-//   };
-// }, []);
+ 
   return (
     <BrowserRouter>
+      <AppUrlListener />
       <Routes>
         <Route path="" element={<Index />} />
         <Route path="sign-up" element={<SignUpComponent/>}/>
@@ -117,4 +80,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;
