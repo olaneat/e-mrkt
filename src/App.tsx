@@ -21,6 +21,9 @@ import { App as CapApp } from '@capacitor/app';
 import DashboardPage from "./app/pages/admin/dashboard/dashboard"
 import AdminSignInPage  from "./app/pages/admin/login/sigin"
 import { PluginListenerHandle } from "@capacitor/core";
+import AdminAuthPage from "../src/app/components/admin-auth/index"
+
+
 const App = () => {
 
   const user = useSelector((state:RootState)=>state?.user);
@@ -110,8 +113,11 @@ const App = () => {
         <Route path="/settings/*" element={<SettingPage />}/>
         <Route path="/reset-password/*" element={<PasswordReset />}/>
         <Route path="/orders" element={<Orders/>}/>
-        <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/auth-admin" element={<AdminSignInPage />} />
+        <Route element={<AdminAuthPage />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+
+        </Route>
       </Routes>
     </BrowserRouter>
   )

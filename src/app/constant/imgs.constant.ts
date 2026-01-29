@@ -30,6 +30,8 @@ import paymentWhite from '/icons/payment-white.svg'
 import OrderListWhite from '/icons/order-list-white.svg'
 import chevronRite from '/icons/arr-rite.svg'
 import whiteSearch from '/icons/white-search.svg'
+import showToggle from '/icons/show.jpg'
+import hideToggle from '/icons/hide-toggle.jpg'
 
 
 // img list start here 
@@ -68,7 +70,9 @@ const Icons= {
     paymentWhite,
     OrderListWhite,
     chevronRite,
-    whiteSearch
+    whiteSearch,
+    showToggle,
+    hideToggle
 }
 
 
