@@ -1,0 +1,22 @@
+.main-auth-page{
+    width: 100%;
+    background: #fcfcfc;
+    height: 100vh;
+    display: flex;
+    gap: 4px;
+    position: relative;
+    .full-screen{
+        position: absolute;
+        left: 230px;
+        .side-bar{
+            display: flex;
+            height: 100%;
+            width: auto;
+        }
+        width: 100%;
+        
+    }
+    .half{
+        // margin-left: 230px;
+    }
+}
