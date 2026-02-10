@@ -1,5 +1,5 @@
 import React, { useState }  from "react";
-import imgsConstant from "../../constant/imgs.constant";
+import imgsConstant from "../../../constant/imgs.constant";
 import './style.scss'
 
 

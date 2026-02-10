@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../../../components/sidebar/sidbar";
+import Sidebar from "../../../components/admin/sidebar/sidbar";
 import './style.scss'
 const  DashboardPage = () => {
 const [size, setSize] = useState<boolean>(true)

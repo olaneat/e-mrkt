@@ -21,7 +21,7 @@ import { App as CapApp } from '@capacitor/app';
 import DashboardPage from "./app/pages/admin/dashboard/dashboard"
 import AdminSignInPage  from "./app/pages/admin/login/sigin"
 import { PluginListenerHandle } from "@capacitor/core";
-import AdminAuthPage from "../src/app/components/admin-auth/index"
+import AdminAuthPage from "./../src/app/components/admin/admin-auth/index"
 
 
 const App = () => {

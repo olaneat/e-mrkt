@@ -32,6 +32,7 @@ import chevronRite from '/icons/arr-rite.svg'
 import whiteSearch from '/icons/white-search.svg'
 import showToggle from '/icons/show.jpg'
 import hideToggle from '/icons/hide-toggle.jpg'
+import notificaionIcon from '/icons/bell-solid-full.jpg'
 
 
 // img list start here 
@@ -72,7 +73,8 @@ const Icons= {
     chevronRite,
     whiteSearch,
     showToggle,
-    hideToggle
+    hideToggle,
+    notificaionIcon
 }
 
 

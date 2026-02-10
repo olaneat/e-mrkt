@@ -1,13 +1,38 @@
-.admin-bar-container{
+.admin-navbar-container{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
-
-    .nav-container{
+    height: 60px;
+    background: #fff;
+    padding: 0px 24px;
+    .nav-content{
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
-        
+        gap: 64px;
+        // width: 300px;
+        max-width: 2500px;
+        .nav-icons{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            .user-icon{
+                // display: flex;
+                // justify-content: center;
+                // align-items: center;
+                // border-radius: 50%;
+                // height: 24px;
+                // width: 24px;
+                // background: #e5e5e5;
+                .icon-img{
+                    width: 20px;
+                }
+            
+            }
+
+            
+        }
     }
 }
