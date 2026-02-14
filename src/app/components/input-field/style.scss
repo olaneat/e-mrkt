@@ -72,8 +72,12 @@
 
 }
 .dropdown-field{
-    justify-content: space-between !important;
+    // justify-content: space-between !important;
+    display: flex;
+    gap: 16px;
     background: #fff;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     .dropdown-list{
         background: #fff;
@@ -89,9 +93,10 @@
         width: 100%;
         z-index: 10000;
         overflow: auto;
-        height: 150px;
+        // height: 150px;
         flex-direction: column;
         cursor: pointer;
+        min-width: 80px;
         .dropdown-option{
             padding: 2px;
         }
