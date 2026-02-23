@@ -1,0 +1,118 @@
+.recent-orders-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-self: stretch;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    background: #fff;
+    width: 100%;
+    .order-title{
+        font-size: 20px;
+        color: #333;
+        font-weight: 600;
+        padding:8px 16px 8px 16px;
+        border-bottom: 1px solid #e5e5e5;
+        align-self: stretch;
+        display: flex;
+        justify-content: flex-start;
+
+    }   
+    .filter-div{
+        display: flex;
+        align-items: stretch;
+        gap: 8px;
+        padding: 8px 16px;
+        width: 100%;
+
+        .filter{
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            display: flex;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            font-size: 12px;
+            cursor: pointer;
+            max-width: 250px;
+            width: 100px;
+        }
+        .search{width: 100%;}
+    }
+    .oders-list-div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 16px;
+        width: 100%;
+        flex-direction: column;
+        border-radius: 10px;
+        border: 1px solid #f1f1f1;
+        max-height: 300px;
+        overflow-y: auto;
+        .order-list-title-div{
+            background: #e5e5e5;
+            display: flex;
+            align-self: stretch;
+            // gap: 8px;
+            justify-content: space-between;
+            .order-title{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                font-size: 12px;
+                font-weight: 500;
+                color: #333;
+
+            }
+
+        }
+        .order-detail-list{
+            display: flex;
+            width: 100%;
+            .order{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                .content{
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid #f1f1f1;
+                    align-items: center;
+                    padding: 8px 16px;
+                    width: 100%;
+                    gap: 16px;
+                    .order-id{
+                        font-size: 12px;
+                        color: #333;
+                        font-weight: 500;
+                    }
+                    .order-status{
+                        font-size: 12px;
+                        color: #333;
+                        font-weight: 500;
+                    }
+                    .date-created{
+                        font-size: 12px;
+                        color: #333;
+                        font-weight: 500;
+                    }
+                    .total-cost{
+                        font-size: 12px;
+                        color: #333;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -90,15 +90,16 @@
         gap: 8px;
         display: flex;
         border-radius: 10px;
-        width: 100%;
+        width: fit-content;
         z-index: 10000;
         overflow: auto;
-        // height: 150px;
+        max-height: 250px;
         flex-direction: column;
         cursor: pointer;
         min-width: 80px;
         .dropdown-option{
             padding: 2px;
+            text-wrap: nowrap;
         }
     }
     .select-icon{

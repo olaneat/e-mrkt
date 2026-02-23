@@ -90,4 +90,11 @@
        align-self: stretch;
        align-items: center;
     }
+    .recent-orders{
+        display: flex;
+        align-items: stretch;
+        align-self: stretch;
+        justify-content: center;
+        width: 100%;
+    }
 }

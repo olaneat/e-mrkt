@@ -1,7 +1,7 @@
 import Rect, { useEffect, useRef, useState } from "react";
 import * as d3 from 'd3'
 import './style.scss'
-import SelectField, {DropdownHandle} from "../input-field/custom-select-field";
+import SelectField, {DropdownHandle} from "../../input-field/custom-select-field";
 
 export interface ChartData{
     data:any
