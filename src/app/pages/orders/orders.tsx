@@ -30,7 +30,7 @@ const Orders = ()=>{
   const dispatch = useDispatch();
   const imgUrl = imgsConstant
   
-  let [queryParams, queryParamsParams] = useState<OrderSearchDTO>({
+  let [queryParams, setqueryParams] = useState<OrderSearchDTO>({
     searchText: searchParams.get('ref') || "",
     status:  searchParams.get('status') || undefined,
   });
@@ -38,7 +38,7 @@ const Orders = ()=>{
   const toggleTab =(value:any)=>{
     queryParams.status = value.key
     setTabName(value.value);
-    queryParamsParams((prevParams) => ({
+    setqueryParams((prevParams) => ({
       ...prevParams,
       status: tabName,
     }));
@@ -93,7 +93,7 @@ const Orders = ()=>{
 
   const getSearchValue = (name:string, value:string)=>{
     queryParams.searchText = value
-    queryParamsParams((prev)=>({
+    setqueryParams((prev)=>({
       ...prev,
       [name]:value
     }))

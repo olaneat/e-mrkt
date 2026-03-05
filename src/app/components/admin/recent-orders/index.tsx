@@ -1,18 +1,23 @@
 import React, {useEffect, useState, useRef} from "react";
 import './style.scss'
 import { OrdersDTO } from "../../../dto/orders.dto";
-import SelectField, { DropdownHandle } from "../../../components/input-field/custom-select-field";
-import InputField from "../../..//components/input-field/input-field";
-
-
+import SelectField, { DropdownHandle } from "../../input-field/custom-select-field";
+import InputField from "../../input-field/input-field";
+import { getRecentOrderList } from "../../../slices/recent-order-list.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { format, formatDistanceToNow, parseISO } from 'date-fns';
+import { se } from "date-fns/locale";
 export interface OrdersProps{
     data:OrdersDTO[]
 }
-const OrderListComponent = ({data}:OrdersProps) =>{
-    const [orders, setOrders] = useState<OrdersDTO[]>([])
+const OrderListComponent = () =>{
     const dropdownRef = useRef<DropdownHandle>(null);
+    const dispatch = useDispatch();
+    const {recentOrders, isRecentOrderLoading, err} = useSelector((state:RootState)=>state.RecentOrderList);
     const [selectedFilter, setSelectedFilter] = useState<any> ({
-        filter: ""
+        status: "",
+        searchText: ""
     })
     const filterList: any[] =  [
         "All",
@@ -32,18 +37,25 @@ const OrderListComponent = ({data}:OrdersProps) =>{
     ];
 
     const getData = (name:string, value:string)=>{
+      console.log(name, value, 'name and value')
         setSelectedFilter((prev:any)=>({
             ...prev, 
             [name]:value
         }))
+        console.log(selectedFilter, 'selected filter')
+        dispatch(getRecentOrderList(selectedFilter) as any);
     }
     useEffect(()=>{
-        setOrders(data)
-        console.log(data, 'data')
-        // Fetch recent orders data from API and update state
-        // Example: fetch('/api/recent-orders').then(res => res.json()).then(data => setOrders(data));
+        displayOrders();
+        console.log(recentOrders, 'recent orders')
     }, [])
 
+
+    const displayOrders = () =>{
+      console.log('displaying orders')
+      dispatch(getRecentOrderList(selectedFilter) as any);
+    }
+  
     return( 
         <div className="recent-orders-container">
           <span className="order-title">Recent Orders</span>
@@ -51,8 +63,8 @@ const OrderListComponent = ({data}:OrdersProps) =>{
             <div className="filter">
               <SelectField 
                 preSelectedValue={selectedFilter?.filter ? selectedFilter?.filter:filterList[0]}
-                label="Filter"
-                fieldName="filter"
+                label="filter"
+                fieldName="status"
                 options={filterList}
                 ref={dropdownRef}
                 onChange={getData}
@@ -64,6 +76,8 @@ const OrderListComponent = ({data}:OrdersProps) =>{
                 type="search"
                 placeholder="Search by Order Id"
                 searchType="default"
+                name="searchText"
+                onChange={getData}
               />
             </div>
 
@@ -76,16 +90,18 @@ const OrderListComponent = ({data}:OrdersProps) =>{
               <span className="order-title">Date Created</span>
               <span className="order-title">Total Cost</span>
             </div>
-              {orders.length>0 ?
+              {recentOrders.length>0 ?
                 <div className="order-detail-list">
                   <div className="order">
-                    {orders.map((order:any, index)=>(
+                    {recentOrders.map((order:any, index)=>(
                       <div className="content" key={order.id}>
                         <span className="order-id">{index+1}</span>
                         <span className="order-id">{order.reference}</span>
                         <span className="order-status">{order.status}</span>
-                        <span className="date-created">{order.createdAt}</span>
-                        <span className="total-cost">9282928393</span>
+                        <span className="date-created">{format(order.createdAt,"MMMM do, yyyy 'at' h:mm a")}</span>
+                        <span className="total-cost">{Number(order.total_amount).toLocaleString('en-US',
+                          { style: 'currency', currency: 'NGN' })} 
+                        </span>
                       </div>
 
                     ))}

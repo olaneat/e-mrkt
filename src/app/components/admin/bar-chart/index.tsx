@@ -2,6 +2,10 @@ import Rect, { useEffect, useRef, useState } from "react";
 import * as d3 from 'd3'
 import './style.scss'
 import SelectField, {DropdownHandle} from "../../input-field/custom-select-field";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+import { RootState } from "../../../store";
+import { RevenueMetrics } from "../../../slices/revenue.slice";
 
 export interface ChartData{
     data:any
@@ -22,9 +26,11 @@ const EmptyChartState = () => (
     </div>
 );
 
-const BarChart = ({data}: ChartData) =>{
-    let value = data
-    const filterList:string []= ['Days', 'Weeks', 'Month', 'Year', 'Custom'];
+const BarChart = () =>{
+
+    const {revenue, revenueErr, isReveenueLoading} = useSelector((state:RootState)=>state.revenueMetrics)
+    const dispatch = useDispatch();
+    const filterList:string []= ['days', 'weeks', 'months', 'years', 'Custom'];
     const dropdownRef = useRef<DropdownHandle>(null);
     const svgRef = useRef<SVGSVGElement | null>(null);
     const wrapperRef = useRef<HTMLDivElement>(null)
@@ -33,15 +39,28 @@ const BarChart = ({data}: ChartData) =>{
     const MARGIN = { top: 40, right: 20, bottom: 36, left: 48 };
     
     const [selectedFilter, setSelectedFilter] = useState<any> ({
-        filter: ""
+        period: ""
     })
 
     // Check if data is empty or undefined
-    const hasData = data && Array.isArray(data) && data.length > 0;
+    const hasData = revenue?.data && Array.isArray(revenue?.data) && revenue?.data?.length > 0;
 
+    const geDispatchDetail =(value:string)=>{
+        if(value){
+            console.log(value, 'filter vau')
+        }
+        dispatch(RevenueMetrics(value)as any)
+    }
+
+    useEffect(()=>{
+
+        geDispatchDetail(selectedFilter.filter)
+
+    }, [0])
+    
     useEffect(() => {
         if (!wrapperRef.current) return;
-
+        
         const resizeObserver = new ResizeObserver((entries) => {
             const entry = entries[0];
             if (entry) {
@@ -77,7 +96,7 @@ const BarChart = ({data}: ChartData) =>{
             .append("g")
             .attr("transform", `translate(${MARGIN.left},${MARGIN.top})`);
 
-        const maxValue:any = d3.max(data, (d:any) => d.value) || 100;
+        const maxValue:any = d3.max(revenue?.data, (d:any) => d.revenue) || 100;
         const yScale = d3
             .scaleLinear()
             .domain([0, maxValue * 1.05])
@@ -86,34 +105,34 @@ const BarChart = ({data}: ChartData) =>{
 
         const xScale = d3
             .scaleBand<string>()
-            .domain(data.map((d:any) => d.name))
+            .domain(revenue?.data.map((d:any) => d.date))
             .range([0, innerWidth])
             .paddingInner(0.28)
             .paddingOuter(0.1);
 
         // Bars
         g.selectAll(".bar")
-            .data(data)
+            .data(revenue?.data)
             .join("rect")
             .attr("class", "bar")
-            .attr("x", (d:any) => xScale(d.name) ?? 0)
-            .attr("y", (d:any) => yScale(d.value))
+            .attr("x", (d:any) => xScale(d.date) ?? 0)
+            .attr("y", (d:any) => yScale(d.revenue))
             .attr("width", xScale.bandwidth())
-            .attr("height", (d:any) => innerHeight - yScale(d.value))
+            .attr("height", (d:any) => innerHeight - yScale(d.revenue))
             .attr("fill", "#DB4444")
             .attr("rx", 4);
 
         // X-axis labels
         g.selectAll(".day-label")
-            .data(data)
+            .data(revenue?.data)
             .join("text")
             .attr("class", "day-label")
-            .attr("x", (d:any) => (xScale(d.name) ?? 0) + xScale.bandwidth() / 2)
+            .attr("x", (d:any) => (xScale(d.date) ?? 0) + xScale.bandwidth() / 2)
             .attr("y", innerHeight + 24)
             .attr("text-anchor", "middle")
             .attr("fill", "#6b7280")
             .attr("font-size", 12)
-            .text((d:any) => d.name);
+            .text((d:any) => d.date);
 
         // Y-axis labels
         const yTicks = yScale.ticks(5);
@@ -128,26 +147,30 @@ const BarChart = ({data}: ChartData) =>{
             .attr("font-size", 11)
             .text((d) => `N${Math.round(d / 1000)}k`);
 
-    }, [data, dimensions, hasData]);
+    }, [revenue?.data, dimensions, hasData]);
     
     const getData = (name:string, value:any) =>{
         setSelectedFilter((prevState:any)=>({
             ...prevState,
             [name]:value
         }))
+        console.log(selectedFilter, 'filter')
+        console.log(value, 'selected')
+        geDispatchDetail(value)
     }
 
     return (
         <div className="bar-chart-container">
             <div className="outer-title-div">
-                <span className="chat-title">Overall Sales <span>{data?.overallsale || '3,000,000.00'}</span></span>
+                <span className="chat-title">Overall Sales <span> {revenue?.overall_total.toLocaleString('en-US', {style: 'currency', currency: 'NGN'}) }</span></span>
                 <span className="filters"> 
                     <SelectField
                         options={filterList}
                         preSelectedValue={selectedFilter?.filter ? selectedFilter?.filter:  filterList[0]}
                         onChange={getData}
-                        fieldName="filter"
-                        label="filter"
+                        fieldName="period"
+                        label="period"
+                        key={0}
                         ref={dropdownRef}
                     />
                 </span>

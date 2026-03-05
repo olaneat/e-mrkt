@@ -3,7 +3,7 @@ import Sidebar from "../../../components/admin/sidebar/sidbar";
 import './style.scss'
 import imgsConstant from "../../../constant/imgs.constant";
 import BarChart from "../../../components/admin/bar-chart";
-import OrderListComponent from "../../../components/admin/rent-orders";
+import OrderListComponent from "../../../components/admin/recent-orders";
 import { OrdersDTO } from "../../../dto/orders.dto";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -14,43 +14,10 @@ import { RootState } from "../../../store";
 const  DashboardPage = () => {
   const [size, setSize] = useState<boolean>(true);
   const dispatch = useDispatch();
-  const {statusCount, isStatusCountLoading, StatusCountError} = useSelector((state:RootState)=>state.OrderStatusCount);
+  const {statusCount, isStatusCountLoading, StatusCountError} = useSelector((state:RootState)=>state?.OrderStatusCount);
   const isFirstRender = useRef(true);
   const allIcons = imgsConstant.Icons;
-  const [BarChartValue, setBarchartValue] = useState();
-  const dummyData:any = [
-    { name: 'Mon', value: 30 },
-    { name: 'Tue', value: 80 },
-    { name: 'Wed', value: 45 },
-    { name: 'Thur', value: 60 },
-    { name: 'Fri', value: 20 },
-    { name: 'Sat', value: 90 },
-    { name: 'Sun', value: 100 },
-  ]
   
-  const OrderList:OrdersDTO[] = [
-    {
-      id: '19283',
-      reference: '129k83j',
-      items: [],
-      createdAt: '20-09-1923',
-      status:'pending'
-    },
-    {
-      id: '1219283',
-      reference: 'a12k83j',
-      items: [],
-      createdAt: '21-09-2025',
-      status:'Delivered'
-    },
-    {
-      id: '19284',
-      reference: '129k8j',
-      items: [],
-      createdAt: '22-01-2026',
-      status:'in_transit'
-    }
-  ]
   const getSize = (value:boolean)=>{
     setSize(value)
     
@@ -58,8 +25,7 @@ const  DashboardPage = () => {
 
 
   const getStatusCount = () =>{ 
-    dispatch(fetchStatusCount() as any).then((res:any)=>{
-     });
+    dispatch(fetchStatusCount() as any).then();
   }
 
   useEffect(()=>{
@@ -99,10 +65,10 @@ const  DashboardPage = () => {
         </div>
       </div>
       <div className="overall-card">
-        <BarChart data={dummyData}/>
+        <BarChart />
       </div>
       <div className="recent-orders">
-        <OrderListComponent data={OrderList}/>
+        <OrderListComponent />
       </div>
 
     

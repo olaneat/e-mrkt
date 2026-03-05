@@ -31,4 +31,5 @@ export const mapProductListDTO = (data: any): ProductDTO[] => {
   export interface OrderSearchDTO{
     searchText: string
     status?:string
+    peroid?:string
   } 

@@ -24,7 +24,8 @@ export interface OrdersDTO{
     reference:string,
     items: OrderItemDTO[]
     status:string,
-    createdAt:string
+    createdAt:string, 
+    total_amount:number
 
 }
 
@@ -34,6 +35,7 @@ export const mapOrder =(orders:any)=>{
         id: order.id ?? undefined,
         status: order.status ?? undefined,
         createdAt: order.created_at,
+        total_amount: order.total_amount ?? undefined, 
         items: Array.isArray(order.items) ? order.items.map((item:any)=>({
             id: item.id ?? undefined,
             name: item.name ?? undefined,

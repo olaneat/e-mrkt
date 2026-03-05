@@ -23,6 +23,9 @@ import ResetPasswordReducer from './slices/rest-pswd.slice'
 import SearchReducer  from './slices/search.slice'
 import OrderListReducer from "./slices/orders.slice";
 import OrderStatusCount from './slices/status-count.slice';
+import RecentOrderSlice from "./slices/recent-order-list.slice";
+import RevenueSlice from './slices/revenue.slice'
+
 const persistState = loadState();
 const persistConfig = {
   key: "root",
@@ -51,7 +54,9 @@ const reducers = combineReducers({
   resetPassword: ResetPasswordReducer,
   search :SearchReducer,
   OrderList: OrderListReducer,
-  OrderStatusCount: OrderStatusCount
+  OrderStatusCount: OrderStatusCount,
+  RecentOrderList: RecentOrderSlice,
+  revenueMetrics: RevenueSlice
 
 
   // [productListData.reducerPath]: productListData.reducer,
