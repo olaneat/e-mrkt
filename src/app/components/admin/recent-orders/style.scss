@@ -20,7 +20,7 @@
         display: flex;
         justify-content: flex-start;
 
-    }   
+    }
     .filter-div{
         display: flex;
         align-items: stretch;
@@ -46,73 +46,184 @@
         }
         .search{width: 100%;}
     }
-    .oders-list-div{
+    .recent-orders{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        
+        .orders-list-div {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid #f1f1f1;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+
+            .orders-table {
+                width: 100%;
+                border-collapse: collapse;
+
+                thead {
+                background: #e5e5e5;
+
+                th {
+                    text-align: left;
+                    font-size: 12px;
+                    font-weight: 500;
+                    color: #333;
+                    padding: 10px 16px;
+                }
+                }
+
+                tbody {
+                tr {
+                    border-bottom: 1px solid #f1f1f1;
+
+                    td {
+                    font-size: 12px;
+                    font-weight: 500;
+                    color: #333;
+                    padding: 10px 16px;
+                    }
+                }
+                }
+            }
+
+    }
+    }   
+    // .oders-list-div{
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     padding: 8px 16px;
+    //     width: 100%;
+    //     flex-direction: column;
+    //     border-radius: 10px;
+    //     border: 1px solid #f1f1f1;
+    //     max-height: 300px;
+    //     overflow-y: auto;
+    //     .order-list-title-div{
+    //         background: #e5e5e5;
+    //         display: flex;
+    //         align-self: stretch;
+    //         // gap: 8px;
+    //         justify-content: space-between;
+    //         .order-title{
+    //             display: flex;
+    //             justify-content: flex-start;
+    //             align-items: center;
+    //             font-size: 12px;
+    //             font-weight: 500;
+    //             color: #333;
+
+    //         }
+
+    //     }
+    //     .order-detail-list{
+    //         display: flex;
+    //         width: 100%;
+    //         .order{
+    //             display: flex;
+    //             justify-content: space-between;
+    //             align-items: center;
+    //             flex-direction: column;
+    //             width: 100%;
+    //             .content{
+    //                 display: flex;
+    //                 justify-content: space-between;
+    //                 border-bottom: 1px solid #f1f1f1;
+    //                 align-items: center;
+    //                 padding: 8px 16px;
+    //                 width: 100%;
+    //                 gap: 16px;
+    //                 .order-id{
+    //                     font-size: 12px;
+    //                     color: #333;
+    //                     font-weight: 500;
+    //                 }
+    //                 .order-status{
+    //                     font-size: 12px;
+    //                     color: #333;
+    //                     font-weight: 500;
+    //                 }
+    //                 .date-created{
+    //                     font-size: 12px;
+    //                     color: #333;
+    //                     font-weight: 500;
+    //                 }
+    //                 .total-cost{
+    //                     font-size: 12px;
+    //                     color: #333;
+    //                     font-weight: 500;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     .empty-order-detail-list{
+    //         display: flex;
+    //         justify-content: center;
+    //         align-items: center;
+    //         flex-direction: column;
+    //         gap: 16px;
+
+    //         .empt-icon{
+    //             width: 150px;
+    //             height: 150px;
+    //         }
+    //         .order-empty-div{
+    //             display: flex;
+    //             justify-content: center;
+    //             align-self: center;
+    //             gap: 4px;
+    //             flex-direction: column;
+
+    //             .order-empty-title{
+    //                 font-size: 20px;
+    //                 font-weight: 600;
+    //             }
+    //             .order-empty-txt{
+    //                 font-size: 12px;
+    //                 font-size: 400;
+    //             }
+    //         }
+    //     }
+    // }
+   
+    .empty-order-detail-list {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 8px 16px;
-        width: 100%;
         flex-direction: column;
-        border-radius: 10px;
-        border: 1px solid #f1f1f1;
-        max-height: 300px;
-        overflow-y: auto;
-        .order-list-title-div{
-            background: #e5e5e5;
-            display: flex;
-            align-self: stretch;
-            // gap: 8px;
-            justify-content: space-between;
-            .order-title{
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-                font-size: 12px;
-                font-weight: 500;
-                color: #333;
+        padding: 20px;
+        gap: 16px;
 
-            }
-
+        .empt-icon {
+        width: 150px;
+        height: 150px;
         }
-        .order-detail-list{
-            display: flex;
-            width: 100%;
-            .order{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                flex-direction: column;
-                width: 100%;
-                .content{
-                    display: flex;
-                    justify-content: space-between;
-                    border-bottom: 1px solid #f1f1f1;
-                    align-items: center;
-                    padding: 8px 16px;
-                    width: 100%;
-                    gap: 16px;
-                    .order-id{
-                        font-size: 12px;
-                        color: #333;
-                        font-weight: 500;
-                    }
-                    .order-status{
-                        font-size: 12px;
-                        color: #333;
-                        font-weight: 500;
-                    }
-                    .date-created{
-                        font-size: 12px;
-                        color: #333;
-                        font-weight: 500;
-                    }
-                    .total-cost{
-                        font-size: 12px;
-                        color: #333;
-                        font-weight: 500;
-                    }
-                }
-            }
+
+        .order-empty-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+
+        .order-empty-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .order-empty-txt {
+            font-size: 12px;
+            font-weight: 400;
+        }
         }
     }
+}
+
+.loader{
+    width: 100%;
+}
+.recent-orders{
+    width: 100%;
 }

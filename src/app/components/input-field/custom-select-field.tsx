@@ -37,6 +37,8 @@ const SelectField =  forwardRef<DropdownHandle, CustomDropdownProps>(
   }
 
   useEffect(()=>{
+
+    console.log(preSelectedValue, 'value seled')
   }, [])
 
 
@@ -63,9 +65,9 @@ const SelectField =  forwardRef<DropdownHandle, CustomDropdownProps>(
             </span>
           }
           { isDropDownOpen
-            ? <span className="dropdown-list" key={preSelectedValue}>
-              {options?.map((item)=>(
-                <span className="dropdown-option" key={item.id} onClick={()=>getData(item)}>{item}</span>
+            ? <span className="dropdown-list" >
+              {options?.map((item, index)=>(
+                <span className="dropdown-option" key={index} onClick={()=>getData(item)}>{item}</span>
               ))}
             </span>
             : ""

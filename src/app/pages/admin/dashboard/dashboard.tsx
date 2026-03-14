@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchStatusCount } from "../../../slices/status-count.slice";
 import { RootState } from "../../../store";
+import DashboardLoader from "../../../components/admin/loaders/dashboard-loader";
 // import 
 
 const  DashboardPage = () => {
@@ -34,36 +35,40 @@ const  DashboardPage = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="status-cards">
-        <div className="card new-order">
-          <img src={allIcons.newOrdersIcon} className="order-status-icon" alt="" />
-          <div className="order-contents">
-            <div className="order-title">New Orders</div>
-            <div className="order-count">{statusCount?.pending_payment}</div>
+      {isStatusCountLoading ? (
+        <DashboardLoader type="card"/>
+        ) :(
+          <div className="status-cards">
+          <div className="card new-order">
+            <img src={allIcons.newOrdersIcon} className="order-status-icon" alt="" />
+            <div className="order-contents">
+              <div className="order-title">New Orders</div>
+              <div className="order-count">{statusCount?.pending_payment}</div>
+            </div>
+          </div>
+          <div className="card pending">
+            <img src={allIcons.pendingIcon} className="pending-icon" alt="" />
+            <div className="order-contents">
+              <div className="order-title">Pending Orders</div>
+              <div className="order-count">{statusCount?.processing_count}</div>
+            </div>
+          </div>
+          <div className="card shipped">
+            <img src={allIcons.TransitIcon} className="order-status-icon" alt="" />
+            <div className="order-contents">       
+              <div className="order-title">In Transit Orders</div>
+              <div className="order-count">{statusCount?.intransit_count}</div>
+            </div>
+          </div>
+          <div className="card delivered">
+            <img src={allIcons.deliveredIcon} className="order-status-icon" alt="" />
+            <div className="order-contents">
+              <div className="order-title">Delivered Orders</div>
+              <div className="order-count">{statusCount?.delivered_count}</div>
+            </div>
           </div>
         </div>
-        <div className="card pending">
-          <img src={allIcons.pendingIcon} className="pending-icon" alt="" />
-          <div className="order-contents">
-            <div className="order-title">Pending Orders</div>
-            <div className="order-count">{statusCount?.processing_count}</div>
-          </div>
-        </div>
-        <div className="card shipped">
-          <img src={allIcons.TransitIcon} className="order-status-icon" alt="" />
-          <div className="order-contents">       
-            <div className="order-title">In Transit Orders</div>
-            <div className="order-count">{statusCount?.intransit_count}</div>
-          </div>
-        </div>
-        <div className="card delivered">
-          <img src={allIcons.deliveredIcon} className="order-status-icon" alt="" />
-          <div className="order-contents">
-            <div className="order-title">Delivered Orders</div>
-            <div className="order-count">{statusCount?.delivered_count}</div>
-          </div>
-        </div>
-      </div>
+        )}
       <div className="overall-card">
         <BarChart />
       </div>

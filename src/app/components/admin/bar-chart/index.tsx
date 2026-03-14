@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { RootState } from "../../../store";
 import { RevenueMetrics } from "../../../slices/revenue.slice";
-
+import BarChartLoaderComponent from "../loaders/barchar/barchart-loader";
 export interface ChartData{
     data:any
 }
@@ -84,8 +84,11 @@ const BarChart = () =>{
     }, []);
     
     useEffect(() => {
-        if (!svgRef.current || !hasData) return;
-
+        
+        console.log(isReveenueLoading, 'rev loader')
+        console.log(revenue, )
+        // if (!svgRef.current || !hasData) return;
+        if (!svgRef.current || !revenue?.data?.length) return;
         const svg = d3.select(svgRef.current);
         svg.selectAll("*").remove();
 
@@ -147,37 +150,48 @@ const BarChart = () =>{
             .attr("font-size", 11)
             .text((d) => `N${Math.round(d / 1000)}k`);
 
-    }, [revenue?.data, dimensions, hasData]);
+    }, [revenue?.data, dimensions]);
     
     const getData = (name:string, value:any) =>{
+
         setSelectedFilter((prevState:any)=>({
             ...prevState,
             [name]:value
         }))
+
         console.log(selectedFilter, 'filter')
-        console.log(value, 'selected')
+        console.log(name, 'selected')
         geDispatchDetail(value)
     }
-
+    // if(isReveenueLoading){
+    //    return(
+    //     <div>
+    //       <DashboardLoader type="barchart"/>
+    //     </div>
+    //   )
+    // }
     return (
         <div className="bar-chart-container">
             <div className="outer-title-div">
                 <span className="chat-title">Overall Sales <span> {revenue?.overall_total.toLocaleString('en-US', {style: 'currency', currency: 'NGN'}) }</span></span>
                 <span className="filters"> 
                     <SelectField
+                        ref={dropdownRef}
                         options={filterList}
-                        preSelectedValue={selectedFilter?.filter ? selectedFilter?.filter:  filterList[0]}
+                        label="period"
+                        preSelectedValue={selectedFilter?.period ? selectedFilter?.period:  filterList[0]}
                         onChange={getData}
                         fieldName="period"
-                        label="period"
-                        key={0}
-                        ref={dropdownRef}
+                        
                     />
                 </span>
             </div>
             <div className="bar-chart-div" ref={wrapperRef}>
                 <span className="bar-chart-title">Revenue Analytics</span>
-                {hasData ? (
+                
+                {isReveenueLoading ? (
+                    <BarChartLoaderComponent/>
+                ) : revenue?.data?.length! > 0 ? (
                     <svg
                         ref={svgRef}
                         width={dimensions.width}
@@ -187,6 +201,16 @@ const BarChart = () =>{
                 ) : (
                     <EmptyChartState />
                 )}
+                {/* {revenue?.data.length! >0 ? (
+                    <svg
+                        ref={svgRef}
+                        width={dimensions.width}
+                        height={dimensions.height}
+                        style={{ display: "block" }}
+                    />
+                ) : (
+                    <EmptyChartState />
+                )} */}
             </div>
         </div>
     )

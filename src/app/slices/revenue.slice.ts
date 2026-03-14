@@ -53,6 +53,7 @@ const RevenueSlice = createSlice({
     .addCase(RevenueMetrics.fulfilled, (state, action: PayloadAction<RevenueAnalysisDTO>)=>{
         state.isReveenueLoading = false;
         state.revenue = action.payload;
+        
         state.revenueErr = null
     })
     .addCase(RevenueMetrics.pending, (state)=>{

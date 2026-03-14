@@ -1,0 +1,152 @@
+// style.scss
+
+// // Base skeleton animation
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// ========== CARD LOADER ==========
+.stat-card-skeleton {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  min-width: 200px;
+  justify-content: center;
+  width: 100%;
+  .item{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    align-items: center;
+    height: 100px;
+  }
+  .skeleton-icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 12px;
+  }
+
+  .card-content {
+    flex: 1;
+
+    .skeleton-title {
+      height: 16px;
+      width: 80px;
+      margin-bottom: 8px;
+    }
+
+    .skeleton-count {
+      height: 28px;
+      width: 120px;
+    }
+  }
+}
+
+// ========== BAR CHART LOADER ==========
+
+
+// ========== TABLE LOADER ==========
+.table-skeleton {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  padding: 20px;
+  width: 100%;
+
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .skeleton-title {
+      height: 24px;
+      width: 120px;
+    }
+
+    .skeleton-search {
+      height: 36px;
+      width: 200px;
+      border-radius: 20px;
+    }
+  }
+
+  .skeleton-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      tr {
+        th {
+          padding: 12px 16px;
+          background: #f8f9fa;
+          border-bottom: 2px solid #e9ecef;
+
+          .skeleton-th {
+            height: 14px;
+            width: 100%;
+            max-width: 100px;
+          }
+        }
+      }
+    }
+
+    tbody {
+      .loader-row {
+        td {
+          padding: 16px;
+          border-bottom: 1px solid #f1f1f1;
+        }
+      }
+    }
+  }
+
+  // Skeleton variants
+  .skeleton {
+    &-text {
+      height: 16px;
+      width: 100%;
+    }
+
+    &-text-small {
+      height: 16px;
+      width: 30px;
+    }
+
+    &-badge {
+      height: 24px;
+      width: 100px;
+      border-radius: 20px;
+    }
+
+    &-th {
+      height: 14px;
+      background: #e0e0e0;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+ 
+
+  .table-skeleton {
+    overflow-x: auto;
+    
+    .skeleton-table {
+      min-width: 600px;
+    }
+  }
+}

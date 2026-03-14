@@ -6,14 +6,16 @@ import InputField from "../../input-field/input-field";
 import { getRecentOrderList } from "../../../slices/recent-order-list.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { format, formatDistanceToNow, parseISO } from 'date-fns';
-import { se } from "date-fns/locale";
+import { format } from 'date-fns';
+import imgsConstant from "../../../constant/imgs.constant";
+import DashboardLoader from "../loaders/dashboard-loader";
 export interface OrdersProps{
     data:OrdersDTO[]
 }
 const OrderListComponent = () =>{
     const dropdownRef = useRef<DropdownHandle>(null);
     const dispatch = useDispatch();
+    const icons = imgsConstant.Icons;
     const {recentOrders, isRecentOrderLoading, err} = useSelector((state:RootState)=>state.RecentOrderList);
     const [selectedFilter, setSelectedFilter] = useState<any> ({
         status: "",
@@ -42,11 +44,15 @@ const OrderListComponent = () =>{
             ...prev, 
             [name]:value
         }))
-        console.log(selectedFilter, 'selected filter')
-        dispatch(getRecentOrderList(selectedFilter) as any);
+        const updatedFilter = {
+          ...selectedFilter,
+          [name]: value
+        };
+        console.log(updatedFilter, 'selected filter')
+        dispatch(getRecentOrderList(updatedFilter) as any);
     }
     useEffect(()=>{
-        displayOrders();
+      displayOrders();
         console.log(recentOrders, 'recent orders')
     }, [])
 
@@ -55,66 +61,86 @@ const OrderListComponent = () =>{
       console.log('displaying orders')
       dispatch(getRecentOrderList(selectedFilter) as any);
     }
-  
+    
     return( 
-        <div className="recent-orders-container">
-          <span className="order-title">Recent Orders</span>
-          <div className="filter-div">
-            <div className="filter">
-              <SelectField 
-                preSelectedValue={selectedFilter?.filter ? selectedFilter?.filter:filterList[0]}
-                label="filter"
-                fieldName="status"
-                options={filterList}
-                ref={dropdownRef}
-                onChange={getData}
-              
-              />
-            </div>
-            <div className="search">
-              <InputField 
-                type="search"
-                placeholder="Search by Order Id"
-                searchType="default"
-                name="searchText"
-                onChange={getData}
-              />
-            </div>
-
+      <div className="recent-orders-container">
+        <span className="order-title">Recent Orders</span>
+        <div className="filter-div">
+          <div className="filter">
+            <SelectField 
+              preSelectedValue={selectedFilter?.filter ? selectedFilter?.filter:filterList[0]}
+              label="filter"
+              fieldName="status"
+              options={filterList}
+              ref={dropdownRef}
+              onChange={getData}
+            
+            />
           </div>
-          <div className="oders-list-div">
-            <div className="order-list-title-div">
-              <span className="order-title">S/N</span>
-              <span className="order-title">Order ID</span>
-              <span className="order-title">Order Status</span>
-              <span className="order-title">Date Created</span>
-              <span className="order-title">Total Cost</span>
-            </div>
-              {recentOrders.length>0 ?
-                <div className="order-detail-list">
-                  <div className="order">
-                    {recentOrders.map((order:any, index)=>(
-                      <div className="content" key={order.id}>
-                        <span className="order-id">{index+1}</span>
-                        <span className="order-id">{order.reference}</span>
-                        <span className="order-status">{order.status}</span>
-                        <span className="date-created">{format(order.createdAt,"MMMM do, yyyy 'at' h:mm a")}</span>
-                        <span className="total-cost">{Number(order.total_amount).toLocaleString('en-US',
-                          { style: 'currency', currency: 'NGN' })} 
-                        </span>
-                      </div>
-
-                    ))}
-                  </div>
-                </div>
-              : 
-              <div className="empty-order-detail-list">
-                <span className="order-empty-title">No orders yet</span>
-                <span className="order-empty-txt">When customers place orders, they’ll appear here.</span>
-              </div>
-            }
+          <div className="search">
+            <InputField 
+              type="search"
+              placeholder="Search by Order Id"
+              searchType="default"
+              name="searchText"
+              onChange={getData}
+            />
           </div>
         </div>
+        {isRecentOrderLoading ? (
+          <div className="loader">
+            <DashboardLoader type="table"/>
+          </div>
+        ):recentOrders.length > 0 ? (
+          <div className="recent-orders">
+          
+          <div className="orders-list-div">
+            <table className="orders-table">
+              <thead>
+                <tr>
+                  <th>S/N</th>
+                  <th>Order ID</th>
+                  <th>Order Status</th>
+                  <th>Date Created</th>
+                  <th>Total Cost</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {recentOrders.map((order: any, index) => (
+                  <tr key={order.id}>
+                    <td>{index + 1}</td>
+                    <td>{order.reference}</td>
+                    <td>{order.status.split("_").join(" ")}</td>
+                    <td>
+                      {format(order.createdAt, "MMMM do, yyyy 'at' h:mm a")}
+                    </td>
+                    <td>
+                      {Number(order.total_amount).toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "NGN",
+                      })}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          </div>
+        ) : (
+          <div className="empty-order-detail-list">
+            <img src={icons.cartIcon} className="empt-icon" alt="" />
+            <span className="order-empty-div">
+              <span className="order-empty-title">No orders yet</span>
+              <span className="order-empty-txt">
+                When customers place orders, they’ll appear here.
+              </span>
+            </span>
+          </div>
+          )
+          
+        }
+      </div>
     )
 };
 

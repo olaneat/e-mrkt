@@ -77,3 +77,44 @@
         
     }
 }
+
+
+.sales-loader {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(30, 30, 40, 0.88);
+  z-index: 99;
+
+  .bar {
+    width: 180px;
+    height: 6px;
+    background: #2a2a38;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 60px;
+      background: linear-gradient(90deg, #c41e3a, #ff5e5e, #c41e3a);
+      border-radius: 3px;
+      animation: loading-slide 1.8s cubic-bezier(0.65, 0.05, 0.36, 1) infinite;
+    }
+  }
+
+  .text {
+    margin-top: 1.8rem;
+    color: #aaa;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+  }
+}
+
+@keyframes loading-slide {
+  0%   { transform: translateX(-160%); }
+  100% { transform: translateX(360%); }
+}
