@@ -1,6 +1,7 @@
 import React, { useState }  from "react";
 import imgsConstant from "../../../constant/imgs.constant";
 import './style.scss'
+import { Link } from "react-router-dom";
 
 
 
@@ -12,7 +13,14 @@ interface SidebarProps {
 const Sidebar:React.FC<SidebarProps> = ({onToggle}) => {
     const [itemName, setItemName] = useState<string>('');
     const [isVisible, setIsVisible] = useState<boolean>(true);
-    const sidebarList: string[] = ['Dashboard', 'Orders', 'Users', 'Products', 'FAQ', 'Policy' ]
+    const sidebarList: DataType[] = [
+        {name: 'Dashboard', url: 'dashboard'},
+        {name: 'Orders', url: 'orders'},
+        {name: 'Users', url: 'user-list'},
+        {name: 'Products', url: 'product-list'},
+        {name: 'FAQ', url: 'fao'},
+        {name: 'Policy', url: 'policy'},
+    ]
     const icons = imgsConstant.Icons
     const toggleWidth = () => {
         // setWidth(fullWidth);
@@ -38,13 +46,16 @@ const Sidebar:React.FC<SidebarProps> = ({onToggle}) => {
                                 </div>
                                 <span className="sidebar-list">
                                     {sidebarList.map((item, index)=>{
-                                        return<span 
-                                            key={index} 
-                                            className={itemName == item  ? 'active side': 'side'}
-                                            onClick={()=>selectItem(item)}
-                                            >
-                                                {item}
-                                        </span>
+                                        return<Link to={item.url} key={index} className="link-text">
+                                            <span 
+                                                key={index} 
+                                                className={itemName == item.name  ? 'active side': 'side'}
+                                                onClick={()=>selectItem(item.name)}
+                                                >
+                                                    {item.name}
+                                            </span>
+                                        
+                                        </Link>
                                     })}
                                 </span>
                                 <div className="footer">
@@ -66,3 +77,8 @@ const Sidebar:React.FC<SidebarProps> = ({onToggle}) => {
 };
 
 export default Sidebar;
+
+export interface DataType{
+    name: string;
+    url:string
+}

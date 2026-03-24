@@ -35,7 +35,10 @@ const HomePage = () => {
   //   }),
   // });
   const { categories, isCategoryLoading, categoryError } = useSelector((state: RootState) => state.category);
-  
+   const [itemsPerPage, setItemPerPage] = useState<number>(10);
+    const [page, setPage] = useState<number>(1);
+    const [totalItems, setTotalItem] = useState<number>(500);
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
   const isLoadingOverall =  isCategoryLoading || loading;
    useEffect(()=>{
     getCategories();
@@ -45,9 +48,13 @@ const HomePage = () => {
 
 
   const getProducts = () =>{
-      // dispatch(DisplayProducts('args') as any);  
-      dispatch(DisplayProducts())
-    }
+      // dispatch(DisplayProducts('args') as any);
+    let data :PaginationQuery = {
+      page:page, 
+      size:10
+    }  
+    dispatch(DisplayProducts(data))
+  }
 
 
   const getCategories = () =>{
@@ -77,7 +84,7 @@ if (isLoadingOverall) {
         </div>
         <div className="list">
           <CountdownTimer />
-          <ProductList  products={products || []} categories={categories || []} />
+          <ProductList  products={products?.results || []} categories={categories || []} />
         </div>
         <div>
         </div>
@@ -91,3 +98,8 @@ if (isLoadingOverall) {
 }
 
 export default HomePage;
+
+export interface PaginationQuery{
+  page:number,
+  size:number
+}

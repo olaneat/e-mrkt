@@ -37,6 +37,8 @@ import TransitIcon from '/icons/delivery-van.svg';
 import newOrdersIcon from '/icons/new-orders.svg'
 import pendingIcon from '/icons/loading-01.svg'
 import deliveredIcon from '/icons/delivered.svg'
+import DeleteIcon from '/icons/delete.svg'
+import EditIcon from '/icons/edit-icon.svg'
 
 
 // img list start here 
@@ -82,7 +84,9 @@ const Icons= {
     newOrdersIcon,
     TransitIcon,
     pendingIcon,
-    deliveredIcon
+    deliveredIcon,
+    EditIcon,
+    DeleteIcon
 }
 
 

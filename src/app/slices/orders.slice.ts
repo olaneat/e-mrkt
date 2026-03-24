@@ -21,7 +21,7 @@ export const getOrderList = createAsyncThunk<
     async(value, {rejectWithValue})=>{
         try{
             const response = await ProductService.getOrders(value);
-            let orders = mapOrder(response.data);
+            let orders = mapOrder(response.data.results);
             return orders;
 
         }catch(err:any){

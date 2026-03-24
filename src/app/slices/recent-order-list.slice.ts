@@ -20,7 +20,6 @@ export const getRecentOrderList = createAsyncThunk<
     'order/order-lists',
     async(value, {rejectWithValue})=>{
         try{
-            console.log(value, 'value')
             const response = await AdminService.getTotalOrders(value);
             let orders = mapOrder(response);
             return orders;

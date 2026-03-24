@@ -22,7 +22,7 @@ import DashboardPage from "./app/pages/admin/dashboard/dashboard"
 import AdminSignInPage  from "./app/pages/admin/login/sigin"
 import { PluginListenerHandle } from "@capacitor/core";
 import AdminAuthPage from "./../src/app/components/admin/admin-auth/index"
-
+import AdminProductList from "./app/pages/admin/products/product-list"
 
 const App = () => {
 
@@ -116,6 +116,8 @@ const App = () => {
         <Route path="/auth-admin" element={<AdminSignInPage />} />
         <Route element={<AdminAuthPage />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/product-list" element={<AdminProductList />} />
+
 
         </Route>
       </Routes>

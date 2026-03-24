@@ -2,8 +2,8 @@ import env from "../../environment/env";
 import { ProductDTO, OrderSearchDTO } from "../dto/products.dto";
 import api from "../../app/interceptor/auth.interceptor";
 
- const getProductList = ()=>{
-   const url = `${env.BASE_URL}/products/list`;
+ const getProductList = (data:any)=>{
+   const url = `${env.BASE_URL}/products/list?page=${data.page}&size=${data.size}`;
     return api.get(url);
  }
 
@@ -63,3 +63,4 @@ import api from "../../app/interceptor/auth.interceptor";
     getOrders
  }
  export default ProductService;
+

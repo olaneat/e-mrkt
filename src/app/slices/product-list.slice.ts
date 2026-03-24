@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import ProductService from "../services/product.service";
-import { ProductDTO, ERROR_MESSAGES, mapProductListDTO } from "../dto/products.dto";
+import { ProductDTO, ProductResponse, ERROR_MESSAGES, mapProductListDTO } from "../dto/products.dto";
 
 interface ProductState{
-    products: ProductDTO[] | null,
+    products: ProductResponse | null,
     err: string | null,
     loading : boolean,
 }
@@ -18,14 +18,14 @@ const initialState:ProductState = {
 
 
 export const DisplayProducts = createAsyncThunk<
-  ProductDTO[],
-  void,
+  ProductResponse,
+  any,
   {  rejectValue: string}
   >(
     'product list',
-    async (_, { rejectWithValue }) => {
+    async (data, { rejectWithValue }) => {
       try {
-        const response = await ProductService.getProductList();
+        const response = await ProductService.getProductList(data);
         return mapProductListDTO(response.data);
       } catch (error: any) {
         return rejectWithValue(
@@ -51,7 +51,7 @@ const ProductSlice = createSlice({
             state.loading = true;
             state.err = null;
           })
-          .addCase(DisplayProducts.fulfilled, (state, action: PayloadAction<ProductDTO[]>) => {
+          .addCase(DisplayProducts.fulfilled, (state, action: PayloadAction<ProductResponse>) => {
             state.loading = false;
             state.products = action.payload;
             state.err = null;
