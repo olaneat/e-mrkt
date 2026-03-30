@@ -11,7 +11,6 @@ import { CategoryDTO } from "../../dto/categories.dto"
 import { RootState, AppDispatch } from "../../store";
 import LoaderComponent from "../../components/loader/loader"
 import { DisplayProducts } from '../../slices/product-list.slice'
-import { useGetProductsQuery } from "../../slices/new-product.slice"
 
 
 const HomePage = () => {

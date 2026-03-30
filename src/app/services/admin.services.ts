@@ -19,7 +19,7 @@ const getTotalOrders=(data:OrderSearchDTO)=>{
     if(data.status){
         query += `?status=${encodeURIComponent(data.status)}`
     }
-    return api.get(url + query).then((response) =>response.data.results as OrdersDTO[])
+    return api.get(url + query).then((response) =>response.data as OrdersDTO[])
     // return api.get(url).then((response) =>response.data)
 
 }

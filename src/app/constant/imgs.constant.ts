@@ -39,7 +39,7 @@ import pendingIcon from '/icons/loading-01.svg'
 import deliveredIcon from '/icons/delivered.svg'
 import DeleteIcon from '/icons/delete.svg'
 import EditIcon from '/icons/edit-icon.svg'
-
+import UploadIcon from '/icons/upload.svg'
 
 // img list start here 
 import loginImg from '/imgs/shopping.png'
@@ -86,7 +86,8 @@ const Icons= {
     pendingIcon,
     deliveredIcon,
     EditIcon,
-    DeleteIcon
+    DeleteIcon, 
+    UploadIcon
 }
 
 

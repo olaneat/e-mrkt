@@ -107,10 +107,24 @@ const InputField = (props:any)=>{
               onBlur={handleBlur}
             />
           </span>
+          
            { props.err
              ? <small className="err-msg"> {props.err}</small>
              : ''
             }
+          </span>
+          : props.type=="textarea"
+          ? <span className="field-span">
+              <textarea
+                name={props.name}
+                placeholder={props.placeholder}
+                className="field" 
+                id="text-area"
+                rows={5} cols={15}
+                value={props.data}
+              >
+              </textarea>
+              
           </span>
           :  ""
         }

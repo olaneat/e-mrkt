@@ -14,7 +14,7 @@ import ModalComponent from "../../../../components/modal/modal";
 import { ProductDTO } from "app/dto/products.dto";
 import PaginationComponent from "../../../../components/pagination/pagination";
 import { useSearchParams } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 
 const AdminProductList = () =>{
@@ -23,6 +23,7 @@ const AdminProductList = () =>{
   const [searchParams, setParams] = useSearchParams();
   const [productId, setProductId] = useState<string>("") 
   const currentPage = Number(searchParams.get('page')) || 1;
+  const navigate = useNavigate()
 
   const dispatch = useDispatch();
   const icons = imgsConstant.Icons;
@@ -67,6 +68,9 @@ const AdminProductList = () =>{
     console.log('are u sure ')
     console.log(productId, 'id')
   }
+  const addProduct = ()=>{
+    navigate('/add-product')
+  }
   return (
     <div>
       {
@@ -82,7 +86,7 @@ const AdminProductList = () =>{
                     <InputField searchType="default" type="search" placeholder="search "/>
                 </div>
                 <div className="add-btn">
-                    <Button type="primary" name="Add Product"/>
+                    <Button type="primary" name="Add Product" handleClick={addProduct}/>
 
                 </div>
               </div>

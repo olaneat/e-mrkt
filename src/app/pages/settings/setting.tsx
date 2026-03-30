@@ -119,14 +119,17 @@ const SettingPage = () => {
   }
 
   const handleFileUpload = (e:any)=>{
+    console.log(e.target.files[0], 'file')
     const selectField = e.target.files[0];
     let name ="profile_image";
     setpreviewLink(URL.createObjectURL(selectField));
+    console.log(selectField, 'file123')
     // updateProfileForm.profile_image = 
     getProfileData(name, selectField)
   }
 
   const getProfileData = (name:string, value:ProfileDTO) =>{
+    console.log(name, value, 'data')
     setUpdateProfileForm((prevState:any)=>({
       ...prevState,
       [name]:value

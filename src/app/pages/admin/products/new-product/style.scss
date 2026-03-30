@@ -1,0 +1,118 @@
+.add-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 32px;
+    border-radius: 10px;
+    margin: 32px;
+    box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0, rgba(0, 0, 0, 0.1) 0 -3px 4px 0;
+    .add-title{
+        background: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        display: flex;
+        justify-content: flex-start;
+        align-self: stretch;
+
+    }
+    .img-container{
+        background: #fff;
+        width: 100%;
+        border: 1px dotted;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        width: 300px;
+        background: #e5e5e5;
+
+        .preview{
+            width: 300px;
+            height: 200px;
+        }
+
+        .upload{
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            .txt{
+                font-size: 12.8px;
+            }
+            .icon-upload{
+                width: 40px;
+                height: 40px;
+            }
+            .upload-txt{
+                background: #DB4444;
+                padding: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                border-radius: 10px;
+
+            }
+        }
+
+    }
+    .add-form-content{
+        display: flex;
+        align-self: stretch;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+        flex-direction: column;
+
+        .product-title{
+            font-size: 18px;
+            font-size: 600;
+            color: #212121;
+        }
+        .product-fields{
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            align-self: stretch;
+            .field-detail{
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                justify-content: center;
+                align-items: flex-start;
+                width: 100%;
+                .label{
+                    font-size: 12px;
+                    color: #666;
+                    font-weight: 500;
+                }
+                .field{
+                   display: flex;
+                    align-self: stretch;
+                }
+                .drop-down{
+                    position: absolute;
+                    width: 100%;
+                    bottom: 10px;
+                }
+            }
+            
+        }
+        .button{
+            display: flex;
+            justify-content: flex-end;
+            align-self: stretch;
+            padding: 16px;
+            .btn{
+                width: 120px;
+            }
+        }
+    }
+}
