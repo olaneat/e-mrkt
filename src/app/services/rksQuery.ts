@@ -8,7 +8,7 @@ export const rtkBaseQuery: BaseQueryFn<
   { message: string }
 > = async () => {
   try {
-    const result = await ProductService.getProductList();
+    const result = await ProductService.getProductList({page:1, size:10});
     return { data: result.data };
   } catch (error: any) {
     return {

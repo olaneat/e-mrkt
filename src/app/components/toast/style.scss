@@ -31,6 +31,8 @@
             .toast-txt{
                 font-size: 12px;
                 font-weight: 500;
+                white-space: nowrap;
+                width: fit-content;
                 
             }
         }
@@ -93,8 +95,8 @@
 @media (min-width:768px) {
   .toast-container{
     position: absolute;
-    top:calc(100vh - 100px);
-    left: calc(100vw - 250px);
+    top:calc(100vh - 20px);
+    left: calc(100vw - 470px);
 
   }
 }

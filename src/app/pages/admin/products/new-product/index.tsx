@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import { displayProductDetail } from "../../../../slices/product-detail.slice";
 import { UpdateProduct } from "../../../../slices/update-product.slice";
 import env from "./../../../../../environment/env";
+import ToastComponent from "../../../../components/toast/toast";
 
 const AddProduct = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -21,7 +22,10 @@ const AddProduct = () => {
   const [uploadUrl, setUploadUrl] = useState<string>('');
   const { categories, isCategoryLoading } = useSelector((state: RootState) => state.category);
   const { product, isDetailloading } = useSelector((state: RootState) => state.product);
-
+  const [toastMsg, setToastMsg] = useState<string>('');
+  const [toastType, setToastType] = useState<string>('');
+  const [showToast, setShowToast] = useState<boolean>(false);
+  const [toastTitle, setToastTitle] = useState<string>('');
   const [categoryNames, setCategoryNames] = useState<string[]>([]);
   const [categoryMap, setCategoryMap] = useState<Record<string, string>>({}); // name -> id
   const [categoryId, setCategoryId] = useState<string>(''); // name -> id
@@ -177,7 +181,7 @@ const AddProduct = () => {
         let nameValue = value.toLocaleString().toLowerCase();
         form.append(key, nameValue );
       }
-      
+
       if (key === 'colour' || key === 'size') {
         const arr = Array.isArray(value) ? value : [];
         // Optional: clean size like "45 40" → separate entries
@@ -204,7 +208,21 @@ const AddProduct = () => {
       
     });
     if (productId) {
-      dispatch(UpdateProduct(form) as any);
+      dispatch(UpdateProduct(form) as any).then((res:any)=>{
+        console.log(res);
+        if(res.meta.requestStatus === 'fulfilled'){
+          setToastTitle('Success');
+          setToastMsg('Product updated successfully');
+          setToastType('success');
+          setShowToast(true);
+          setTimeout(()=>{setShowToast(false)},5000)
+        } else {
+          setToastTitle('Error');
+          setToastMsg('Failed to update product');
+          setToastType('error');
+          setShowToast(true);
+        }
+      }).catch((err:any)=>{});
     } else {
       dispatch(CreateProduct(form) as any);
     }
@@ -314,7 +332,7 @@ const AddProduct = () => {
               name="sku"
               placeholder="Enter SKU"
               onChange={handleChange}
-              data={productFormData.stock}
+              data={productFormData.sku}
             />
           </span>
         </div>
@@ -344,13 +362,13 @@ const AddProduct = () => {
           </span>
 
           <span className="field-detail">
-            <span className="label">Bluetooth:</span>
+            <span className="label">Connectivity:</span>
             <InputField
               type="text"
-              name="bluetooth"
-              placeholder="Bluetooth details"
+              name="connectivity"
+              placeholder="Connectivity details"
               onChange={handleChange}
-              data={productFormData.bluetooth}
+              data={productFormData.connectivity}
             />
           </span>
           <span className="field-detail">
@@ -361,7 +379,7 @@ const AddProduct = () => {
               placeholder="Battery capacity"
               onChange={handleChange}
               data={productFormData.battery}
-            />
+            />  
           </span>
         </div>
         
@@ -393,11 +411,11 @@ const AddProduct = () => {
           </span>
 
           <span className="field-detail">
-            <span className="label">Rear Camera:</span>
+            <span className="label">Main Camera:</span>
             <InputField
               type="text"
               name="rear_camera"
-              placeholder="Rear Camera details"
+              placeholder="Main Camera details"
               onChange={handleChange}
               data={productFormData.rear_camera}
              
@@ -415,18 +433,18 @@ const AddProduct = () => {
             />
           </span>
           <span className="field-detail">
-            <span className="label">Memory:</span>
+            <span className="label">Storage Capacity:</span>
             <InputField
               type="text"
-              name="memory"
+              name="storage"
               placeholder="Storage details"
               onChange={handleChange}
-              data={productFormData.memory}
+              data={productFormData.storage}
             />
           </span>
         </div>
 
-        <div className="product-fields">
+        {/* <div className="product-fields">
           <span className="field-detail">
             <span className="label">Design:</span>
             <InputField
@@ -439,11 +457,52 @@ const AddProduct = () => {
           </span>
 
           
+        </div> */}
+
+        <div className="product-fields">
+          <span className="field-detail">
+            <span className="label">Processor:</span>
+            <InputField
+              type="text"
+              name="processor"
+              placeholder="Processor details"
+              onChange={handleChange}
+              data={productFormData.processor}
+            />
+          </span>
+          <span className="field-detail">
+            <span className="label">Model:</span>
+            <InputField
+              type="text"
+              name="model"
+              placeholder="Model details"
+              onChange={handleChange}
+              data={productFormData.model}
+            />
+          </span>
+
+          <span className="field-detail">
+            <span className="label">RAM Capacity:</span>
+            <InputField
+              type="text"
+              name="ram"
+              placeholder="RAM details"
+              onChange={handleChange}
+              data={productFormData.memory}
+            />
+          </span>
         </div>
         <div className="button">
-          <Button type="primary" handleClick={submitData} name={productId ? "Update" : "Submit"} />
+          <Button type="primary" handleClick={submitData} name={productId ? "Update detail" : "Create new Product"} />
         </div>
       </div>
+
+      <ToastComponent 
+        title={toastTitle} 
+        type={toastType} 
+        message={toastMsg}  
+        isOpen={showToast}
+        handleClose={() => setShowToast(false)} />
     </div>
   );
 };
