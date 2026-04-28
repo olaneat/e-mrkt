@@ -14,12 +14,12 @@ import { ProductDetailDTO } from "app/dto/product-detail.dto";
  }
 
 
- const addNewProduct = (data:ProductDetailDTO) =>{
+ const addNewProduct = (data:FormData) =>{
    const url = `${env.BASE_URL}/products/add-product`
    return api.post(url, data);
  }
 
- const updateProduct = (data:ProductDTO, id:string) =>{
+ const updateProduct = (data:FormData, id:string) =>{
    const url = `${env.BASE_URL}/products/update-product/${id}`
    return api.put(url, data, {
     headers: { 'Content-Type': 'multipart/form-data' }

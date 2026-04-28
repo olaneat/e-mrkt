@@ -53,7 +53,8 @@ const AddProduct = () => {
     battery: '',
     manufacturer: '',
     size: [],
-    id: ''
+    id: '',
+    design: '' // Assuming design is stored in description or add a separate field if needed
     // Add other missing fields you use (sku, processor, etc.)
   });
 
@@ -108,13 +109,14 @@ const AddProduct = () => {
       battery: product.battery ?? '',
       manufacturer: product.manufacturer ?? '',
       size: Array.isArray(product.size) ? product.size : [],
-      id: product.id ?? ''
+      id: product.id ?? '',
+      design: product.design ?? '' // Assuming design is stored in description or add a separate field if needed
       // Add other fields as needed
     });
 
     // Set preview if there's an existing image URL
     if (product.img) {
-      setPreview(product.img);
+      setPreview(`${env.IMG_URL}/${product.img}`);
     }
   }, [product]);
 
@@ -171,7 +173,11 @@ const AddProduct = () => {
         }
         return;
       }
-
+      if(key=='name'){
+        let nameValue = value.toLocaleString().toLowerCase();
+        form.append(key, nameValue );
+      }
+      
       if (key === 'colour' || key === 'size') {
         const arr = Array.isArray(value) ? value : [];
         // Optional: clean size like "45 40" → separate entries
@@ -185,8 +191,14 @@ const AddProduct = () => {
         form.append(key, categoryId);
         return;
       }
+      if (key === 'id') {
+        if (productId) {
+          form.append('id', productId);
+        }
+        return;
+      }
 
-      if (value !== undefined && value !== null) {
+      if (value !== undefined && value !== null && value !== '') {
         form.append(key, String(value));
       }
       
@@ -212,7 +224,7 @@ const AddProduct = () => {
           style={{ display: 'none' }}
         />
         {preview ? (
-          <img src={ `${env.IMG_URL}/${preview}`} alt="Preview" className="preview" />
+          <img src={ preview} alt="Preview" className="preview" />
         ) : (
           <div className="upload">
             <img src={icons.UploadIcon} className="icon-upload" alt="" />
@@ -376,7 +388,7 @@ const AddProduct = () => {
               name="front_camera"
               placeholder="Enter Front Camera details"
               onChange={handleChange}
-              data={productFormData.weight}
+              data={productFormData.front_camera}
             />
           </span>
 
@@ -387,7 +399,7 @@ const AddProduct = () => {
               name="rear_camera"
               placeholder="Rear Camera details"
               onChange={handleChange}
-              data={productFormData.wlan}
+              data={productFormData.rear_camera}
              
             />
           </span>
@@ -399,7 +411,7 @@ const AddProduct = () => {
               name="platform"
               placeholder="Operating system details"
               onChange={handleChange}
-              data={productFormData.bluetooth}
+              data={productFormData.platform}
             />
           </span>
           <span className="field-detail">
@@ -409,7 +421,7 @@ const AddProduct = () => {
               name="memory"
               placeholder="Storage details"
               onChange={handleChange}
-              data={productFormData.battery}
+              data={productFormData.memory}
             />
           </span>
         </div>
@@ -422,7 +434,7 @@ const AddProduct = () => {
               name="description"
               placeholder="Enter Product Design details"
               onChange={handleChange}
-              data={productFormData.description}
+              data={productFormData.design}
             />
           </span>
 

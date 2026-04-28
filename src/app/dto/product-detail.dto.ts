@@ -28,6 +28,7 @@ export interface ProductDetailDTO {
     colour: any[];
     price: number;
     battery?: string;
+    design?: string; // Assuming design is stored in description or add a separate field if needed
   }
 
   export const mapProductDetailDTO = (data: any): ProductDetailDTO => ({
