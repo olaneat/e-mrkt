@@ -25,14 +25,12 @@ const  initialState: UpdateProductState = {
     'product/update-product',
     async(ProductForm:any, {rejectWithValue})=>{  
         try{
-            console.log('Updating product with form data:', ProductForm, 'jell');
             const rawId =
                 typeof ProductForm.get === 'function'
                     ? ProductForm.get('id')
                     : ProductForm.id;
 
             const id = typeof rawId === 'string' ? rawId : '';
-            console.log('Updating product with id:', id, 'and form data:', ProductForm);
             const response = await ProductService.updateProduct(ProductForm, id);
             return response.data
         }catch(error:any){
