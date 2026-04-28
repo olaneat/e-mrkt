@@ -3,15 +3,15 @@ import ProductService from "../services/product.service";
 import { ProductDetailDTO, mapProductDetailDTO, ERROR_MESSAGES } from "../dto/product-detail.dto";
 interface ProductState {
   product: ProductDetailDTO | null;
-  loading: boolean;
-  err: string | null;
+  isDetailloading: boolean;
+  detailErr: string | null;
 }
 
 // Initial state
 const initialState: ProductState = {
   product: null,
-  loading: false,
-  err: null,
+  isDetailloading: false,
+  detailErr: null,
 };
 export const displayProductDetail = createAsyncThunk<
   ProductDetailDTO,
@@ -37,24 +37,24 @@ const productDetailSlice = createSlice({
   reducers: {
     clearProductDetail(state) {
       state.product = null;
-      state.err = null;
-      state.loading = false; // Ensure consistent reset
+      state.detailErr = null;
+      state.isDetailloading = false; // Ensure consistent reset
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(displayProductDetail.pending, (state) => {
-        state.loading = true;
-        state.err = null;
+        state.isDetailloading = true;
+        state.detailErr = null;
       })
       .addCase(displayProductDetail.fulfilled, (state, action: PayloadAction<ProductDetailDTO>) => {
-        state.loading = false;
+        state.isDetailloading = false;
         state.product = action.payload;
-        state.err = null;
+        state.detailErr = null;
       })
       .addCase(displayProductDetail.rejected, (state, action) => {
-        state.loading = false;
-        state.err = action.payload || ERROR_MESSAGES.FETCH_FAILED;
+        state.isDetailloading = false;
+        state.detailErr = action.payload || ERROR_MESSAGES.FETCH_FAILED;
       });
   },
 });

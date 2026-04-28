@@ -11,20 +11,19 @@ import imgsConstant from "../../../../constant/imgs.constant";
 import DashboardLoader from "../../../../components/admin/loaders/dashboard-loader";
 import EmptyStateComponent from "../../../../components/empty-state/empty-state";
 import ModalComponent from "../../../../components/modal/modal";
-import { ProductDTO } from "app/dto/products.dto";
+import { ProductDTO } from "../../../../dto/products.dto";
 import PaginationComponent from "../../../../components/pagination/pagination";
-import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 
 const AdminProductList = () =>{
-  const {products, loading, err} = useSelector((state: RootState)=>state.products)
+  const {products, loading, err} = useSelector((state: RootState)=>state.products);  
   const [modal, SetOpenModal] = useState<boolean>(false)
   const [searchParams, setParams] = useSearchParams();
   const [productId, setProductId] = useState<string>("") 
   const currentPage = Number(searchParams.get('page')) || 1;
   const navigate = useNavigate()
-
   const dispatch = useDispatch();
   const icons = imgsConstant.Icons;
 
@@ -42,8 +41,9 @@ const AdminProductList = () =>{
   useEffect(()=>{
     getProductLIst();
     setTotalItem(products?.count!)
-  
+    
   }, [])
+
 
 
   const  setSelectedtPage =(page:number) =>{
@@ -70,6 +70,9 @@ const AdminProductList = () =>{
   }
   const addProduct = ()=>{
     navigate('/add-product')
+  }
+  const editProduct = (id:string)=>{
+    navigate(`/update-product/${id}`)
   }
   return (
     <div>
@@ -120,7 +123,7 @@ const AdminProductList = () =>{
                           <td>
                               <span className="action-icons">
                               <img src={icons.visiblePswd} alt="" className="action-icon" />
-                              <img src={icons.EditIcon} alt="" className="action-icon" />
+                              <img src={icons.EditIcon} alt="" className="action-icon" onClick={()=>{editProduct(product.id ?? '')}} />
                               <img src={icons.DeleteIcon} alt="" className="action-icon" onClick={()=>{openModal(product)}} />
                               
                               </span>

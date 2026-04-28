@@ -122,6 +122,8 @@ const InputField = (props:any)=>{
                 id="text-area"
                 rows={5} cols={15}
                 value={props.data}
+                onChange={handleChange}
+
               >
               </textarea>
               

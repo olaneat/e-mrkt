@@ -1,7 +1,7 @@
 import api from "../interceptor/auth.interceptor";
 import env from "../../environment/env";
 import { OrderStatusDTO } from "../dto/status.dto";
-import { OrdersDTO } from "app/dto/orders.dto";
+import { OrdersDTO, OrderResponseDTO } from "app/dto/orders.dto";
 import { OrderSearchDTO } from "../dto/products.dto";
 
 
@@ -12,6 +12,7 @@ const getOrderStatusCount = () =>{
 
 const getTotalOrders=(data:OrderSearchDTO)=>{
     const url = `${env.BASE_URL}/admin/order-list`;
+    console.log(url, 'url')
     let query = "";
     if(data.searchText){
         query =`?search=${encodeURIComponent(data.searchText)}&`
@@ -19,7 +20,7 @@ const getTotalOrders=(data:OrderSearchDTO)=>{
     if(data.status){
         query += `?status=${encodeURIComponent(data.status)}`
     }
-    return api.get(url + query).then((response) =>response.data as OrdersDTO[])
+    return api.get(url + query).then()
     // return api.get(url).then((response) =>response.data)
 
 }

@@ -21,7 +21,9 @@ import { ProductDetailDTO } from "app/dto/product-detail.dto";
 
  const updateProduct = (data:ProductDTO, id:string) =>{
    const url = `${env.BASE_URL}/products/update-product/${id}`
-   return api.put(url, data);
+   return api.put(url, data, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+   });
  }
  
  const deleteProduct = (id:string) =>{

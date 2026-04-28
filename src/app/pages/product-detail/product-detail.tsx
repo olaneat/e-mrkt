@@ -17,8 +17,8 @@ import Icons from '../../constant/imgs.constant'
 const ProductDetail = () =>{
     const dispatch = useDispatch();
     // const [productDetail, setProductDetail] = useState<ProductDetailDTO>();
-    const { product, loading, err } = useSelector((state: RootState) => state.product);
-    const isLoadingOverall = loading; 
+    const { product, isDetailloading, detailErr } = useSelector((state: RootState) => state.product);
+    const isLoadingOverall = isDetailloading; 
     const { categories, isCategoryLoading, categoryError } = useSelector((state: RootState) => state.category);
       
     const params = useParams();
@@ -86,7 +86,7 @@ const ProductDetail = () =>{
     }
 
     const addItemToCart=()=>{
-      if(product?.size.length!>0 && !size){
+      if(product!.size!.length!>0 && !size){
         setShowToast(true)
         setToastMsg('please select a size')
         setToastType('warning')
@@ -264,10 +264,10 @@ const ProductDetail = () =>{
                       }
                       
                       {
-                        product?.rearCamera ?
+                        product?.rear_camera ?
                           <div className="itemss">
                             <span className="product-color">Rear camera:</span>
-                            <span className="desc-txt">{product.rearCamera}</span>
+                            <span className="desc-txt">{product.rear_camera}</span>
                           </div>
                         :""
                       }
@@ -280,10 +280,10 @@ const ProductDetail = () =>{
                         :""
                         }
                         {
-                          product?.frontCamera ?
+                          product?.front_camera ?
                           <div className="itemss">
                             <span className="product-color">camera: </span>
-                            <span className="desc-txt">{product.frontCamera}</span>
+                            <span className="desc-txt">{product.front_camera}</span>
 
                           </div>
                           :""

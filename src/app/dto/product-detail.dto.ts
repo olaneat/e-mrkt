@@ -1,7 +1,7 @@
 export interface ProductDetailDTO {
     id?: string;
     name: string;
-    img: string;
+    img: string | File;
     slug?: string;
     manufacturer: string;
     model: string;
@@ -25,7 +25,7 @@ export interface ProductDetailDTO {
     connectivity?: string;
     bluetooth?: string;
     line?: string;
-    colour: string;
+    colour: any[];
     price: number;
     battery?: string;
   }

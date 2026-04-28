@@ -118,6 +118,8 @@ const App = () => {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/product-list" element={<AdminProductList />} />
           <Route path="add-product" element={<AddProduct/>} />
+          <Route path="update-product/:id" element={<AddProduct/>} />
+
 
         </Route>
       </Routes>

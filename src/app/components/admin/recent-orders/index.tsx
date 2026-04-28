@@ -16,7 +16,7 @@ const OrderListComponent = () =>{
     const dropdownRef = useRef<DropdownHandle>(null);
     const dispatch = useDispatch();
     const icons = imgsConstant.Icons;
-    const {recentOrders, isRecentOrderLoading, err} = useSelector((state:RootState)=>state.RecentOrderList);
+    const {recentOrders, isRecentOrderLoading, err} = useSelector((state:RootState)=>state.recentOrders);
     const [selectedFilter, setSelectedFilter] = useState<any> ({
         status: "",
         searchText: ""
@@ -39,7 +39,6 @@ const OrderListComponent = () =>{
     ];
 
     const getData = (name:string, value:string)=>{
-      console.log(name, value, 'name and value')
         setSelectedFilter((prev:any)=>({
             ...prev, 
             [name]:value
@@ -48,18 +47,16 @@ const OrderListComponent = () =>{
           ...selectedFilter,
           [name]: value
         };
-        console.log(updatedFilter, 'selected filter')
         dispatch(getRecentOrderList(updatedFilter) as any);
     }
     useEffect(()=>{
       displayOrders();
-        console.log(recentOrders, 'recent orders')
     }, [])
-
+   
 
     const displayOrders = () =>{
-      console.log('displaying orders')
       dispatch(getRecentOrderList(selectedFilter) as any);
+      console.log('displaying orders', recentOrders?.results)
     }
     
     return( 
@@ -91,7 +88,7 @@ const OrderListComponent = () =>{
           <div className="loader">
             <DashboardLoader type="table"/>
           </div>
-        ):recentOrders.length > 0 ? (
+        ):recentOrders?.results.length! > 0 ? (
           <div className="recent-orders">
           
           <div className="orders-list-div">
@@ -107,7 +104,7 @@ const OrderListComponent = () =>{
               </thead>
 
               <tbody>
-                {recentOrders.map((order: any, index) => (
+                {recentOrders?.results.map((order: any, index) => (
                   <tr key={order.id}>
                     <td>{index + 1}</td>
                     <td>{order.reference}</td>
