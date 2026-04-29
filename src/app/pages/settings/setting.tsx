@@ -276,7 +276,7 @@ const updateUserProfile = ()=>{
                         <InputField 
                           type="text" 
                           data={updateProfileForm?.phone_number}  
-                          placeholder="Enter last name"
+                          placeholder="Enter Phone number"
                           onChange={getProfileData}
                           name="phone_number"
                          />
@@ -287,7 +287,7 @@ const updateUserProfile = ()=>{
                         <InputField 
                           type="text" 
                           data={updateProfileForm?.address}  
-                          placeholder="Enter state"
+                          placeholder="Enter Complete Address"
                           onChange={getProfileData}
                           name="address"
                          />

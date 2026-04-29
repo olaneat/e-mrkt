@@ -42,6 +42,7 @@ const HomePage = () => {
    useEffect(()=>{
     getCategories();
     getProducts()
+    console.log(products, 'products')
 
   }, []);
 
