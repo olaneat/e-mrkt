@@ -1,7 +1,6 @@
 import React , { useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { displayProductDetail } from "../../slices/product-detail.slice";
-import { ProductDetailDTO } from "../../dto/product-detail.dto";
 import { Link, useParams } from 'react-router-dom';
 import NavBar from '../../components/navbar/navbar'
 import Footer from "../../components/footer/footer"
@@ -13,13 +12,12 @@ import { RootState, AppDispatch } from "../../store";
 import ToastComponent from "../../components/toast/toast";
 import LoaderComponent from "../../components/loader/loader";
 import Icons from '../../constant/imgs.constant'
+import { textTranform } from "../../constant/text-transform";
 
 const ProductDetail = () =>{
     const dispatch = useDispatch();
-    // const [productDetail, setProductDetail] = useState<ProductDetailDTO>();
     const { product, isDetailloading, detailErr } = useSelector((state: RootState) => state.product);
     const isLoadingOverall = isDetailloading; 
-    const { categories, isCategoryLoading, categoryError } = useSelector((state: RootState) => state.category);
       
     const params = useParams();
     const [tabvalue, setTabValue] = useState<string>("");
@@ -132,16 +130,16 @@ const ProductDetail = () =>{
             <div className="nav">
               <Link to={'/'} className="link"><span className="home">Home</span></Link>
               <img src={icons.chevronRite} alt="" className="arr-rite" />
-              <span className="home">{product?.category}</span>
+              <span className="home">{textTranform(product?.category!)}</span>
               <img src={icons.chevronRite} alt="" className="arr-rite" />
-              <span className="product-name">{product?.name}</span>
+              <span className="product-name">{textTranform(product?.name!)}</span>
             </div>
             <div className="main-content">
               <div className="img">
                 <img className="detail-img" src={`${env.IMG_URL}${product?.img}`} alt="" />
               </div>
               <div className="description-div">
-                <span className="name">{product?.name}</span>
+                <span className="name">{textTranform(product?.name!)}</span>
                 {/* <div className="rating-div">
                   <span className="rating"> </span>
                   <span className="available">

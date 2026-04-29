@@ -65,7 +65,6 @@
             color: #666;
             font-weight: 500;
             
-            text-transform:capitalize;
           }
           .price{
               display: flex;
@@ -336,7 +335,7 @@
       width: 100%;
       padding: 0px;
       .img{
-        max-width: 100%;
+        max-width: 150px;
       }
     }
 
@@ -362,7 +361,6 @@
         
       }
       .name{
-        text-transform:capitalize;
         font-size: 20px;
         color: #0006;
         text-decoration: none;
@@ -568,7 +566,7 @@
 
   .flash-img{
     img{
-      height: 150px;
+      height: 130px;
       width: 100%;
       max-width: 200px;
     }

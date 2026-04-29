@@ -1,13 +1,10 @@
-import React,{ useState, useEffect} from "react";
-import { useSelector} from "react-redux";
+import React,{ useEffect} from "react";
 import { ProductDTO } from "app/dto/products.dto";
 import { CategoryDTO } from "app/dto/categories.dto";
-import { DisplayProducts } from '../../slices/product-list.slice'
-import { useDispatch } from "react-redux";
 import env from "../../../environment/env";
 import "./product-list.scss"
 import { Link } from "react-router-dom";
-import { RootState, AppDispatch } from "../../store";
+import { textTranform } from "../../constant/text-transform";
 
 interface props {
   products: ProductDTO[]; 
@@ -17,6 +14,9 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
   useEffect(()=>{
 
   },[categories])
+
+  
+
     return(
       <div className="product-container">
         <div className="flash-products">
@@ -30,7 +30,7 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
                 </div>
                 <div className="txt">
                   <span className="name wrap-txt">
-                    {product.name}
+                    {textTranform(product.name!)}
                   </span>
                   <span className="price">
                     <span className="new-price">
@@ -65,7 +65,7 @@ const ProductList: React.FC<props>= ({ products, categories }) =>{
                 </div>
                 <div className="txt">
                   <span className="name wrap-txt">
-                    {product.name}
+                    {textTranform(product.name!)}
                   </span>
                   <span className="price">
                     <span className="new-price">

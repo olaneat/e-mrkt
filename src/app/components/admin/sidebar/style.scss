@@ -95,8 +95,6 @@
     visibility 0s linear 0.35s;  // hide pointer-events & visibility after fade
 }
 .toggle-icon{
-    height: 55px;
-    height: 50px;
     box-shadow: 4px 0 12px rgba(0, 0, 0, 0.10);
     border-radius: 10px;
     
@@ -106,4 +104,18 @@
     color: #666;
     text-decoration: none;
     width: 100%;
+}
+
+@media (max-width:768px) {
+    .toggle-icon{
+        width: 26px;
+        height: 26px;
+    }
+}
+@media (min-width:768px) {
+    .toggle-icon{
+        height: 50px;
+        width: 50px;
+
+    }
 }

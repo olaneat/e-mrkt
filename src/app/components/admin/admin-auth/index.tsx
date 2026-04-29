@@ -17,7 +17,11 @@ const AdminAuthPage =()=>{
 
     }
     useEffect(()=>{
-      console.log(expanded, 'def state')
+      if(window.innerWidth < 768){
+        console.log('window size', window.innerWidth)
+        setIsExpanded(true)
+        console.log(expanded, 'jajajajaj')
+      }
       
     })
     return (

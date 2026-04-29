@@ -491,6 +491,16 @@ const AddProduct = () => {
               data={productFormData.memory}
             />
           </span>
+          <span className="field-detail">
+            <span className="label">Brand:</span>
+            <InputField
+              type="text"
+              name="brand"
+              placeholder="Product Brand"
+              onChange={handleChange}
+              data={productFormData.brand}
+            />
+          </span>
         </div>
         <div className="button">
           <Button type="primary" handleClick={submitData} name={productId ? "Update detail" : "Create new Product"} />

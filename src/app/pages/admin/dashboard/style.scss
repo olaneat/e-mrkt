@@ -10,7 +10,7 @@
         display: flex;
         align-items: stretch;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         gap: 16px;
         width: 100%;
 
@@ -34,6 +34,7 @@
                 .order-title{
                     font-size: 20px;
                     font-weight: 600;
+                    text-wrap: nowrap;
                     color: #fff;
                 }
                 .order-count{
@@ -96,5 +97,20 @@
         align-self: stretch;
         justify-content: center;
         width: 100%;
+    }
+
+}
+@media (max-width:768px) {
+    .status-cards{
+        overflow-x: auto;
+        &::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Firefox
+  scrollbar-width: none;
+
+  // IE / old Edge
+  -ms-overflow-style: none;
     }
 }
